@@ -111,11 +111,27 @@ in
       vimPlugins.codeium-vim
       vscode
       zsh-powerlevel10k
+
+      # Utilities
+      bat
+      btop
+      busybox
+      fzf
+      exa
+      gparted
+      neofetch
+      qemu_kvm
+      ripgrep
     ];
 
     sessionVariables = {
       EDITOR = "nvim";
     };
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   # Enable home-manager and git
