@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
 
+let
+    myPkgs = import (builtins.fetchTarball {
+        url = "https://github.com/NixOS/nixpkgs/archive/e2911d022051066f6db6458b95a13f5e259f13b1.tar.gz";
+    }) {};
+in
 {
   home = {
     username = "kazuto";
@@ -73,4 +78,23 @@
   # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git.enable = true;
+
+  services.mysql = {
+    enable = true;
+    package = myPkgs.mysql57;
+    ensureUsers = [
+      {
+        name = "root";
+        ensurePermissions = {
+          "*.*" = "ALL PRIVILEGES";
+        };
+      }
+    ];
+  };
+
+  services.redis = {
+    servers."default" = {
+      enable = true;
+    };
+  };
 }
