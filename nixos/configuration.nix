@@ -131,7 +131,20 @@
 
   nixpkgs = {
     # You can add overlays here
-    overlays = [];
+    overlays = [
+      (self: super: {
+        waybar = super.waybar.overrideAttrs (oa: {
+          mesonFlags = oa.mesonFlags ++ [ "-Dexperimental=true" ];
+          patches = (oa.patches or []) ++ [
+            (pkgs.fetchpatch {
+              name = "fix waybar hyprctl";
+              url = "https://aur.archlinux.org/cgit/aur.git/plain/hyprctl.patch?h=waybar-hyprland-git";
+              sha256 = "sha256-pY3+9Dhi61Jo2cPnBdmn3NUTSA8bAbtgsk2ooj4y7aQ=";
+            })
+          ];
+        });
+      })
+    ];
 
     # Configure your nixpkgs instance
     config = {
@@ -143,6 +156,27 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # Hyprland
+    avizo
+    dunst
+    gst_all_1.gstreamer
+    hyprland
+    hyprpaper
+    hyprpicker
+    papirus-icon-theme
+    playerctl
+    rofi-wayland
+    sddm
+    viewnior
+    waybar
+    wayland-protocols
+    wlroots
+    wlogout
+    wl-clipboard
+    xdg-utils
+    xfce.thunar
+    xwayland
+
     # System
     blueman
     brightnessctl
@@ -165,16 +199,48 @@
     xorg.xhost
   ];
 
+  environment.shells = with pkgs; [ zsh ];
+  environment.pathsToLink = [ "/share/zsh" ];
+
+  fonts = {
+    fontDir.enable = true;
+    fonts = with pkgs; [
+       nerdfonts
+       font-awesome
+       google-fonts
+    ];
+  };
+
+  programs.dconf.enable = true;
+
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
 
+  programs.hyprland = {
+    enable = true;
+
+    xwayland = {
+      hidpi = true;
+      enable = true;
+    };
+  };
+
+  programs.waybar.enable = true;
+
   programs.zsh.enable = true;
   programs.zsh.syntaxHighlighting.enable = true;
 
-  environment.shells = with pkgs; [ zsh ];
-  environment.pathsToLink = [ "/share/zsh" ];
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-hyprland
+        xdg-desktop-portal-wlr
+    ];
+    wlr.enable = true;
+  };
 
   # === Security === #
 
