@@ -6,6 +6,33 @@ let
     }) {};
 in
 {
+  gtk = {
+    enable = true;
+
+    theme = {
+      name = "Juno";
+      package = pkgs.juno-theme;
+    };
+
+    cursorTheme = {
+      name = "Bibata-Modern-Amber";
+      package = pkgs.bibata-cursors;
+    };
+
+    iconTheme = {
+      name = "Papirus Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+  };
+
   home = {
     username = "kazuto";
     homeDirectory = "/home/kazuto";
