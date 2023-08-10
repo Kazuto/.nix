@@ -1,8 +1,14 @@
 { config, pkgs, ... }:
 
 let
-    myPkgs = import (builtins.fetchTarball {
-        url = "https://github.com/NixOS/nixpkgs/archive/e2911d022051066f6db6458b95a13f5e259f13b1.tar.gz";
+    # MySQL 5.7.39
+    pkgs = import (builtins.fetchTarball {
+      url = "https://github.com/NixOS/nixpkgs/archive/e2911d022051066f6db6458b95a13f5e259f13b1.tar.gz";
+    }) {};
+
+    # PHPStorm 2021.3
+    pkgs = import (builtins.fetchTarball {
+      url = "https://github.com/NixOS/nixpkgs/archive/3479555209833f42c16f9da373b6f64af1b06c4a.tar.gz";
     }) {};
 in
 {
