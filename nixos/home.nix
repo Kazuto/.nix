@@ -39,6 +39,18 @@ in
 
     stateVersion = "23.05";
 
+    file = {
+      ".p10k.zsh" = {
+        source = ../.config/zsh/.p10k.zsh;
+        executable = true;
+      };
+
+      ".aliases" = {
+        source = ../.config/zsh/.aliases;
+        executable = false;
+      };
+    };
+
     packages = with pkgs; [
       # Applications
       bitwarden
@@ -100,11 +112,44 @@ in
       vscode
       zsh-powerlevel10k
     ];
+
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
   };
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
-  programs.git.enable = true;
+
+  programs.git = {
+    enable = true;
+    userName = "Kazuto";
+    userEmail = "mail@kazuto.de";
+  };
+
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions = true;
+    enableCompletion = true;
+    dotDir = ".config/zsh";
+
+    history = {
+      size = 10000;
+      path = "${config.xdg.dataHome}/zsh/history";
+    };
+
+    initExtra = ''
+      [[ ! -f ~/.aliases ]] || source ~/.aliases
+      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+    '';
+
+    zplug = {
+      enable = true;
+      plugins = [
+        { name = "romkatv/powerlevel10k"; tags = [ "as:theme" "depth:1" ]; }
+      ];
+    };
+  };
 
   services.mysql = {
     enable = true;
