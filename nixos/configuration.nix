@@ -142,12 +142,39 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [
+    # System
+    blueman
+    brightnessctl
+    curl
+    gcc
+    git
+    inotify-tools
+    libnotify
+    pamixer
+    pavucontrol
+    pipewire
+    polkit_gnome
+    pulseaudioFull
+    (python311Full.withPackages (p: with p; [
+      pygobject3 gst-python
+    ]))
+    python311Packages.pip
+    wget
+    wireplumber
+    xorg.xhost
+  ];
 
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
+
+  programs.zsh.enable = true;
+  programs.zsh.syntaxHighlighting.enable = true;
+
+  environment.shells = with pkgs; [ zsh ];
+  environment.pathsToLink = [ "/share/zsh" ];
 
   # === Security === #
 
