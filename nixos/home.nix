@@ -7,7 +7,18 @@
 
     stateVersion = "23.05";
 
-    packages = [];
+    packages = with pkgs; [
+      # Applications
+      bitwarden
+      brave
+      discord
+      firefox-wayland
+      mailspring
+      nextcloud-client
+      spotify
+      teams
+      telegram-desktop
+    ];
   };
 
   # Enable home-manager and git
