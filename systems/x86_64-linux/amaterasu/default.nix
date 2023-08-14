@@ -3,11 +3,11 @@
 with lib;
 with lib.internal;
 {
-  imports = [
-    imports = [ ./hardware.nix ];
-  ];
+  imports = [ ./hardware.nix ];
 
   shiro = {
+    nix = enabled;
+
     desktop = {
       hyprland = enabled;
     };

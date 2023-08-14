@@ -14,7 +14,7 @@ in
     services.printing = {
       enable = true;
 
-      drivers = [ pkgs.cups-kyodialog ]
+      drivers = [ pkgs.cups-kyodialog ];
     };
   };
 }

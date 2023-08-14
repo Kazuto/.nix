@@ -18,6 +18,6 @@ in
         mailspring = enabled;
         nextcloud = enabled;
       };
-    }
-  }
+    };
+  };
 }

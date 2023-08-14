@@ -17,6 +17,6 @@ in
         teams = enabled;
         telegram = enabled;
       };
-    }
-  }
+    };
+  };
 }

@@ -15,6 +15,6 @@ in
       apps = {
         spotify = enabled;
       };
-    }
-  }
+    };
+  };
 }

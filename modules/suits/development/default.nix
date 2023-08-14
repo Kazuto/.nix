@@ -41,6 +41,6 @@ in
       tools = {
         git = enabled;
       };
-    }
-  }
+    };
+  };
 }

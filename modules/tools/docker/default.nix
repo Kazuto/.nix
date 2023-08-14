@@ -14,6 +14,6 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ docker docker-compose ];
 
-    user.extraGroups = = [ "docker" ];
+    user.extraGroups = [ "docker" ];
   };
 }

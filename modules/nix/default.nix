@@ -6,13 +6,15 @@ let
   cfg = config.shiro.nix;
 in
 {
-  options.shiro.desktop.hyprland = with types; {
-    enable = mkBoolOpt false "Whether or not to install Hyprland and dependencies.";
+  options.shiro.nix = with types; {
+    enable = mkBoolOpt false "Whether or not to manage nix configuration.";
   };
 
-  nix = {
-    settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+  config = mkIf cfg.enable {
+    nix = {
+      settings = {
+        experimental-features = [ "nix-command" "flakes" ];
+      };
     };
   };
 }
