@@ -12,6 +12,7 @@ with lib;
     };
 
     suites = {
+      common = enabled;
       desktop = enabled;
       development = enabled;
       entertainment = enabled;

@@ -11,6 +11,7 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      busybox
       gcc
       xorg.xhost
     ];
