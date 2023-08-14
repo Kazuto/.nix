@@ -15,7 +15,7 @@ alias dotfiles="cd ~/.dotfiles && vim ."
 alias c="clear"
 
 # sourcing shell config
-alias s="source ~/.zshrc"
+alias s="source ~/.config/zsh/.zshrc"
 
 # file listing
 alias l="ls -lah"
