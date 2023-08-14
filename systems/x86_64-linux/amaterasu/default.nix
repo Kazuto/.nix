@@ -26,6 +26,7 @@ with lib;
     services = {
       openssh = enabled;
       printing = enabled;
+      dbus = enabled;
     };
 
     system = {
