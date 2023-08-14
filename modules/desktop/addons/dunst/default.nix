@@ -10,7 +10,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ dunst ];
+    environment.systemPackages = with pkgs; [ dunst libnotify ];
 
     services.dbus.enable = true;
 

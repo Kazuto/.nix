@@ -20,6 +20,7 @@ in
         nodejs20 = enabled;
         php81 = enabled;
         phpstorm = enabled;
+        python311 = enabled;
         postman = enabled;
         vscode = enabled;
       };
@@ -27,6 +28,7 @@ in
       cli = {
         codespell = enabled;
         commitizen = enabled;
+        curl = enabled;
         editorconfig-checker = enabled;
         fzf = enabled;
         neovim = enabled;
@@ -34,6 +36,7 @@ in
         shellcheck = enabled;
         skeema = enabled;
         supabase = enabled;
+        wget = enabled;
         zsh = enabled;
       };
 

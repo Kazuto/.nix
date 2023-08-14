@@ -22,6 +22,8 @@ in
       waybar = enabled;
       wlogout = enabled;
       xdg-portal = enabled;
+
+      blueman = enabled;
     };
 
     shiro.home.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
@@ -32,16 +34,12 @@ in
       hyprland
       wayland-protocols
       wlroots
-      xwayland
       wl-clipboard
+      xwayland
 
-      gst_all_1.gstreamer
       viewnior
-
-      playerctl
-      brightnessctl
-
       xfce.thunar
+      polkit_gnome
     ];
 
     environment.sessionVariables = {

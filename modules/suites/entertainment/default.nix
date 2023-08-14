@@ -13,6 +13,7 @@ in
     shiro = {
       apps = {
         spotify = enabled;
+        vlc = enabled;
       };
     };
   };

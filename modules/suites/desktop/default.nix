@@ -13,6 +13,7 @@ in
     shiro = {
       apps = {
         bitwarden = enabled;
+        firefox = enabled;
         brave = enabled;
         mailspring = enabled;
         nextcloud = enabled;

@@ -10,7 +10,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ waybar ];
+    environment.systemPackages = with pkgs; [ waybar playerctl inotify-tools];
 
     shiro.home.configFile."waybar".source = ./config;
 

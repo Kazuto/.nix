@@ -59,7 +59,7 @@ in
           initExtra = ''
             [[ ! -f ~/.aliases ]] || source ~/.aliases
             [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-              '';
+          '';
 
           zplug = {
             enable = true;
