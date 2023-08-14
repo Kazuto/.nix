@@ -3,7 +3,7 @@
 # ======== GENERAL ======== #
 [ "$(which bat)" != "" ] && alias cat="bat --paging=never"
 [ "$(which exa)" != "" ] && alias ls="exa --icons $@"
-[ "$(which trash)" != "" ] && alias rm="trash"
+# [ "$(which trash)" != "" ] && alias rm="trash"
 
 alias dotfiles="cd ~/.dotfiles && vim ."
 
@@ -11,7 +11,7 @@ alias dotfiles="cd ~/.dotfiles && vim ."
 alias c="clear"
 
 # sourcing shell config
-alias s="source ~/.zshrc"
+alias s="source ~/.config/zsh/.zshrc"
 
 # file listing
 alias l="ls -lah"

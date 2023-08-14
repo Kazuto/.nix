@@ -1,16 +1,5 @@
 { config, pkgs, ... }:
 
-let
-    # MySQL 5.7.39
-    pkgs = import (builtins.fetchTarball {
-      url = "https://github.com/NixOS/nixpkgs/archive/e2911d022051066f6db6458b95a13f5e259f13b1.tar.gz";
-    }) {};
-
-    # PHPStorm 2021.3
-    pkgs = import (builtins.fetchTarball {
-      url = "https://github.com/NixOS/nixpkgs/archive/3479555209833f42c16f9da373b6f64af1b06c4a.tar.gz";
-    }) {};
-in
 {
   gtk = {
     enable = true;
@@ -38,6 +27,8 @@ in
       gtk-application-prefer-dark-theme = 1;
     };
   };
+
+ nixpkgs.config.allowUnfree = true;
 
   home = {
     username = "kazuto";
@@ -70,7 +61,7 @@ in
       telegram-desktop
 
       # Development
-      beekeper-studio
+      beekeeper-studio
       codespell
       commitizen
       dbeaver
@@ -86,7 +77,6 @@ in
       neovim
       nodejs_20
       nodePackages.eslint_d
-      nodePackages.npm
       nodePackages.postcss
       nodePackages.prettier_d_slim
       nodePackages.vercel
@@ -112,7 +102,7 @@ in
       shellcheck
       skeema
       supabase-cli
-      trash-cli
+      trashy
       tree
       vimPlugins.codeium-vim
       vscode
@@ -173,22 +163,22 @@ in
     };
   };
 
-  services.mysql = {
-    enable = true;
-    package = myPkgs.mysql57;
-    ensureUsers = [
-      {
-        name = "root";
-        ensurePermissions = {
-          "*.*" = "ALL PRIVILEGES";
-        };
-      }
-    ];
-  };
-
-  services.redis = {
-    servers."default" = {
-      enable = true;
-    };
-  };
+  # services.mysql = {
+  #   enable = true;
+  #   package = myPkgs.mysql57;
+  #   ensureUsers = [
+  #     {
+  #       name = "root";
+  #       ensurePermissions = {
+  #         "*.*" = "ALL PRIVILEGES";
+  #       };
+  #     }
+  #   ];
+  # };
+  #
+  # services.redis = {
+  #   servers."default" = {
+  #     enable = true;
+  #   };
+  # };
 }

@@ -118,6 +118,7 @@
       isNormalUser = true;
       description = "Kazuto";
       extraGroups = [ "networkmanager" "wheel" ];
+      shell = pkgs.zsh;
     };
   };
 
