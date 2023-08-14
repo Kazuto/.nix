@@ -1,7 +1,6 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-with lib.internal;
 let
   cfg = config.shiro.desktop.addons.xdg-portal;
 in
@@ -22,7 +21,9 @@ in
           xdg-desktop-portal-gtk
         ];
         wlr.enable = true;
-        gtkUsePortal = true;
+
+        # deprecated
+        # gtkUsePortal = true;
       };
     };
   };

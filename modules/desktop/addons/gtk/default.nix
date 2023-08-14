@@ -1,7 +1,6 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-with lib.internal;
 let
   cfg = config.shiro.desktop.addons.gtk;
 in
@@ -26,30 +25,32 @@ in
   };
 
   config = mkIf cfg.enable {
-    gtk = {
-      enable = true;
+    shiro.home.extraOptions = {
+      gtk = {
+        enable = true;
 
-      theme = {
-        name = cfg.theme.name;
-        package = cfg.theme.pkg;
-      };
+        theme = {
+          name = cfg.theme.name;
+          package = cfg.theme.pkg;
+        };
 
-      cursorTheme = {
-        name = cfg.cursor.name;
-        package = cfg.cursor.pkg;
-      };
+        cursorTheme = {
+          name = cfg.cursor.name;
+          package = cfg.cursor.pkg;
+        };
 
-      iconTheme = {
-        name = cfg.icon.name;
-        package = cfg.icon.pkg;
-      };
+        iconTheme = {
+          name = cfg.icon.name;
+          package = cfg.icon.pkg;
+        };
 
-      gtk3.extraConfig = {
-        gtk-application-prefer-dark-theme = 1;
-      };
+        gtk3.extraConfig = {
+          gtk-application-prefer-dark-theme = 1;
+        };
 
-      gtk4.extraConfig = {
-        gtk-application-prefer-dark-theme = 1;
+        gtk4.extraConfig = {
+          gtk-application-prefer-dark-theme = 1;
+        };
       };
     };
   };

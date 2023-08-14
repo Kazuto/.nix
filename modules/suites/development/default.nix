@@ -1,7 +1,6 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-with lib.internal;
 let
   cfg = config.shiro.suites.development;
 in
@@ -18,7 +17,7 @@ in
         gitkraken = enabled;
         insomnia = enabled;
         kitty = enabled;
-        nodejs_20 = enabled;
+        nodejs20 = enabled;
         php81 = enabled;
         phpstorm = enabled;
         postman = enabled;

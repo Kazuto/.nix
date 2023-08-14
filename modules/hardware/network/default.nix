@@ -1,10 +1,8 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-with lib.internal;
 let
   cfg = config.shiro.hardware.network;
-  user = config.shiro.user;
 in
 {
   options.shiro.hardware.network = with types; {
@@ -19,7 +17,7 @@ in
       };
     };
 
-    user.extraGroups = [ "networkmanager" ];
+    shiro.user.extraGroups = [ "networkmanager" ];
 
     # Fixes an issue that normally causes nixos-rebuild to fail.
     # https://github.com/NixOS/nixpkgs/issues/180175

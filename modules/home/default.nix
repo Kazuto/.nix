@@ -1,7 +1,6 @@
 { options, config, lib, pkgs, inputs, ... }:
 
 with lib;
-with lib.internal;
 let
   cfg = config.shiro.home;
 in
@@ -18,7 +17,7 @@ in
     extraOptions = mkOpt attrs { } "Options to pass directly to home-manager.";
   };
 
-  config = mkIf cfg.enable {
+  config = {
     shiro.home.extraOptions = {
       home.stateVersion = config.system.stateVersion;
       home.file = mkAliasDefinitions options.shiro.home.file;

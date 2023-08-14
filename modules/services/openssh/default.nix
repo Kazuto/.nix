@@ -1,12 +1,11 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-with lib.internal;
 let
-  cfg = config.shiro.hardware.ssh;
+  cfg = config.shiro.services.openssh;
 in
 {
-  options.shiro.hardware.ssh = with types; {
+  options.shiro.services.openssh = with types; {
     enable = mkBoolOpt false "Whether or not to configure ssh settings.";
   };
 

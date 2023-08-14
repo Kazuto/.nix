@@ -1,7 +1,6 @@
 { pkgs, lib, nixos-hardware, ... }:
 
 with lib;
-with lib.internal;
 {
   imports = [ ./hardware.nix ];
 
@@ -12,7 +11,7 @@ with lib.internal;
       hyprland = enabled;
     };
 
-    suits = {
+    suites = {
       desktop = enabled;
       development = enabled;
       entertainment = enabled;

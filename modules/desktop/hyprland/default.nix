@@ -1,7 +1,6 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-with lib.internal;
 let
   cfg = config.shiro.desktop.hyprland;
 in
@@ -16,13 +15,13 @@ in
       dunst = enabled;
       electron-support = enabled;
       gtk = enabled;
-      hyprload = enabled;
+      # hyprload = enabled;
       hyprpaper = enabled;
       hyprpicker = enabled;
       rofi = enabled;
       waybar = enabled;
       wlogout = enabled;
-      xdg-portals = enabled;
+      xdg-portal = enabled;
     };
 
     shiro.home.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
@@ -35,7 +34,6 @@ in
       wlroots
       xwayland
       wl-clipboard
-      gdm
 
       gst_all_1.gstreamer
       viewnior
@@ -64,7 +62,7 @@ in
       enable = true;
 
       displayManager = {
-        defaultSession = "Hyprland";
+        defaultSession = "hyprland";
 
         gdm  = {
           enable = true;
@@ -74,7 +72,7 @@ in
         # Enable automatic login for the user.
         autoLogin = {
           enable = true;
-          user = cfg.users.users.${config.shiro.user.name};
+          user = config.shiro.user.name;
         };
       };
 

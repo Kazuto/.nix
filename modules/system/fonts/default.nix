@@ -1,7 +1,6 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-with lib.internal;
 let
   cfg = config.shiro.system.fonts;
 in
@@ -26,7 +25,7 @@ in
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
         noto-fonts-emoji
-        (nerdfonts.override { fonts = [ "JetBrainsMono Nerd Font" ]; })
+        nerdfonts
       ] ++ cfg.fonts;
     };
   };

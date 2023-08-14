@@ -1,10 +1,8 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-with lib.internal;
 let
   cfg = config.shiro.hardware.audio;
-  user = config.shiro.user;
 in
 {
   options.shiro.hardware.audio = with types; {
@@ -39,7 +37,7 @@ in
       wireplumber
     ];
 
-    user.extraGroups = [ "audio" ];
+    shiro.user.extraGroups = [ "audio" ];
   };
 }
 

@@ -54,7 +54,7 @@
   };
 
   # Configure console keymap
-  console.keyMap = "de";
+  # console.keyMap = "de";
 
   # Enable the displaying of notifications
   services.dbus.enable = true;

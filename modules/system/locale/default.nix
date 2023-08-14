@@ -1,7 +1,6 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-with lib.internal;
 let
   cfg = config.shiro.system.locale;
 in
@@ -28,7 +27,7 @@ in
     };
 
     # Configure console keymap
-    console.keyMap = "de";
+    # console.keyMap = "de";
   };
 }
 

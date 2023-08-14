@@ -1,5 +1,5 @@
 {
-  description = "My NixOS / nix-darwin / nixos-generators systems";
+  description = "My nix configuration";
 
   inputs = {
     # NixPkgs (nixos-23.05)
@@ -32,5 +32,9 @@
         allowUnfree = true;
         permittedInsecurePackages = [];
       };
+
+      systems.modules = with inputs; [
+        home-manager.nixosModules.home-manager
+      ];
     };
 }

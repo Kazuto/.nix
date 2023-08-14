@@ -1,12 +1,11 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-with lib.internal;
 let
-  cfg = config.shiro.hardware.printing;
+  cfg = config.shiro.services.printing;
 in
 {
-  options.shiro.hardware.printing = with types; {
+  options.shiro.services.printing = with types; {
     enable = mkBoolOpt false "Whether or not to configure printing settings.";
   };
 

@@ -1,7 +1,6 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-with lib.internal;
 let
   cfg = config.shiro.cli.zsh;
 in
@@ -24,6 +23,8 @@ in
       xclip
     ];
 
+    programs.zsh.enable = true;
+
     shiro.home = {
       file = {
         ".p10k.zsh" = {
@@ -37,35 +38,37 @@ in
         };
       };
 
-      programs.fzf = {
-        enable = true;
-        enableZshIntegration = true;
-      };
-
-      programs.zsh = {
-        enable = true;
-        enableAutosuggestions = true;
-        enableCompletion = true;
-
-        dotDir = ".config/zsh";
-
-        history = {
-          size = 10000;
-          path = "${config.xdg.dataHome}/zsh/history";
+      extraOptions = {
+        programs.fzf = {
+          enable = true;
+          enableZshIntegration = true;
         };
 
-        initExtra = ''
-          [[ ! -f ~/.aliases ]] || source ~/.aliases
-          [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-        '';
-
-        zplug = {
+        programs.zsh = {
           enable = true;
-          plugins = [
+          enableAutosuggestions = true;
+          enableCompletion = true;
+
+          dotDir = ".config/zsh";
+
+          history = {
+            size = 10000;
+            path = "$XDG_DATA_HOME/zsh/history";
+          };
+
+          initExtra = ''
+            [[ ! -f ~/.aliases ]] || source ~/.aliases
+            [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+              '';
+
+          zplug = {
+            enable = true;
+            plugins = [
             { name = "zsh-users/zsh-autosuggestions"; }
             { name = "zsh-users/zsh-syntax-highlighting"; }
             { name = "romkatv/powerlevel10k"; tags = [ "as:theme" "depth:1" ]; }
-          ];
+            ];
+          };
         };
       };
     };
