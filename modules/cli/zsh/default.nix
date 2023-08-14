@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ options, config, lib, pkgs, ... }:
 
 let
   cfg = config.shiro.cli.zsh;

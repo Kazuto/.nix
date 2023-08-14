@@ -1,6 +1,7 @@
+{ options, config, lib, pkgs, ... }:
 
-{ lib, config, ... }:
-
+with lib;
+with lib.internal;
 let
   cfg = config.shiro.hardware.printing;
 in
@@ -10,7 +11,11 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.printing.enable = true;
+    services.printing = {
+      enable = true;
+
+      drivers = [ pkgs.cups-kyodialog ]
+    };
   };
 }
 

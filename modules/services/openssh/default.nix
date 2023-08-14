@@ -1,6 +1,7 @@
+{ options, config, lib, pkgs, ... }:
 
-{ lib, config, ... }:
-
+with lib;
+with lib.internal;
 let
   cfg = config.shiro.hardware.ssh;
 in

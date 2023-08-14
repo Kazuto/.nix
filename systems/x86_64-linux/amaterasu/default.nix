@@ -1,5 +1,7 @@
-{ config, pkgs, ... }:
+{ pkgs, lib, nixos-hardware, ... }:
 
+with lib;
+with lib.internal;
 {
   imports = [
     imports = [ ./hardware.nix ];

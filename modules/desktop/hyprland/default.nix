@@ -1,5 +1,7 @@
-{ lib, config, ... }:
+{ options, config, lib, pkgs, ... }:
 
+with lib;
+with lib.internal;
 let
   cfg = config.shiro.desktop.hyprland;
 in
@@ -12,15 +14,20 @@ in
     shiro.desktop.addons = {
       avizo = enabled;
       dunst = enabled;
+      electron-support = enabled;
       gtk = enabled;
+      hyprload = enabled;
       hyprpaper = enabled;
       hyprpicker = enabled;
       rofi = enabled;
       waybar = enabled;
       wlogout = enabled;
       xdg-portals = enabled;
-      electron-support = enabled;
     };
+
+    shiro.home.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
+    shiro.home.configFile."hypr/keybind".source = ./keybind;
+    shiro.home.configFile."hypr/xdg-portal-hyprland".source = ./xdg-portal-hyprland;
 
     environment.systemPackages = with pkgs; [
       hyprland
@@ -28,6 +35,7 @@ in
       wlroots
       xwayland
       wl-clipboard
+      gdm
 
       gst_all_1.gstreamer
       viewnior

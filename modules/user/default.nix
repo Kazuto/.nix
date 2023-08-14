@@ -1,5 +1,7 @@
-{ lib, config, ... }:
+{ options, config, lib, pkgs, ... }:
 
+with lib;
+with lib.internal;
 let
   cfg = config.shiro.user;
 in
@@ -15,7 +17,7 @@ in
       "Extra options passed to <option>users.users.<name></option>.";
   };
 
-  config = mkIf cfg.enable {
+  config = {
     users.users.${cfg.name} = {
       isNormalUser = true;
 
