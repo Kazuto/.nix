@@ -26,6 +26,8 @@ in
         noto-fonts-cjk-serif
         noto-fonts-emoji
         nerdfonts
+        font-awesome
+        google-fonts
       ] ++ cfg.fonts;
     };
   };
