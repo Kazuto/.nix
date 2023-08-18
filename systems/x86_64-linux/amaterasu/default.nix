@@ -21,6 +21,7 @@ with lib;
 
     apps = {
       gparted = enabled;
+      remmina = enabled;
     };
 
     services = {
