@@ -236,7 +236,7 @@ local vim_visual_multi = {
 return {
   autopairs,
   cmp,
-  codium,
+  -- codium,
   comment,
   lion,
   luasnip,
