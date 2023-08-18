@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.shiro.development.gitkraken;
+  cfg = config.shiro.development.tools.gitkraken;
 in
 {
-  options.shiro.development.gitkraken = with types; {
+  options.shiro.development.tools.gitkraken = with types; {
     enable = mkBoolOpt false "Whether or not to install Gitkraken.";
   };
 

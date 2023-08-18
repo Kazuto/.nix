@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.shiro.development.kitty;
+  cfg = config.shiro.development.tools.kitty;
 in
 {
-  options.shiro.development.kitty = with types; {
+  options.shiro.development.tools.kitty = with types; {
     enable = mkBoolOpt false "Whether or not to install Kitty.";
   };
 

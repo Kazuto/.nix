@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.shiro.development.python311;
+  cfg = config.shiro.development.languages.python311;
 in
 {
-  options.shiro.development.python311 = with types; {
+  options.shiro.development.languages.python311 = with types; {
     enable = mkBoolOpt false "Whether or not to use Python 3.11.";
   };
 

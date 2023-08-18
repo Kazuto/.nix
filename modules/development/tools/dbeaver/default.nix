@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.shiro.development.dbeaver;
+  cfg = config.shiro.development.tools.dbeaver;
 in
 {
-  options.shiro.development.dbeaver = with types; {
+  options.shiro.development.tools.dbeaver = with types; {
     enable = mkBoolOpt false "Whether or not to install Dbeaver.";
   };
 

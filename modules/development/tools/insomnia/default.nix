@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.shiro.development.insomnia;
+  cfg = config.shiro.development.tools.insomnia;
 in
 {
-  options.shiro.development.insomnia = with types; {
+  options.shiro.development.tools.insomnia = with types; {
     enable = mkBoolOpt false "Whether or not to install Insomnia.";
   };
 

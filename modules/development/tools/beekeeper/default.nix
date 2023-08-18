@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.shiro.development.beekeeper;
+  cfg = config.shiro.development.tools.beekeeper;
 in
 {
-  options.shiro.development.beekeeper = with types; {
+  options.shiro.development.tools.beekeeper = with types; {
     enable = mkBoolOpt false "Whether or not to install Beekeeper Studio.";
   };
 

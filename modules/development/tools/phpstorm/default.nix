@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.shiro.development.phpstorm;
+  cfg = config.shiro.development.tools.phpstorm;
 in
 {
-  options.shiro.development.phpstorm = with types; {
+  options.shiro.development.tools.phpstorm = with types; {
     enable = mkBoolOpt false "Whether or not to install phpstorm.";
   };
 

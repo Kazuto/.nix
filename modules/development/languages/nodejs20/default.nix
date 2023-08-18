@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.shiro.development.nodejs20;
+  cfg = config.shiro.development.languages.nodejs20;
 in
 {
-  options.shiro.development.nodejs20 = with types; {
+  options.shiro.development.languages.nodejs20 = with types; {
     enable = mkBoolOpt false "Whether or not to install Node.js 20.";
   };
 

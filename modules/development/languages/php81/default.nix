@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.shiro.development.php81;
+  cfg = config.shiro.development.languages.php81;
 in
 {
-  options.shiro.development.php81 = with types; {
+  options.shiro.development.languages.php81 = with types; {
     enable = mkBoolOpt false "Whether or not to use PHP 8.1.";
   };
 

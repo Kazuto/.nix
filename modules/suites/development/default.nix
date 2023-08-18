@@ -11,18 +11,21 @@ in
 
   config = mkIf cfg.enable {
     shiro = {
-      development = {
+      development.tools = {
         beekeeper = enabled;
         dbeaver = enabled;
         gitkraken = enabled;
         insomnia = enabled;
         kitty = enabled;
-        nodejs20 = enabled;
-        php81 = enabled;
         phpstorm = enabled;
-        python311 = enabled;
         postman = enabled;
         vscode = enabled;
+      };
+
+      development.languages = {
+        nodejs20 = enabled;
+        php81 = enabled;
+        python311 = enabled;
       };
 
       cli = {

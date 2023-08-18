@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.shiro.development.postman;
+  cfg = config.shiro.development.tools.postman;
 in
 {
-  options.shiro.development.postman = with types; {
+  options.shiro.development.tools.postman = with types; {
     enable = mkBoolOpt false "Whether or not to install Postman.";
   };
 
