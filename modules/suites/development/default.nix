@@ -26,14 +26,10 @@ in
       };
 
       cli = {
-        codespell = enabled;
         commitizen = enabled;
         curl = enabled;
-        editorconfig-checker = enabled;
-        fzf = enabled;
         neovim = enabled;
         pre-commit = enabled;
-        shellcheck = enabled;
         skeema = enabled;
         supabase = enabled;
         wget = enabled;
