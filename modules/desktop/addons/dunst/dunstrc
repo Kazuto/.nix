@@ -83,7 +83,7 @@
     background = "#1E1E2E"
 
     # Rounded corners; (0 = disabled)
-    corner_radius = 4
+    corner_radius = 10
 
     # Defines width in pixels of frame around the notification window; (0 = disabled)
     frame_width = 0
