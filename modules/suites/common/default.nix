@@ -10,9 +10,18 @@ in
   };
 
   config = mkIf cfg.enable {
+    shiro = {
+      hardware = {
+        audio = enabled;
+        network = enabled;
+      };
+    };
+
     environment.systemPackages = with pkgs; [
-      busybox
+      killall
       gcc
+      gnumake
+      pkg-config
       xorg.xhost
     ];
   };
