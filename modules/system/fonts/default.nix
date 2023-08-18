@@ -25,7 +25,7 @@ in
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
         noto-fonts-emoji
-        nerdfonts
+        (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
         font-awesome
         google-fonts
       ] ++ cfg.fonts;
