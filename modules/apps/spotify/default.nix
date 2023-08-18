@@ -10,6 +10,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ spotify spicetify-cli ];
+    environment.systemPackages = with pkgs; [ spotify ];
   };
 }
