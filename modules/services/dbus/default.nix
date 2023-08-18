@@ -11,6 +11,8 @@ in
 
   config = mkIf cfg.enable {
     services.dbus.enable = true;
+
+    services.gvfs.enable = true;
   };
 }
 
