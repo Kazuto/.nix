@@ -1,6 +1,7 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
+with lib.shiro;
 let
   cfg = config.shiro.desktop.addons.hyprpaper;
 in

@@ -1,6 +1,7 @@
 { options, config, lib, pkgs, inputs, ... }:
 
 with lib;
+with lib.shiro;
 let
   cfg = config.shiro.home;
 in
