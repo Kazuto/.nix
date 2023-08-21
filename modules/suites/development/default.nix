@@ -36,6 +36,7 @@ in
         pre-commit = enabled;
         skeema = enabled;
         supabase = enabled;
+        vercel = enabled;
         wget = enabled;
         zsh = enabled;
       };
