@@ -9,11 +9,26 @@
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Home Manager (release-23.05)
-    home-manager.url = "github:nix-community/home-manager/release-23.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-23.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
+    # In order to configure macOS systems.
+    darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Unified configuration for systems, packages, modules, shells, templates, and more with Nix Flakes
     snowfall-lib = {
       url = "github:snowfallorg/lib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Simplified Nix Flakes on the command line
+    snowfall-flake = {
+      url = "github:snowfallorg/flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -27,6 +42,10 @@
     in
     lib.mkFlake {
       package-namespace = "shiro";
+
+      overlays = with inputs; [
+				snowfall-flake.overlay
+			];
 
       channels-config = {
         allowUnfree = true;
