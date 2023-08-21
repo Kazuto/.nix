@@ -34,7 +34,6 @@ in
         neovim = enabled;
         ngrok = enabled;
         pre-commit = enabled;
-        skeema = enabled;
         supabase = enabled;
         vercel = enabled;
         wget = enabled;
