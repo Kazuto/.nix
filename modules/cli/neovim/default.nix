@@ -37,6 +37,7 @@ in
       editorconfig-checker
       shellcheck
       languagetool
+      lua-language-server
       tree-sitter
 
       nodePackages.bash-language-server
