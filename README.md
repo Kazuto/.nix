@@ -26,13 +26,12 @@ sudo nixos-rebuild switch --flake ./#amaterasu
 
 ### Tsukuyomi (Development on macOS)
 ```bash
-## First build
-
-sudo nix run nix-darwin \
+# First build
+nix run nix-darwin \
     --extra-experimental-features nix-command \
     --extra-experimental-features flakes \
     -- switch --flake ./#tsukuyomi
 
-## Consecutive builds
-sudo darwin-rebuild switch --flake ./#tsukuyomi
+# Consecutive builds
+darwin-rebuild switch --flake ./#tsukuyomi
 ```

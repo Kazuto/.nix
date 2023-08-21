@@ -1,14 +1,15 @@
 { pkgs, lib, ... }:
 
 with lib;
+with lib.shiro;
 {
-  # imports = [ ./hardware.nix ];
-
   shiro = {
-    nix = enabled;
+    layouts = {
+      workstation = enabled;
+    };
 
-    cli = {
-      ripgrep = enabled;
+    suites = {
+      tiling = enabled;
     };
   };
 
@@ -16,11 +17,5 @@ with lib;
     "/opt/homebrew/bin"
   ];
 
-  environment.systemPackages = with pkgs; [
-    snowfallorg.flake
-    # raycast
-    # skhd
-  ];
-
-  system.stateVersion = "23.05";
+  system.stateVersion = 4;
 }

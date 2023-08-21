@@ -5,38 +5,17 @@ with lib;
   imports = [ ./hardware.nix ];
 
   shiro = {
-    nix = enabled;
+    layouts = {
+      workstation = enabled;
+    };
 
     desktop = {
       hyprland = enabled;
     };
 
-    suites = {
-      common = enabled;
-      desktop = enabled;
-      development = enabled;
-      entertainment = enabled;
-      social = enabled;
-    };
-
     apps = {
       gparted = enabled;
       remmina = enabled;
-    };
-
-    services = {
-      openssh = enabled;
-      printing = enabled;
-      dbus = enabled;
-    };
-
-    system = {
-      boot = enabled;
-      env = enabled;
-      fonts = enabled;
-      locale = enabled;
-      time = enabled;
-      xkb = enabled;
     };
   };
 
