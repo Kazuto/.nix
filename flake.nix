@@ -22,7 +22,7 @@
 
     # Unified configuration for systems, packages, modules, shells, templates, and more with Nix Flakes
     snowfall-lib = {
-      url = "github:snowfallorg/lib";
+      url = "github:snowfallorg/lib/dev";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -38,19 +38,26 @@
       lib = inputs.snowfall-lib.mkLib {
         inherit inputs;
         src = ./.;
+
+	snowfall = {
+          meta = {
+            name = "shiro";
+            title = "Shiro";
+          };
+
+          namespace = "shiro";
+        };
       };
     in
     lib.mkFlake {
-      package-namespace = "shiro";
+      channels-config = {
+	allowUnfree = true;
+	permittedInsecurePackages = [];
+      };
 
       overlays = with inputs; [
-				snowfall-flake.overlay
-			];
-
-      channels-config = {
-        allowUnfree = true;
-        permittedInsecurePackages = [];
-      };
+	snowfall-flake.overlay
+      ];
 
       systems.modules = with inputs; [
         home-manager.nixosModules.home-manager
