@@ -32,6 +32,7 @@ in
         commitizen = enabled;
         curl = enabled;
         neovim = enabled;
+        ngrok = enabled;
         pre-commit = enabled;
         skeema = enabled;
         supabase = enabled;
