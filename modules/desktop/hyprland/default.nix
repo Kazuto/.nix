@@ -26,6 +26,7 @@ in
       xdg-portal = enabled;
 
       blueman = enabled;
+      polkit = enabled;
     };
 
     shiro.home.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
@@ -40,7 +41,7 @@ in
       xwayland
 
       viewnior
-      polkit_gnome
+
     ];
 
     environment.sessionVariables = {
