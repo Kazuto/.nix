@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.shiro.suites.common;
+  cfg = config.shiro.suites.core;
 in
 {
-  options.shiro.suites.common = with types; {
+  options.shiro.suites.core = with types; {
     enable = mkBoolOpt false "Whether or not to enable common configuration.";
   };
 
