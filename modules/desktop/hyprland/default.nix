@@ -18,7 +18,9 @@ in
       # hyprload = enabled;
       hyprpaper = enabled;
       hyprpicker = enabled;
+      nautilus = enabled;
       rofi = enabled;
+      thunar = enabled;
       waybar = enabled;
       wlogout = enabled;
       xdg-portal = enabled;
@@ -38,7 +40,6 @@ in
       xwayland
 
       viewnior
-      xfce.thunar
       polkit_gnome
     ];
 
