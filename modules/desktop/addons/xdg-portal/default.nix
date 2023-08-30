@@ -10,20 +10,23 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ xdg-utils ];
+    environment.systemPackages = with pkgs; [
+      xdg-utils
+
+      xdg-desktop-portal
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+    ];
 
     xdg = {
+      autostart.enable = true;
       portal = {
         enable = true;
         extraPortals = with pkgs; [
-          xdg-desktop-portal-hyprland
-          xdg-desktop-portal-wlr
           xdg-desktop-portal-gtk
+          xdg-desktop-portal
         ];
         wlr.enable = true;
-
-        # deprecated
-        # gtkUsePortal = true;
       };
     };
   };
