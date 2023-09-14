@@ -9,6 +9,7 @@
         "gtk-layer-shell": true,
         "height": 0,
         "modules-left": [
+            // "custom/menu",
             "wlr/workspaces"
         ],
         "modules-center": [
@@ -16,6 +17,7 @@
         ],
         "modules-right": [
             "clock"
+            // "custom/power"
         ],
         // "modules-center": ["wlr/workspaces"],
         "include": [

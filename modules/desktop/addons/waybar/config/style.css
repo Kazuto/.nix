@@ -23,23 +23,29 @@ tooltip {
 #clock,
 #workspaces,
 #window,
-#custom-spotify,
 #tray,
-#custom-updates,
 #pulseaudio,
 #cpu,
 #memory,
 #network {
   background: #1E1E2E;
-  padding: 0px 10px;
-  margin: 8px 0px 3px 0px;
+  border-radius: 10px;
+  padding: 0px 8px;
+  margin: 8px 5px 3px 5px;
+}
+
+#custom-menu,
+#custom-power,
+#custom-spotify,
+#custom-updates {
+  background: #1E1E2E;
+  border-radius: 10px;
+  padding: 0px 8px;
+  margin: 8px 5px 3px 5px;
 }
 
 #workspaces {
   background: #1E1E2E;
-  border-radius: 10px;
-  padding: 0px 5px;
-  margin-left: 5px;
 }
 
 #workspaces button {
@@ -66,7 +72,6 @@ tooltip {
 #workspaces button.urgent {
   color: #F38BA8;
   background: none;
-  border-radius: 10px;
 }
 
 #workspaces button:hover {
@@ -76,53 +81,45 @@ tooltip {
 
 #clock {
   color: #FAB387;
-  border-radius: 10px;
-  margin-right: 5px;
 }
 
-#window {
-  border-radius: 10px;
+#custom-menu {
+  color: #89B4FA;
+  padding-left: 9px;
+  padding-right: 15px;
+}
+
+#custom-power {
+  color: #FAB387;
+  padding-left: 11px;
+  padding-right: 13px;
 }
 
 #custom-spotify {
-  border-radius: 10px;
-  margin-left : 10px;
   color: #A6E3A1;
 }
 
-#tray {
-  border-radius: 10px;
-  margin-right: 10px;
-}
-
 #cpu {
-  border-radius: 10px 0px 0px 10px;
   color: #89DCEB;
+  border-radius: 10px 0px 0px 10px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 #memory {
   color: #74C7EC;
+  border-radius: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 #network {
-  border-radius: 0px 10px 10px 0px;
-  margin-right: 10px;
   color: #89B4FA;
-}
-
-#custom-updates {
-  color: #F5C2E7;
-  border-radius: 10px 0px 0px 10px;
+  border-radius: 0px 10px 10px 0px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 #pulseaudio {
   color: #CBA6F7;
-  border-radius: 10px;
-  margin-right: 5px;
-}
-
-#pulseaudio.microphone {
-  color: #CBA6F7;
-  border-radius: 0px 10px 10px 0px;
-  margin-right: 5px;
 }
