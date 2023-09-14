@@ -42,7 +42,13 @@ in
       wl-clipboard
 
       viewnior
+      mplayer
+      grim
+      xdg-user-dirs
 
+      jq
+      xsel
+      nss_latest
       cmake
       ninja
     ];
