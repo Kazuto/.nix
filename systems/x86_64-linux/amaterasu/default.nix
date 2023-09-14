@@ -16,6 +16,7 @@ with lib;
       desktop = enabled;
       development = enabled;
       entertainment = enabled;
+      gaming = enabled;
       social = enabled;
     };
 
