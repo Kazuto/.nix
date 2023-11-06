@@ -33,6 +33,8 @@ in
     shiro.cli.ripgrep = enabled;
 
     environment.systemPackages = with pkgs; [
+      neovim
+      
       ctags
       codespell
       editorconfig-checker
