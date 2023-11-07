@@ -14,7 +14,7 @@ in
     environment.systemPackages = with pkgs;  [
       (php.buildEnv {
         extensions = ({ enabled, all }: enabled ++ (with all; [
-          xdebug imagick
+          xdebug imagick gd phan
         ]));
         extraConfig = ''
           memory_limit = 8G

@@ -28,7 +28,7 @@ in
 
       development.languages = {
         nodejs20 = enabled;
-        php81 = enabled;
+        # php81 = enabled;
         python311 = enabled;
       };
 
@@ -37,6 +37,7 @@ in
         neovim = enabled;
         ngrok = enabled;
         pre-commit = enabled;
+        skeema = enabled;
         supabase = enabled;
         trash = enabled;
         vercel = enabled;

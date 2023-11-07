@@ -53,8 +53,17 @@ in
         yabai -m rule --add app="^Calculator$" manage=off
         yabai -m rule --add app="^Karabiner-Elements$" manage=off
         yabai -m rule --add app="^QuickTime Player$" manage=off
-        yabai -m rule --add app="^Microsoft Teams$" manage=off
         yabai -m rule --add app="^Raycast$" manage=off
+        yabai -m rule --add app="^Herd$" manage=off
+        yabai -m rule --add app="^LogiTune$" manage=off border=off
+
+        yabai -m rule --add app='Microsoft Teams' border=off manage=off
+        # yabai -m rule --add app='^Microsoft Teams$' title='^Meeting$' border=off manage=off
+
+        # The below signal only works on current master, not in 1.1.2
+        # Tries to focus the window under the cursor whenever the MS teams notification gains focus
+        # Probably conflicts with mouse follows focus in some ways
+        yabai -m signal --add event=window_focused app='^Microsoft Teams$' title='^Microsoft Teams Notification$' action='yabai -m window --focus mouse > /dev/null 2>&1'
       '';
     };
 

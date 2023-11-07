@@ -13,25 +13,32 @@ local lualine = {
   end,
 }
 
+local highlight = {
+  "RainbowRed",
+  "RainbowYellow",
+  "RainbowBlue",
+  "RainbowOrange",
+  "RainbowGreen",
+  "RainbowViolet",
+  "RainbowCyan",
+}
+
+local highlight = {
+  "CursorColumn",
+  "Whitespace",
+}
+
 local indent_blankline = {
   "lukas-reineke/indent-blankline.nvim",
+  main = "ibl",
   config = function()
-    require("indent_blankline").setup({
-      filetype_exclude = {
-        "help",
-        "terminal",
-        "dashboard",
-        "lspinfo",
-        "TelescopePrompt",
-        "TelescopeResults",
+    require("ibl").setup({
+      indent = { highlight = highlight, char = "" },
+      whitespace = {
+          highlight = highlight,
+          remove_blankline_trail = false,
       },
-      buftype_exclude = {
-        "terminal",
-        "NvimTree",
-      },
-      char = "┊",
-      show_trailing_blankline_indent = false,
-      show_first_indent_level = true,
+      scope = { enabled = false },
     })
   end,
 }
