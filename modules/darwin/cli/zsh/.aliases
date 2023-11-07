@@ -140,3 +140,16 @@ function tls {
 function tms {
   tmuxifier new-session "$1"
 }
+
+# ======== NIX ======== #
+function nix:update {
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "Rebuilding flake ./#$HOST"
+    darwin-rebuild switch --flake ./#$HOST
+  fi
+
+  if [[ "$OSTYPE" == "linux"* ]]; then
+    echo "Rebuilding flake ./#$HOST"
+    nixos-rebuild switch --flake ./#$HOST
+  fi
+}
