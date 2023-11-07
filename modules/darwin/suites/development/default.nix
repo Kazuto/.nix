@@ -17,10 +17,13 @@ in
       };
 
       development.tools = {
+        ghostscript = enabled;
         git = enabled;
         gitkraken = enabled;
         # insomnia = enabled;
         kitty = enabled;
+        mailhog = enabled;
+        meilisearch = enabled;
         phpstorm = enabled;
         postman = enabled;
         vscode = enabled;
@@ -34,6 +37,7 @@ in
 
       cli = {
         commitizen = enabled;
+        gitleaks = enabled;
         neovim = enabled;
         ngrok = enabled;
         pre-commit = enabled;

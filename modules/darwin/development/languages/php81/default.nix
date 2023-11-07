@@ -12,19 +12,22 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;  [
-      (php.buildEnv {
+      (php81.buildEnv {
         extensions = ({ enabled, all }: enabled ++ (with all; [
-          xdebug imagick gd phan
+           gd imagick opcache pcov redis xdebug
         ]));
+
         extraConfig = ''
-          memory_limit = 8G
-          IDE Key = nvim
-          xdebug.mode = debug
+          memory_limit=4G
+          xdebug.idekey=nvim
+          xdebug.mode=debug
         '';
       })
 
-      php81Packages.composer
+      imagemagick
       php81Extensions.imagick
+
+      php81Packages.composer
     ];
   };
 }
