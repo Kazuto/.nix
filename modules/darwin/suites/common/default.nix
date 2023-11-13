@@ -14,10 +14,6 @@ in
     shiro = {
       nix = enabled;
 
-      apps = {
-        raycast = enabled;
-      };
-
       cli = {
         flake = enabled;
         stow = enabled;

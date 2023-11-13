@@ -46,6 +46,8 @@ in
       nodePackages.bash-language-server
       nodePackages.diagnostic-languageserver
       nodePackages.dockerfile-language-server-nodejs
+      nodePackages.eslint_d
+      nodePackages.prettier_d_slim
       nodePackages.tailwindcss
       nodePackages.typescript-language-server
       nodePackages.vim-language-server
