@@ -17,6 +17,7 @@ in
       };
 
       development.tools = {
+        bun = enabled;
         git = enabled;
         gitkraken = enabled;
         # insomnia = enabled;

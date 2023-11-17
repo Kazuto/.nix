@@ -38,8 +38,8 @@ in
         dnd_icon_color             = "0xffa8a8a8";
         clock_icon_color           = "0xffa8a8a8";
         power_icon_strip           = " ";
-        space_icon                 = "•";
-        space_icon_strip           = "󰖟 󰫐  󰊤 󰆼 6 7 8 󰓇";
+        space_icon                 = "";
+        space_icon_strip           = "󰫐 󰖟  󰆼 󱂛 󰊤   󰓇";
         spaces_for_all_displays    = "off";
         display_separator          = "off";
         display_separator_icon     = "";
