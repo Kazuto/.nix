@@ -33,6 +33,8 @@ local indent_blankline = {
   end,
 }
 
+vim.g.barbar_auto_setup = false
+
 local barbar = {
   "romgrk/barbar.nvim",
   lazy = false,
@@ -41,8 +43,6 @@ local barbar = {
     "nvim-tree/nvim-web-devicons",
   },
   config = function()
-    vim.g.barbar_auto_setup = false
-
     require("barbar").setup({
       animation = true,
       auto_hide = false,

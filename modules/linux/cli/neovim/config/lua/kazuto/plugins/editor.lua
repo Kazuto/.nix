@@ -76,7 +76,7 @@ local nvimtree = {
     })
   end,
   keys = {
-    { "<C-b>", vim.cmd.NvimTreeToggle, { desc = "Toggle Nvim Tree" } },
+    { "<leader>e", vim.cmd.NvimTreeToggle, desc = "Toggle Nvim Tree" },
   },
 }
 

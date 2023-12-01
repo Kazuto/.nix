@@ -117,8 +117,8 @@ return {
   { "tpope/vim-repeat" },                 -- Allow plugins to hook into repeat (.)
   { "tpope/vim-surround" },               -- Replace surrounding quotes or tags
   { "tpope/vim-sleuth" },                 -- Automatically detect indentation
-  { "sheerun/vim-polyglot" },             -- A collection of language packs
-  { "farmergreg/vim-lastplace" },          -- Restore cursor position in files
+  -- { "sheerun/vim-polyglot" },             -- A collection of language packs
+  { "farmergreg/vim-lastplace" },         -- Restore cursor position in files
   { "nelstrom/vim-visual-star-search" },  -- Enable * for visually selected text
   { "jessarcher/vim-heritage" },          -- Automatically create parent directories when saving
   { "airblade/vim-rooter"},               -- Change working directory to project root
