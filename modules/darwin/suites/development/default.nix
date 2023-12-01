@@ -16,6 +16,17 @@ in
         obsidian = enabled;
       };
 
+      cli = {
+        commitizen = enabled;
+        neovim = enabled;
+        ngrok = enabled;
+        phpstan = enabled;
+        supabase = enabled;
+        trash = enabled;
+        vercel = enabled;
+        zsh = enabled;
+      };
+
       development.tools = {
         bun = enabled;
         git = enabled;
@@ -31,16 +42,6 @@ in
         nodejs20 = enabled;
         # php81 = enabled;
         python311 = enabled;
-      };
-
-      cli = {
-        commitizen = enabled;
-        neovim = enabled;
-        ngrok = enabled;
-        supabase = enabled;
-        trash = enabled;
-        vercel = enabled;
-        zsh = enabled;
       };
     };
   };

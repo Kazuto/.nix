@@ -12,6 +12,23 @@ in
 
   config = mkIf cfg.enable {
     shiro = {
+      apps = {
+        obsidian = enabled;
+      };
+
+      cli = {
+        commitizen = enabled;
+        curl = enabled;
+        neovim = enabled;
+        ngrok = enabled;
+        phpstan = enabled;
+        pre-commit = enabled;
+        supabase = enabled;
+        vercel = enabled;
+        wget = enabled;
+        zsh = enabled;
+      };
+
       development.tools = {
         beekeeper = enabled;
         dbeaver = enabled;
@@ -27,18 +44,6 @@ in
         nodejs20 = enabled;
         php81 = enabled;
         python311 = enabled;
-      };
-
-      cli = {
-        commitizen = enabled;
-        curl = enabled;
-        neovim = enabled;
-        ngrok = enabled;
-        pre-commit = enabled;
-        supabase = enabled;
-        vercel = enabled;
-        wget = enabled;
-        zsh = enabled;
       };
 
       tools = {
