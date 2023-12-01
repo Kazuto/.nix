@@ -4,6 +4,7 @@ local servers = {
   "eslint",
   "html",
   "intelephense",
+  "phpactor",
   "jsonls",
   "lua_ls",
   "tailwindcss",
@@ -43,7 +44,7 @@ local lspconfig = {
 }
 
 local null_ls = {
-  "jose-elias-alvarez/null-ls.nvim",
+  "nvimtools/none-ls.nvim",
   config = function()
     local null_ls = require("null-ls")
 
@@ -77,18 +78,17 @@ local null_ls = {
 
         code_actions.shellcheck,
 
-        diagnostics.actionlint,
-        diagnostics.codespell,
-        diagnostics.dotenv_linter,
+        -- diagnostics.codespell,
+
         diagnostics.editorconfig_checker,
 
+        diagnostics.php,
         diagnostics.phpstan,
-        diagnostics.shellcheck,
+
         diagnostics.trail_space.with({
           disabled_filetypes = { "NvimTree" },
         }),
 
-        formatting.beautysh,
         formatting.jq,
         formatting.pint,
         formatting.prettierd.with({

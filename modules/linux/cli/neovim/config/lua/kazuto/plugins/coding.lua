@@ -1,16 +1,3 @@
-local autopairs = {
-  "windwp/nvim-autopairs",
-  dependencies = {
-    "hrsh7th/nvim-cmp",
-  },
-  config = function()
-    require("nvim-autopairs").setup({
-      disable_filetype = { "TelescopePrompt" },
-    })
-  end,
-  event = "InsertEnter",
-}
-
 local cmp = {
   "hrsh7th/nvim-cmp",
   dependencies = {
@@ -110,21 +97,6 @@ local codium = {
   },
 }
 
-local comment = {
-  "numToStr/Comment.nvim",
-  config = function()
-    require("Comment").setup()
-  end,
-}
-
--- Align text by characters
-
-vim.g.lion_squeeze_spaces = 1 -- Remove as many spaces as possible when aligning
-
-local lion = {
-  "tommcdo/vim-lion",
-}
-
 local luasnip = {
   "L3MON4D3/LuaSnip",
   config = function()
@@ -156,21 +128,6 @@ local luasnip = {
   end,
 }
 
-vim.g.pasta_disabled_filetypes = { "fugitive" }
-
-local pasta = {
-  "sickill/vim-pasta",
-}
-
--- Split or join lines of code
-
-vim.g.splitjoin_html_attributes_bracket_on_new_line = 1
-vim.g.splitjoin_trailing_comma = 1
-vim.g.splitjoin_php_method_chain_full = 1
-
-local splitjoin = {
-  "AndrewRadev/splitjoin.vim",
-}
 
 local treesitter = {
   "nvim-treesitter/nvim-treesitter",
@@ -228,20 +185,9 @@ local treesitter = {
   end,
 }
 
--- Multi-Cursor selection
-local vim_visual_multi = {
-  "mg979/vim-visual-multi",
-}
-
 return {
-  autopairs,
   cmp,
-  -- codium,
-  comment,
-  lion,
+  codium,
   luasnip,
-  pasta,
-  splitjoin,
   treesitter,
-  vim_visual_multi,
 }

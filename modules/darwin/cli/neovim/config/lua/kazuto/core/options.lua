@@ -1,40 +1,67 @@
 local opt = vim.opt
 
--- line numbers
+-- LINE NUMBERS
+
 opt.number = true
 opt.relativenumber = true
 
--- tabs & indentation
+-- TABS & INDENTATION
 opt.tabstop = 2
 opt.softtabstop = 2
 opt.shiftwidth = 2
 opt.shiftround = true
 opt.expandtab = true
 opt.autoindent = true
-opt.smartindent = true
+opt.smartindent = true -- indent when starting a new line
 
--- line wrapping
-opt.wrap = false
+-- LINE WRAPPING
+opt.wrap = false -- disable line wrapping
 
---
-opt.swapfile = false
-opt.backup = false
-opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
-opt.undofile = true
+-- WILDMODE
+opt.wildmode = "longest:full,full" -- list all matches and complete till longest common string
 
--- search
-opt.ignorecase = true
-opt.smartcase = true
+-- UNDO AND BACKUP
+opt.swapfile = false -- disable swap files
+opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- set undo directory
+opt.undofile = true -- enable undo files
+opt.backup = true -- enable backup
+opt.backupdir:remove(".") -- remove current directory from backup directory
+
+-- SEARCH
+opt.ignorecase = true -- ignore case if written all lowercase
+opt.smartcase = true -- if written at least one uppercase, search is case sensitive
 opt.hlsearch = false
 opt.incsearch = true
 
--- appearance
-opt.termguicolors = true
-opt.background = "dark"
-opt.signcolumn = "yes"
+-- APPEARANCE
+opt.termguicolors = true -- enable 24-bit RGB color
+opt.background = "dark" -- dark or light
+opt.signcolumn = "yes" -- always show sign column
 
-opt.scrolloff = 8
+opt.scrolloff = 8 -- minimum number of lines to keep above and below the cursor
+opt.sidescrolloff = 8 -- minimum number of columns to keep to the left and right of the cursor
 
-opt.updatetime = 50
+opt.updatetime = 50 -- faster completion
 
-opt.colorcolumn = "80"
+opt.colorcolumn = "80" -- highlight column 80
+
+-- SPLIT WINDOWS
+opt.splitright = true -- split new window to right
+opt.splitbelow = true -- split new window below
+
+-- CONFIRMATION
+opt.confirm = true -- ask for confirmation
+
+-- CLIPBOARD
+-- opt.clipboard:append("unnamedplus") -- use system clipboard
+
+-- LISTCHARS
+opt.list = true -- enable listchars
+opt.listchars = {
+    tab = '▸ ',
+    trail = '·',
+    nbsp = '⎵',
+    -- eol = '↲',
+    extends = '❯',
+    precedes = '❮'
+}

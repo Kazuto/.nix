@@ -34,7 +34,7 @@ in
 
     environment.systemPackages = with pkgs; [
       neovim
-      
+
       ctags
       codespell
       editorconfig-checker
@@ -42,12 +42,13 @@ in
       languagetool
       lua-language-server
       tree-sitter
+      phpactor
+      # unstable.prettierd
 
       nodePackages.bash-language-server
       nodePackages.diagnostic-languageserver
       nodePackages.dockerfile-language-server-nodejs
       nodePackages.eslint_d
-      nodePackages.prettier_d_slim
       nodePackages.tailwindcss
       nodePackages.typescript-language-server
       nodePackages.vim-language-server
