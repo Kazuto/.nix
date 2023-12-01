@@ -13,6 +13,15 @@ with lib;
       hyprland = enabled;
     };
 
+    suites = {
+      core = enabled;
+      desktop = enabled;
+      development = enabled;
+      entertainment = enabled;
+      gaming = enabled;
+      social = enabled;
+    };
+
     apps = {
       gparted = enabled;
       remmina = enabled;

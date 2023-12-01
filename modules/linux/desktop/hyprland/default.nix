@@ -19,12 +19,15 @@ in
       # hyprload = enabled;
       hyprpaper = enabled;
       hyprpicker = enabled;
+      nautilus = enabled;
       rofi = enabled;
+      thunar = enabled;
       waybar = enabled;
       wlogout = enabled;
       xdg-portal = enabled;
 
       blueman = enabled;
+      polkit = enabled;
     };
 
     shiro.home.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
@@ -33,19 +36,31 @@ in
 
     environment.systemPackages = with pkgs; [
       hyprland
-      wayland-protocols
+      hyprland-share-picker
+      hyprland-protocols
+
       wlroots
       wl-clipboard
-      xwayland
 
       viewnior
-      xfce.thunar
-      polkit_gnome
+      mplayer
+      grim
+      xdg-user-dirs
+
+      jq
+      xsel
+      nss_latest
+      cmake
+      ninja
     ];
 
     environment.sessionVariables = {
       # If you cursor becomes invisible
       WLR_NO_HARDWARE_CURSORS = "1";
+      # WLR_RENDERER = "vulkan";
+      XDG_CURRENT_DESKTOP = "Hyprland";
+      XDG_SESSION_DESKTOP = "Hyprland";
+      NIXOS_XDG_OPEN_USE_PORTAL = "1";
     };
 
     programs.hyprland = {
@@ -77,6 +92,11 @@ in
 
       # Enable touchpad support (enabled default in most desktopManager).
       libinput.enable = true;
+    };
+
+    services.gnome = {
+      sushi.enable = true;
+      gnome-keyring.enable = true;
     };
 
     # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229

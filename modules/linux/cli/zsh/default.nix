@@ -58,6 +58,8 @@ in
           };
 
           initExtra = ''
+            export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+
             [[ ! -f ~/.aliases ]] || source ~/.aliases
             [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
           '';

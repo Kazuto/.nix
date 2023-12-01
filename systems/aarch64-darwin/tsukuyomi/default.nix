@@ -11,6 +11,7 @@ with lib.shiro;
     suites = {
       smake = enabled;
       tiling = enabled;
+      gaming = enabled;
     };
   };
 
