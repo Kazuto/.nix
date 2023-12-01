@@ -33,7 +33,7 @@ local nvimtree = {
       },
       git = {
         enable = true,
-        ignore = true,
+        ignore = false,
         timeout = 500,
       },
       view = {
@@ -44,11 +44,12 @@ local nvimtree = {
         highlight_git = true,
         root_folder_modifier = ":t",
         root_folder_label = false,
+        group_empty = true,
         icons = {
           show = {
             file = true,
             folder = true,
-            folder_arrow = true,
+            folder_arrow = false,
             git = true,
           },
           glyphs = {
@@ -72,6 +73,16 @@ local nvimtree = {
             },
           },
         },
+        indent_markers = {
+          enable = true,
+          inline_arrows = true,
+          icons = {
+            corner = "└",
+            edge = "│",
+            item = "│",
+            none = " ",
+          },
+        },
       },
     })
   end,
@@ -91,19 +102,45 @@ local telescope = {
   },
   config = function()
     local telescope = require("telescope")
+    local actions = require("telescope.actions")
 
-    telescope.setup()
+    telescope.setup({
+      defaults = {
+        path_display = { truncate = 1 },
+        prompt_prefix = "   ",
+        selection_caret = " ",
+        entry_prefix = "",
+        layout_config = {
+          prompt_position = "top",
+        },
+        sorting_strategy = "ascending",
+        mappings = {
+          i = {
+            ["<esc>"] = actions.close,
+            ["<C-Down>"] = actions.cycle_history_next,
+            ["<C-Up>"] = actions.cycle_history_prev,
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+          },
+        },
+        file_ignore_patterns = { "node_modules", ".git", "vendor" },
+      },
+      pickers = {
+        find_files = {
+          hidden = true,
+        },
+      },
+    })
 
     telescope.load_extension("fzf")
   end,
   keys = {
     { "<leader>ff", ":Telescope find_files<CR>",                                        desc = "[F]ind [F]iles" },
     { "<leader>fa", ":Telescope find_files follow=true no_ingore=true hidden=true<CR>", desc = "[F]ind [A]ll" },
-    { "<leader>fs", ":Telescope live_grep<CR>",                                         desc = "[F]ind [W]ord" },
+    { "<leader>fs", ":Telescope live_grep<CR>",                                         desc = "[F]ind [S]tring" },
     { "<leader>fc", ":Telescope grep_string<CR>",                                       desc = "[F]ind [C]ursor" },
-    { "<leader>fb", ":Telescope buffers<CR>",                                           desc = "[F]ind [B]ufffer" },
-    { "<leader>fo", ":Telescope oldfiles<CR>",                                          desc = "[F]ind [O]ld files" },
-    { "<leader>fh", ":Telescope help_tags<CR>",                                         desc = "[F]ind [H]elp" },
+    { "<leader>fb", ":Telescope buffers<CR>",                                           desc = "[F]ind [B]uffer" },
+    { "<leader>fh", ":Telescope oldfiles<CR>",                                          desc = "[F]ind [H]istory" },
   },
 }
 

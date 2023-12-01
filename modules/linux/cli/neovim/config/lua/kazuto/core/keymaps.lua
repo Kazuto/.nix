@@ -58,3 +58,8 @@ Map('n', '<C-Right>', ':vertical resize +2<CR>')
 
 Map('v', '<J>', ":m '>+1<CR>gv=gv")
 Map('v', '<K>', ":m '<-2<CR>gv=gv")
+
+-- bufferline
+Map("n", "<Tab>", ":BufferLineCycleNext<CR>", { desc = "Next Buffer" })
+Map("n", "<S-Tab>", ":BufferLineCyclePrevious<CR>", { desc = "Previous Buffer" })
+Map("n", "<C-x>", ":bdelete<CR>", { desc = "Close Buffer" })

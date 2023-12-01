@@ -6,9 +6,9 @@ opt.number = true
 opt.relativenumber = true
 
 -- TABS & INDENTATION
-opt.tabstop = 2
-opt.softtabstop = 2
-opt.shiftwidth = 2
+opt.tabstop = 4
+opt.softtabstop = 4
+opt.shiftwidth = 4
 opt.shiftround = true
 opt.expandtab = true
 opt.autoindent = true
@@ -34,6 +34,7 @@ opt.hlsearch = false
 opt.incsearch = true
 
 -- APPEARANCE
+opt.title = true
 opt.termguicolors = true -- enable 24-bit RGB color
 opt.background = "dark" -- dark or light
 opt.signcolumn = "yes" -- always show sign column
