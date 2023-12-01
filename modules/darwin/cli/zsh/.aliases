@@ -153,3 +153,6 @@ function nix:update {
     nixos-rebuild switch --flake ./#$HOST
   fi
 }
+
+# ======== DOCKER ======== #
+alias dcu="docker-compose up -d --force-recreate --remove-orphans"
