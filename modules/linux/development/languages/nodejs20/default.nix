@@ -15,7 +15,6 @@ in
       nodejs_20
       nodePackages.eslint_d
       nodePackages.postcss
-      nodePackages.prettier_d_slim
       nodePackages.vercel
       nodePackages.volar
       nodePackages.yarn
