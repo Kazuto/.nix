@@ -9,7 +9,7 @@
 [ "$(which xclip)" != "" ] && alias pbcopy="xclip -sel clip";
 [ "$(which xclip)" != "" ] && alias pbpaste="xclip -sel clip -o";
 
-alias dotfiles="cd ~/.dotfiles && vim ."
+alias config="cd ~/.config/ && nvim"
 
 # clearing terminal
 alias c="clear"
@@ -142,6 +142,8 @@ function tms {
 }
 
 # ======== NIX ======== #
+alias nix="cd ~/.nix/ && nvim"
+
 function nix:update {
   if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "Rebuilding flake ./#$HOST"
