@@ -31,12 +31,12 @@ in
 
       development.tools = {
         beekeeper = enabled;
+        bruno = enabled;
         dbeaver = enabled;
         gitkraken = enabled;
         insomnia = enabled;
         kitty = enabled;
         phpstorm = enabled;
-        postman = enabled;
         vscode = enabled;
       };
 

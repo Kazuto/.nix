@@ -28,13 +28,13 @@ in
       };
 
       development.tools = {
+        bruno = enabled;
         bun = enabled;
         git = enabled;
         gitkraken = enabled;
         # insomnia = enabled;
         kitty = enabled;
         phpstorm = enabled;
-        postman = enabled;
         vscode = enabled;
       };
 
