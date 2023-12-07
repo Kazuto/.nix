@@ -28,7 +28,6 @@ in
       };
 
       development.tools = {
-        bruno = enabled;
         bun = enabled;
         git = enabled;
         gitkraken = enabled;
