@@ -14,8 +14,6 @@ in
     shiro = {
       apps = {
         discord = enabled;
-        prismlauncher = enabled;
-        steam = enabled;
       };
     };
   };
