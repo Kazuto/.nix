@@ -29,7 +29,7 @@ local lualine = {
             'diff',
             symbols = { added = ' ', modified = ' ', removed = ' ' },
           },
-          function ()
+          function()
             return '󰅭 ' .. vim.pesc(tostring(#vim.tbl_keys(vim.lsp.buf_get_clients())) or '')
           end,
           { 'diagnostics', sources = { 'nvim_diagnostic' } },
@@ -55,104 +55,170 @@ local lualine = {
           'selectioncount',
           'location',
           'progress',
-        },      },
-      })
-    end,
-  }
+        },
+      },
+    })
+  end,
+}
 
-  local indent_blankline = {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    config = function()
-      require("ibl").setup({
-        exclude = {
-          filetypes = {
-            "dashboard",
+local indent_blankline = {
+  "lukas-reineke/indent-blankline.nvim",
+  main = "ibl",
+  config = function()
+    require("ibl").setup({
+      exclude = {
+        filetypes = {
+          "dashboard",
+        },
+      },
+      scope = { enabled = false },
+    })
+  end,
+}
+
+local bufferline = {
+  "akinsho/bufferline.nvim",
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
+  config = function()
+    require("bufferline").setup({
+      options = {
+        indicator = {
+          icon = ' ',
+        },
+        show_close_icon = true,
+        tab_size = 0,
+        max_name_length = 25,
+        offsets = {
+          {
+            filetype = "NvimTree",
+            text = '  Files',
+            highlight = 'StatusLine',
+            text_align = 'left',
+          },
+          {
+            filetype = "undotree",
+            text = '  History',
+            highlight = 'StatusLine',
+            text_align = 'left',
           },
         },
-        scope = { enabled = false },
-      })
-    end,
-  }
-
-  local bufferline = {
-    "akinsho/bufferline.nvim",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function()
-      require("bufferline").setup({
-        options = {
-          indicator = {
-            icon = ' ',
-          },
-          show_close_icon = true,
-          tab_size = 0,
-          max_name_length = 25,
-          offsets = {
-            {
-              filetype = "NvimTree",
-              text = '  Files',
-              highlight = 'StatusLine',
-              text_align = 'left',
-            },
-            {
-              filetype = "undotree",
-              text = '  History',
-              highlight = 'StatusLine',
-              text_align = 'left',
-            },
-          },
-          hover = {
-            enabled = true,
-            delay = 0,
-            reveal = { "close" },
-          },
-          modified_icon = "",
-          custom_areas = {
-            left = function()
-              return {
-                { text = "    ", fg = '#8fff6d' },
-              }
-            end,
-          },
-          diagnostics = "nvim_lsp",
-          diagnostics_update_in_insert = true,
-          diagnostics_indicator = function(count, level)
-            local icon = level:match("error") and " " or " "
-            return icon .. count
+        hover = {
+          enabled = true,
+          delay = 0,
+          reveal = { "close" },
+        },
+        modified_icon = "",
+        custom_areas = {
+          left = function()
+            return {
+              { text = "    ", fg = '#8fff6d' },
+            }
           end,
-          highlights = {
-            fill = {
-              bg = { attribute = "bg", highlight = "StatusLine" },
-            },
-            buffer_selected = {
-              italic = false,
-            },
-            separator = {
-              fg = { attribute = "bg", highlight = "StatusLine" },
-              bg = { attribute = "bg", highlight = "BufferlineInactive" },
-            },
-          }
+        },
+        diagnostics = "nvim_lsp",
+        diagnostics_update_in_insert = true,
+        diagnostics_indicator = function(count, level)
+          local icon = level:match("error") and " " or " "
+          return icon .. count
+        end,
+        highlights = {
+          fill = {
+            bg = { attribute = "bg", highlight = "StatusLine" },
+          },
+          buffer_selected = {
+            italic = false,
+          },
+          separator = {
+            fg = { attribute = "bg", highlight = "StatusLine" },
+            bg = { attribute = "bg", highlight = "BufferlineInactive" },
+          },
         }
-      })
-    end,
-  }
+      }
+    })
+  end,
+}
 
-  local dashboard = {
-    "glepnir/dashboard-nvim",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function()
-      require("dashboard").setup()
-    end,
-    event = "VimEnter",
-  }
+local shortcuts = {
+  {
+    icon = ' ',
+    icon_hl = '@variable',
+    group = 'Label',
+    desc = 'New File ',
+    key = 'n',
+    key_format = ' %s', -- remove default surrounding `[]`
+    action = 'enew',
+  },
+  {
+    icon = ' ',
+    icon_hl = '@variable',
+    group = 'Label',
+    desc = 'Find File ',
+    key = 'f',
+    key_format = ' %s', -- remove default surrounding `[]`
+    action = 'Telescope find_files cwd='
+  },
+  {
+    icon = ' ',
+    icon_hl = '@variable',
+    desc = 'Find Text ',
+    group = 'Label',
+    key = 'F',
+    key_format = ' %s', -- remove default surrounding `[]`
+    action = 'Telescope live_grep',
+  },
+  {
+    icon = ' ',
+    icon_hl = '@variable',
+    desc = 'Update Plugins ',
+    group = 'Label',
+    key = 'u',
+    key_format = ' %s', -- remove default surrounding `[]`
+    action = 'Lazy update',
+  },
+}
 
-  return {
-    lualine,
-    indent_blankline,
-    bufferline,
-    dashboard,
-  }
+local dashboard = {
+  "glepnir/dashboard-nvim",
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
+  config = function()
+    require("dashboard").setup({
+      config = {
+        header = {
+          '                                        ',
+          '                                        ',
+          '        ..............    ......        ',
+          '         ............    ......         ',
+          '              ................          ',
+          '             ................           ',
+          '            ......  ....                ',
+          '             ....   .....               ',
+          '              ..    .....               ',
+          '                  ......                ',
+          '                 ......                 ',
+          '                 .....                  ',
+          '                   ..                   ',
+          '                                        ',
+          '                                        ',
+        },
+        center = shortcuts,
+        packages = { enable = true }, -- show how many plugins neovim loaded
+        project = { enable = true, icon = ' ', limit = 3 },
+        mru = { limit = 3, icon = ' ', label = 'Recent files', cwd_only = true },
+        shortcut = shortcuts,
+        footer = { '' },
+      }
+    })
+  end,
+  event = "VimEnter",
+}
+
+return {
+  lualine,
+  indent_blankline,
+  bufferline,
+  dashboard,
+}
