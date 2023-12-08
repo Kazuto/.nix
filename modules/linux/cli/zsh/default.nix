@@ -18,7 +18,7 @@ in
 
       # Tools needed for aliases
       bat
-      eza
+      exa
       trashy
       tree
       xclip
