@@ -57,8 +57,9 @@ in
         yabai -m rule --add app="^Herd$" manage=off
         yabai -m rule --add app="^LogiTune$" manage=off border=off
 
-        yabai -m rule --add app='Microsoft Teams' border=off manage=off
-        # yabai -m rule --add app='^Microsoft Teams$' title='^Meeting$' border=off manage=off
+        yabai -m rule --add app='Microsoft Teams classic' border=off manage=off
+        yabai -m signal --add event=space_changed action='cur_msteams_wid=$(yabai -m query --windows --window | jq -r "if .app == \"Microsoft Teams classic\" and .title == \"Microsoft Teams Notification\" then .id else empty end"); if [ -n $cur_msteams_wid ]; then next_window_id=$(yabai -m query --windows --space | jq -r "map(select(.id != $cur_msteams_wid)) | first | .id // empty"); if [ -n $next_window_id ]; then yabai -m window $next_window_id --focus; fi ; fi'
+        yabai -m signal --add event=window_created action='yabai -m query --windows --window $YABAI_WINDOW_ID | jq -e ".\"can-resize\"" || yabai -m window $YABAI_WINDOW_ID --toggle float' app="Microsoft Teams classic"
 
         # The below signal only works on current master, not in 1.1.2
         # Tries to focus the window under the cursor whenever the MS teams notification gains focus
