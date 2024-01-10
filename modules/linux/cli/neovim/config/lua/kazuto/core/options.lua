@@ -59,10 +59,10 @@ opt.confirm = true -- ask for confirmation
 -- LISTCHARS
 opt.list = true -- enable listchars
 opt.listchars = {
-    tab = '▸ ',
-    trail = '·',
-    nbsp = '⎵',
-    -- eol = '↲',
-    extends = '❯',
-    precedes = '❮'
+	tab = "▸ ",
+	trail = "·",
+	nbsp = "⎵",
+	-- eol = '↲',
+	extends = "❯",
+	precedes = "❮",
 }

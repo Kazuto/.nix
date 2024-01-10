@@ -1,149 +1,149 @@
 local servers = {
-  "bashls",
-  "emmet_ls",
-  "eslint",
-  "gopls",
-  "html",
-  "intelephense",
-  "jsonls",
-  "lua_ls",
-  "phpactor",
-  "tailwindcss",
-  -- "yamlls",
-  "volar",
+	"bashls",
+	"emmet_ls",
+	"eslint",
+	"gopls",
+	"html",
+	"intelephense",
+	"jsonls",
+	"lua_ls",
+	"phpactor",
+	"tailwindcss",
+	-- "yamlls",
+	"volar",
 }
 
 local mason = {
-  "williamboman/mason.nvim",
-  dependencies = {
-    "williamboman/mason-lspconfig.nvim",
-  },
-  config = function()
-    require("mason").setup()
+	"williamboman/mason.nvim",
+	dependencies = {
+		"williamboman/mason-lspconfig.nvim",
+	},
+	config = function()
+		require("mason").setup()
 
-    require("mason-lspconfig").setup({
-      ensure_installed = servers,
-      automatic_installation = true,
-    })
-  end,
+		require("mason-lspconfig").setup({
+			ensure_installed = servers,
+			automatic_installation = true,
+		})
+	end,
 }
 
 local lspconfig = {
-  "neovim/nvim-lspconfig",
-  dependencies = {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "b0o/schemastore.nvim",
-    { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
-    "folke/neodev.nvim",
-    "hrsh7th/cmp-nvim-lsp",
-  },
-  config = function()
-    local handler = require("kazuto.plugins.lsp.handler")
+	"neovim/nvim-lspconfig",
+	dependencies = {
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"b0o/schemastore.nvim",
+		{ "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+		"folke/neodev.nvim",
+		"hrsh7th/cmp-nvim-lsp",
+	},
+	config = function()
+		local handler = require("kazuto.plugins.lsp.handler")
 
-    for _, server in ipairs(servers) do
-      local opts = {
-        on_attach = handler.on_attach,
-        capabilities = handler.capabilities,
-      }
+		for _, server in ipairs(servers) do
+			local opts = {
+				on_attach = handler.on_attach,
+				capabilities = handler.capabilities,
+			}
 
-      server = vim.split(server, "@")[1]
+			server = vim.split(server, "@")[1]
 
-      local status, settings = pcall(require, "kazuto.plugins.lsp.settings." .. server)
-      if status then
-        opts = vim.tbl_deep_extend("force", settings, opts)
-      end
+			local status, settings = pcall(require, "kazuto.plugins.lsp.settings." .. server)
+			if status then
+				opts = vim.tbl_deep_extend("force", settings, opts)
+			end
 
-      require("lspconfig")[server].setup(opts)
-    end
-  end,
+			require("lspconfig")[server].setup(opts)
+		end
+	end,
 }
 
 local null_ls = {
-  "nvimtools/none-ls.nvim",
-  config = function()
-    local null_ls = require("null-ls")
+	"nvimtools/none-ls.nvim",
+	config = function()
+		local null_ls = require("null-ls")
 
-    -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/code_actions
-    local code_actions = null_ls.builtins.code_actions
+		-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/code_actions
+		local code_actions = null_ls.builtins.code_actions
 
-    -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
-    local formatting = null_ls.builtins.formatting
+		-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
+		local formatting = null_ls.builtins.formatting
 
-    -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-    local diagnostics = null_ls.builtins.diagnostics
+		-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
+		local diagnostics = null_ls.builtins.diagnostics
 
-    null_ls.setup({
-      debug = false,
-      sources = {
-        code_actions.eslint_d.with({
-          condition = function(utils)
-            return utils.root_has_file({ ".eslintrc.js" })
-          end,
-        }),
-        diagnostics.eslint_d.with({
-          condition = function(utils)
-            return utils.root_has_file({ ".eslintrc.js" })
-          end,
-        }),
-        formatting.eslint_d.with({
-          condition = function(utils)
-            return utils.root_has_file({ ".eslintrc.js" })
-          end,
-        }),
+		null_ls.setup({
+			debug = false,
+			sources = {
+				code_actions.eslint_d.with({
+					condition = function(utils)
+						return utils.root_has_file({ ".eslintrc.js" })
+					end,
+				}),
+				diagnostics.eslint_d.with({
+					condition = function(utils)
+						return utils.root_has_file({ ".eslintrc.js" })
+					end,
+				}),
+				formatting.eslint_d.with({
+					condition = function(utils)
+						return utils.root_has_file({ ".eslintrc.js" })
+					end,
+				}),
 
-        code_actions.shellcheck,
+				code_actions.shellcheck,
 
-        -- diagnostics.codespell,
+				-- diagnostics.codespell,
 
-        diagnostics.editorconfig_checker,
+				diagnostics.editorconfig_checker,
 
-        diagnostics.php,
-        diagnostics.phpstan,
+				diagnostics.php,
+				diagnostics.phpstan,
 
-        diagnostics.trail_space.with({
-          disabled_filetypes = { "NvimTree" },
-        }),
+				diagnostics.trail_space.with({
+					disabled_filetypes = { "NvimTree" },
+				}),
 
-        formatting.jq,
-        formatting.pint,
-        formatting.prettierd.with({
-          extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-        }),
-        formatting.stylua,
-      },
-    })
-  end,
+				formatting.jq,
+				formatting.pint,
+				formatting.prettierd.with({
+					extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
+				}),
+				formatting.stylua,
+			},
+		})
+	end,
 }
 
 local lspsaga = {
-  "glepnir/lspsaga.nvim",
-  branch = "main",
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
-    "nvim-treesitter/nvim-treesitter",
-  },
-  config = function()
-    require("lspsaga").setup({
-      -- keybinds for navigation in lspsaga window
-      scroll_preview = { scroll_down = "<C-f>", scroll_up = "<C-b>" },
-      -- use enter to open file with definition preview
-      definition = {
-        edit = "<CR>",
-      },
-      ui = {
-        colors = {
-          normal_bg = "#022746",
-        },
-      },
-    })
-  end,
-  event = "LspAttach",
+	"glepnir/lspsaga.nvim",
+	branch = "main",
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+		"nvim-treesitter/nvim-treesitter",
+	},
+	config = function()
+		require("lspsaga").setup({
+			-- keybinds for navigation in lspsaga window
+			scroll_preview = { scroll_down = "<C-f>", scroll_up = "<C-b>" },
+			-- use enter to open file with definition preview
+			definition = {
+				edit = "<CR>",
+			},
+			ui = {
+				colors = {
+					normal_bg = "#022746",
+				},
+			},
+		})
+	end,
+	event = "LspAttach",
 }
 
 return {
-  mason,
-  lspconfig,
-  null_ls,
-  lspsaga,
+	mason,
+	lspconfig,
+	null_ls,
+	lspsaga,
 }

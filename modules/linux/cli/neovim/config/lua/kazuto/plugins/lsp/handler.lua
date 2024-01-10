@@ -27,7 +27,7 @@ M.setup = function()
 		severity_sort = true,
 		float = {
 			source = true,
-		}
+		},
 	}
 
 	vim.diagnostic.config(config)

@@ -2,16 +2,15 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-
 -- Shorten function name
 function Map(mode, lhs, rhs, opts)
-    local options = { noremap = true, silent = true }
+	local options = { noremap = true, silent = true }
 
-    if opts then
-        options = vim.tbl_extend("force", options, opts)
-    end
+	if opts then
+		options = vim.tbl_extend("force", options, opts)
+	end
 
-    vim.keymap.set(mode, lhs, rhs, options)
+	vim.keymap.set(mode, lhs, rhs, options)
 end
 
 -- general
@@ -29,24 +28,24 @@ Map("n", "<leader>se", "<C-w>=", { desc = "[S]plit window [E]qual" })
 Map("n", "<leader>sx", ":close<CR>", { desc = "[S]plit window E[x]it" })
 
 -- Maintain the cursor position when yanking a visual selection
-Map('v', 'y', 'myy`y')
+Map("v", "y", "myy`y")
 
 -- reselect visual selection after indenting
-Map('v', '<', '<gv')
-Map('v', '>', '>gv')
+Map("v", "<", "<gv")
+Map("v", ">", ">gv")
 
 -- Easy insertion of a trailing ; or , from insert mode
-Map('i', ';;', '<Esc>A;<Esc>')
-Map('i', ',,', '<Esc>A,<Esc>')
+Map("i", ";;", "<Esc>A;<Esc>")
+Map("i", ",,", "<Esc>A,<Esc>")
 
 -- paste replace visual selection without copying it
-Map('v', 'p', '"_dP')
+Map("v", "p", '"_dP')
 
 -- resize with arrows
-Map('n', '<C-Up>', ':resize +2<CR>')
-Map('n', '<C-Down>', ':resize -2<CR>')
-Map('n', '<C-Left>', ':vertical resize -2<CR>')
-Map('n', '<C-Right>', ':vertical resize +2<CR>')
+Map("n", "<C-Up>", ":resize +2<CR>")
+Map("n", "<C-Down>", ":resize -2<CR>")
+Map("n", "<C-Left>", ":vertical resize -2<CR>")
+Map("n", "<C-Right>", ":vertical resize +2<CR>")
 
 -- move text up and down
 -- Map('i', '<A-j>', '<Esc>:m .+1<CR>==gi')
@@ -56,8 +55,8 @@ Map('n', '<C-Right>', ':vertical resize +2<CR>')
 -- Map('v', '<A-j>', ":m '>+1<CR>gv=gv")
 -- Map('v', '<A-k>', ":m '<-2<CR>gv=gv")
 
-Map('v', '<J>', ":m '>+1<CR>gv=gv")
-Map('v', '<K>', ":m '<-2<CR>gv=gv")
+Map("v", "<J>", ":m '>+1<CR>gv=gv")
+Map("v", "<K>", ":m '<-2<CR>gv=gv")
 
 -- bufferline
 Map("n", "<Tab>", ":BufferLineCycleNext<CR>", { desc = "Next Buffer" })
