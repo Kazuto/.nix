@@ -43,6 +43,7 @@ in
       lua-language-server
       phpactor
       shellcheck
+      stylua
       tree-sitter
       # unstable.prettierd
 
