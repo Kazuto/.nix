@@ -18,6 +18,7 @@ in
 
       cli = {
         commitizen = enabled;
+        gum = enabled;
         neovim = enabled;
         ngrok = enabled;
         phpstan = enabled;

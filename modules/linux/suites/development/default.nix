@@ -19,6 +19,7 @@ in
       cli = {
         commitizen = enabled;
         curl = enabled;
+        gum = enabled;
         neovim = enabled;
         ngrok = enabled;
         phpstan = enabled;
