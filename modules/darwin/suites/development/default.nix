@@ -42,6 +42,7 @@ in
         nodejs20 = enabled;
         # php81 = enabled;
         python311 = enabled;
+        go = enabled;
       };
     };
   };
