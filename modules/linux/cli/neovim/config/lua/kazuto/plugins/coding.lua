@@ -1,16 +1,23 @@
 local cmp = {
   "hrsh7th/nvim-cmp",
   dependencies = {
-    "L3MON4D3/LuaSnip",
-    "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-nvim-lsp-signature-help",
+    "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
+    "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
     "onsails/lspkind.nvim",
     "rafamadriz/friendly-snippets",
   },
   config = function()
     local cmp = require("cmp")
+    local luasnip = require("luasnip")
+
+    local has_words_before = function ()
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    end
 
     require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -24,15 +31,36 @@ local cmp = {
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          elseif has_words_before() then
+            cmp.complete()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
       }),
       snippet = {
         expand = function(args)
-          require("luasnip").lsp_expand(args.body)
+          luasnip.lsp_expand(args.body)
         end,
       },
       sources = cmp.config.sources({
         { name = "nvim_lsp" }, -- lsp
+        { name = "nvim_lsp_signature_help" },
         { name = "luasnip" }, -- snippets
         { name = "buffer" }, -- text within current buffer
         { name = "path" }, -- file system paths
@@ -42,6 +70,9 @@ local cmp = {
           maxwidth = 50,
           ellipsis_char = "...",
         }),
+      },
+      experimental = {
+        ghost_text = true,
       },
     })
 
@@ -128,11 +159,13 @@ local luasnip = {
   end,
 }
 
+vim.g.skip_ts_context_commentstring_module = true
 
 local treesitter = {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   dependencies = {
+    "JoosepAlviste/nvim-ts-context-commentstring",
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
   config = function()
@@ -170,18 +203,26 @@ local treesitter = {
       -- Recommendation: set to false if you don"t have `tree-sitter` CLI installed locally
       auto_install = true,
 
-      ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-      -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
       highlight = {
         enable = true,
-        additional_vim_regex_highlighting = false,
+        additional_vim_regex_highlighting = true,
       },
 
       autopairs = {
         enable = true,
       },
     })
+  end,
+}
+
+local projectionist = {
+  "tpope/vim-projectionist",
+  dependencies = {
+    "tpope/vim-dispatch",
+  },
+  config = function()
+    vim.g.projectionist_heuristics = {
+    }
   end,
 }
 

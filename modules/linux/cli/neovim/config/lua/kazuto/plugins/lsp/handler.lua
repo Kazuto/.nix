@@ -11,7 +11,7 @@ M.setup = function()
 	local signs = {
 		Error = " ",
 		Warn = " ",
-		Hint = "ﴞ ",
+		Hint = " ",
 		Info = " ",
 	}
 
@@ -25,6 +25,9 @@ M.setup = function()
 		update_on_insert = true,
 		underline = true,
 		severity_sort = true,
+		float = {
+			source = true,
+		}
 	}
 
 	vim.diagnostic.config(config)
@@ -35,22 +38,22 @@ local function keymaps(client, bufnr)
 		vim.keymap.set("n", keys, func, { noremap = true, silent = true, buffer = bufnr, desc = desc })
 	end
 
-	map("gf", "<cmd>Lspsaga lsp_finder<CR>", "Show definition, references")
-	map("gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", "[G]o [D]eclaration")
-	map("gd", "<cmd>Lspsaga peek_definition<CR>", "[G]o [d]efinition")
-	map("gi", ":Telescope lsp_implementations<CR>", "[G]o [I]mplementation")
-	map("gr", ":Telescope lsp_references<CR>", "[G]o [R]eferences")
-
-	map("<leader>ca", "<cmd>Lspsaga code_action<CR>", "[C]ode [A]ctions")
-	map("<leader>rn", "<cmd>Lspsaga rename<CR>", "[R]ename")
+	-- Mappings.
 	map("<leader>D", "<cmd>Lspsaga show_line_diagnostics<CR>", "[D]iagnostics for line")
 	map("<leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>", "[D]iagnostics for cursor")
-
-	map("[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", "Previous diagnostic in buffer")
-	map("]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", "Next diagnostic in buffer")
+	map("gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", "[G]o [D]eclaration")
+	map("gd", "<cmd>lua vim.lsp.buf.definition()<CR>", "[G]o [D]efinition")
+	map("gi", ":Telescope lsp_implementations<CR>", "[G]o [I]mplementation")
+	map("gr", ":Telescope lsp_references<CR>", "[G]o [R]eferences")
 	map("K", "<cmd>Lspsaga hover_doc<CR>", "Documentation cursor")
-	map("<leader>o", "<cmd>LSoutlineToggle<CR>", "[O]utline right hand side")
+	map("<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", "[R]ename")
+	map("<leader>ca", "<cmd>Lspsaga code_action<CR>", "[C]ode [A]ctions")
 	map("<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<CR>", "[F]ormat")
+	map("pd", "<cmd>Lspsaga peek_definition<CR>", "[P]eek [d]efinition")
+
+	-- map("[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", "Previous diagnostic in buffer")
+	-- map("]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", "Next diagnostic in buffer")
+	-- map("<leader>o", "<cmd>LSoutlineToggle<CR>", "[O]utline right hand side")
 
 	if client.name == "tsserver" then
 		map("<leader>rf", ":TypescriptRenameFile<CR>", "[R]ename [File] Typescript")

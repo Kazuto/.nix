@@ -12,6 +12,21 @@ local servers = {
   "volar",
 }
 
+local mason = {
+  "williamboman/mason.nvim",
+  dependencies = {
+    "williamboman/mason-lspconfig.nvim",
+  },
+  config = function()
+    require("mason").setup()
+
+    require("mason-lspconfig").setup({
+      ensure_installed = servers,
+      automatic_installation = true,
+    })
+  end,
+}
+
 local lspconfig = {
   "neovim/nvim-lspconfig",
   dependencies = {
@@ -99,6 +114,7 @@ local null_ls = {
     })
   end,
 }
+
 local lspsaga = {
   "glepnir/lspsaga.nvim",
   branch = "main",
@@ -124,24 +140,9 @@ local lspsaga = {
   event = "LspAttach",
 }
 
-local mason = {
-  "williamboman/mason.nvim",
-  dependencies = {
-    "williamboman/mason-lspconfig.nvim",
-  },
-  config = function()
-    require("mason").setup()
-
-    require("mason-lspconfig").setup({
-      ensure_installed = servers,
-      automatic_installation = true,
-    })
-  end,
-}
-
 return {
+  mason,
   lspconfig,
   null_ls,
   lspsaga,
-  mason,
 }
