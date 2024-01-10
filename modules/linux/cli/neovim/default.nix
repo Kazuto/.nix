@@ -38,11 +38,12 @@ in
       ctags
       codespell
       editorconfig-checker
-      shellcheck
+      gopls
       languagetool
       lua-language-server
-      tree-sitter
       phpactor
+      shellcheck
+      tree-sitter
       # unstable.prettierd
 
       nodePackages.bash-language-server
