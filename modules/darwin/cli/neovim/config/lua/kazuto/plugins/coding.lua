@@ -231,6 +231,7 @@ local laravel = {
 		"nvim-telescope/telescope.nvim",
 		"tpope/vim-dotenv",
 		"MunifTanjim/nui.nvim",
+		"nvimtools/none-ls.nvim",
 	},
 	cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
 	keys = {

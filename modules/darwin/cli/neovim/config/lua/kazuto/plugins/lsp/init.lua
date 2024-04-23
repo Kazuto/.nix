@@ -61,6 +61,9 @@ local lspconfig = {
 
 local null_ls = {
 	"nvimtools/none-ls.nvim",
+	dependencies = {
+		"nvimtools/none-ls-extras.nvim",
+	},
 	config = function()
 		local null_ls = require("null-ls")
 
@@ -76,36 +79,36 @@ local null_ls = {
 		null_ls.setup({
 			debug = false,
 			sources = {
-				code_actions.eslint_d.with({
-					condition = function(utils)
-						return utils.root_has_file({ ".eslintrc.js" })
-					end,
-				}),
-				diagnostics.eslint_d.with({
-					condition = function(utils)
-						return utils.root_has_file({ ".eslintrc.js" })
-					end,
-				}),
-				formatting.eslint_d.with({
-					condition = function(utils)
-						return utils.root_has_file({ ".eslintrc.js" })
-					end,
-				}),
+				-- code_actions.eslint_d.with({
+				-- 	condition = function(utils)
+				-- 		return utils.root_has_file({ ".eslintrc.js" })
+				-- 	end,
+				-- }),
+				-- diagnostics.eslint_d.with({
+				-- 	condition = function(utils)
+				-- 		return utils.root_has_file({ ".eslintrc.js" })
+				-- 	end,
+				-- }),
+				-- formatting.eslint_d.with({
+				-- 	condition = function(utils)
+				-- 		return utils.root_has_file({ ".eslintrc.js" })
+				-- 	end,
+				-- }),
 
-				code_actions.shellcheck,
+				-- code_actions.shellcheck,
 
 				-- diagnostics.codespell,
 
 				diagnostics.editorconfig_checker,
 
-				diagnostics.php,
+				-- diagnostics.php,
 				diagnostics.phpstan,
 
 				diagnostics.trail_space.with({
 					disabled_filetypes = { "NvimTree" },
 				}),
 
-				formatting.jq,
+				-- formatting.jq,
 				formatting.pint,
 				formatting.prettierd.with({
 					extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
