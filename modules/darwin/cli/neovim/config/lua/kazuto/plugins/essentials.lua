@@ -20,16 +20,23 @@ local comment = {
 -- Quick access to attached files
 local harpoon = {
 	"theprimeagen/harpoon",
+	branch = "harpoon2",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 	},
 	config = function()
-		require("harpoon").setup()
+		local harpoon = require("harpoon")
+
+		harpoon:setup()
+
+		vim.keymap.set("n", "<leader>a", function()
+			harpoon:list():append()
+		end, { desc = "[H]arpoon [A]dd" })
+
+		vim.keymap.set("n", "<C-e>", function()
+			harpoon.ui:toggle_quick_menu(harpoon:list())
+		end, { desc = "[H]arpoon [L]ist" })
 	end,
-	keys = {
-		{ "<leader>a", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "[H]arpoon [A]dd" },
-		{ "<C-e>", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "[H]arpoon [L]ist" },
-	},
 }
 
 -- Align text by characters
