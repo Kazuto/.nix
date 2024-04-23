@@ -36,6 +36,11 @@ in
           source = ./.aliases;
           executable = false;
         };
+
+        ".functions" = {
+          source = ./.functions;
+          executable = false;
+        };
       };
 
       extraOptions = {
@@ -58,6 +63,7 @@ in
 
           initExtra = ''
             [[ ! -f ~/.aliases ]] || source ~/.aliases
+            [[ ! -f ~/.functions ]] || source ~/.functions
             [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
           '';
 

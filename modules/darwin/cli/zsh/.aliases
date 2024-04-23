@@ -57,7 +57,7 @@ function pat() {
   else args="--filter=$1"
   fi
 
-  art test -d memory_limit=6144M --verbose "$args"
+  art test -d memory_limit=6144M "$args"
 }
 
 function flaky() {
@@ -83,13 +83,8 @@ function flaky() {
   echo "$output"
 }
 
-# PHPStan
-alias psc="phpstan analyse --ansi --memory-limit=8G"
-alias psb="phpstan --generate-baseline --memory-limit=8G"
-
 # ======== COMPOSER ======== #
 alias pix="vendor/bin/pint"
-alias pgb="vendor/bin/phpstan --generate-baseline --memory-limit=4G"
 alias vgp="vendor-patches generate && composer update --lock"
 
 # ======== GIT ======== #
