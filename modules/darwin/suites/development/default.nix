@@ -25,6 +25,7 @@ in
         supabase = enabled;
         trash = enabled;
         vercel = enabled;
+        zoxide = enabled;
         zsh = enabled;
       };
 
