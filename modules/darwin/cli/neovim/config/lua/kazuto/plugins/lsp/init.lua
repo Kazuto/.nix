@@ -1,7 +1,6 @@
 local servers = {
 	"bashls",
 	"emmet_ls",
-	"eslint",
 	"gopls",
 	"html",
 	"intelephense",
@@ -9,7 +8,6 @@ local servers = {
 	"lua_ls",
 	"phpactor",
 	"tailwindcss",
-	-- "yamlls",
 	"volar",
 }
 
@@ -17,13 +15,36 @@ local mason = {
 	"williamboman/mason.nvim",
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	config = function()
-		require("mason").setup()
+		local mason = require("mason")
+		-- import mason-lspconfig
+		local mason_lspconfig = require("mason-lspconfig")
 
-		require("mason-lspconfig").setup({
+		local mason_tool_installer = require("mason-tool-installer")
+
+		mason.setup({
+			ui = {
+				icons = {
+					package_installed = "✓",
+					package_pending = "➜",
+					package_uninstalled = "✗",
+				},
+			},
+		})
+
+		mason_lspconfig.setup({
 			ensure_installed = servers,
 			automatic_installation = true,
+		})
+
+		mason_tool_installer.setup({
+			ensure_installed = {
+				"prettier",
+				"stylua",
+				"eslint_d",
+			},
 		})
 	end,
 }
@@ -59,66 +80,6 @@ local lspconfig = {
 	end,
 }
 
-local null_ls = {
-	"nvimtools/none-ls.nvim",
-	dependencies = {
-		"nvimtools/none-ls-extras.nvim",
-	},
-	config = function()
-		local null_ls = require("null-ls")
-
-		-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/code_actions
-		local code_actions = null_ls.builtins.code_actions
-
-		-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
-		local formatting = null_ls.builtins.formatting
-
-		-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-		local diagnostics = null_ls.builtins.diagnostics
-
-		null_ls.setup({
-			debug = false,
-			sources = {
-				-- code_actions.eslint_d.with({
-				-- 	condition = function(utils)
-				-- 		return utils.root_has_file({ ".eslintrc.js" })
-				-- 	end,
-				-- }),
-				-- diagnostics.eslint_d.with({
-				-- 	condition = function(utils)
-				-- 		return utils.root_has_file({ ".eslintrc.js" })
-				-- 	end,
-				-- }),
-				-- formatting.eslint_d.with({
-				-- 	condition = function(utils)
-				-- 		return utils.root_has_file({ ".eslintrc.js" })
-				-- 	end,
-				-- }),
-
-				-- code_actions.shellcheck,
-
-				-- diagnostics.codespell,
-
-				diagnostics.editorconfig_checker,
-
-				-- diagnostics.php,
-				diagnostics.phpstan,
-
-				diagnostics.trail_space.with({
-					disabled_filetypes = { "NvimTree" },
-				}),
-
-				-- formatting.jq,
-				formatting.pint,
-				formatting.prettierd.with({
-					extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-				}),
-				formatting.stylua,
-			},
-		})
-	end,
-}
-
 local lspsaga = {
 	"glepnir/lspsaga.nvim",
 	branch = "main",
@@ -147,6 +108,5 @@ local lspsaga = {
 return {
 	mason,
 	lspconfig,
-	null_ls,
 	lspsaga,
 }
