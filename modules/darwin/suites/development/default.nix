@@ -34,6 +34,7 @@ in
         git = enabled;
         gitkraken = enabled;
         # insomnia = enabled;
+        pocketbase = enabled;
         kitty = enabled;
         phpstorm = enabled;
         vscode = enabled;
