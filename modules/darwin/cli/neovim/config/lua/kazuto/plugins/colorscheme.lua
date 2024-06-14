@@ -55,6 +55,16 @@ return {
 					-- Highlight hex color strings (`#ff9900`) using that color
 					hex_color = hipatterns.gen_highlighter.hex_color(),
 
+					-- Highlight bit color strings (`0xff1e1e1e`) using that color
+					bit_color = {
+						pattern = "0xff%w%w%w%w%w%w",
+						group = function(_, match)
+							local r, g, b = match:match("0xff(%w%w)(%w%w)(%w%w)")
+
+							return hipatterns.compute_hex_color_group(string.format("#%s%s%s", r, g, b), "bg")
+						end,
+					},
+
 					-- Highlight hsl color strings (`hsl(180, 100, 100)`) using that color
 					hsl_color = {
 						pattern = "hsl%(%d+,? %d+,? %d+%)",
