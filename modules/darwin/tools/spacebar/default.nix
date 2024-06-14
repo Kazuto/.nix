@@ -13,6 +13,15 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ spacebar ];
 
+    shiro.home = {
+      file = {
+        "$HOME/.config/spacebar/scripts/center.sh" = {
+          source = ./scripts/center.sh;
+          executable = true;
+        };
+      };
+    };
+
     services.spacebar = {
       enable = true;
       package = pkgs.spacebar;
@@ -21,7 +30,7 @@ in
         position                   = "top";
         display                    = "main";
         height                     = 26;
-        title                      = "on";
+        title                      = "off";
         spaces                     = "on";
         clock                      = "on";
         power                      = "on";
@@ -50,9 +59,10 @@ in
         dnd_icon                   = "";
         clock_format               = ''"%d.%m.%y %R"'';
 
-        right_shell                = "off";
-        right_shell_icon           = "";
-        right_shell_command        = "whoami";
+        right_shell                = "on";
+        right_shell_icon           = "󰓇";
+        right_shell_icon_color     = "0xff1db954";
+        right_shell_command        = "~/.config/spacebar/scripts/center";
       };
     };
   };

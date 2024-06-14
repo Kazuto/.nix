@@ -26,7 +26,7 @@ in
         pre-commit = enabled;
         supabase = enabled;
         vercel = enabled;
-        wget = enabled;
+        # wget = enabled;
         zsh = enabled;
       };
 

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+ARTIST=$(nowplaying-cli get artist)
+TITLE=$(nowplaying-cli get title)
+
+PLAYING=$(nowplaying-cli get PlaybackRate)
+
+if [ "$PLAYING" == "null" ]; then
+    echo "No music playing"
+else 
+    echo "$ARTIST - $TITLE"
+fi
