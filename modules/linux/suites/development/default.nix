@@ -27,6 +27,7 @@ in
         supabase = enabled;
         vercel = enabled;
         # wget = enabled;
+        zoxide = enabled;
         zsh = enabled;
       };
 

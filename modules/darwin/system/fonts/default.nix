@@ -17,11 +17,7 @@ in
       LOG_ICONS = "true";
     };
 
-
-    fonts = {
-      fontDir = enabled;
-
-      fonts = with pkgs; [
+    fonts.packages = with pkgs; [
         noto-fonts
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
@@ -30,6 +26,5 @@ in
         font-awesome
         google-fonts
       ] ++ cfg.fonts;
-    };
   };
 }

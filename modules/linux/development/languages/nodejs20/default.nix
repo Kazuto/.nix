@@ -16,7 +16,7 @@ in
       nodePackages.eslint_d
       nodePackages.postcss
       nodePackages.vercel
-      nodePackages.volar
+      vscode-extensions.vue.volar
       nodePackages.yarn
     ];
   };

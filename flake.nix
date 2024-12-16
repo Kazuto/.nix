@@ -3,14 +3,14 @@
 
   inputs = {
     # NixPkgs (nixos-23.05)
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "nixpkgs/nixos-24.11";
 
     # NixPkgs Unstable (nixos-unstable)
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    unstable.url = "nixpkgs/nixos-unstable";
 
     # Home Manager (release-23.05)
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -56,7 +56,7 @@
       };
 
       overlays = with inputs; [
-	snowfall-flake.overlay
+	snowfall-flake.overlays.default
       ];
 
       systems.modules = with inputs; [

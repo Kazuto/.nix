@@ -2,7 +2,7 @@
 
 # ======== GENERAL ======== #
 [ "$(which bat)" != "" ] && alias cat="bat --paging=never"
-[ "$(which exa)" != "" ] && alias ls="exa --icons $@"
+[ "$(which eza)" != "" ] && alias ls="eza --icons $@"
 [ "$(which trash)" != "" ] && alias rm="trash"
 [ "$(which zoxide)" != "" ] && alias cd="z"
 
