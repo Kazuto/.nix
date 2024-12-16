@@ -33,7 +33,7 @@ local harpoon = {
 			harpoon:list():append()
 		end, { desc = "[H]arpoon [A]dd" })
 
-		vim.keymap.set("n", "<C-l>", function()
+		vim.keymap.set("n", "<C-e>", function()
 			harpoon.ui:toggle_quick_menu(harpoon:list())
 		end, { desc = "[H]arpoon [L]ist" })
 	end,

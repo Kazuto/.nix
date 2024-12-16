@@ -35,8 +35,8 @@ Map("v", "<", "<gv")
 Map("v", ">", ">gv")
 
 -- Easy insertion of a trailing ; or , from insert mode
-Map("i", ";;", "<Esc>A;<Esc>")
-Map("i", ",,", "<Esc>A,<Esc>")
+-- Map("i", ";;", "<Esc>A;<Esc>")
+-- Map("i", ",,", "<Esc>A,<Esc>")
 
 -- paste replace visual selection without copying it
 Map("v", "p", '"_dP')

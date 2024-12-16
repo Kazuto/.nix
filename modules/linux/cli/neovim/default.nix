@@ -45,7 +45,6 @@ in
       shellcheck
       stylua
       tree-sitter
-      # unstable.prettierd
 
       nodePackages.bash-language-server
       nodePackages.diagnostic-languageserver
@@ -54,9 +53,7 @@ in
       nodePackages.tailwindcss
       nodePackages.typescript-language-server
       nodePackages.vim-language-server
-      nodePackages.vscode-css-languageserver-bin
-      nodePackages.vscode-html-languageserver-bin
-      nodePackages.vscode-json-languageserver-bin
+      nodePackages.vscode-langservers-extracted
       nodePackages.yaml-language-server
     ];
   };

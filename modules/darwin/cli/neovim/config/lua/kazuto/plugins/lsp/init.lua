@@ -1,16 +1,3 @@
-local servers = {
-	"bashls",
-	"emmet_ls",
-	"gopls",
-	"html",
-	"intelephense",
-	"jsonls",
-	"lua_ls",
-	"phpactor",
-	"tailwindcss",
-	"volar",
-}
-
 local mason = {
 	"williamboman/mason.nvim",
 	dependencies = {
@@ -19,7 +6,7 @@ local mason = {
 	},
 	config = function()
 		local mason = require("mason")
-		-- import mason-lspconfig
+
 		local mason_lspconfig = require("mason-lspconfig")
 
 		local mason_tool_installer = require("mason-tool-installer")
@@ -35,7 +22,20 @@ local mason = {
 		})
 
 		mason_lspconfig.setup({
-			ensure_installed = servers,
+			ensure_installed = {
+				"bashls",
+				"cssls",
+				"emmet_ls",
+				"gopls",
+				"html",
+				"intelephense",
+				"jsonls",
+				"lua_ls",
+				"phpactor",
+				"tailwindcss",
+				"ts_ls",
+				"volar",
+			},
 			automatic_installation = true,
 		})
 
@@ -62,21 +62,25 @@ local lspconfig = {
 	config = function()
 		local handler = require("kazuto.plugins.lsp.handler")
 
-		for _, server in ipairs(servers) do
-			local opts = {
-				on_attach = handler.on_attach,
-				capabilities = handler.capabilities,
-			}
+		local lspconfig = require("lspconfig")
 
-			server = vim.split(server, "@")[1]
+		local mason_lspconfig = require("mason-lspconfig")
 
-			local status, settings = pcall(require, "kazuto.plugins.lsp.settings." .. server)
-			if status then
-				opts = vim.tbl_deep_extend("force", settings, opts)
-			end
+		mason_lspconfig.setup_handlers({
+			function(server_name)
+				local opts = {
+					on_attach = handler.on_attach,
+					capabilities = handler.capabilities,
+				}
 
-			require("lspconfig")[server].setup(opts)
-		end
+				local status, settings = pcall(require, "kazuto.plugins.lsp.settings." .. server_name)
+				if status then
+					opts = vim.tbl_deep_extend("force", settings, opts)
+				end
+
+				lspconfig[server_name].setup(opts)
+			end,
+		})
 	end,
 }
 

@@ -30,7 +30,7 @@ local lualine = {
 						symbols = { added = " ", modified = " ", removed = " " },
 					},
 					function()
-						return "󰅭 " .. vim.pesc(tostring(#vim.tbl_keys(vim.lsp.buf_get_clients())) or "")
+						return "󰅭 " .. vim.pesc(tostring(#vim.tbl_keys(vim.lsp.get_clients())) or "")
 					end,
 					{ "diagnostics", sources = { "nvim_diagnostic" } },
 				},
@@ -118,7 +118,8 @@ local bufferline = {
 					end,
 				},
 				diagnostics = "nvim_lsp",
-				diagnostics_update_in_insert = true,
+				vim.diagnostic.config({ update_in_insert = true }),
+				diagnostics_update_on_event = true,
 				diagnostics_indicator = function(count, level)
 					local icon = level:match("error") and " " or " "
 					return icon .. count

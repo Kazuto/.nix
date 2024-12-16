@@ -150,11 +150,14 @@ vim.o.timeoutlen = 300
 
 local which_key = {
 	"folke/which-key.nvim",
-	config = function()
-		require("which-key").setup({
-			keys = { "<leader>", '"', "'", "`", "c", "v" },
-		})
-	end,
+	dependencies = {
+		"echasnovski/mini.icons",
+	},
+	opts = {
+		preset = "modern",
+	},
+	keys = { "<leader>", '"', "'", "`", "c", "v" },
+	event = { "VeryLazy" },
 }
 
 -- Show changes to a file
@@ -216,7 +219,6 @@ local neoscroll = {
 		require("neoscroll").setup()
 	end,
 }
-
 
 return {
 	nvimtree,

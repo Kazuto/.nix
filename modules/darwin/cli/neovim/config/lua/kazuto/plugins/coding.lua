@@ -228,10 +228,11 @@ local projectionist = {
 local laravel = {
 	"adalessa/laravel.nvim",
 	dependencies = {
-		"nvim-telescope/telescope.nvim",
 		"tpope/vim-dotenv",
+		"nvim-telescope/telescope.nvim",
 		"MunifTanjim/nui.nvim",
 		"nvimtools/none-ls.nvim",
+		"kevinhwang91/promise-async",
 	},
 	cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
 	keys = {
@@ -250,7 +251,7 @@ local laravel = {
 	event = { "VeryLazy" },
 	config = function()
 		require("laravel").setup()
-		require("telescope").load_extension("laravel")
+		-- require("telescope").load_extension("laravel")
 	end,
 }
 
