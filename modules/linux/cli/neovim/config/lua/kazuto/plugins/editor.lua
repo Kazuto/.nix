@@ -182,7 +182,7 @@ local gitsigns = {
 		"nvim-lua/plenary.nvim",
 	},
 	config = function()
-		require("gitsigns").setup()
+		require("gitsigns").setup({})
 	end,
 	keys = {
 		{ "<leader>gp", ":Gitsigns prev_hunk<CR>", desc = "[G]o to [P]revious Hunk" },
@@ -191,6 +191,7 @@ local gitsigns = {
 		{ "<leader>hr", ":Gitsigns reset_hunk<CR>", desc = "[H]unk [R]eset" },
 		{ "<leader>hS", ":Gitsigns stage_buffer<CR>", desc = "[S]tage [B]uffer" },
 	},
+	event = { "VeryLazy" },
 }
 
 local illuminate = {

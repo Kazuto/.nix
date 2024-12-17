@@ -48,7 +48,7 @@ local function keymaps(client, bufnr)
 	map("K", "<cmd>Lspsaga hover_doc<CR>", "Documentation cursor")
 	map("<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", "[R]ename")
 	map("<leader>ca", "<cmd>Lspsaga code_action<CR>", "[C]ode [A]ctions")
-	map("<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<CR>", "[F]ormat")
+	-- map("<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<CR>", "[F]ormat")
 	map("pd", "<cmd>Lspsaga peek_definition<CR>", "[P]eek [d]efinition")
 
 	-- map("[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", "Previous diagnostic in buffer")

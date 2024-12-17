@@ -10,74 +10,81 @@ return {
 			api.nvim_set_hl(0, "NvimTreeIndentMarker", { fg = "#313244" })
 
 			api.nvim_set_hl(0, "IndentBlanklineChar", {
-				fg = api.nvim_get_hl_by_name("LineNr", true).background,
-			})
-
-			api.nvim_set_hl(0, "StatusLineNonText", {
-				fg = api.nvim_get_hl_by_name("NonText", true).background,
-				bg = api.nvim_get_hl_by_name("StatusLine", true).background,
-			})
-
-			api.nvim_set_hl(0, "MiniHipatternsFixme", {
-				fg = api.nvim_get_hl_by_name("Normal", true).background,
-				bg = api.nvim_get_hl_by_name("DiagnosticError", true).foreground,
-			})
-
-			api.nvim_set_hl(0, "MiniHipatternsHack", {
-				fg = api.nvim_get_hl_by_name("Normal", true).background,
-				bg = api.nvim_get_hl_by_name("DiagnosticWarn", true).foreground,
-			})
-
-			api.nvim_set_hl(0, "MiniHipatternsTodo", {
-				fg = api.nvim_get_hl_by_name("Normal", true).background,
-				bg = api.nvim_get_hl_by_name("DiagnosticInfo", true).foreground,
-			})
-
-			api.nvim_set_hl(0, "MiniHipatternsNote", {
-				fg = api.nvim_get_hl_by_name("Normal", true).background,
-				bg = api.nvim_get_hl_by_name("DiagnosticHint", true).foreground,
+				fg = api.nvim_get_hl(0, { name = "LineNr" }).fg,
 			})
 		end,
 	},
 	{
-		"echasnovski/mini.hipatterns",
-		event = "BufReadPre",
+		"brenoprata10/nvim-highlight-colors",
 		config = function()
-			local hipatterns = require("mini.hipatterns")
-			hipatterns.setup({
-				highlighters = {
-					-- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
-					fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
-					hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
-					todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
-					note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
-
-					-- Highlight hex color strings (`#ff9900`) using that color
-					hex_color = hipatterns.gen_highlighter.hex_color(),
-
-					-- Highlight bit color strings (`0xff1e1e1e`) using that color
-					bit_color = {
-						pattern = "0xff%w%w%w%w%w%w",
-						group = function(_, match)
-							local r, g, b = match:match("0xff(%w%w)(%w%w)(%w%w)")
-
-							return hipatterns.compute_hex_color_group(string.format("#%s%s%s", r, g, b), "bg")
-						end,
-					},
-
-					-- Highlight hsl color strings (`hsl(180, 100, 100)`) using that color
-					hsl_color = {
-						pattern = "hsl%(%d+,? %d+,? %d+%)",
-						group = function(_, match)
-							local colors = require("kazuto.utils.colors")
-							local h, s, l = match:match("hsl%((%d+),? (%d+),? (%d+)%)")
-							h, s, l = tonumber(h), tonumber(s), tonumber(l)
-
-							return hipatterns.compute_hex_color_group(colors.hslToHex(h, s, l), "bg")
-						end,
-					},
-				},
+			require("nvim-highlight-colors").setup({
+				render = "virtual",
+				virtual_symbol = "●",
+				virtual_symbol_prefix = "",
+				virtual_symbol_suffix = " ",
+				enable_hex = true, -- Highlight hex colors, e.g. '#FFFFFF'
+				enable_short_hex = true, -- Highlight short hex colors e.g. '#f90'
+				enable_rgb = true, -- Highlight rgb colors, e.g. 'rgb(0 0 0)'
+				enable_hsl = true, -- Highlight hsl colors, e.g. 'hsl(150deg 30% 40%)'
+				enable_var_usage = true, --Highlight CSS variables, e.g. 'var(--testing-color)'
+				enable_named_colors = true, -- Highlight named colors, e.g. 'color: green'
+				enable_tailwind = true, -- Highlight tailwind colors, e.g. 'bg-blue-500'
 			})
 		end,
+	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {
+			signs = true,
+			sign_priority = 8,
+			keywords = {
+				FIX = {
+					icon = " ",
+					color = "error",
+					alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
+				},
+				HACK = { icon = " ", color = "warning" },
+				WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+				TODO = { icon = " ", color = "info" },
+				NOTE = { icon = " ", color = "hint" },
+			},
+			gui_style = {
+				fg = "NONE",
+				bg = "BOLD",
+			},
+			merge_keywords = true,
+			highlight = {
+				multiline = true,
+				multiline_pattern = "^.",
+				multiline_context = 10,
+				before = "fg",
+				keyword = "wide",
+				after = "fg",
+				pattern = [[.*<(KEYWORDS)\s*:]],
+				comments_only = true,
+				max_line_len = 400,
+				exclude = {},
+			},
+			colors = {
+				error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
+				warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
+				info = { "DiagnosticInfo", "#2563EB" },
+				hint = { "DiagnosticHint", "#10B981" },
+				default = { "Identifier", "#7C3AED" },
+				test = { "Identifier", "#FF00FF" },
+			},
+			search = {
+				command = "rg",
+				args = {
+					"--color=never",
+					"--no-heading",
+					"--with-filename",
+					"--line-number",
+					"--column",
+				},
+				pattern = [[\b(KEYWORDS):]],
+			},
+		},
 	},
 }
