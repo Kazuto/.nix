@@ -278,9 +278,22 @@ local govim = {
 	build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
 }
 
+local dap = {
+	"mfussenegger/nvim-dap",
+	dependencies = {
+		"rcarriga/nvim-dap-ui",
+		"theHamsta/nvim-dap-virtual-text",
+		"nvim-neotest/nvim-nio",
+	},
+	config = function()
+		require("dapui").setup()
+	end,
+}
+
 return {
 	cmp,
 	codium,
+	dap,
 	luasnip,
 	treesitter,
 	laravel,

@@ -38,10 +38,12 @@ in
       ctags
       codespell
       editorconfig-checker
+      fd
       gopls
       languagetool
       lua-language-server
       phpactor
+      ripgrep
       shellcheck
       stylua
       tree-sitter

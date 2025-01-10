@@ -79,7 +79,7 @@ let
     cmd + shift - 8 : ${yabai} -m window --space 8;
     cmd + shift - 9 : ${yabai} -m window --space 9;
 
-    cmd - return : ${kitty} --single-instance -d ~
+    cmd - return : open -a ghostty -n
   '';
 in
 {

@@ -12,7 +12,11 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;  [
-      pkgs.go
+      go
+      gotools
+      golangci-lint
+      ginkgo
+      mockgen
     ];
   };
 }

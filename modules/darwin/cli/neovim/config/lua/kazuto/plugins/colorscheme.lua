@@ -22,6 +22,7 @@ return {
 				virtual_symbol = "●",
 				virtual_symbol_prefix = "",
 				virtual_symbol_suffix = " ",
+				virtual_symbol_position = "inline",
 				enable_hex = true, -- Highlight hex colors, e.g. '#FFFFFF'
 				enable_short_hex = true, -- Highlight short hex colors e.g. '#f90'
 				enable_rgb = true, -- Highlight rgb colors, e.g. 'rgb(0 0 0)'

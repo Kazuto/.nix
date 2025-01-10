@@ -18,6 +18,7 @@ in
         flake = enabled;
         stow = enabled;
         neofetch = enabled;
+        wget = enabled;
       };
 
       services = {

@@ -31,6 +31,7 @@ in
 
       development.tools = {
         bun = enabled;
+        # ghostty = enabled;
         git = enabled;
         gitkraken = enabled;
         # insomnia = enabled;

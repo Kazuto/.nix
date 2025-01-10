@@ -28,6 +28,7 @@ in
       php81Extensions.imagick
 
       php81Packages.composer
+      blade-formatter
     ];
   };
 }
