@@ -39,7 +39,7 @@
         inherit inputs;
         src = ./.;
 
-	snowfall = {
+	      snowfall = {
           meta = {
             name = "shiro";
             title = "Shiro";
@@ -51,16 +51,19 @@
     in
     lib.mkFlake {
       channels-config = {
-	allowUnfree = true;
-	permittedInsecurePackages = [];
+        allowUnfree = true;
+        permittedInsecurePackages = [];
       };
 
       overlays = with inputs; [
-	snowfall-flake.overlays.default
+	      snowfall-flake.overlays.default
       ];
 
       systems.modules = with inputs; [
         home-manager.nixosModules.home-manager
       ];
+    }    
+    // {
+      self = inputs.self;
     };
 }
