@@ -22,7 +22,7 @@
 
     # Unified configuration for systems, packages, modules, shells, templates, and more with Nix Flakes
     snowfall-lib = {
-      url = "github:snowfallorg/lib/dev";
+      url = "github:snowfallorg/lib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
