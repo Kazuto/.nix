@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.apps.mailspring;
+  cfg = config.${namespace}.apps.mailspring;
 in
 {
-  options.shiro.apps.mailspring = with types; {
+  options.${namespace}.apps.mailspring = with types; {
     enable = mkBoolOpt false "Whether or not to install Mailspring";
   };
 

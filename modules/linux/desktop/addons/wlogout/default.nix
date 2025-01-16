@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.desktop.addons.wlogout;
+  cfg = config.${namespace}.desktop.addons.wlogout;
 in
 {
-  options.shiro.desktop.addons.wlogout = with types; {
+  options.${namespace}.desktop.addons.wlogout = with types; {
     enable = mkBoolOpt false "Whether or not to install wlogout.";
   };
 

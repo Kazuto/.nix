@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.zoxide;
+  cfg = config.${namespace}.cli.zoxide;
 in
 {
-  options.shiro.cli.zoxide = with types; {
+  options.${namespace}.cli.zoxide = with types; {
     enable = mkBoolOpt false "Whether or not to install zoxide cli";
   };
 

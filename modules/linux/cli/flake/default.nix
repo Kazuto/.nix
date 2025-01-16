@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.flake;
+  cfg = config.${namespace}.cli.flake;
 in
 {
-  options.shiro.cli.flake = with types; {
+  options.${namespace}.cli.flake = with types; {
     enable = mkBoolOpt false "Whether or not to install flake";
   };
 

@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.development.tools.dbeaver;
+  cfg = config.${namespace}.development.tools.dbeaver;
 in
 {
-  options.shiro.development.tools.dbeaver = with types; {
+  options.${namespace}.development.tools.dbeaver = with types; {
     enable = mkBoolOpt false "Whether or not to install Dbeaver.";
   };
 

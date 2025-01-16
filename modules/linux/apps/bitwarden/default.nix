@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.apps.bitwarden;
+  cfg = config.${namespace}.apps.bitwarden;
 in
 {
-  options.shiro.apps.bitwarden = with types; {
+  options.${namespace}.apps.bitwarden = with types; {
     enable = mkBoolOpt false "Whether or not to install bitwarden";
   };
 

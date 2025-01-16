@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.curl;
+  cfg = config.${namespace}.cli.curl;
 in
 {
-  options.shiro.cli.curl = with types; {
+  options.${namespace}.cli.curl = with types; {
     enable = mkBoolOpt false "Whether or not to install curl";
   };
 

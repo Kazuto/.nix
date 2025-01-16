@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.apps.obsidian;
+  cfg = config.${namespace}.apps.obsidian;
 in
 {
-  options.shiro.apps.obsidian = with types; {
+  options.${namespace}.apps.obsidian = with types; {
     enable = mkBoolOpt false "Whether or not to install obsidian";
   };
 

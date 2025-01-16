@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.development.tools.insomnia;
+  cfg = config.${namespace}.development.tools.insomnia;
 in
 {
-  options.shiro.development.tools.insomnia = with types; {
+  options.${namespace}.development.tools.insomnia = with types; {
     enable = mkBoolOpt false "Whether or not to install Insomnia.";
   };
 

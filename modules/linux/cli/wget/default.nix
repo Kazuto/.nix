@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.wget;
+  cfg = config.${namespace}.cli.wget;
 in
 {
-  options.shiro.cli.wget = with types; {
+  options.${namespace}.cli.wget = with types; {
     enable = mkBoolOpt false "Whether or not to install wget";
   };
 

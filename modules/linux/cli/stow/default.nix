@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.stow;
+  cfg = config.${namespace}.cli.stow;
 in
 {
-  options.shiro.cli.stow = with types; {
+  options.${namespace}.cli.stow = with types; {
     enable = mkBoolOpt false "Whether or not to install stow";
   };
 

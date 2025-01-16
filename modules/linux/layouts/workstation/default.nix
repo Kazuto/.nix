@@ -1,11 +1,11 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
-let cfg = config.shiro.layouts.workstation;
+with lib.${namespace};
+let cfg = config.${namespace}.layouts.workstation;
 in
 {
-  options.shiro.layouts.workstation = with types; {
+  options.${namespace}.layouts.workstation = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable the workstation layout.";
   };

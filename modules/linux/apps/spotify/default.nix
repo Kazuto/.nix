@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.apps.spotify;
+  cfg = config.${namespace}.apps.spotify;
 in
 {
-  options.shiro.apps.spotify = with types; {
+  options.${namespace}.apps.spotify = with types; {
     enable = mkBoolOpt false "Whether or not to install Spotify";
   };
 

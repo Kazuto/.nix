@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.development.tools.phpstorm;
+  cfg = config.${namespace}.development.tools.phpstorm;
 in
 {
-  options.shiro.development.tools.phpstorm = with types; {
+  options.${namespace}.development.tools.phpstorm = with types; {
     enable = mkBoolOpt false "Whether or not to install phpstorm.";
   };
 

@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.tools.ghostty;
+  cfg = config.${namespace}.tools.ghostty;
 in
 {
-  options.shiro.tools.ghostty = with types; {
+  options.${namespace}.tools.ghostty = with types; {
     enable = mkBoolOpt false "Whether or not to install Ghostty.";
   };
 

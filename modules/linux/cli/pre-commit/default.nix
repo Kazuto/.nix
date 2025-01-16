@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.pre-commit;
+  cfg = config.${namespace}.cli.pre-commit;
 in
 {
-  options.shiro.cli.pre-commit = with types; {
+  options.${namespace}.cli.pre-commit = with types; {
     enable = mkBoolOpt false "Whether or not to install pre-commit";
   };
 

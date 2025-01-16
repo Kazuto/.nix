@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.commitizen;
+  cfg = config.${namespace}.cli.commitizen;
 in
 {
-  options.shiro.cli.commitizen = with types; {
+  options.${namespace}.cli.commitizen = with types; {
     enable = mkBoolOpt false "Whether or not to install Commitizen";
   };
 

@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.desktop.addons.xdg-portal;
+  cfg = config.${namespace}.desktop.addons.xdg-portal;
 in
 {
-  options.shiro.desktop.addons.xdg-portal = with types; {
+  options.${namespace}.desktop.addons.xdg-portal = with types; {
     enable = mkBoolOpt false "Whether or not to install xdg-portal.";
   };
 

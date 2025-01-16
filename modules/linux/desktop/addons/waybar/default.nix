@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.desktop.addons.waybar;
+  cfg = config.${namespace}.desktop.addons.waybar;
 in
 {
-  options.shiro.desktop.addons.waybar = with types; {
+  options.${namespace}.desktop.addons.waybar = with types; {
     enable = mkBoolOpt false "Whether or not to install waybar.";
   };
 

@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.desktop.addons.rofi;
+  cfg = config.${namespace}.desktop.addons.rofi;
 in
 {
-  options.shiro.desktop.addons.rofi = with types; {
+  options.${namespace}.desktop.addons.rofi = with types; {
     enable = mkBoolOpt false "Whether or not to install rofi.";
   };
 

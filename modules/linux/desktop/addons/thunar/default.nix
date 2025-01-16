@@ -1,11 +1,11 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
 let
-  cfg = config.shiro.desktop.addons.thunar;
+  cfg = config.${namespace}.desktop.addons.thunar;
 in
 {
-  options.shiro.desktop.addons.thunar = with types; {
+  options.${namespace}.desktop.addons.thunar = with types; {
     enable = mkBoolOpt false "Whether or not to install Thunar.";
   };
 

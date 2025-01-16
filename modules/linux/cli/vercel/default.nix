@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.vercel;
+  cfg = config.${namespace}.cli.vercel;
 in
 {
-  options.shiro.cli.vercel = with types; {
+  options.${namespace}.cli.vercel = with types; {
     enable = mkBoolOpt false "Whether or not to install vercel cli";
   };
 

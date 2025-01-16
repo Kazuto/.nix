@@ -1,11 +1,11 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
 let
-  cfg = config.shiro.suites.gaming;
+  cfg = config.${namespace}.suites.gaming;
 in
 {
-  options.shiro.suites.gaming = with types; {
+  options.${namespace}.suites.gaming = with types; {
     enable = mkBoolOpt false "Whether or not to enable gaming configuration.";
   };
 

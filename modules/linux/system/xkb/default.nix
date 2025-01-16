@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.system.xkb;
+  cfg = config.${namespace}.system.xkb;
 in
 {
-  options.shiro.system.xkb = with types; {
+  options.${namespace}.system.xkb = with types; {
     enable = mkBoolOpt false "Whether or not to configure keyboard settings.";
   };
 

@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.desktop.addons.electron-support;
+  cfg = config.${namespace}.desktop.addons.electron-support;
 in
 {
-  options.shiro.desktop.addons.electron-support = with types; {
+  options.${namespace}.desktop.addons.electron-support = with types; {
     enable = mkBoolOpt false "Whether or not to enable electron support.";
   };
 

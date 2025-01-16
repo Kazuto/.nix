@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.development.languages.php81;
+  cfg = config.${namespace}.development.languages.php81;
 in
 {
-  options.shiro.development.languages.php81 = with types; {
+  options.${namespace}.development.languages.php81 = with types; {
     enable = mkBoolOpt false "Whether or not to use PHP 8.1.";
   };
 

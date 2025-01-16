@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.user;
+  cfg = config.${namespace}.user;
 in
 {
-  options.shiro.user = with types; {
+  options.${namespace}.user = with types; {
     name = mkOpt str "kazuto" "The name to use for the user account.";
     fullName = mkOpt str "Kai Mayer" "The full name of the user.";
     email = mkOpt str "mail@kazuto.de" "The email of the user.";

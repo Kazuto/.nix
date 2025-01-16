@@ -1,13 +1,13 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.tools.git;
-  user = config.shiro.user;
+  cfg = config.${namespace}.tools.git;
+  user = config.${namespace}.user;
 in
 {
-  options.shiro.tools.git = with types; {
+  options.${namespace}.tools.git = with types; {
     enable = mkBoolOpt false "Whether or not to use git.";
     userName = mkOpt types.str user.fullName "The name to configure git with.";
     userEmail = mkOpt types.str user.email "The email to configure git with.";

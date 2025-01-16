@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.apps.brave;
+  cfg = config.${namespace}.apps.brave;
 in
 {
-  options.shiro.apps.brave = with types; {
+  options.${namespace}.apps.brave = with types; {
     enable = mkBoolOpt false "Whether or not to install Brave";
   };
 

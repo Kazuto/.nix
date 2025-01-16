@@ -1,16 +1,16 @@
 { options, config, lib, pkgs, inputs, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.home;
+  cfg = config.${namespace}.home;
 in
 {
   imports = with inputs; [
     home-manager.nixosModules.home-manager
   ];
 
-  options.shiro.home = with types; {
+  options.${namespace}.home = with types; {
     file = mkOpt attrs { }
       "A set of files to be managed by home-manager's <option>home.file</option>.";
     configFile = mkOpt attrs { }
@@ -21,19 +21,16 @@ in
   config = {
     shiro.home.extraOptions = {
       home.stateVersion = config.system.stateVersion;
-      home.file = mkAliasDefinitions options.shiro.home.file;
+      home.file = mkAliasDefinitions options.${namespace}.home.file;
       xdg.enable = true;
-      xdg.configFile = mkAliasDefinitions options.shiro.home.configFile;
+      xdg.configFile = mkAliasDefinitions options.${namespace}.home.configFile;
     };
 
-    # snowfallorg.users.${config.shiro.user.name}.home.config = mkAliasDefinitions options.shiro.home.extraOptions;
+    snowfallorg.users.${config.${namespace}.user.name}.home.config = config.${namespace}.home.extraOptions;
 
     home-manager = {
       useUserPackages = true;
       useGlobalPkgs = true;
-
-      users.${config.shiro.user.name} =
-        mkAliasDefinitions options.shiro.home.extraOptions;
     };
   };
 }

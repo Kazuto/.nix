@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.neofetch;
+  cfg = config.${namespace}.cli.neofetch;
 in
 {
-  options.shiro.cli.neofetch = with types; {
+  options.${namespace}.cli.neofetch = with types; {
     enable = mkBoolOpt false "Whether or not to install neofetch";
   };
 

@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.desktop.hyprland;
+  cfg = config.${namespace}.desktop.hyprland;
 in
 {
-  options.shiro.desktop.hyprland = with types; {
+  options.${namespace}.desktop.hyprland = with types; {
     enable = mkBoolOpt false "Whether or not to install Hyprland and dependencies.";
   };
 
@@ -86,7 +86,7 @@ in
         # Enable automatic login for the user.
         autoLogin = {
           enable = true;
-          user = config.shiro.user.name;
+          user = config.${namespace}.user.name;
         };
       };
 

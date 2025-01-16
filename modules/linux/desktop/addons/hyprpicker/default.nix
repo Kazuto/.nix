@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.desktop.addons.hyprpicker;
+  cfg = config.${namespace}.desktop.addons.hyprpicker;
 in
 {
-  options.shiro.desktop.addons.hyprpicker = with types; {
+  options.${namespace}.desktop.addons.hyprpicker = with types; {
     enable = mkBoolOpt false "Whether or not to install hyprpicker.";
   };
 

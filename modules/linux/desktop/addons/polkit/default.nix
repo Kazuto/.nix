@@ -1,11 +1,11 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
 let
-  cfg = config.shiro.desktop.addons.polkit;
+  cfg = config.${namespace}.desktop.addons.polkit;
 in
 {
-  options.shiro.desktop.addons.polkit = with types; {
+  options.${namespace}.desktop.addons.polkit = with types; {
     enable = mkBoolOpt false "Whether or not to install polkit.";
   };
 

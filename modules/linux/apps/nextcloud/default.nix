@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.apps.nextcloud;
+  cfg = config.${namespace}.apps.nextcloud;
 in
 {
-  options.shiro.apps.nextcloud = with types; {
+  options.${namespace}.apps.nextcloud = with types; {
     enable = mkBoolOpt false "Whether or not to install Nextcloud (Client)";
   };
 

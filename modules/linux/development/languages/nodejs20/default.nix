@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.development.languages.nodejs20;
+  cfg = config.${namespace}.development.languages.nodejs20;
 in
 {
-  options.shiro.development.languages.nodejs20 = with types; {
+  options.${namespace}.development.languages.nodejs20 = with types; {
     enable = mkBoolOpt false "Whether or not to install Node.js 20.";
   };
 

@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.development.tools.beekeeper;
+  cfg = config.${namespace}.development.tools.beekeeper;
 in
 {
-  options.shiro.development.tools.beekeeper = with types; {
+  options.${namespace}.development.tools.beekeeper = with types; {
     enable = mkBoolOpt false "Whether or not to install Beekeeper Studio.";
   };
 

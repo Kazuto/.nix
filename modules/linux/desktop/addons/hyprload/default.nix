@@ -1,9 +1,9 @@
 { options, config, lib, pkgs, stdenv, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.desktop.addons.hyprload;
+  cfg = config.${namespace}.desktop.addons.hyprload;
 
   hyprload = stdenv.mkDerivation {
     name = "hyprload";
@@ -20,7 +20,7 @@ let
   };
 in
 {
-  options.shiro.desktop.addons.hyprload = with types; {
+  options.${namespace}.desktop.addons.hyprload = with types; {
     enable = mkBoolOpt false "Whether or not to install hyprload.";
   };
 

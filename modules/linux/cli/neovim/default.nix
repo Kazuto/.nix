@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.neovim;
+  cfg = config.${namespace}.cli.neovim;
 in
 {
-  options.shiro.cli.neovim = with types; {
+  options.${namespace}.cli.neovim = with types; {
     enable = mkBoolOpt false "Whether or not to install neovim";
   };
 

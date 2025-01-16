@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.desktop.addons.hyprpaper;
+  cfg = config.${namespace}.desktop.addons.hyprpaper;
 in
 {
-  options.shiro.desktop.addons.hyprpaper = with types; {
+  options.${namespace}.desktop.addons.hyprpaper = with types; {
     enable = mkBoolOpt false "Whether or not to install hyprpaper.";
   };
 

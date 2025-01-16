@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.hardware.network;
+  cfg = config.${namespace}.hardware.network;
 in
 {
-  options.shiro.hardware.network = with types; {
+  options.${namespace}.hardware.network = with types; {
     enable = mkBoolOpt false "Whether or not to configure network settings.";
   };
 

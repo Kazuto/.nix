@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.desktop.addons.gtk;
+  cfg = config.${namespace}.desktop.addons.gtk;
 in
 {
-  options.shiro.desktop.addons.gtk = with types; {
+  options.${namespace}.desktop.addons.gtk = with types; {
     enable = mkBoolOpt false "Whether to customize GTK and apply themes.";
     theme = {
       name = mkOpt str "Catppuccin-Mocha-Standard-Blue-Dark" "The name of the GTK theme to apply.";

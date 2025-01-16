@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.zsh;
+  cfg = config.${namespace}.cli.zsh;
 in
 {
-  options.shiro.cli.zsh = with types; {
+  options.${namespace}.cli.zsh = with types; {
     enable = mkBoolOpt false "Whether or not to install zsh";
   };
 

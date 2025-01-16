@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.tools.kitty;
+  cfg = config.${namespace}.tools.kitty;
 in
 {
-  options.shiro.tools.kitty = with types; {
+  options.${namespace}.tools.kitty = with types; {
     enable = mkBoolOpt false "Whether or not to install Kitty.";
   };
 

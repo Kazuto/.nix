@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.development.tools.valet-linux;
+  cfg = config.${namespace}.development.tools.valet-linux;
 in
 {
-  options.shiro.development.tools.valet-linux = with types; {
+  options.${namespace}.development.tools.valet-linux = with types; {
     enable = mkBoolOpt false "Whether or not to install Beekeeper Studio.";
   };
 

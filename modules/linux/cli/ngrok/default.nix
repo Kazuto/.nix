@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.ngrok;
+  cfg = config.${namespace}.cli.ngrok;
 in
 {
-  options.shiro.cli.ngrok = with types; {
+  options.${namespace}.cli.ngrok = with types; {
     enable = mkBoolOpt false "Whether or not to install ngrok";
   };
 

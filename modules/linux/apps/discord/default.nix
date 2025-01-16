@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.apps.discord;
+  cfg = config.${namespace}.apps.discord;
 in
 {
-  options.shiro.apps.discord = with types; {
+  options.${namespace}.apps.discord = with types; {
     enable = mkBoolOpt false "Whether or not to install Discord";
   };
 

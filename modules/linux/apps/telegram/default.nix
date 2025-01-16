@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.apps.telegram;
+  cfg = config.${namespace}.apps.telegram;
 in
 {
-  options.shiro.apps.telegram = with types; {
+  options.${namespace}.apps.telegram = with types; {
     enable = mkBoolOpt false "Whether or not to install Telegram";
   };
 

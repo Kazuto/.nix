@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.gum;
+  cfg = config.${namespace}.cli.gum;
 in
 {
-  options.shiro.cli.gum = with types; {
+  options.${namespace}.cli.gum = with types; {
     enable = mkBoolOpt false "Whether or not to install gum";
   };
 

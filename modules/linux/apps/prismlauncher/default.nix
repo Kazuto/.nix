@@ -1,11 +1,11 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
 let
-  cfg = config.shiro.apps.prismlauncher;
+  cfg = config.${namespace}.apps.prismlauncher;
 in
 {
-  options.shiro.apps.prismlauncher = with types; {
+  options.${namespace}.apps.prismlauncher = with types; {
     enable = mkBoolOpt false "Whether or not to install prismlauncher";
   };
 

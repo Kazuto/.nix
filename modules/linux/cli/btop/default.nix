@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.btop;
+  cfg = config.${namespace}.cli.btop;
 in
 {
-  options.shiro.cli.btop = with types; {
+  options.${namespace}.cli.btop = with types; {
     enable = mkBoolOpt false "Whether or not to install btop";
   };
 

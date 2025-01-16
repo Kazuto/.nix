@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.apps.vlc;
+  cfg = config.${namespace}.apps.vlc;
 in
 {
-  options.shiro.apps.vlc = with types; {
+  options.${namespace}.apps.vlc = with types; {
     enable = mkBoolOpt false "Whether or not to install vlc";
   };
 

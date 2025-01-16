@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.system.env;
+  cfg = config.${namespace}.system.env;
 in
 {
-  options.shiro.system.env = with types; {
+  options.${namespace}.system.env = with types; {
     enable = mkBoolOpt false "Whether or not to set xdg environment variables.";
   };
 

@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.nix;
+  cfg = config.${namespace}.nix;
 in
 {
-  options.shiro.nix = with types; {
+  options.${namespace}.nix = with types; {
     enable = mkBoolOpt false "Whether or not to manage nix configuration.";
   };
 

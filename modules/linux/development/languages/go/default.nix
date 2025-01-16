@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.development.languages.go;
+  cfg = config.${namespace}.development.languages.go;
 in
 {
-  options.shiro.development.languages.go = with types; {
+  options.${namespace}.development.languages.go = with types; {
     enable = mkBoolOpt false "Whether or not to use Golang";
   };
 

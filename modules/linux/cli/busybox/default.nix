@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.busybox;
+  cfg = config.${namespace}.cli.busybox;
 in
 {
-  options.shiro.cli.busybox = with types; {
+  options.${namespace}.cli.busybox = with types; {
     enable = mkBoolOpt false "Whether or not to install busybox";
   };
 

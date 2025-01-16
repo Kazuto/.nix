@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.development.languages.python311;
+  cfg = config.${namespace}.development.languages.python311;
 in
 {
-  options.shiro.development.languages.python311 = with types; {
+  options.${namespace}.development.languages.python311 = with types; {
     enable = mkBoolOpt false "Whether or not to use Python 3.11.";
   };
 

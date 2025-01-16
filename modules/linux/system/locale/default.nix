@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.system.locale;
+  cfg = config.${namespace}.system.locale;
 in
 {
-  options.shiro.system.locale = with types; {
+  options.${namespace}.system.locale = with types; {
     enable = mkBoolOpt false "Whether or not to configure locale settings.";
   };
 

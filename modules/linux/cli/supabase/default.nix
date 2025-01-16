@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.supabase;
+  cfg = config.${namespace}.cli.supabase;
 in
 {
-  options.shiro.cli.supabase = with types; {
+  options.${namespace}.cli.supabase = with types; {
     enable = mkBoolOpt false "Whether or not to install supabase";
   };
 

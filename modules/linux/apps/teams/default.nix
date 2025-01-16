@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.apps.teams;
+  cfg = config.${namespace}.apps.teams;
 in
 {
-  options.shiro.apps.teams = with types; {
+  options.${namespace}.apps.teams = with types; {
     enable = mkBoolOpt false "Whether or not to install Teams";
   };
 

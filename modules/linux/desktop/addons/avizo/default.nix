@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.desktop.addons.avizo;
+  cfg = config.${namespace}.desktop.addons.avizo;
 in
 {
-  options.shiro.desktop.addons.avizo = with types; {
+  options.${namespace}.desktop.addons.avizo = with types; {
     enable = mkBoolOpt false "Whether or not to install avizo.";
   };
 

@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.apps.firefox;
+  cfg = config.${namespace}.apps.firefox;
 in
 {
-  options.shiro.apps.firefox = with types; {
+  options.${namespace}.apps.firefox = with types; {
     enable = mkBoolOpt false "Whether or not to install firefox";
   };
 

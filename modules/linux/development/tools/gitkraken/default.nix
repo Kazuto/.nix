@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.development.tools.gitkraken;
+  cfg = config.${namespace}.development.tools.gitkraken;
 in
 {
-  options.shiro.development.tools.gitkraken = with types; {
+  options.${namespace}.development.tools.gitkraken = with types; {
     enable = mkBoolOpt false "Whether or not to install Gitkraken.";
   };
 

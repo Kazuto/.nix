@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.system.time;
+  cfg = config.${namespace}.system.time;
 in
 {
-  options.shiro.system.time = with types; {
+  options.${namespace}.system.time = with types; {
     enable = mkBoolOpt false "Whether or not to configure timezone information.";
   };
 

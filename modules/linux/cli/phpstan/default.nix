@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.cli.phpstan;
+  cfg = config.${namespace}.cli.phpstan;
 in
 {
-  options.shiro.cli.phpstan = with types; {
+  options.${namespace}.cli.phpstan = with types; {
     enable = mkBoolOpt false "Whether or not to install phpstan";
   };
 

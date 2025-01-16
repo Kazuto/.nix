@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.apps.remmina;
+  cfg = config.${namespace}.apps.remmina;
 in
 {
-  options.shiro.apps.remmina = with types; {
+  options.${namespace}.apps.remmina = with types; {
     enable = mkBoolOpt false "Whether or not to install remmina";
   };
 

@@ -1,11 +1,11 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
 let
-  cfg = config.shiro.desktop.addons.nautilus;
+  cfg = config.${namespace}.desktop.addons.nautilus;
 in
 {
-  options.shiro.desktop.addons.nautilus = with types; {
+  options.${namespace}.desktop.addons.nautilus = with types; {
     enable = mkBoolOpt false "Whether or not to install Nautilus.";
   };
 

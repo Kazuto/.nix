@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.tools.qemu;
+  cfg = config.${namespace}.tools.qemu;
 in
 {
-  options.shiro.tools.qemu = with types; {
+  options.${namespace}.tools.qemu = with types; {
     enable = mkBoolOpt false "Whether or not to install qemu.";
   };
 

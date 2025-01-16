@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.services.dbus;
+  cfg = config.${namespace}.services.dbus;
 in
 {
-  options.shiro.services.dbus = with types; {
+  options.${namespace}.services.dbus = with types; {
     enable = mkBoolOpt false "Whether or not to configure dbus settings.";
   };
 

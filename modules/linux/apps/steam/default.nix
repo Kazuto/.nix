@@ -1,11 +1,11 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
 let
-  cfg = config.shiro.apps.steam;
+  cfg = config.${namespace}.apps.steam;
 in
 {
-  options.shiro.apps.steam = with types; {
+  options.${namespace}.apps.steam = with types; {
     enable = mkBoolOpt false "Whether or not to install steam";
   };
 

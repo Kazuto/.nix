@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.apps.gparted;
+  cfg = config.${namespace}.apps.gparted;
 in
 {
-  options.shiro.apps.gparted = with types; {
+  options.${namespace}.apps.gparted = with types; {
     enable = mkBoolOpt false "Whether or not to install gparted";
   };
 

@@ -1,11 +1,11 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
 let
-  cfg = config.shiro.apps.lutris;
+  cfg = config.${namespace}.apps.lutris;
 in
 {
-  options.shiro.apps.lutris = with types; {
+  options.${namespace}.apps.lutris = with types; {
     enable = mkBoolOpt false "Whether or not to install lutris";
   };
 

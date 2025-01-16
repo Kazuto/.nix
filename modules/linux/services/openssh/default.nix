@@ -1,12 +1,12 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, namespace, ... }:
 
 with lib;
-with lib.shiro;
+with lib.${namespace};
 let
-  cfg = config.shiro.services.openssh;
+  cfg = config.${namespace}.services.openssh;
 in
 {
-  options.shiro.services.openssh = with types; {
+  options.${namespace}.services.openssh = with types; {
     enable = mkBoolOpt false "Whether or not to configure ssh settings.";
   };
 
