@@ -2,7 +2,7 @@
 
 rec {
   override-meta = meta: package:
-    package.overrideAttrs (_: {
-      inherit meta;
+    package.overrideAttrs (attrs: {
+      meta = (attrs.meta or { }) // meta;
     });
 }
