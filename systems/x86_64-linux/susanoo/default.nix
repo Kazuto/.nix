@@ -1,6 +1,7 @@
-{ pkgs, lib, nixos-hardware, ... }:
+{ pkgs, lib, nixos-hardware, namespace, ... }:
 
 with lib;
+with lib.shiro;
 {
   imports = [ ./hardware.nix ];
 

@@ -26,6 +26,8 @@ in
       xdg.configFile = mkAliasDefinitions options.shiro.home.configFile;
     };
 
+    # snowfallorg.users.${config.shiro.user.name}.home.config = mkAliasDefinitions options.shiro.home.extraOptions;
+
     home-manager = {
       useUserPackages = true;
       useGlobalPkgs = true;
