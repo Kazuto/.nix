@@ -9,7 +9,6 @@ with lib.${namespace};
     suites = {
       common = enabled;
     };
-
   };
 
   system.stateVersion = "24.11";

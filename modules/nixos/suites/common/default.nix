@@ -17,8 +17,8 @@ in
       cli = {
       	curl = enabled;
         flake = enabled;
-	neovim = enabled;
-	zsh = enabled;
+        neovim = enabled;
+        zsh = enabled;
       };
 
       tools = {
