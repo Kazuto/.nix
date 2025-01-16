@@ -15,7 +15,7 @@ in
 
     services.xserver = {
       layout = "de";
-      xkbVariant = "mac_nodeadkeys";
+      # xkbVariant = "mac_nodeadkeys";
     };
   };
 }

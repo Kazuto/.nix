@@ -17,7 +17,7 @@ in
       };
     };
 
-    shiro.user.extraGroups = [ "networkmanager" ];
+    shiro.user.extraGroups = [ "networkmanager", "wheel" ];
 
     # Fixes an issue that normally causes nixos-rebuild to fail.
     # https://github.com/NixOS/nixpkgs/issues/180175

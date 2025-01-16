@@ -15,8 +15,14 @@ in
       nix = enabled;
 
       cli = {
+      	curl = enabled;
         flake = enabled;
-        stow = enabled;
+	neovim = enabled;
+	zsh = enabled;
+      };
+
+      tools = {
+        ghostty = enabled;
       };
 
       hardware = {
