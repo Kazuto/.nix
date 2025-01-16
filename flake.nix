@@ -62,8 +62,5 @@
       systems.modules = with inputs; [
         home-manager.nixosModules.home-manager
       ];
-    }    
-    // {
-      self = inputs.self;
     };
 }
