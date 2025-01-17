@@ -40,7 +40,7 @@ in
 
       tools = {
         git = enabled;
-      }
+      };
     };
 
     environment.systemPackages = with pkgs; [
