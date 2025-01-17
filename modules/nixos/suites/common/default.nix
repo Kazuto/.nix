@@ -12,47 +12,18 @@ in
 
   config = mkIf cfg.enable {
     shiro = {
-      nix = enabled;
-
       cli = {
+        btop = enabled;
       	curl = enabled;
-        flake = enabled;
+        neofetch = enabled;
         neovim = enabled;
+        # wget = enabled;
         zsh = enabled;
       };
 
       tools = {
         ghostty = enabled;
       };
-
-      hardware = {
-        audio = enabled;
-        network = enabled;
-      };
-
-      services = {
-        openssh = enabled;
-        printing = enabled;
-        dbus = enabled;
-      };
-
-      system = {
-        boot = enabled;
-        env = enabled;
-        fonts = enabled;
-        locale = enabled;
-        time = enabled;
-        xkb = enabled;
-      };
     };
-
-    environment.systemPackages = with pkgs; [
-      killall
-      gcc
-      gnumake
-      pkg-config
-      xorg.xhost
-      snowfallorg.flake
-    ];
   };
 }
