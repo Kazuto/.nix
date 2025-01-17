@@ -1,12 +1,19 @@
-{ pkgs, lib, nixos-hardware, namespace, ... }:
-
+{ 
+    pkgs, 
+    lib, 
+    namespace, 
+    ... 
+}:
 with lib;
 with lib.${namespace};
 {
   imports = [ ./hardware.nix ];
 
+  networking.hostName = "susanoo";
+
   shiro = {
     suites = {
+      core = enabled;
       common = enabled;
     };
   };
