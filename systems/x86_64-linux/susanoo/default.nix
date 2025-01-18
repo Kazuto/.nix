@@ -1,7 +1,8 @@
 { 
     pkgs, 
     lib, 
-    namespace, 
+    namespace,
+    nixos-hardware,
     ... 
 }:
 with lib;

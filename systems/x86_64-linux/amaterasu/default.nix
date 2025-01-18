@@ -1,8 +1,16 @@
-{ pkgs, lib, nixos-hardware, ... }:
-
+{ 
+    pkgs, 
+    lib, 
+    namespace,
+    nixos-hardware,
+    ... 
+}:
 with lib;
+with lib.${namespace};
 {
   imports = [ ./hardware.nix ];
+
+  networking.hostName = "amaterasu";
 
   shiro = {
     layouts = {
@@ -15,6 +23,7 @@ with lib;
 
     suites = {
       core = enabled;
+      common = enabled;
       desktop = enabled;
       development = enabled;
       entertainment = enabled;
