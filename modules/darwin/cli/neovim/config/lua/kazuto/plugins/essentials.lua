@@ -1,3 +1,5 @@
+-- A super powerful autopair plugin for Neovim that supports multiple characters.
+-- https://github.com/windwp/nvim-autopairs
 local autopairs = {
 	"windwp/nvim-autopairs",
 	dependencies = {
@@ -11,13 +13,17 @@ local autopairs = {
 	event = "InsertEnter",
 }
 
+-- Smart and Powerful commenting plugin
+-- -- https://github.com/numToStr/Comment.nvim
 local comment = {
 	"numToStr/Comment.nvim",
 	config = function()
 		require("Comment").setup()
 	end,
 }
+
 -- Quick access to attached files
+-- https://github.com/theprimeagen/harpoon
 local harpoon = {
 	"theprimeagen/harpoon",
 	branch = "harpoon2",
@@ -29,17 +35,22 @@ local harpoon = {
 
 		harpoon:setup()
 
-		vim.keymap.set("n", "<leader>a", function()
-			harpoon:list():append()
+		vim.keymap.set("n", "<leader>ha", function()
+			harpoon:list():add()
 		end, { desc = "[H]arpoon [A]dd" })
 
-		vim.keymap.set("n", "<C-e>", function()
+		vim.keymap.set("n", "<leader>hd", function()
+			harpoon:list():remove()
+		end, { desc = "[H]arpoon [R]emove" })
+
+		vim.keymap.set("n", "<leader>hl", function()
 			harpoon.ui:toggle_quick_menu(harpoon:list())
 		end, { desc = "[H]arpoon [L]ist" })
 	end,
 }
 
 -- Align text by characters
+-- https://github.com/tommcdo/vim-lion
 local lion = {
 	"tommcdo/vim-lion",
 	config = function()
@@ -48,6 +59,7 @@ local lion = {
 }
 
 -- Keep indentation when pasting
+-- https://github.com/RRethy/vim-pasta
 local pasta = {
 	"sickill/vim-pasta",
 	config = function()
@@ -56,7 +68,7 @@ local pasta = {
 }
 
 -- Split or join lines of code
-
+-- https://github.com/AndrewRadev/splitjoin.vim
 local splitjoin = {
 	"AndrewRadev/splitjoin.vim",
 	config = function()
@@ -67,6 +79,7 @@ local splitjoin = {
 }
 
 -- Show a floating terminal
+-- https://github.com/akinsho/toggleterm.nvim
 local toggleterm = {
 	"akinsho/toggleterm.nvim",
 	config = function()
@@ -95,6 +108,8 @@ local toggleterm = {
 	end,
 }
 
+-- A vim text object for XML/HTML attributes.
+-- https://github.com/whatyouhide/vim-textobj-xmlattr
 local vim_textobj_xmlattr = {
 	"whatyouhide/vim-textobj-xmlattr",
 	dependencies = {
@@ -103,6 +118,7 @@ local vim_textobj_xmlattr = {
 }
 
 -- Multi-Cursor selection
+-- https://github.com/mg979/vim-visual-multi
 local vim_visual_multi = {
 	"mg979/vim-visual-multi",
 }

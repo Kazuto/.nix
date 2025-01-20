@@ -1,3 +1,5 @@
+-- A completion engine plugin for neovim written in Lua.
+-- https://github.com/hrsh7th/nvim-cmp
 local cmp = {
 	"hrsh7th/nvim-cmp",
 	dependencies = {
@@ -136,6 +138,8 @@ local codium = {
 	},
 }
 
+-- Snippet Engine for Neovim written in Lua.
+-- https://github.com/L3MON4D3/LuaSnip
 local luasnip = {
 	"L3MON4D3/LuaSnip",
 	config = function()
@@ -169,6 +173,8 @@ local luasnip = {
 
 vim.g.skip_ts_context_commentstring_module = true
 
+-- Treesitter configurations and abstraction layer for Neovim
+-- https://github.com/nvim-treesitter/nvim-treesitter
 local treesitter = {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
@@ -223,6 +229,8 @@ local treesitter = {
 	end,
 }
 
+-- Granular project configuration
+-- https://github.com/tpope/vim-projectionist
 local projectionist = {
 	"tpope/vim-projectionist",
 	dependencies = {
@@ -233,6 +241,8 @@ local projectionist = {
 	end,
 }
 
+-- Plugin for Neovim to enhance the development experience of Laravel projects
+-- https://github.com/adalessa/laravel.nvim
 local laravel = {
 	"adalessa/laravel.nvim",
 	dependencies = {
@@ -244,11 +254,12 @@ local laravel = {
 	},
 	cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
 	keys = {
-		{ "<leader>la", ":Laravel artisan<cr>" },
-		{ "<leader>lr", ":Laravel routes<cr>" },
-		{ "<leader>lm", ":Laravel related<cr>" },
+		{ "<leader>aa", ":Laravel artisan<CR>", desc = "Laravel Artisan" },
+		{ "<leader>ar", ":Laravel routes<CR>", desc = "Laravel Application Routes" },
+		{ "<leader>am", ":Laravel make<CR>", desc = "Laravel Make" },
+		{ "<leader>ac", ":Laravel related<CR>", desc = "Laravel Related" },
 		{
-			"<leader>lt",
+			"<leader>at",
 			function()
 				require("laravel.tinker").send_to_tinker()
 			end,

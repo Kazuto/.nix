@@ -14,7 +14,7 @@ function Map(mode, lhs, rhs, opts)
 end
 
 -- general
-Map("n", "<leader>gs", vim.cmd.Git, { desc = "[Git] [S]tatus" })
+-- Map("n", "<leader>gs", vim.cmd.Git, { desc = "[Git] [S]tatus" })
 Map("n", "<C-s>", vim.cmd.w, { desc = "[S]ave file" })
 
 -- When text is wrapped, move by terminal rows, not lines, unless a count is provided

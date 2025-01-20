@@ -1,6 +1,8 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- File explorer
+-- https://github.com/nvim-tree/nvim-tree.lua
 local nvimtree = {
 	"nvim-tree/nvim-tree.lua",
 	dependencies = {
@@ -92,6 +94,7 @@ local nvimtree = {
 }
 
 -- Fuzzy finder
+-- https://github.com/nvim-telescope/telescope.nvim
 local telescope = {
 	"nvim-telescope/telescope.nvim",
 	version = "*",
@@ -145,6 +148,7 @@ local telescope = {
 }
 
 -- Useful plugin to show you pending keybinds
+-- https://github.com/folke/which-key.nvim
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
@@ -161,6 +165,7 @@ local which_key = {
 }
 
 -- Show changes to a file
+-- https://github.com/mbbill/undotree
 local undotree = {
 	"mbbill/undotree",
 	keys = {
@@ -169,6 +174,7 @@ local undotree = {
 }
 
 -- Show definitions etc. !required ctags!
+-- https://github.com/preservim/tagbar
 local tagbar = {
 	"preservim/tagbar",
 	keys = {
@@ -176,6 +182,8 @@ local tagbar = {
 	},
 }
 
+-- Super fast git decorations
+-- https://github.com/lewis6991/gitsigns.nvim
 local gitsigns = {
 	"lewis6991/gitsigns.nvim",
 	dependencies = {
@@ -194,6 +202,8 @@ local gitsigns = {
 	event = { "VeryLazy" },
 }
 
+-- Highlight other uses of the current word
+-- https://github.com/rrethy/vim-illuminate
 local illuminate = {
 	"RRethy/vim-illuminate",
 	config = function()
@@ -203,6 +213,8 @@ local illuminate = {
 	end,
 }
 
+-- A fancy, configurable, notification manager for NeoVim
+-- https://github.com/rcarriga/nvim-notify
 local vim_notify = {
 	"rcarriga/nvim-notify",
 	config = function()
@@ -214,6 +226,8 @@ local vim_notify = {
 	end,
 }
 
+-- Smooth scrolling
+-- https://github.com/karb94/neoscroll.nvim
 local neoscroll = {
 	"karb94/neoscroll.nvim",
 	config = function()

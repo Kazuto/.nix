@@ -1,3 +1,5 @@
+-- A blazing fast and easy to configure Neovim statusline written in Lua.
+-- https://github.com/nvim-lualine/lualine.nvim
 local lualine = {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
@@ -61,6 +63,8 @@ local lualine = {
 	end,
 }
 
+-- This plugin adds indentation guides to Neovim.
+-- https://github.com/lukas-reineke/indent-blankline.nvim
 local indent_blankline = {
 	"lukas-reineke/indent-blankline.nvim",
 	main = "ibl",
@@ -76,6 +80,8 @@ local indent_blankline = {
 	end,
 }
 
+-- A snazzy buffer line (with tabpage integration) for Neovim built using lua.
+-- https://github.com/akinsho/bufferline.nvim
 local bufferline = {
 	"akinsho/bufferline.nvim",
 	dependencies = {
@@ -180,8 +186,10 @@ local shortcuts = {
 	},
 }
 
+-- Fancy and Blazing Fast start screen
+-- https://github.com/nvimdev/dashboard-nvim
 local dashboard = {
-	"glepnir/dashboard-nvim",
+	"nvimdev/dashboard-nvim",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
