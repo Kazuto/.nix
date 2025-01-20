@@ -60,7 +60,7 @@ in
         clock_format               = ''"%d.%m.%y %R"'';
 
         right_shell                = "on";
-        right_shell_icon           = "󰓇";
+        right_shell_icon           = "";
         right_shell_icon_color     = "0xff1db954";
         right_shell_command        = "~/.config/spacebar/scripts/center";
       };
