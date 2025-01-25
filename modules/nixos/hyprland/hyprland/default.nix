@@ -76,14 +76,9 @@ lib.${namespace}.mkModule {
 
     # Enable touchpad support (enabled default in most desktopManager).
     services.libinput.enable = true;
-    
+
     services.displayManager = {
       defaultSession = "hyprland";
-
-      gdm  = {
-        enable = true;
-        wayland = true;
-      };
 
       # Enable automatic login for the user.
       autoLogin = {
@@ -94,6 +89,11 @@ lib.${namespace}.mkModule {
 
     services.xserver = {
       enable = true;
+
+      displayManager.gdm  = {
+        enable = true;
+        wayland = true;
+      };
     };
 
     services.gnome = {
