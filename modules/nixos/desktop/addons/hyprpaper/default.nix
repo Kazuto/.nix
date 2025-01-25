@@ -17,8 +17,8 @@ lib.${namespace}.mkModule {
   output = {
     environment.systemPackages = with pkgs; [ hyprpaper ];
 
-    shiro.home.configFile."hypr/hyprpaper.conf".source = ./hyprpaper.conf;
-    shiro.home.configFile."hypr/wallpaper".source = ./wallpaper;
+    config.${namespace}.home.configFile."hypr/hyprpaper.conf".source = ./hyprpaper.conf;
+    config.${namespace}.home.configFile."hypr/wallpaper".source = ./wallpaper;
   };
 }
 

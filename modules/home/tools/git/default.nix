@@ -21,7 +21,7 @@ lib.${namespace}.mkModule {
   output = with config.${namespace}.cli.git; {
     environment.systemPackages = with pkgs; [ git gh ];
 
-    shiro.home.extraOptions = {
+    config.${namespace}.home.extraOptions = {
       programs.git = {
         enable = true;
 

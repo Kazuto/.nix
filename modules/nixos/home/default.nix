@@ -21,8 +21,8 @@ lib.${namespace}.mkModule {
     extraOptions = lib.${namespace}.mkOpt attrs { } "Options to pass directly to home-manager.";
   };
 
-  output = with config.${namespace}.home {
-    shiro.home.extraOptions = {
+  output = with config.${namespace}.home; {
+    config.${namespace}.home.extraOptions = {
       home.stateVersion = config.system.stateVersion;
       home.file = mkAliasDefinitions options.${namespace}.home.file;
       xdg.enable = true;

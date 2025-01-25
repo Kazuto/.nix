@@ -16,7 +16,7 @@ lib.${namespace}.mkModule {
   output = {
     environment.systemPackages = with pkgs; [ kitty ];
 
-    shiro.home.configFile."kitty/kitty.conf".source = ./kitty.conf;
+    config.${namespace}.home.configFile."kitty/kitty.conf".source = ./kitty.conf;
   };
 }
 

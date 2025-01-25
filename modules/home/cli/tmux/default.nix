@@ -16,6 +16,6 @@ lib.${namespace}.mkModule {
   output = {
     environment.systemPackages = with pkgs; [ tmux ];
 
-    shiro.home.configFile."tmux/tmux.conf".source = ./tmux.conf;
+    config.${namespace}.home.configFile."tmux/tmux.conf".source = ./tmux.conf;
   };
 }

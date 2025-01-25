@@ -17,7 +17,7 @@ lib.${namespace}.mkModule {
   output = {
     environment.systemPackages = with pkgs; [ wlogout ];
 
-    shiro.home.configFile."wlogout".source = ./config;
+    config.${namespace}.home.configFile."wlogout".source = ./config;
   };
 }
 

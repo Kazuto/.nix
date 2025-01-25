@@ -37,17 +37,16 @@ lib.${namespace}.mkModule {
         beekeeper = enabled;
         bruno = enabled;
         dbeaver = enabled;
-        gitkraken = enabled;
         insomnia = enabled;
-        kitty = enabled;
+        gitkraken = enabled;
         vscode = enabled;
       };
 
       development.languages = {
+        go = enabled;
         nodejs20 = enabled;
         php81 = enabled;
         python311 = enabled;
-        go = enabled;
       };
 
       tools = {

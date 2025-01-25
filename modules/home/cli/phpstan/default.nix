@@ -10,7 +10,7 @@ lib.${namespace}.mkModule {
 
   path = [
     "cli"
-    "btop"
+    "phpstan"
   ];
 
   output = {

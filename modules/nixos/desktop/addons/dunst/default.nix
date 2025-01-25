@@ -19,7 +19,7 @@ lib.${namespace}.mkModule {
 
     services.dbus.enable = true;
 
-    shiro.home.configFile."dunst/dunstrc".source = ./dunstrc;
+    config.${namespace}.home.configFile."dunst/dunstrc".source = ./dunstrc;
   };
 }
 

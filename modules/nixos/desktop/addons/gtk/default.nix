@@ -15,7 +15,7 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    shiro.home.extraOptions = {
+    config.${namespace}.home.extraOptions = {
       gtk = {
         enable = true;
 

@@ -21,7 +21,7 @@ lib.${namespace}.mkModule {
       EDITOR = "nvim";
     };
 
-    shiro.home.extraOptions = {
+    config.${namespace}.home.extraOptions = {
       programs.neovim = {
         enable = true;
 

@@ -3,7 +3,6 @@
   lib, 
   pkgs, 
   namespace,
-  user-defaults,
   ... 
 }:
 lib.${namespace}.mkModule {
@@ -17,25 +16,24 @@ lib.${namespace}.mkModule {
     name = lib.${namespace}.mkOpt' str "kazuto";
     fullName = lib.${namespace}.mkOpt' str "Kai Mayer";
     email = lib.${namespace}.mkOpt' str "mail@kazuto.de";
-    initialPassword = lib.${namespace}.mkOpt' str "password";
   };
 
-  output = {
-    users ={ 
-      users.${user-defaults.name} = {
+  output = with config.${namespace}.user; {
+    users = { 
+      users.${name} = {
         isNormalUser = true;
 
-        inherit (user-defaults) name initialPassword;
+        name = name;
 
-        home = "/home/${user-defaults.name}";
+        home = "/home/${name}";
         group = "users";
 
         shell = pkgs.zsh;
 
         uid = 1000;
 
-        extraGroups = [ "wheel" ] ++ cfg.extraGroups;
-      } // cfg.extraOptions;
-    }
+        extraGroups = [ "wheel" ];
+      };
+    };
   };
 }

@@ -17,7 +17,7 @@ lib.${namespace}.mkModule {
   output = {
     environment.systemPackages = with pkgs; [ avizo pamixer pulseaudioFull brightnessctl ];
 
-    shiro.home.configFile."avizo/config.ini".source = ./config.ini;
+    config.${namespace}.home.configFile."avizo/config.ini".source = ./config.ini;
   };
 }
 

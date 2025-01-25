@@ -17,7 +17,7 @@ lib.${namespace}.mkModule {
   output = {
     environment.systemPackages = with pkgs; [ rofi-wayland ];
 
-    shiro.home.configFile."rofi/themes".source = ./themes;
+    config.${namespace}.home.configFile."rofi/themes".source = ./themes;
   };
 }
 

@@ -41,7 +41,7 @@ lib.${namespace}.mkModule {
       wireplumber
     ];
 
-    shiro.user.extraGroups = [ "audio" ];
+    config.${namespace}.user.extraGroups = [ "audio" ];
   };
 }
 

@@ -15,7 +15,7 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    shiro.home.configFile."electron-flags.conf".source = ./electron-flags.conf;
+    config.${namespace}.home.configFile."electron-flags.conf".source = ./electron-flags.conf;
 
     environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
   };

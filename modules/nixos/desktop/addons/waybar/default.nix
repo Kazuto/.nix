@@ -31,7 +31,7 @@ lib.${namespace}.mkModule {
       });
     };
 
-    shiro.home.configFile."waybar".source = ./config;
+    config.${namespace}.home.configFile."waybar".source = ./config;
   };
 }
 
