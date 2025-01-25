@@ -14,7 +14,15 @@ lib.${namespace}.mkModule {
     "waybar"
   ];
 
-  output = {
+  output = with config.${namespace}.user; {
+    users = { 
+      users.${name} = {
+        home = {
+          configFile."waybar".source = ./config;
+        };
+      };
+    };
+
     environment.systemPackages = with pkgs; [ playerctl inotify-tools];
 
     programs.waybar = {
@@ -30,8 +38,6 @@ lib.${namespace}.mkModule {
         ];
       });
     };
-
-    config.${namespace}.home.configFile."waybar".source = ./config;
   };
 }
 

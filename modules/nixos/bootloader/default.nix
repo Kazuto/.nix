@@ -1,7 +1,6 @@
 { 
   config, 
   lib, 
-  pkgs, 
   namespace, 
   ... 
 }:
@@ -9,8 +8,7 @@ lib.${namespace}.mkModule {
   inherit config;
 
   path = [
-    "system"
-    "boot"
+    "bootloader"
   ];
 
   output = {

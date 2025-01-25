@@ -14,12 +14,18 @@ lib.${namespace}.mkModule {
     "dunst"
   ];
 
-  output = {
+  output = with config.${namespace}.user; {
+    users = { 
+      users.${name} = {
+        home = {
+          configFile."dunst/dunstrc".source = ./dunstrc;
+        };
+      };
+    };
+    
     environment.systemPackages = with pkgs; [ dunst libnotify ];
 
     services.dbus.enable = true;
-
-    config.${namespace}.home.configFile."dunst/dunstrc".source = ./dunstrc;
   };
 }
 

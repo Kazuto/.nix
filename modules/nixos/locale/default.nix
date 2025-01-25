@@ -9,7 +9,6 @@ lib.${namespace}.mkModule {
   inherit config;
 
   path = [
-    "system"
     "locale"
   ];
 

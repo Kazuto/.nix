@@ -14,10 +14,16 @@ lib.${namespace}.mkModule {
     "rofi"
   ];
 
-  output = {
+  output = with config.${namespace}.user; {
+    users = { 
+      users.${name} = {
+        home = {
+          configFile."rofi/themes".source = ./themes;
+        };
+      };
+    };
+    
     environment.systemPackages = with pkgs; [ rofi-wayland ];
-
-    config.${namespace}.home.configFile."rofi/themes".source = ./themes;
   };
 }
 

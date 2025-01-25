@@ -14,10 +14,16 @@ lib.${namespace}.mkModule {
     "avizo"
   ];
 
-  output = {
-    environment.systemPackages = with pkgs; [ avizo pamixer pulseaudioFull brightnessctl ];
+  output = with config.${namespace}.user; {
+    users = { 
+      users.${name} = {
+        home = {
+          configFile."avizo/config.ini".source = ./config.ini;
+        };
+      };
+    };
 
-    config.${namespace}.home.configFile."avizo/config.ini".source = ./config.ini;
+    environment.systemPackages = with pkgs; [ avizo pamixer pulseaudioFull brightnessctl ];
   };
 }
 

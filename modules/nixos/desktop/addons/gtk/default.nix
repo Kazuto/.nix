@@ -14,34 +14,38 @@ lib.${namespace}.mkModule {
     "gtk"
   ];
 
-  output = {
-    config.${namespace}.home.extraOptions = {
-      gtk = {
-        enable = true;
+  output = with config.${namespace}.user; {
+    users = { 
+      users.${name} = {
+        extraOptions = {
+          gtk = {
+            enable = true;
 
-        theme = {
-          name = "Catppuccin-Mocha-Standard-Blue-Dark";
-          package = pkgs.catppuccin-gtk.override {
-            variant = "mocha";
+            theme = {
+              name = "Catppuccin-Mocha-Standard-Blue-Dark";
+              package = pkgs.catppuccin-gtk.override {
+                variant = "mocha";
+              };
+            };
+
+            cursorTheme = {
+              name = "Catppuccin-Mocha-Dark-Cursors";
+              package = pkgs.catppuccin-cursors.mochaDark;
+            };
+
+            iconTheme = {
+              name = "Papirus-Dark";
+              package = pkgs.papirus-icon-theme;
+            };
+
+            gtk3.extraConfig = {
+              gtk-application-prefer-dark-theme = 1;
+            };
+
+            gtk4.extraConfig = {
+              gtk-application-prefer-dark-theme = 1;
+            };
           };
-        };
-
-        cursorTheme = {
-          name = "Catppuccin-Mocha-Dark-Cursors";
-          package = pkgs.catppuccin-cursors.mochaDark;
-        };
-
-        iconTheme = {
-          name = "Papirus-Dark";
-          package = pkgs.papirus-icon-theme;
-        };
-
-        gtk3.extraConfig = {
-          gtk-application-prefer-dark-theme = 1;
-        };
-
-        gtk4.extraConfig = {
-          gtk-application-prefer-dark-theme = 1;
         };
       };
     };

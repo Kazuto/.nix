@@ -9,8 +9,7 @@ lib.${namespace}.mkModule {
   inherit config;
 
   path = [
-    "system"
-    "env"
+    "environment"
   ];
 
   output = {

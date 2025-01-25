@@ -14,8 +14,14 @@ lib.${namespace}.mkModule {
     "electron-support"
   ];
 
-  output = {
-    config.${namespace}.home.configFile."electron-flags.conf".source = ./electron-flags.conf;
+  output = with config.${namespace}.user; {
+    users = { 
+      users.${name} = {
+        home = {
+          configFile."electron-flags.conf".source = ./electron-flags.conf;
+        };
+      };
+    };
 
     environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
   };
