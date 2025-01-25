@@ -19,7 +19,6 @@ lib.${namespace}.mkModule {
       dunst = enabled;
       electron-support = enabled;
       gtk = enabled;
-      # hyprload = enabled;
       hyprpaper = enabled;
       hyprpicker = enabled;
       nautilus = enabled;

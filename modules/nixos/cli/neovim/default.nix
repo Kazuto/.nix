@@ -5,6 +5,9 @@
   namespace, 
   ... 
 }:
+let
+  inherit (lib.${namespace}) enabled;
+in
 lib.${namespace}.mkModule {
   inherit config;
 
@@ -32,8 +35,10 @@ lib.${namespace}.mkModule {
       # programs.bash.shellAliases.vim = "nvim";
     };
 
-    shiro.development.languages.nodejs20 = enabled;
-    shiro.cli.ripgrep = enabled;
+    shiro = {
+      development.languages.nodejs20 = enabled;
+      cli.ripgrep = enabled;
+    };
 
     environment.systemPackages = with pkgs; [
       neovim

@@ -31,13 +31,6 @@
       url = "github:snowfallorg/flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    user-defaults = {
-      name = "kazuto";
-      fullName = "Kai Mayer";
-      email = "mail@kazuto.de";
-      initialPassword = "password";
-    };
   };
 
   outputs = inputs:
