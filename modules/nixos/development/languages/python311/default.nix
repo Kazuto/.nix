@@ -1,16 +1,20 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.development.languages.python311;
-in
-{
-  options.${namespace}.development.languages.python311 = with types; {
-    enable = mkBoolOpt false "Whether or not to use Python 3.11.";
-  };
+  path = [
+    "development"
+    "languages"
+    "python311"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs;  [
       (python311Full.withPackages(p: with p; [
         pygobject3 gst-python

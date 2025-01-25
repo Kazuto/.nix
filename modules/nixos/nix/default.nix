@@ -1,16 +1,18 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.nix;
-in
-{
-  options.${namespace}.nix = with types; {
-    enable = mkBoolOpt false "Whether or not to manage nix configuration.";
-  };
+  path = [
+    "nix"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     nix = {
       settings = {
         experimental-features = [ "nix-command" "flakes" ];
@@ -18,6 +20,3 @@ in
     };
   };
 }
-
-
-

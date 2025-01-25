@@ -1,16 +1,20 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.development.languages.nodejs20;
-in
-{
-  options.${namespace}.development.languages.nodejs20 = with types; {
-    enable = mkBoolOpt false "Whether or not to install Node.js 20.";
-  };
+  path = [
+    "development"
+    "languages"
+    "nodejs20"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs;  [
       nodejs_20
       nodePackages.eslint_d

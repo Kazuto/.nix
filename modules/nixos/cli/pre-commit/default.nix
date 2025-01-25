@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.cli.pre-commit;
-in
-{
-  options.${namespace}.cli.pre-commit = with types; {
-    enable = mkBoolOpt false "Whether or not to install pre-commit";
-  };
+  path = [
+    "cli"
+    "pre-commit"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ pre-commit ];
   };
 }

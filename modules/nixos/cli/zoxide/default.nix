@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.cli.zoxide;
-in
-{
-  options.${namespace}.cli.zoxide = with types; {
-    enable = mkBoolOpt false "Whether or not to install zoxide cli";
-  };
+  path = [
+    "cli"
+    "zoxide"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ zoxide ];
   };
 }

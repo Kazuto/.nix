@@ -1,18 +1,26 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.development.languages.go;
-in
-{
-  options.${namespace}.development.languages.go = with types; {
-    enable = mkBoolOpt false "Whether or not to use Golang";
-  };
+  path = [
+    "development"
+    "languages"
+    "go"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs;  [
-      pkgs.go
+      go
+      gotools
+      golangci-lint
+      ginkgo
+      mockgen
     ];
   };
 }

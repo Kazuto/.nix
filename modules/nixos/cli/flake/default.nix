@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.cli.flake;
-in
-{
-  options.${namespace}.cli.flake = with types; {
-    enable = mkBoolOpt false "Whether or not to install flake";
-  };
+  path = [
+    "cli"
+    "flake"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ snowfallorg.flake ];
   };
 }

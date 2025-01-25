@@ -1,21 +1,23 @@
-{ options, config, lib, pkgs, namespace, ... }:
-
-with lib;
-with lib.${namespace};
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
 let
-  cfg = config.${namespace}.suites.development;
+  inherit (lib.${namespace}) enabled;
 in
-{
-  options.${namespace}.suites.development = with types; {
-    enable = mkBoolOpt false "Whether or not to enable development configuration.";
-  };
+lib.${namespace}.mkModule {
+  inherit config;
 
-  config = mkIf cfg.enable {
+  path = [
+    "suites"
+    "development"
+  ];
+
+  output = {
     shiro = {
-      apps = {
-        obsidian = enabled;
-      };
-
       cli = {
         commitizen = enabled;
         curl = enabled;
@@ -38,7 +40,6 @@ in
         gitkraken = enabled;
         insomnia = enabled;
         kitty = enabled;
-        phpstorm = enabled;
         vscode = enabled;
       };
 

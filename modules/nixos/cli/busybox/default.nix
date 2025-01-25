@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.cli.busybox;
-in
-{
-  options.${namespace}.cli.busybox = with types; {
-    enable = mkBoolOpt false "Whether or not to install busybox";
-  };
+  path = [
+    "cli"
+    "busybox"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ busybox ];
   };
 }

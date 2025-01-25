@@ -1,15 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-let
-  cfg = config.${namespace}.apps.lutris;
-in
-{
-  options.${namespace}.apps.lutris = with types; {
-    enable = mkBoolOpt false "Whether or not to install lutris";
-  };
+  path = [
+    "apps"
+    "lutris"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [
       lutris
 

@@ -1,15 +1,20 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-let
-  cfg = config.${namespace}.desktop.addons.polkit;
-in
-{
-  options.${namespace}.desktop.addons.polkit = with types; {
-    enable = mkBoolOpt false "Whether or not to install polkit.";
-  };
+  path = [
+    "desktop"
+    "addons"
+    "polkit"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ polkit_gnome ];
 
     environment.sessionVariables = {

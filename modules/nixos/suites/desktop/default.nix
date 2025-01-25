@@ -1,23 +1,26 @@
-{ options, config, lib, pkgs, namespace, ... }:
-
-with lib;
-with lib.${namespace};
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
 let
-  cfg = config.${namespace}.suites.desktop;
+  inherit (lib.${namespace}) enabled;
 in
-{
-  options.${namespace}.suites.desktop = with types; {
-    enable = mkBoolOpt false "Whether or not to enable desktop configuration.";
-  };
+lib.${namespace}.mkModule {
+  inherit config;
 
-  config = mkIf cfg.enable {
+  path = [
+    "suites"
+    "desktop"
+  ];
+
+  output = {
     shiro = {
       apps = {
         bitwarden = enabled;
         firefox = enabled;
-        brave = enabled;
-        mailspring = enabled;
-        nextcloud = enabled;
       };
     };
   };

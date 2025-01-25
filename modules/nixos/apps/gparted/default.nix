@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.apps.gparted;
-in
-{
-  options.${namespace}.apps.gparted = with types; {
-    enable = mkBoolOpt false "Whether or not to install gparted";
-  };
+  path = [
+    "apps"
+    "gparted"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ gparted ];
   };
 }

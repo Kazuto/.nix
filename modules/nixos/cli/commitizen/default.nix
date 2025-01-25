@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.cli.commitizen;
-in
-{
-  options.${namespace}.cli.commitizen = with types; {
-    enable = mkBoolOpt false "Whether or not to install Commitizen";
-  };
+  path = [
+    "cli"
+    "commitizen"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ commitizen ];
   };
 }

@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.cli.neovim;
-in
-{
-  options.${namespace}.cli.neovim = with types; {
-    enable = mkBoolOpt false "Whether or not to install neovim";
-  };
+  path = [
+    "cli"
+    "neovim"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.variables = {
       EDITOR = "nvim";
     };

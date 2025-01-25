@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.system.time;
-in
-{
-  options.${namespace}.system.time = with types; {
-    enable = mkBoolOpt false "Whether or not to configure timezone information.";
-  };
+  path = [
+    "system"
+    "time"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     time.timeZone = "Europe/Berlin";
   };
 }

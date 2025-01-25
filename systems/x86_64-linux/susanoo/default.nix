@@ -2,11 +2,11 @@
     pkgs, 
     lib, 
     namespace,
-    nixos-hardware,
     ... 
 }:
-with lib;
-with lib.${namespace};
+let
+  inherit (lib.${namespace}) enabled;
+in
 {
   imports = [ ./hardware.nix ];
 

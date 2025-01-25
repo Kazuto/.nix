@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.apps.teams;
-in
-{
-  options.${namespace}.apps.teams = with types; {
-    enable = mkBoolOpt false "Whether or not to install Teams";
-  };
+  path = [
+    "apps"
+    "teams"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ teams ];
   };
 }

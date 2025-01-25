@@ -1,24 +1,27 @@
-{ options, config, lib, pkgs, inputs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace,
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.home;
-in
-{
-  imports = with inputs; [
-    home-manager.nixosModules.home-manager
+  path = [
+    "tools"
+    "git"
   ];
 
-  options.${namespace}.home = with types; {
-    file = mkOpt attrs { }
+  extraOptions = with lib.types; {
+    file = lib.${namespace}.mkOpt attrs { }
       "A set of files to be managed by home-manager's <option>home.file</option>.";
-    configFile = mkOpt attrs { }
+    configFile = lib.${namespace}.mkOpt attrs { }
       "A set of files to be managed by home-manager's <option>xdg.configFile</option>.";
-    extraOptions = mkOpt attrs { } "Options to pass directly to home-manager.";
+    extraOptions = lib.${namespace}.mkOpt attrs { } "Options to pass directly to home-manager.";
   };
 
-  config = {
+  output = with config.${namespace}.home {
     shiro.home.extraOptions = {
       home.stateVersion = config.system.stateVersion;
       home.file = mkAliasDefinitions options.${namespace}.home.file;

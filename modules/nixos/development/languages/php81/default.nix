@@ -1,16 +1,20 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.development.languages.php81;
-in
-{
-  options.${namespace}.development.languages.php81 = with types; {
-    enable = mkBoolOpt false "Whether or not to use PHP 8.1.";
-  };
+  path = [
+    "development"
+    "languages"
+    "php81"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs;  [
       (php.buildEnv {
         extensions = ({ enabled, all }: enabled ++ (with all; [

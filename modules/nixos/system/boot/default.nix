@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.system.boot;
-in
-{
-  options.${namespace}.system.boot = with types; {
-    enable = mkBoolOpt false "Whether or not to configure boot loader.";
-  };
+  path = [
+    "system"
+    "boot"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     boot.loader.systemd-boot.enable = true;
     boot.loader.systemd-boot.configurationLimit = 5;
     boot.loader.efi.canTouchEfiVariables = true;

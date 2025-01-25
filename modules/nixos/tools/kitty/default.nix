@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace,
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.tools.kitty;
-in
-{
-  options.${namespace}.tools.kitty = with types; {
-    enable = mkBoolOpt false "Whether or not to install Kitty.";
-  };
+  path = [
+    "tools"
+    "kitty"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ kitty ];
 
     shiro.home.configFile."kitty/kitty.conf".source = ./kitty.conf;

@@ -1,15 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-let
-  cfg = config.${namespace}.apps.steam;
-in
-{
-  options.${namespace}.apps.steam = with types; {
-    enable = mkBoolOpt false "Whether or not to install steam";
-  };
+  path = [
+    "apps"
+    "steam"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ steam ];
   };
 }

@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.hardware.network;
-in
-{
-  options.${namespace}.hardware.network = with types; {
-    enable = mkBoolOpt false "Whether or not to configure network settings.";
-  };
+  path = [
+    "hardware"
+    "network"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     networking = {
       networkmanager = {
         enable = true;

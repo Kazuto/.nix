@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.cli.phpstan;
-in
-{
-  options.${namespace}.cli.phpstan = with types; {
-    enable = mkBoolOpt false "Whether or not to install phpstan";
-  };
+  path = [
+    "cli"
+    "btop"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ php81Packages.phpstan ];
   };
 }

@@ -1,15 +1,20 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-let
-  cfg = config.${namespace}.desktop.addons.thunar;
-in
-{
-  options.${namespace}.desktop.addons.thunar = with types; {
-    enable = mkBoolOpt false "Whether or not to install Thunar.";
-  };
+  path = [
+    "desktop"
+    "addons"
+    "thunar"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     programs.thunar = {
       enable = true;
       plugins = with pkgs.xfce; [

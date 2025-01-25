@@ -1,47 +1,39 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.desktop.addons.gtk;
-in
-{
-  options.${namespace}.desktop.addons.gtk = with types; {
-    enable = mkBoolOpt false "Whether to customize GTK and apply themes.";
-    theme = {
-      name = mkOpt str "Catppuccin-Mocha-Standard-Blue-Dark" "The name of the GTK theme to apply.";
-      pkg = mkOpt package pkgs.catppuccin-gtk "The package to use for the theme.";
-    };
-    cursor = {
-      name = mkOpt str "Catppuccin-Mocha-Dark-Cursors" "The name of the cursor theme to apply.";
-      pkg = mkOpt package pkgs.catppuccin-cursors.mochaDark "The package to use for the cursor theme.";
-    };
-    icon = {
-      name = mkOpt str "Papirus-Dark" "The name of the icon theme to apply.";
-      pkg = mkOpt package pkgs.papirus-icon-theme "The package to use for the icon theme.";
-    };
-  };
+  path = [
+    "desktop"
+    "addons"
+    "gtk"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     shiro.home.extraOptions = {
       gtk = {
         enable = true;
 
         theme = {
-          name = cfg.theme.name;
-          package = cfg.theme.pkg.override {
+          name = "Catppuccin-Mocha-Standard-Blue-Dark";
+          package = pkgs.catppuccin-gtk.override {
             variant = "mocha";
           };
         };
 
         cursorTheme = {
-          name = cfg.cursor.name;
-          package = cfg.cursor.pkg;
+          name = "Catppuccin-Mocha-Dark-Cursors";
+          package = pkgs.catppuccin-cursors.mochaDark;
         };
 
         iconTheme = {
-          name = cfg.icon.name;
-          package = cfg.icon.pkg;
+          name = "Papirus-Dark";
+          package = pkgs.papirus-icon-theme;
         };
 
         gtk3.extraConfig = {

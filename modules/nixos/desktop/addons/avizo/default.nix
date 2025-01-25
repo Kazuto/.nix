@@ -1,16 +1,20 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.desktop.addons.avizo;
-in
-{
-  options.${namespace}.desktop.addons.avizo = with types; {
-    enable = mkBoolOpt false "Whether or not to install avizo.";
-  };
+  path = [
+    "desktop"
+    "addons"
+    "avizo"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ avizo pamixer pulseaudioFull brightnessctl ];
 
     shiro.home.configFile."avizo/config.ini".source = ./config.ini;

@@ -1,26 +1,32 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace,
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.tools.git;
-  user = config.${namespace}.user;
-in
-{
-  options.${namespace}.tools.git = with types; {
-    enable = mkBoolOpt false "Whether or not to use git.";
-    userName = mkOpt types.str user.fullName "The name to configure git with.";
-    userEmail = mkOpt types.str user.email "The email to configure git with.";
+  path = [
+    "tools"
+    "git"
+  ];
+
+  extraOptions = with lib.types; {
+    userName = lib.${namespace}.mkOpt str "kazuto" "The name to configure git with.";
+    userEmail = lib.${namespace}.mkOpt str "mail@kazuto.de" "The email to configure git with.";
   };
 
-  config = mkIf cfg.enable {
+  output = with config.${namespace}.cli.git; {
     environment.systemPackages = with pkgs; [ git gh ];
 
     shiro.home.extraOptions = {
       programs.git = {
         enable = true;
 
-        inherit (cfg) userName userEmail;
+        userName = userName;
+        userEmail = userEmail;
 
         extraConfig = {
           init = { defaultBranch = "master"; };

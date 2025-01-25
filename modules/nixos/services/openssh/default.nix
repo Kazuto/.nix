@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.services.openssh;
-in
-{
-  options.${namespace}.services.openssh = with types; {
-    enable = mkBoolOpt false "Whether or not to configure ssh settings.";
-  };
+  path = [
+    "services"
+    "openssh"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     services.openssh.enable = true;
 
     programs.gnupg.agent = {

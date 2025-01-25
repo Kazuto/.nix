@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.cli.wget;
-in
-{
-  options.${namespace}.cli.wget = with types; {
-    enable = mkBoolOpt false "Whether or not to install wget";
-  };
+  path = [
+    "cli"
+    "wget"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ wget ];
   };
 }

@@ -1,16 +1,22 @@
-{ options, config, lib, pkgs, namespace, ... }:
-
-with lib;
-with lib.${namespace};
-let cfg = config.${namespace}.layouts.workstation;
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+let
+  inherit (lib.${namespace}) enabled;
 in
-{
-  options.${namespace}.layouts.workstation = with types; {
-    enable =
-      mkBoolOpt false "Whether or not to enable the workstation layout.";
-  };
+lib.${namespace}.mkModule {
+  inherit config;
 
-  config = mkIf cfg.enable {
+  path = [
+    "layouts"
+    "workstation"
+  ];
+
+  output = {
     shiro = {
       suites = {
         common = enabled;

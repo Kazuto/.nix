@@ -1,16 +1,22 @@
-{ options, config, lib, pkgs, namespace, ... }:
-
-with lib;
-with lib.${namespace};
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
 let
-  cfg = config.${namespace}.suites.common;
+  inherit (lib.${namespace}) enabled;
 in
-{
-  options.${namespace}.suites.common = with types; {
-    enable = mkBoolOpt false "Whether or not to enable common configuration.";
-  };
+lib.${namespace}.mkModule {
+  inherit config;
 
-  config = mkIf cfg.enable {
+  path = [
+    "suites"
+    "common"
+  ];
+
+  output = {
     shiro = {
       cli = {
         btop = enabled;

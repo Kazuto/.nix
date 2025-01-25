@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.system.xkb;
-in
-{
-  options.${namespace}.system.xkb = with types; {
-    enable = mkBoolOpt false "Whether or not to configure keyboard settings.";
-  };
+  path = [
+    "system"
+    "xkb"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     console.useXkbConfig = true;
 
     services.xserver = {

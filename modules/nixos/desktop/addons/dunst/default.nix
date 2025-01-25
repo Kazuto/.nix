@@ -1,16 +1,20 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.desktop.addons.dunst;
-in
-{
-  options.${namespace}.desktop.addons.dunst = with types; {
-    enable = mkBoolOpt false "Whether or not to install dunst.";
-  };
+  path = [
+    "desktop"
+    "addons"
+    "dunst"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ dunst libnotify ];
 
     services.dbus.enable = true;

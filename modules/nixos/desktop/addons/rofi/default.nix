@@ -1,16 +1,20 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.desktop.addons.rofi;
-in
-{
-  options.${namespace}.desktop.addons.rofi = with types; {
-    enable = mkBoolOpt false "Whether or not to install rofi.";
-  };
+  path = [
+    "desktop"
+    "addons"
+    "rofi"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ rofi-wayland ];
 
     shiro.home.configFile."rofi/themes".source = ./themes;

@@ -1,16 +1,22 @@
-{ options, config, lib, pkgs, namespace, ... }:
-
-with lib;
-with lib.${namespace};
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
 let
-  cfg = config.${namespace}.suites.media;
+  inherit (lib.${namespace}) enabled;
 in
-{
-  options.${namespace}.suites.media = with types; {
-    enable = mkBoolOpt false "Whether or not to enable media configuration.";
-  };
+lib.${namespace}.mkModule {
+  inherit config;
 
-  config = mkIf cfg.enable {
+  path = [
+    "suites"
+    "media"
+  ];
+
+  output = {
     shiro = {
       apps = {
         spotify = enabled;

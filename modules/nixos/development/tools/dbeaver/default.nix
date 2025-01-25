@@ -1,16 +1,20 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.development.tools.dbeaver;
-in
-{
-  options.${namespace}.development.tools.dbeaver = with types; {
-    enable = mkBoolOpt false "Whether or not to install Dbeaver.";
-  };
+  path = [
+    "development"
+    "tools"
+    "dbeaver"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ dbeaver ];
   };
 }

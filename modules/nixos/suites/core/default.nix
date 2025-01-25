@@ -1,16 +1,22 @@
-{ options, config, lib, pkgs, namespace, ... }:
-
-with lib;
-with lib.${namespace};
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
 let
-  cfg = config.${namespace}.suites.core;
+  inherit (lib.${namespace}) enabled;
 in
-{
-  options.${namespace}.suites.core = with types; {
-    enable = mkBoolOpt false "Whether or not to enable core configuration.";
-  };
+lib.${namespace}.mkModule {
+  inherit config;
 
-  config = mkIf cfg.enable {
+  path = [
+    "suites"
+    "core"
+  ];
+
+  output = {
     shiro = {
       nix = enabled;
 
@@ -49,7 +55,6 @@ in
       gnumake
       pkg-config
       xorg.xhost
-      snowfallorg.flake
     ];
   };
 }

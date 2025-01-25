@@ -1,16 +1,22 @@
-{ options, config, lib, pkgs, namespace, ... }:
-
-with lib;
-with lib.${namespace};
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
 let
-  cfg = config.${namespace}.suites.social;
+  inherit (lib.${namespace}) enabled;
 in
-{
-  options.${namespace}.suites.social = with types; {
-    enable = mkBoolOpt false "Whether or not to enable social configuration.";
-  };
+lib.${namespace}.mkModule {
+  inherit config;
 
-  config = mkIf cfg.enable {
+  path = [
+    "suites"
+    "social"
+  ];
+
+  output = {
     shiro = {
       apps = {
         discord = enabled;

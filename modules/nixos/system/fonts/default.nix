@@ -1,17 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.system.fonts;
-in
-{
-  options.${namespace}.system.fonts = with types; {
-    enable = mkBoolOpt false "Whether or not to manage fonts.";
-    fonts = mkOpt (listOf package) [ ] "Custom font packages to install.";
-  };
+  path = [
+    "system"
+    "fonts"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.variables = {
       # Enable icons in tooling since we have nerdfonts.
       LOG_ICONS = "true";
@@ -27,6 +29,6 @@ in
         (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
         font-awesome
         google-fonts
-      ] ++ cfg.fonts;
+      ];
   };
 }

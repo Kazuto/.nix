@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.services.printing;
-in
-{
-  options.${namespace}.services.printing = with types; {
-    enable = mkBoolOpt false "Whether or not to configure printing settings.";
-  };
+  path = [
+    "services"
+    "printing"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     services.printing = {
       enable = true;
 

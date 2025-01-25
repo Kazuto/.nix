@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.hardware.audio;
-in
-{
-  options.${namespace}.hardware.audio = with types; {
-    enable = mkBoolOpt false "Whether or not to configure audio settings.";
-  };
+  path = [
+    "hardware"
+    "audio"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     security.rtkit.enable = true;
 
     # Enable sound with pipewire.

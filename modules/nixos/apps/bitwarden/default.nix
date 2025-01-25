@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.apps.bitwarden;
-in
-{
-  options.${namespace}.apps.bitwarden = with types; {
-    enable = mkBoolOpt false "Whether or not to install bitwarden";
-  };
+  path = [
+    "apps"
+    "bitwarden"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ bitwarden ];
   };
 }

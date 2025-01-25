@@ -10,10 +10,10 @@ lib.${namespace}.mkModule {
 
   path = [
     "apps"
-    "telegram"
+    "spotify"
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ telegram-desktop ];
+    environment.systemPackages = with pkgs; [ spotify ];
   };
 }

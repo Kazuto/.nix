@@ -1,15 +1,22 @@
-{ options, config, lib, pkgs, namespace, ... }:
-
-with lib;
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
 let
-  cfg = config.${namespace}.suites.gaming;
+  inherit (lib.${namespace}) enabled;
 in
-{
-  options.${namespace}.suites.gaming = with types; {
-    enable = mkBoolOpt false "Whether or not to enable gaming configuration.";
-  };
+lib.${namespace}.mkModule {
+  inherit config;
 
-  config = mkIf cfg.enable {
+  path = [
+    "suites"
+    "gaming"
+  ];
+
+  output = {
     shiro = {
       apps = {
         discord = enabled;

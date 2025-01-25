@@ -1,16 +1,20 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.desktop.addons.xdg-portal;
-in
-{
-  options.${namespace}.desktop.addons.xdg-portal = with types; {
-    enable = mkBoolOpt false "Whether or not to install xdg-portal.";
-  };
+  path = [
+    "desktop"
+    "addons"
+    "xdg-portal"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [
       xdg-utils
 

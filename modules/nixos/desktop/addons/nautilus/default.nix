@@ -1,15 +1,20 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-let
-  cfg = config.${namespace}.desktop.addons.nautilus;
-in
-{
-  options.${namespace}.desktop.addons.nautilus = with types; {
-    enable = mkBoolOpt false "Whether or not to install Nautilus.";
-  };
+  path = [
+    "desktop"
+    "addons"
+    "nautilus"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs.gnome; [
       nautilus
       sushi

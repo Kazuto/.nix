@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.cli.tmux;
-in
-{
-  options.${namespace}.cli.tmux = with types; {
-    enable = mkBoolOpt false "Whether or not to install tmux";
-  };
+  path = [
+    "cli"
+    "tmux"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ tmux ];
 
     shiro.home.configFile."tmux/tmux.conf".source = ./tmux.conf;

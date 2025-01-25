@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.cli.stow;
-in
-{
-  options.${namespace}.cli.stow = with types; {
-    enable = mkBoolOpt false "Whether or not to install stow";
-  };
+  path = [
+    "cli"
+    "stow"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ stow ];
   };
 }

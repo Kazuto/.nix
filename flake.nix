@@ -2,13 +2,13 @@
   description = "My nix configuration";
 
   inputs = {
-    # NixPkgs (nixos-23.05)
+    # NixPkgs
     nixpkgs.url = "nixpkgs/nixos-24.11";
 
     # NixPkgs Unstable (nixos-unstable)
     unstable.url = "nixpkgs/nixos-unstable";
 
-    # Home Manager (release-23.05)
+    # Home Manager
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,6 +30,13 @@
     snowfall-flake = {
       url = "github:snowfallorg/flake";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    user-defaults = {
+      name = "kazuto";
+      fullName = "Kai Mayer";
+      email = "mail@kazuto.de";
+      initialPassword = "password";
     };
   };
 

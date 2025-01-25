@@ -1,16 +1,20 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.desktop.addons.hyprpicker;
-in
-{
-  options.${namespace}.desktop.addons.hyprpicker = with types; {
-    enable = mkBoolOpt false "Whether or not to install hyprpicker.";
-  };
+  path = [
+    "desktop"
+    "addons"
+    "hyprpicker"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ hyprpicker ];
   };
 }

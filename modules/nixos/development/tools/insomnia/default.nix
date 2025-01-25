@@ -1,16 +1,20 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.development.tools.insomnia;
-in
-{
-  options.${namespace}.development.tools.insomnia = with types; {
-    enable = mkBoolOpt false "Whether or not to install Insomnia.";
-  };
+  path = [
+    "development"
+    "tools"
+    "insomnia"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ insomnia ];
   };
 }

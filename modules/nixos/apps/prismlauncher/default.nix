@@ -1,15 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-let
-  cfg = config.${namespace}.apps.prismlauncher;
-in
-{
-  options.${namespace}.apps.prismlauncher = with types; {
-    enable = mkBoolOpt false "Whether or not to install prismlauncher";
-  };
+  path = [
+    "apps"
+    "prismlauncher"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment.systemPackages = with pkgs; [ prismlauncher ];
   };
 }

@@ -1,16 +1,19 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
+lib.${namespace}.mkModule {
+  inherit config;
 
-with lib;
-with lib.${namespace};
-let
-  cfg = config.${namespace}.system.env;
-in
-{
-  options.${namespace}.system.env = with types; {
-    enable = mkBoolOpt false "Whether or not to set xdg environment variables.";
-  };
+  path = [
+    "system"
+    "env"
+  ];
 
-  config = mkIf cfg.enable {
+  output = {
     environment = {
       sessionVariables = {
         XDG_CACHE_HOME = "$HOME/.cache";

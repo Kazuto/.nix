@@ -1,10 +1,11 @@
-{ options, config, lib, pkgs, namespace, ... }:
-
-with lib;
-with lib.${namespace};
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  namespace, 
+  ... 
+}:
 let
-  cfg = config.${namespace}.desktop.addons.hyprload;
-
   hyprload = stdenv.mkDerivation {
     name = "hyprload";
     src = fetchFromGitHub {
@@ -19,12 +20,16 @@ let
     '';
   };
 in
-{
-  options.${namespace}.desktop.addons.hyprload = with types; {
-    enable = mkBoolOpt false "Whether or not to install hyprload.";
-  };
+lib.${namespace}.mkModule {
+  inherit config;
 
-  config = mkIf cfg.enable {
+  path = [
+    "desktop"
+    "addons"
+    "hyperload"
+  ];
+
+  output = {
     environment.systemPackages = [ hyprload ];
 
     shiro.home.configFile."hypr/hyprload.toml".source = ./hyprload.toml;
