@@ -30,11 +30,11 @@ in
       };
 
       development.tools = {
+        bruno = enabled;
         bun = enabled;
         # ghostty = enabled;
         git = enabled;
         gitkraken = enabled;
-        # insomnia = enabled;
         pocketbase = enabled;
         kitty = enabled;
         phpstorm = enabled;

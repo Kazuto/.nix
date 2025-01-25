@@ -1,3 +1,5 @@
+-- Easily install and manage LSP servers, DAP servers, linters, and formatters.
+-- https://github.com/williamboman/mason.nvim
 local mason = {
 	"williamboman/mason.nvim",
 	dependencies = {
@@ -49,6 +51,8 @@ local mason = {
 	end,
 }
 
+-- Quickstart configs for Nvim LSP
+-- https://github.com/neovim/nvim-lspconfig
 local lspconfig = {
 	"neovim/nvim-lspconfig",
 	dependencies = {
@@ -84,8 +88,10 @@ local lspconfig = {
 	end,
 }
 
+-- Improves the Neovim built-in LSP experience.
+-- https://github.com/nvimdev/lspsaga.nvim
 local lspsaga = {
-	"glepnir/lspsaga.nvim",
+	"nvimdev/lspsaga.nvim",
 	branch = "main",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
@@ -99,10 +105,24 @@ local lspsaga = {
 			definition = {
 				edit = "<CR>",
 			},
-			ui = {
-				colors = {
-					normal_bg = "#022746",
+			outline = {
+				keys = {
+					toggle = "o",
 				},
+				layout = "float",
+			},
+			ui = {
+				border = "rounded",
+				colors = {
+					normal_bg = "#1e222a",
+				},
+			},
+			lightbulb = {
+				enable = true,
+				sign = true,
+				enable_in_insert = true,
+				sign_priority = 20,
+				virtual_text = false,
 			},
 		})
 	end,
