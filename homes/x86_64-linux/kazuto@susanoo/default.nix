@@ -8,10 +8,6 @@ let
   inherit (lib.${namespace}) enabled;
 in
 {
-  imports = [ ./hardware.nix ];
-
-  networking.hostName = "susanoo";
-
   shiro = {
     nix = enabled;
 
@@ -31,31 +27,9 @@ in
       zsh = enabled;
     };
 
-    hardware = {
-      audio = enabled;
-      network = enabled;
-    };
-
-    services = {
-      openssh = enabled;
-      printing = enabled;
-      dbus = enabled;
-    };
-
-    system = {
-      boot = enabled;
-      env = enabled;
-      fonts = enabled;
-      locale = enabled;
-      time = enabled;
-      xkb = enabled;
-    };
-
     tools = {
       git = enabled;
       ghostty = enabled;
     };
   };
-
-  system.stateVersion = "24.11";
 }
