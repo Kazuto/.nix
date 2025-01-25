@@ -19,7 +19,8 @@ in
     networking = enabled;
   };
 
-  console.useXkbConfig = true;
+  # Audio
+  hardware.pulseaudio.enable = false;
 
   environment.systemPackages = with pkgs; [
     pamixer
@@ -29,8 +30,29 @@ in
     wireplumber
   ];
 
-  hardware.pulseaudio.enable = false;
+  services.pipewire = {
+    enable = true;
 
+    alsa.enable = true;
+    alsa.support32Bit = true;
+
+    pulse.enable = true;
+    jack.enable = true;
+
+    wireplumber.enable = true;
+  };
+
+  security.rtkit.enable = true;
+
+  # Input (Keyboard)
+  console.useXkbConfig = true;
+
+  services.xserver = {
+    xkb.layout = "de";
+    # xkbVariant = "mac_nodeadkeys";
+  };
+
+  # Networking
   networking.hostName = "susanoo";
   
   programs.gnupg.agent = {
@@ -38,33 +60,17 @@ in
     enableSSHSupport = true;
   };
 
-  security.rtkit.enable = true;
-
   services = {
     dbus.enable = true;
     gvfs.enable = true;
     openssh.enable = true;
+  };
 
-    pipewire = {
-      enable = true;
-
-      alsa.enable = true;
-      alsa.support32Bit = true;
-
-      pulse.enable = true;
-      jack.enable = true;
-
-      wireplumber.enable = true;
-    };
-    
+  # Printing
+  services = {
     printing = {
       enable = true;
       drivers = [ pkgs.cups-kyodialog ];
-    };
-
-    xserver = {
-      xkb.layout = "de";
-      # xkbVariant = "mac_nodeadkeys";
     };
   };
   
