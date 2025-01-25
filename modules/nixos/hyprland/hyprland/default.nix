@@ -42,7 +42,6 @@ lib.${namespace}.mkModule {
 
     environment.systemPackages = with pkgs; [
       hyprland
-      hyprland-share-picker
       hyprland-protocols
 
       wlroots
@@ -75,26 +74,26 @@ lib.${namespace}.mkModule {
       xwayland.enable = true;
     };
 
-    services.xserver = {
-      enable = true;
+    # Enable touchpad support (enabled default in most desktopManager).
+    services.libinput.enable = true;
+    
+    services.displayManager = {
+      defaultSession = "hyprland";
 
-      displayManager = {
-        defaultSession = "hyprland";
-
-        gdm  = {
-          enable = true;
-          wayland = true;
-        };
-
-        # Enable automatic login for the user.
-        autoLogin = {
-          enable = true;
-          user = config.${namespace}.user.name;
-        };
+      gdm  = {
+        enable = true;
+        wayland = true;
       };
 
-      # Enable touchpad support (enabled default in most desktopManager).
-      libinput.enable = true;
+      # Enable automatic login for the user.
+      autoLogin = {
+        enable = true;
+        user = config.${namespace}.user.name;
+      };
+    };
+
+    services.xserver = {
+      enable = true;
     };
 
     services.gnome = {

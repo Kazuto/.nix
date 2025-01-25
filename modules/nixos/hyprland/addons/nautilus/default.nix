@@ -15,7 +15,7 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs.gnome; [
+    environment.systemPackages = with pkgs; [
       nautilus
       sushi
     ];
