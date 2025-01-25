@@ -63,7 +63,7 @@ in
     };
 
     xserver = {
-      layout = "de";
+      xkb.layout = "de";
       # xkbVariant = "mac_nodeadkeys";
     };
   };
