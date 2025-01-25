@@ -72,10 +72,7 @@ lib.${namespace}.mkModule {
     programs.hyprland = {
       enable = true;
 
-      xwayland = {
-        hidpi = true;
-        enable = true;
-      };
+      xwayland.enable = true;
     };
 
     services.xserver = {
