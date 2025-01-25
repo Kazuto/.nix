@@ -15,6 +15,7 @@ in
     bootloader = enabled;
     environment = enabled;
     fonts = enabled;
+    hyprland = enabled;
     locale = enabled;
     networking = enabled;
   };
