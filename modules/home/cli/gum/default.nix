@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ gum ];
+    home.packages = with pkgs; [ gum ];
   };
 }

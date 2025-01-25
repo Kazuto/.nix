@@ -14,7 +14,7 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ ghostty ];
+    home.packages = with pkgs; [ ghostty ];
   };
 }
 

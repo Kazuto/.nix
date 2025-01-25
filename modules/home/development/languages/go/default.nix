@@ -15,7 +15,7 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs;  [
+    home.packages = with pkgs;  [
       go
       gotools
       golangci-lint

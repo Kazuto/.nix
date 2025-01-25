@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ php81Packages.phpstan ];
+    home.packages = with pkgs; [ php81Packages.phpstan ];
   };
 }

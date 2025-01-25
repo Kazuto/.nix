@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ spotify spicetify-cli ];
+    home.packages = with pkgs; [ spotify spicetify-cli ];
   };
 }

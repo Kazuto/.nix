@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ raycast ];
+    home.packages = with pkgs; [ raycast ];
   };
 }

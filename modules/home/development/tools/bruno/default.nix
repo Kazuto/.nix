@@ -15,6 +15,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ bruno ];
+    home.packages = with pkgs; [ bruno ];
   };
 }

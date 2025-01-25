@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ ripgrep ];
+    home.packages = with pkgs; [ ripgrep ];
   };
 }

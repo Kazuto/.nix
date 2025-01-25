@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ wget ];
+    home.packages = with pkgs; [ wget ];
   };
 }

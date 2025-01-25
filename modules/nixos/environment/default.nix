@@ -22,6 +22,10 @@ lib.${namespace}.mkModule {
         # To prevent firefox from creating ~/Desktop.
         XDG_DESKTOP_DIR = "$HOME";
       };
+
+      variables = {
+        EDITOR = "nvim";
+      }; 
     };
   };
 }

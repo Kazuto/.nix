@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ qemu-kvm virt-manager ];
+    home.packages = with pkgs; [ qemu-kvm virt-manager ];
   };
 }

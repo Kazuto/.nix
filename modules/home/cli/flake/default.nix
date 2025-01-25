@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ snowfallorg.flake ];
+    home.packages = with pkgs; [ snowfallorg.flake ];
   };
 }

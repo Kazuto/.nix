@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ steam ];
+    home.packages = with pkgs; [ steam ];
   };
 }

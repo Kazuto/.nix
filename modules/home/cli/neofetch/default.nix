@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ neofetch ];
+    home.packages = with pkgs; [ neofetch ];
   };
 }

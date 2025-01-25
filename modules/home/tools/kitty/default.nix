@@ -13,10 +13,12 @@ lib.${namespace}.mkModule {
     "kitty"
   ];
 
-  output = {
-    environment.systemPackages = with pkgs; [ kitty ];
+  extraOptions = {
+    home.configFile."kitty/kitty.conf".source = ./kitty.conf;
+  };
 
-    config.${namespace}.home.configFile."kitty/kitty.conf".source = ./kitty.conf;
+  output = {
+    home.packages = with pkgs; [ kitty ];
   };
 }
 

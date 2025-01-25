@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ firefox ];
+    home.packages = with pkgs; [ firefox ];
   };
 }

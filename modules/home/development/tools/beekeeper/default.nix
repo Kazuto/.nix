@@ -15,7 +15,7 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ beekeeper-studio ];
+    home.packages = with pkgs; [ beekeeper-studio ];
   };
 }
 

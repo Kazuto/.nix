@@ -11,6 +11,7 @@ in
   imports = [ ./hardware.nix ];
 
   ${namespace} = {
+    home = enabled;
     bootloader = enabled;
     environment = enabled;
     fonts = enabled;

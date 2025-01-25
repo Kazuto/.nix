@@ -15,7 +15,7 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ gitkraken ];
+    home.packages = with pkgs; [ gitkraken ];
   };
 }
 

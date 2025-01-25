@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ ngrok ];
+    home.packages = with pkgs; [ ngrok ];
   };
 }

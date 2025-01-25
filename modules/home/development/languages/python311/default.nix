@@ -15,7 +15,7 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs;  [
+    home.packages = with pkgs;  [
       (python311Full.withPackages(p: with p; [
         pygobject3 gst-python
       ]))

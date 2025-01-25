@@ -15,7 +15,7 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs;  [
+    home.packages = with pkgs;  [
       (php.buildEnv {
         extensions = ({ enabled, all }: enabled ++ (with all; [
            gd imagick opcache pcov redis xdebug

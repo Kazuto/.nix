@@ -15,7 +15,7 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ vscode ];
+    home.packages = with pkgs; [ vscode ];
   };
 }
 

@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ bitwarden ];
+    home.packages = with pkgs; [ bitwarden ];
   };
 }

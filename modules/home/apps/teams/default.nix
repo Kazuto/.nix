@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ teams ];
+    home.packages = with pkgs; [ teams ];
   };
 }

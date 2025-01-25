@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ skeema ];
+    home.packages = with pkgs; [ skeema ];
   };
 }

@@ -13,9 +13,11 @@ lib.${namespace}.mkModule {
     "tmux"
   ];
 
-  output = {
-    environment.systemPackages = with pkgs; [ tmux ];
+  extraOptions = {
+    home.configFile."tmux/tmux.conf".source = ./tmux.conf;
+  };
 
-    config.${namespace}.home.configFile."tmux/tmux.conf".source = ./tmux.conf;
+  output = {
+    home.packages = with pkgs; [ tmux ];
   };
 }

@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ zoxide ];
+    home.packages = with pkgs; [ zoxide ];
   };
 }

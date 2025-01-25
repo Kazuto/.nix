@@ -15,7 +15,7 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ dbeaver ];
+    home.packages = with pkgs; [ dbeaver ];
   };
 }
 

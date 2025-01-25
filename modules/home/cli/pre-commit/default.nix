@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ pre-commit ];
+    home.packages = with pkgs; [ pre-commit ];
   };
 }

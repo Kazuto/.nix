@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ prismlauncher ];
+    home.packages = with pkgs; [ prismlauncher ];
   };
 }

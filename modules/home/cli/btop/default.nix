@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ btop ];
+    home.packages = with pkgs; [ btop ];
   };
 }

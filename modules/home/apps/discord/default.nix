@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ discord ];
+    home.packages = with pkgs; [ discord ];
   };
 }

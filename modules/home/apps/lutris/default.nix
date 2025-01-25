@@ -14,7 +14,7 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [
+    home.packages = with pkgs; [
       lutris
 
       # Needed for some installers like League of Legends

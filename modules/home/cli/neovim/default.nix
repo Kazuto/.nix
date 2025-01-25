@@ -16,33 +16,27 @@ lib.${namespace}.mkModule {
     "neovim"
   ];
 
+  extraOptions = {
+    programs.neovim = {
+      enable = true;
+
+      viAlias = true;
+      vimAlias = true;
+    };
+
+    programs.fzf.enable = true;
+
+    # programs.zsh.shellAliases.vim = "nvim";
+    # programs.bash.shellAliases.vim = "nvim";
+  };
+
   output = {
-    environment.variables = {
-      EDITOR = "nvim";
-    };
-
-    config.${namespace}.home.extraOptions = {
-      programs.neovim = {
-        enable = true;
-
-        viAlias = true;
-        vimAlias = true;
-      };
-
-      programs.fzf.enable = true;
-
-      # programs.zsh.shellAliases.vim = "nvim";
-      # programs.bash.shellAliases.vim = "nvim";
-    };
-
     shiro = {
       development.languages.nodejs20 = enabled;
       cli.ripgrep = enabled;
     };
 
-    environment.systemPackages = with pkgs; [
-      neovim
-
+    home.packages = with pkgs; [
       ctags
       codespell
       editorconfig-checker

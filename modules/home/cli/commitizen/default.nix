@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ commitizen ];
+    home.packages = with pkgs; [ commitizen ];
   };
 }

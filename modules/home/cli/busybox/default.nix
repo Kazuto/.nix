@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ busybox ];
+    home.packages = with pkgs; [ busybox ];
   };
 }

@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ vlc ];
+    home.packages = with pkgs; [ vlc ];
   };
 }

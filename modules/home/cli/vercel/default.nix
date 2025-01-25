@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ nodePackages.vercel ];
+    home.packages = with pkgs; [ nodePackages.vercel ];
   };
 }

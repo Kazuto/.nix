@@ -15,7 +15,7 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ insomnia ];
+    home.packages = with pkgs; [ insomnia ];
   };
 }
 

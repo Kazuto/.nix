@@ -14,6 +14,6 @@ lib.${namespace}.mkModule {
   ];
 
   output = {
-    environment.systemPackages = with pkgs; [ supabase-cli ];
+    home.packages = with pkgs; [ supabase-cli ];
   };
 }
