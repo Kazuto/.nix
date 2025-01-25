@@ -12,7 +12,6 @@ lib.${namespace}.mkModule {
   inherit config;
 
   path = [
-    "desktop"
     "hyprland"
   ];
 
