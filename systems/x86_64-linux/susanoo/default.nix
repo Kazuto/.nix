@@ -52,6 +52,9 @@ in
     # xkbVariant = "mac_nodeadkeys";
   };
 
+  # Locale and Time
+  time.timeZone = "Europe/Berlin";
+
   # Networking
   networking.hostName = "susanoo";
   
@@ -74,8 +77,5 @@ in
     };
   };
   
-
   system.stateVersion = "24.11";
-
-  time.timeZone = "Europe/Berlin";
 }
