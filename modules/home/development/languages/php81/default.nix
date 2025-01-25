@@ -18,7 +18,7 @@ lib.${namespace}.mkModule {
     environment.systemPackages = with pkgs;  [
       (php.buildEnv {
         extensions = ({ enabled, all }: enabled ++ (with all; [
-          xdebug imagick
+           gd imagick opcache pcov redis xdebug
         ]));
         extraConfig = ''
           memory_limit = 8G
@@ -27,8 +27,11 @@ lib.${namespace}.mkModule {
         '';
       })
 
-      php81Packages.composer
+      imagemagick
       php81Extensions.imagick
+
+      php81Packages.composer
+      blade-formatter
     ];
   };
 }

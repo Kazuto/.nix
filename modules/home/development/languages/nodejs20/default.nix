@@ -21,7 +21,6 @@ lib.${namespace}.mkModule {
       nodePackages.postcss
       nodePackages.vercel
       vscode-extensions.vue.volar
-      nodePackages.yarn
     ];
   };
 }
