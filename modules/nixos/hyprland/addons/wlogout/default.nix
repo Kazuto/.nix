@@ -14,15 +14,11 @@ lib.${namespace}.mkModule {
     "wlogout"
   ];
 
-  output = with config.${namespace}.user; {
-    users = { 
-      users.${name} = {
-        home = {
-          configFile."wlogout".source = ./config;
-        };
-      };
-    };
+  extraOptions = {
+    home.configFile."wlogout".source = ./config;
+  };
 
+  output = with config.${namespace}.user; {
     environment.systemPackages = with pkgs; [ wlogout ];
   };
 }

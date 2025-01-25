@@ -14,15 +14,11 @@ lib.${namespace}.mkModule {
     "waybar"
   ];
 
-  output = with config.${namespace}.user; {
-    users = { 
-      users.${name} = {
-        home = {
-          configFile."waybar".source = ./config;
-        };
-      };
-    };
+  extraOptions = {
+    home.configFile."waybar".source = ./config;
+  };
 
+  output = with config.${namespace}.user; {
     environment.systemPackages = with pkgs; [ playerctl inotify-tools];
 
     programs.waybar = {

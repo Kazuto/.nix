@@ -14,7 +14,7 @@ lib.${namespace}.mkModule {
     "gtk"
   ];
 
-  output = with config.${namespace}.user; {
+  extraOptions = with config.${namespace}.user; {
     users = { 
       users.${name} = {
         extraOptions = {
@@ -49,7 +49,9 @@ lib.${namespace}.mkModule {
         };
       };
     };
+  };
 
+  output = with config.${namespace}.user; {
     programs.dconf.enable = true;
 
     environment.systemPackages = with pkgs; [

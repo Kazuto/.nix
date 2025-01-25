@@ -14,15 +14,11 @@ lib.${namespace}.mkModule {
     "rofi"
   ];
 
+  extraOptions = {
+    home.configFile."rofi/themes".source = ./themes;
+  };
+
   output = with config.${namespace}.user; {
-    users = { 
-      users.${name} = {
-        home = {
-          configFile."rofi/themes".source = ./themes;
-        };
-      };
-    };
-    
     environment.systemPackages = with pkgs; [ rofi-wayland ];
   };
 }

@@ -14,15 +14,12 @@ lib.${namespace}.mkModule {
     "hyprpaper"
   ];
 
-  output = with config.${namespace}.user; {
-    users = { 
-      users.${name} = {
-        home = {
-          configFile."hypr/hyprpaper.conf".source = ./hyprpaper.conf;
-          configFile."hypr/wallpaper".source = ./wallpaper;        };
-      };
-    };
+  extraOptions = {
+    home.configFile."hypr/hyprpaper.conf".source = ./hyprpaper.conf;
+    home.configFile."hypr/wallpaper".source = ./wallpaper;      
+  };
 
+  output = with config.${namespace}.user; {
     environment.systemPackages = with pkgs; [ hyprpaper ];
   };
 }
