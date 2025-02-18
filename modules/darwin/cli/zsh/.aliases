@@ -152,5 +152,10 @@ function nix:update {
   fi
 }
 
+# ======== NPM ======== #
+alias nr="npm run"
+alias nrd="npm run dev"
+alias nrs="npm run storybook"
+
 # ======== DOCKER ======== #
 alias dcu="docker-compose up -d --force-recreate --remove-orphans"
