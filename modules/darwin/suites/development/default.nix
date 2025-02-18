@@ -30,7 +30,6 @@ in
       };
 
       development.tools = {
-        bruno = enabled;
         bun = enabled;
         # ghostty = enabled;
         git = enabled;
