@@ -13,4 +13,15 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("kazuto.plugins")
+require("lazy").setup({
+	{ import = "kazuto.plugins" },
+}, {
+	checker = {
+		enabled = true,
+		notify = false,
+	},
+	change_detection = {
+		enabled = true,
+		notify = false,
+	},
+})

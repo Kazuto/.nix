@@ -38,30 +38,26 @@ local function keymaps(client, bufnr)
 		vim.keymap.set(mode, keys, func, { noremap = true, silent = true, buffer = bufnr, desc = desc })
 	end
 
-	-- Mappings.
-	map({ "n" }, "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", "[G]o [D]efinition")
-
-	-- Set up Telescope-specific keymaps
-	map({ "n" }, "<leader>li", ":Telescope lsp_implementations<CR>", "[L]ist [I]mplementation")
-	map({ "n" }, "<leader>lr", ":Telescope lsp_references<CR>", "[L]ist [R]eferences")
+	map({ "n" }, "gD", vim.lsp.buf.declaration, "[G]o [D]efinition")
+	map({ "n" }, "gd", ":Telescope lsp_definitions<CR>", "[L]ist [D]efinitions")
+	map({ "n" }, "gR", ":Telescope lsp_references<CR>", "[L]ist [R]eferences")
+	map({ "n" }, "gi", ":Telescope lsp_implementations<CR>", "[L]ist [I]mplementation")
+	map({ "n" }, "gt", ":Telescope lsp_type_definitions<CR>", "[L]ist [T]ype Definition")
 	map({ "n" }, "gs", ":Telescope git_status<CR>", "[G]it [S]tatus")
 
-	-- Set up LSPSaga-specific keymaps
-	map({ "n" }, "<leader>lr", "<cmd>Lspsaga rename<CR>", "[R]ename")
-	map({ "n" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>", "[C]ode [A]ctions")
-	map({ "n" }, "K", "<cmd>Lspsaga hover_doc<CR>", "[H]over documentation")
+	map({ "n" }, "K", vim.lsp.buf.hover, "Show documentation")
+	-- map({ "n" }, "K", ":Lspsaga hover_doc<CR>", "Show documentation")
 
-	map({ "n" }, "<leader>lD", "<cmd>Lspsaga show_line_diagnostics<CR>", "[D]iagnostics for line")
-	map({ "n" }, "<leader>ld", "<cmd>Lspsaga show_cursor_diagnostics<CR>", "[D]iagnostics for cursor")
-	map({ "n" }, "<leader>lp", "<cmd>Lspsaga peek_definition<CR>", "[P]eek [d]efinition")
-	map({ "n" }, "<leader>lo", "<cmd>Lspsaga outline<CR>", "[O]utline")
+	map({ "n" }, "<leader>D", ":Telescope diagnostics bufnr=0<CR>", "[D]iagnostics for file")
+	map({ "n" }, "<leader>d", vim.diagnostic.open_float, "[D]iagnostics for line")
 
-	-- map("[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", "Previous diagnostic in buffer")
-	-- map("]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", "Next diagnostic in buffer")
+	map({ "n" }, "<leader>rn", vim.lsp.buf.rename, "[R]ename")
+	map({ "n" }, "<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ctions")
 
-	if client.name == "tsserver" then
-		map("<leader>rf", ":TypescriptRenameFile<CR>", "[R]ename [File] Typescript")
-	end
+	map({ "n" }, "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", "Previous diagnostic in buffer")
+	map({ "n" }, "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", "Next diagnostic in buffer")
+
+	map({ "n" }, "<leader>rs", ":LspRestart<CR>", "[R]estart LSP [S]erver")
 end
 
 M.on_attach = function(client, bufnr)

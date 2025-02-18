@@ -12,6 +12,16 @@ return {
 			api.nvim_set_hl(0, "IndentBlanklineChar", {
 				fg = api.nvim_get_hl(0, { name = "LineNr" }).fg,
 			})
+
+			local mocha = require("catppuccin.palettes").get_palette("mocha")
+
+			api.nvim_set_hl(0, "RainbowRed", { fg = mocha.red })
+			api.nvim_set_hl(0, "RainbowYellow", { fg = mocha.yellow })
+			api.nvim_set_hl(0, "RainbowBlue", { fg = mocha.blue })
+			api.nvim_set_hl(0, "RainbowOrange", { fg = mocha.peach })
+			api.nvim_set_hl(0, "RainbowGreen", { fg = mocha.green })
+			api.nvim_set_hl(0, "RainbowViolet", { fg = mocha.mauve })
+			api.nvim_set_hl(0, "RainbowCyan", { fg = mocha.sky })
 		end,
 	},
 	{
@@ -36,56 +46,60 @@ return {
 	{
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = {
-			signs = true,
-			sign_priority = 8,
-			keywords = {
-				FIX = {
-					icon = " ",
-					color = "error",
-					alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
+		config = function()
+			local todo = require("todo-comments")
+
+			todo.setup({
+				signs = true,
+				sign_priority = 8,
+				keywords = {
+					FIX = {
+						icon = " ",
+						color = "error",
+						alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
+					},
+					HACK = { icon = " ", color = "warning" },
+					WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+					TODO = { icon = " ", color = "info" },
+					NOTE = { icon = " ", color = "hint" },
 				},
-				HACK = { icon = " ", color = "warning" },
-				WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-				TODO = { icon = " ", color = "info" },
-				NOTE = { icon = " ", color = "hint" },
-			},
-			gui_style = {
-				fg = "NONE",
-				bg = "BOLD",
-			},
-			merge_keywords = true,
-			highlight = {
-				multiline = true,
-				multiline_pattern = "^.",
-				multiline_context = 10,
-				before = "fg",
-				keyword = "wide",
-				after = "fg",
-				pattern = [[.*<(KEYWORDS)\s*:]],
-				comments_only = true,
-				max_line_len = 400,
-				exclude = {},
-			},
-			colors = {
-				error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
-				warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
-				info = { "DiagnosticInfo", "#2563EB" },
-				hint = { "DiagnosticHint", "#10B981" },
-				default = { "Identifier", "#7C3AED" },
-				test = { "Identifier", "#FF00FF" },
-			},
-			search = {
-				command = "rg",
-				args = {
-					"--color=never",
-					"--no-heading",
-					"--with-filename",
-					"--line-number",
-					"--column",
+				gui_style = {
+					fg = "NONE",
+					bg = "BOLD",
 				},
-				pattern = [[\b(KEYWORDS):]],
-			},
-		},
+				merge_keywords = true,
+				highlight = {
+					multiline = true,
+					multiline_pattern = "^.",
+					multiline_context = 10,
+					before = "fg",
+					keyword = "wide",
+					after = "fg",
+					pattern = [[.*<(KEYWORDS)\s*:]],
+					comments_only = true,
+					max_line_len = 400,
+					exclude = {},
+				},
+				colors = {
+					error = { "DiagnosticError", "ErrorMsg", "#f38ba8" },
+					warning = { "DiagnosticWarn", "WarningMsg", "#fab387" },
+					info = { "DiagnosticInfo", "#89b4fa" },
+					hint = { "DiagnosticHint", "#a6e3a1" },
+					default = { "Identifier", "#cba6f7" },
+					test = { "Identifier", "#f5c2e7" },
+				},
+				search = {
+					command = "rg",
+					args = {
+						"--color=never",
+						"--no-heading",
+						"--with-filename",
+						"--line-number",
+						"--column",
+					},
+					pattern = [[\b(KEYWORDS):]],
+				},
+			})
+		end,
 	},
 }

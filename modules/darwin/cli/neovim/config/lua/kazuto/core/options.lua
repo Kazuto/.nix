@@ -54,12 +54,12 @@ opt.splitbelow = true -- split new window below
 opt.confirm = true -- ask for confirmation
 
 -- CLIPBOARD
--- opt.clipboard:append("unnamedplus") -- use system clipboard
+opt.clipboard:append("unnamedplus") -- use system clipboard
 
 -- LISTCHARS
 opt.list = true -- enable listchars
 opt.listchars = {
-	tab = "▸ ",
+	tab = "┊ ",
 	trail = "·",
 	nbsp = "⎵",
 	-- eol = '↲',

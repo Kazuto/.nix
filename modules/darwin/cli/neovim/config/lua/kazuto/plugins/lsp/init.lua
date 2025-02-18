@@ -43,7 +43,7 @@ local mason = {
 
 		mason_tool_installer.setup({
 			ensure_installed = {
-				"prettier",
+				"prettierd",
 				"stylua",
 				"eslint_d",
 			},
@@ -103,7 +103,12 @@ local lspsaga = {
 			scroll_preview = { scroll_down = "<C-f>", scroll_up = "<C-b>" },
 			-- use enter to open file with definition preview
 			definition = {
-				edit = "<CR>",
+				width = 0.4,
+				height = 0.6,
+			},
+			hover = {
+				max_width = 0.4,
+				max_height = 0.6,
 			},
 			outline = {
 				keys = {

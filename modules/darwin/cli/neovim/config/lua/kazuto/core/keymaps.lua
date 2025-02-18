@@ -14,7 +14,6 @@ function Map(mode, lhs, rhs, opts)
 end
 
 -- general
--- Map("n", "<leader>gs", vim.cmd.Git, { desc = "[Git] [S]tatus" })
 Map("n", "<C-s>", vim.cmd.w, { desc = "[S]ave file" })
 
 -- When text is wrapped, move by terminal rows, not lines, unless a count is provided
@@ -48,17 +47,12 @@ Map("n", "<C-Left>", ":vertical resize -2<CR>")
 Map("n", "<C-Right>", ":vertical resize +2<CR>")
 
 -- move text up and down
--- Map('i', '<A-j>', '<Esc>:m .+1<CR>==gi')
--- Map('i', '<A-k>', '<Esc>:m .-2<CR>==gi')
--- Map('n', '<A-j>', ':m .+1<CR>==')
--- Map('n', '<A-k>', ':m .-2<CR>==')
--- Map('v', '<A-j>', ":m '>+1<CR>gv=gv")
--- Map('v', '<A-k>', ":m '<-2<CR>gv=gv")
+-- Map("i", "<M-j>", "<Esc>:m .+1<CR>==gi")
+-- Map("i", "<M-k>", "<Esc>:m .-2<CR>==gi")
+-- Map("n", "<M-j>", ":m .+1<CR>==")
+-- Map("n", "<M-k>", ":m .-2<CR>==")
+-- Map("v", "<M-j>", ":m '>+1<CR>gv=gv")
+-- Map("v", "<M-k>", ":m '<-2<CR>gv=gv")
 
-Map("v", "<J>", ":m '>+1<CR>gv=gv")
-Map("v", "<K>", ":m '<-2<CR>gv=gv")
-
--- bufferline
-Map("n", "<Tab>", ":BufferLineCycleNext<CR>", { desc = "Next Buffer" })
-Map("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
-Map("n", "<C-x>", ":BufferKill<CR>", { desc = "Close Buffer" })
+-- Map("v", "<J>", ":m '>+1<CR>gv=gv")
+-- Map("v", "<K>", ":m '<-2<CR>gv=gv")

@@ -41,6 +41,7 @@ in
       fd
       gopls
       languagetool
+      lazygit
       lua-language-server
       phpactor
       ripgrep
