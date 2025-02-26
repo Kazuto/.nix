@@ -61,28 +61,28 @@ function pat() {
   art test -d memory_limit=6144M "$args"
 }
 
-function flaky() {
-  runs=1
-  output=""
-
-  failed=false
-
-  while [ "$failed" != "true" ]
-  do
-    output=$(php artisan test -d memory_limit=6144M --filter="$1")
-
-    if "$output" 2>&1 | grep -q -wi "FAIL"
-    then
-      failed=true
-    fi
-
-    $failed && echo -e "\033[0;31m\033[0;37m Run $runs failed" || echo -e "\033[0;32m\033[0;37m Run $runs passed"
-
-    ((runs++))
-  done
-
-  echo "$output"
-}
+# function flaky() {
+#   runs=1
+#   output=""
+#
+#   failed=false
+#
+#   while [ "$failed" != "true" ]
+#   do
+#     output=$(php artisan test -d memory_limit=6144M --filter="$1")
+#
+#     if "$output" 2>&1 | grep -q -wi "FAIL"
+#     then
+#       failed=true
+#     fi
+#
+#     $failed && echo -e "\033[0;31m\033[0;37m Run $runs failed" || echo -e "\033[0;32m\033[0;37m Run $runs passed"
+#
+#     ((runs++))
+#   done
+#
+#   echo "$output"
+# }
 
 # ======== COMPOSER ======== #
 alias pix="vendor/bin/pint"
