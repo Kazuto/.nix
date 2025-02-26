@@ -1,24 +1,66 @@
 -- A blazing fast and easy to configure Neovim statusline written in Lua.
 -- https://github.com/nvim-lualine/lualine.nvim
+
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
 		"arkav/lualine-lsp-progress",
 		"nvim-tree/nvim-web-devicons",
+		"catppuccin/nvim",
 	},
 	config = function()
+		local mocha = require("catppuccin.palettes").get_palette("mocha")
+		vim.opt.laststatus = 0
+
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
-				section_separators = "",
-				component_separators = "",
-				globalstatus = true,
+				component_separators = { left = "|", right = "|" },
+				section_separators = { left = "", right = "" },
 				theme = {
 					normal = {
-						a = "StatusLine",
-						b = "StatusLine",
-						c = "StatusLine",
+						a = { bg = mocha.base, fg = mocha.text, gui = "bold" },
+						b = { bg = mocha.base, fg = mocha.text },
+						c = { bg = mocha.base, fg = mocha.text },
 					},
+					insert = {
+						a = { bg = mocha.blue, fg = mocha.base, gui = "bold" },
+						b = { bg = mocha.base, fg = mocha.text },
+						c = { bg = mocha.base, fg = mocha.text },
+					},
+					visual = {
+						a = { bg = mocha.peach, fg = mocha.base, gui = "bold" },
+						b = { bg = mocha.base, fg = mocha.text },
+						c = { bg = mocha.base, fg = mocha.text },
+					},
+					replace = {
+						a = { bg = mocha.red, fg = mocha.base, gui = "bold" },
+						b = { bg = mocha.base, fg = mocha.text },
+						c = { bg = mocha.base, fg = mocha.text },
+					},
+					command = {
+						a = { bg = mocha.green, fg = mocha.base, gui = "bold" },
+						b = { bg = mocha.base, fg = mocha.text },
+						c = { bg = mocha.base, fg = mocha.text },
+					},
+					inactive = {
+						a = { bg = mocha.base, fg = mocha.text, gui = "bold" },
+						b = { bg = mocha.base, fg = mocha.text },
+						c = { bg = mocha.base, fg = mocha.text },
+					},
+				},
+				disabled_filetypes = {
+					statusline = {},
+					winbar = {},
+				},
+				ignore_focus = {},
+				always_divide_middle = true,
+				always_show_tabline = true,
+				globalstatus = false,
+				refresh = {
+					statusline = 100,
+					tabline = 100,
+					winbar = 100,
 				},
 			},
 			sections = {
