@@ -123,7 +123,7 @@ local lspsaga = {
 				},
 			},
 			lightbulb = {
-				enable = true,
+				enable = false,
 				sign = true,
 				enable_in_insert = true,
 				sign_priority = 20,

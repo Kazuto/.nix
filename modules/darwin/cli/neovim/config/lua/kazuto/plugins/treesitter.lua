@@ -9,7 +9,13 @@ return {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"windwp/nvim-ts-autotag",
 	},
-	config = function()
+	config = function(_, opts)
+		vim.filetype.add({
+			pattern = {
+				[".*%.blade%.php"] = "blade",
+			},
+		})
+
 		local treesitter = require("nvim-treesitter.configs")
 
 		vim.g.skip_ts_context_commentstring_module = true
@@ -35,6 +41,7 @@ return {
 			-- A list of parser names, or "all" (the five listed parsers should always be installed)
 			ensure_installed = {
 				"bash",
+				"blade",
 				"css",
 				"dockerfile",
 				"go",
@@ -75,5 +82,15 @@ return {
 			-- Recommendation: set to false if you don"t have `tree-sitter` CLI installed locally
 			auto_install = true,
 		})
+
+		local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+		parser_config.blade = {
+			install_info = {
+				url = "https://github.com/EmranMR/tree-sitter-blade",
+				files = { "src/parser.c" },
+				branch = "main",
+			},
+			filetype = "blade",
+		}
 	end,
 }

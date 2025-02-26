@@ -8,6 +8,7 @@ return {
 		"MunifTanjim/nui.nvim",
 		"nvimtools/none-ls.nvim",
 		"kevinhwang91/promise-async",
+		"nvim-treesitter/nvim-treesitter",
 	},
 	cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
 	keys = {
@@ -21,12 +22,9 @@ return {
 				require("laravel.tinker").send_to_tinker()
 			end,
 			mode = "v",
-			desc = "Laravel Application Routes",
+			desc = "Laravel Tinker",
 		},
 	},
 	event = { "VeryLazy" },
-	config = function()
-		require("laravel").setup()
-		-- require("telescope").load_extension("laravel")
-	end,
+	config = true,
 }
