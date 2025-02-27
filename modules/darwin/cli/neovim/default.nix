@@ -39,6 +39,7 @@ in
       codespell
       editorconfig-checker
       fd
+      fzf
       gopls
       languagetool
       lazygit
