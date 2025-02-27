@@ -11,7 +11,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ spacebar ];
+    environment.systemPackages = with pkgs; [ spacebar nowplaying-cli ];
 
     shiro.home = {
       file = {
