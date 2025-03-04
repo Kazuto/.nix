@@ -13,15 +13,6 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ spacebar nowplaying-cli ];
 
-    shiro.home = {
-      file = {
-        "$HOME/.config/spacebar/scripts/center.sh" = {
-          source = ./scripts/center.sh;
-          executable = true;
-        };
-      };
-    };
-
     services.spacebar = {
       enable = true;
       package = pkgs.spacebar;
@@ -48,7 +39,7 @@ in
         clock_icon_color           = "0xffb4befe";
         power_icon_strip           = "󰗶 󱐋";
         space_icon                 = "";
-        space_icon_strip           = "󰖟  󰊤 󰆼 󱂛    󰓇";
+        space_icon_strip           = "󰖟  󰆼 󱂛     󰓇";
         spaces_for_all_displays    = "off";
         display_separator          = "off";
         display_separator_icon     = "";

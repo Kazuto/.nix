@@ -26,23 +26,6 @@ in
     programs.zsh.enable = true;
 
     shiro.home = {
-      file = {
-        ".p10k.zsh" = {
-          source = ./.p10k.zsh;
-          executable = true;
-        };
-
-        ".aliases" = {
-          source = ./.aliases;
-          executable = false;
-        };
-
-        ".functions" = {
-          source = ./.functions;
-          executable = false;
-        };
-      };
-
       extraOptions = {
         programs.fzf = {
           enable = true;
@@ -62,9 +45,9 @@ in
           };
 
           initExtra = ''
-            [[ ! -f ~/.aliases ]] || source ~/.aliases
-            [[ ! -f ~/.functions ]] || source ~/.functions
-            [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+            # [[ ! -f ~/.aliases ]] || source ~/.aliases
+            # [[ ! -f ~/.functions ]] || source ~/.functions
+            # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
           '';
 
           zplug = {

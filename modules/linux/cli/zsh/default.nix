@@ -27,18 +27,6 @@ in
     programs.zsh.enable = true;
 
     shiro.home = {
-      file = {
-        ".p10k.zsh" = {
-          source = ./.p10k.zsh;
-          executable = true;
-        };
-
-        ".aliases" = {
-          source = ./.aliases;
-          executable = false;
-        };
-      };
-
       extraOptions = {
         programs.fzf = {
           enable = true;

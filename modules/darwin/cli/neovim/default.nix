@@ -49,6 +49,7 @@ in
       shellcheck
       stylua
       tree-sitter
+      silicon
 
       nodePackages.bash-language-server
       nodePackages.diagnostic-languageserver
