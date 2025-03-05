@@ -21,7 +21,7 @@ in
         layout = "bsp";
         window_placement = "second_child";
 
-        external_bar = "main:26:0";
+        external_bar = "main:42:0";
         top_padding = padding;
         right_padding = padding;
         bottom_padding = padding;

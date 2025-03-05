@@ -15,7 +15,8 @@ in
       tools = {
         yabai = enabled;
         skhd = enabled;
-        spacebar = enabled;
+        # spacebar = enabled;
+        sketchybar = enabled;
       };
     };
   };

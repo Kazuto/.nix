@@ -2,7 +2,7 @@
 
 function icon_map() {
   case "$1" in
-  "Alacritty" | "Hyper" | "iTerm2" | "kitty" | "Terminal" | "终端" | "WezTerm" | "Ghostty")
+  "Alacritty" | "Hyper" | "iTerm2" | "Terminal" | "终端" | "WezTerm")
     icon_result=":terminal:"
     ;;
   "App Store")
@@ -29,6 +29,12 @@ function icon_map() {
   "Firefox")
     icon_result=":firefox:"
     ;;
+  "Ghostty")
+    icon_result=":ghostty:"
+    ;;
+  "kitty")
+    icon_result=":kitty:"
+    ;;
   "Mail" | "Mailspring")
     icon_result=":mail:"
     ;;
@@ -38,8 +44,14 @@ function icon_map() {
   "Neovide" | "MacVim" | "Vim" | "VimR")
     icon_result=":vim:"
     ;;
+  "Neovim" | "neovim" | "nvim")
+    icon_result=":neovim:"
+    ;;
   "Obsidian")
     icon_result=":obsidian:"
+    ;;
+  "OBS")
+    icon_result=":obsstudio:"
     ;;
   "Safari")
     icon_result=":safari:"
@@ -59,7 +71,7 @@ function icon_map() {
   "VLC")
     icon_result=":vlc:"
     ;;
-  "WhatsApp")
+  "WhatsApp" | "‎WhatsApp")
     icon_result=":whats_app:"
     ;;
   *)

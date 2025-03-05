@@ -4,21 +4,22 @@ SPACE_SIDS=(1 2 3 4 5 6 7 8 9)
 
 for sid in "${SPACE_SIDS[@]}"
 do
-  sketchybar --add space space.$sid left                                 \
-             --set space.$sid space=$sid                                 \
-                              icon=$sid                                  \
+  sketchybar --add space space.$sid left \
+             --set space.$sid space=$sid \
+                              icon=$sid \
                               label.font="sketchybar-app-font:Regular:16.0" \
-                              icon.padding_left=10                     \
-                              label.padding_right=20                     \
-                              label.y_offset=-1                          \
+                              icon.padding_left=10 \
+                              label.padding_right=20 \
+                              label.y_offset=-1 \
                               script="$PLUGIN_DIR/space.sh"
 done
 
-sketchybar --add item space_separator left                             \
-           --set space_separator icon="􀆊"                                \
-                                 icon.color=$ITEM_TEXT_COLOR \
-                                 icon.padding_left=4                   \
-                                 label.drawing=off                     \
-                                 background.drawing=off                \
+sketchybar --add item space_separator left \
+           --set space_separator icon="􀆊" \
+                                 icon.color=$CAT_TEXT \
+                                 icon.padding_left=2 \
+                                 icon.padding_right=2 \
+                                 label.drawing=off \
+                                 background.drawing=off \
                                  script="$PLUGIN_DIR/space_windows.sh" \
            --subscribe space_separator space_windows_change
