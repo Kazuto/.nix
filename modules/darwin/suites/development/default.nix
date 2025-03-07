@@ -23,6 +23,7 @@ in
         ngrok = enabled;
         phpstan = enabled;
         supabase = enabled;
+        tmux = enabled;
         trash = enabled;
         vercel = enabled;
         zoxide = enabled;
