@@ -13,8 +13,9 @@ in
   config = mkIf cfg.enable {
     shiro = {
       tools = {
-        yabai = enabled;
-        skhd = enabled;
+        aerospace = enabled;
+        # yabai = enabled;
+        # skhd = enabled;
         # spacebar = enabled;
         sketchybar = enabled;
       };
