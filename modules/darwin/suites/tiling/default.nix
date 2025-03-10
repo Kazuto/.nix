@@ -14,9 +14,6 @@ in
     shiro = {
       tools = {
         aerospace = enabled;
-        # yabai = enabled;
-        # skhd = enabled;
-        # spacebar = enabled;
         sketchybar = enabled;
       };
     };

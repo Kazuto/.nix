@@ -5,6 +5,10 @@ source "$CONFIG_DIR/colors.sh"
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 ITEM_DIR="$CONFIG_DIR/items"
 
+
+AEROSPACE_FOCUSED_MONITOR_NO=$(aerospace list-workspaces --focused)
+AEROSPACE_LIST_OF_WINDOWS_IN_FOCUSED_MONITOR=$(aerospace list-windows --workspace $AEROSPACE_FOCUSED_MONITOR_NO | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
+
 sketchybar --bar height=42 \
                  display=main \
                  blur_radius=0 \
@@ -36,5 +40,7 @@ source $ITEM_DIR/calendar.sh
 # source $ITEM_DIR/volume.sh
 # source $ITEM_DIR/battery.sh
 source $ITEM_DIR/cpu.sh
+
+sketchybar --hotload on
 
 sketchybar --update

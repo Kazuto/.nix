@@ -13,7 +13,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ aerospace];
+    environment.systemPackages = with pkgs; [ aerospace ];
 
     services.jankyborders = {
       enable = true;
@@ -21,11 +21,6 @@ in
 
       active_color = "0xFFFAB387";
       width = 8.0;
-    };
-
-    services.aerospace = {
-      # enable = true;
-      package = pkgs.aerospace;
     };
   };
 }
