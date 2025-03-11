@@ -10,5 +10,5 @@ notification_count=$(echo "$response" | jq '[.[] | select(.unread == true)] | le
 if [[ $notification_count -ne 0 ]]; then
   sketchybar --set $NAME icon.color=$CAT_RED label.drawing=on label="$notification_count"
 else
-  sketchybar --set $NAME label.drawing=off
+  sketchybar --set $NAME icon.color=$CAT_BLUE label.drawing=off
 fi
