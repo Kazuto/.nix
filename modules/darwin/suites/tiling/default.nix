@@ -13,8 +13,8 @@ in
   config = mkIf cfg.enable {
     shiro = {
       tools = {
-        aerospace = enabled;
-        sketchybar = enabled;
+        # aerospace = enabled;
+        # sketchybar = enabled;
       };
     };
   };
