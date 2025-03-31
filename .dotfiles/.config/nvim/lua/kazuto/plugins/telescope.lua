@@ -6,6 +6,8 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		"nvim-telescope/telescope-smart-history.nvim",
+		"nvim-telescope/telescope-ui-select.nvim",
 		"nvim-tree/nvim-web-devicons",
 	},
 	config = function()
@@ -41,11 +43,14 @@ return {
 		})
 
 		telescope.load_extension("fzf")
+		telescope.load_extension("smart_history")
+		telescope.load_extension("ui-select")
 	end,
 	keys = {
 		{ "<leader>ff", ":Telescope find_files<CR>", desc = "[F]ind [F]iles" },
 		{ "<leader>fa", ":Telescope find_files follow=true no_ingore=true hidden=true<CR>", desc = "[F]ind [A]ll" },
 		{ "<leader>fs", ":Telescope live_grep<CR>", desc = "[F]ind [S]tring" },
+		{ "<leader>fg", require("kazuto.plugins.telescope.multigrep"), desc = "[F]ind [G]rep" },
 		{ "<leader>fc", ":Telescope grep_string<CR>", desc = "[F]ind [C]ursor" },
 		{ "<leader>fb", ":Telescope buffers<CR>", desc = "[F]ind [B]uffer" },
 		{ "<leader>fh", ":Telescope oldfiles<CR>", desc = "[F]ind [H]istory" },
