@@ -61,29 +61,6 @@ function pat() {
   art test -d memory_limit=6144M "$args"
 }
 
-# function flaky() {
-#   runs=1
-#   output=""
-#
-#   failed=false
-#
-#   while [ "$failed" != "true" ]
-#   do
-#     output=$(php artisan test -d memory_limit=6144M --filter="$1")
-#
-#     if "$output" 2>&1 | grep -q -wi "FAIL"
-#     then
-#       failed=true
-#     fi
-#
-#     $failed && echo -e "\033[0;31m\033[0;37m Run $runs failed" || echo -e "\033[0;32m\033[0;37m Run $runs passed"
-#
-#     ((runs++))
-#   done
-#
-#   echo "$output"
-# }
-
 # ======== COMPOSER ======== #
 alias pix="vendor/bin/pint"
 alias vgp="vendor-patches generate && composer update --lock"
@@ -153,7 +130,22 @@ function nix:update {
 }
 
 # ======== NPM ======== #
-alias nr="npm run"
+preexec() {
+  local nvmrc_path
+  nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [[ "$1" == npm\ * && -n "$nvmrc_path" ]]; then
+    local nvmrc_node_version
+    nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
+      nvm use
+    fi
+  fi
+}
+
 alias nrd="npm run dev"
 alias nrs="npm run storybook"
 
