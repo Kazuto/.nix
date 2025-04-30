@@ -2,8 +2,6 @@
 
 sketchybar --add item timer right \
            --set timer label="No Timer" \
-                       icon.padding_left=0 \
-                       scroll_texts=on \
                        icon=󱎫 \
                        icon.color="$CAT_YELLOW" \
                        icon.padding_right=6 \
