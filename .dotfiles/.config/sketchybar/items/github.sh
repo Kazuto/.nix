@@ -9,4 +9,24 @@ sketchybar --add item github right \
                         y_offset=1 \
                         update_freq=300 \
                         click_script="open https://github.com/notifications" \
-                        script="$PLUGIN_DIR/github.sh"
+                        script="$PLUGIN_DIR/github.sh" \
+                        popup.background.corner_radius=10                               \
+                        popup.background.color="$CAT_BASE"                       \
+                        popup.background.border_width=1 \
+                        popup.background.border_color="$CAT_SURFACE1" \
+                        popup.align=right \
+                        --subscribe github mouse.clicked mouse.entered mouse.exited mouse.exited.global 
+
+RESPONSE_FILE="/tmp/sketchybar_github_response"
+
+jq -c '.[]' "$RESPONSE_FILE" | while read -r notification; do
+            id=$(echo "$notification" | jq -r '.id')
+            repo_name=$(echo "$notification" | jq -r '.repository.full_name')
+            subject_title=$(echo "$notification" | jq -r '.subject.title')
+
+sketchybar --add item "github.${id}" popup.github \
+           --set "github.${id}" label="${repo_name}: ${subject_title}" \
+                        padding_left=16 \
+                        padding_right=16 
+done
+
