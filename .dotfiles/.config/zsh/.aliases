@@ -131,12 +131,9 @@ function nix:update {
 
 # ======== NPM ======== #
 preexec() {
-  local nvmrc_path
-  nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [[ "$1" == npm\ * && -n "$nvmrc_path" ]]; then
+  if [[ "$1" =~ ^(npm|yarn|bun)(\s|$) ]] && [ -f .nvmrc ]; then
     local nvmrc_node_version
-    nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+    nvmrc_node_version=$(nvm version "$(cat .nvmrc)")
 
     if [ "$nvmrc_node_version" = "N/A" ]; then
       nvm install
