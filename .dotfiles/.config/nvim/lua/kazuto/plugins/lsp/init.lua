@@ -1,9 +1,10 @@
 -- Easily install and manage LSP servers, DAP servers, linters, and formatters.
 -- https://github.com/williamboman/mason.nvim
 local mason = {
-	"williamboman/mason.nvim",
+	"mason-org/mason.nvim",
+	version = "^1.0.0", -- explicit v1 lock
 	dependencies = {
-		"williamboman/mason-lspconfig.nvim",
+		{ "mason-org/mason-lspconfig.nvim", version = "^1.0.0" }, -- same here
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	config = function()
