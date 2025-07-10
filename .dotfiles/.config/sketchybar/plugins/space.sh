@@ -8,6 +8,7 @@ if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
 	sketchybar --set $NAME drawing=on background.drawing=on \
       background.color=$CAT_PEACH \
       label.color=$CAT_BASE \
+      label.shadow.drawing=off \
       icon.color=$CAT_BASE
 else
 	sketchybar --set $NAME drawing=on background.drawing=off \

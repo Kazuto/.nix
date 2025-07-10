@@ -4,7 +4,7 @@ sketchybar --add item timer right \
            --set timer label="No Timer" \
                        icon=􀐱 \
                        icon.color="$CAT_YELLOW" \
-                       icon.padding_right=6 \
+                       icon.padding_right=5 \
                        background.drawing=off \
                        y_offset=1 \
                        script="$PLUGIN_DIR/timer.sh" \
