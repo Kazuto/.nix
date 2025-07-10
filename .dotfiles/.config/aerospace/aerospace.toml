@@ -38,6 +38,8 @@ automatically-unhide-macos-hidden-apps = false
     7 = 'main'
     8 = 'main'
     9 = 'main'
+    "T" = 2
+    "S" = 3
 
 [key-mapping]
     preset = 'qwerty'
@@ -145,9 +147,9 @@ automatically-unhide-macos-hidden-apps = false
 
 [[on-window-detected]]
     if.app-id = 'com.spotify.client'
-    run = "move-node-to-workspace 10"
+    run = "move-node-to-workspace S"
 
 [[on-window-detected]]
     if.app-id = 'com.microsoft.teams2'
-    run = "move-node-to-workspace 11"
+    run = "move-node-to-workspace T"
 
