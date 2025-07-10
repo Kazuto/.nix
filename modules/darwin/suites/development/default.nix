@@ -33,6 +33,7 @@ in
       development.tools = {
         bun = enabled;
         # ghostty = enabled;
+        gh-ost = enabled;
         git = enabled;
         gitkraken = enabled;
         pocketbase = enabled;
