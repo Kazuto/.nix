@@ -13,7 +13,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;  [
       (python311Full.withPackages(p: with p; [
-        pygobject3 gst-python
+        pygobject3 gst-python pillow termcolor pyinstaller gnureadline
       ]))
 
       python311Packages.pip
