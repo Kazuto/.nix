@@ -9,6 +9,7 @@ return {
 		"nvim-telescope/telescope-smart-history.nvim",
 		"nvim-telescope/telescope-ui-select.nvim",
 		"nvim-tree/nvim-web-devicons",
+		"jonarrien/telescope-cmdline.nvim",
 	},
 	config = function()
 		local telescope = require("telescope")
@@ -21,7 +22,7 @@ return {
 				selection_caret = " ",
 				entry_prefix = "",
 				layout_config = {
-					prompt_position = "top",
+					prompt_position = "bottom",
 				},
 				sorting_strategy = "ascending",
 				mappings = {
@@ -45,6 +46,7 @@ return {
 		telescope.load_extension("fzf")
 		telescope.load_extension("smart_history")
 		telescope.load_extension("ui-select")
+		telescope.load_extension("cmdline")
 	end,
 	keys = {
 		{ "<leader>ff", ":Telescope find_files<CR>", desc = "[F]ind [F]iles" },
@@ -55,5 +57,7 @@ return {
 		{ "<leader>fb", ":Telescope buffers<CR>", desc = "[F]ind [B]uffer" },
 		{ "<leader>fh", ":Telescope oldfiles<CR>", desc = "[F]ind [H]istory" },
 		{ "<leader>ft", ":TodoTelescope<CR>", desc = "[F]ind [T]odos" },
+		{ "Q", "<cmd>Telescope cmdline<cr>", desc = "Cmdline" },
+		{ "<leader><leader>", "<cmd>Telescope cmdline<cr>", desc = "Cmdline" },
 	},
 }
