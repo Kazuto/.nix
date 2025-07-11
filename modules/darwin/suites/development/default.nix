@@ -43,6 +43,7 @@ in
       };
 
       development.languages = {
+        lua = enabled;
         nodejs20 = enabled;
         # php81 = enabled;
         python311 = enabled;
