@@ -29,16 +29,17 @@ function l:ps() {
     fi
 }
 
-# ======== TMUX ======== #
-# tat: tmux attach
-function tat {
-  name=$(basename `pwd` | sed -e 's/\.//g')
-
-  if tmux ls 2>&1 | grep "$name"; then
-    tmux attach -t "$name"
-  elif [ -f .envrc ]; then
-    direnv exec / tmux new-session -s "$name"
+dirigo() {
+  if [[ "$1" == --* ]]; then
+    command dirigo "$@"
   else
-    tmux new-session -s "$name"
+    local dir
+    dir=$(command dirigo "$1") || return 1
+    if [ -d "$dir" ]; then
+      cd "$dir" && nvim || return
+    else
+      echo "Directory does not exist: $dir"
+      return 1
+    fi
   fi
 }
