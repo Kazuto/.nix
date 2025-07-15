@@ -7,10 +7,11 @@ opt.relativenumber = true
 
 -- TABS & INDENTATION
 opt.tabstop = 4
-opt.softtabstop = 4
+opt.softtabstop = 0
 opt.shiftwidth = 4
-opt.shiftround = true
+opt.smarttab = true
 opt.expandtab = true
+opt.shiftround = true
 opt.autoindent = true
 opt.smartindent = true -- indent when starting a new line
 

@@ -46,6 +46,8 @@ Map("n", "<C-Down>", ":resize -2<CR>")
 Map("n", "<C-Left>", ":vertical resize -2<CR>")
 Map("n", "<C-Right>", ":vertical resize +2<CR>")
 
+Map("n", "<leader>cs", ":noh<CR>", { desc = "[C]lear [S]earch" })
+
 -- move text up and down
 -- Map("i", "<M-j>", "<Esc>:m .+1<CR>==gi")
 -- Map("i", "<M-k>", "<Esc>:m .-2<CR>==gi")
