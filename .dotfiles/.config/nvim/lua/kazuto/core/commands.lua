@@ -24,9 +24,13 @@ local function buf_kill(kill_command, bufnr, force)
       vim.ui.input({
         prompt = string.format([[%s. Close it anyway? [y]es or [n]o (default: no): ]], warning),
       }, function(choice)
-        if choice:match "ye?s?" then force = true end
+        if choice:match("ye?s?") then
+          force = true
+        end
       end)
-      if not force then return end
+      if not force then
+        return
+      end
     end
   end
 
@@ -35,7 +39,9 @@ local function buf_kill(kill_command, bufnr, force)
     return api.nvim_win_get_buf(win) == bufnr
   end, api.nvim_list_wins())
 
-  if #windows == 0 then return end
+  if #windows == 0 then
+    return
+  end
 
   if force then
     kill_command = kill_command .. "!"
@@ -71,16 +77,15 @@ end
 local common_opts = { force = true }
 
 local collection = {
-	{
-		name = "BufferKill",
-		fn = function()
-			buf_kill("bd")
-		end,
-	},
+  {
+    name = "BufferKill",
+    fn = function()
+      buf_kill("bd")
+    end,
+  },
 }
 
 for _, cmd in pairs(collection) do
-	local opts = vim.tbl_deep_extend("force", common_opts, cmd.opts or {})
-	vim.api.nvim_create_user_command(cmd.name, cmd.fn, opts)
+  local opts = vim.tbl_deep_extend("force", common_opts, cmd.opts or {})
+  vim.api.nvim_create_user_command(cmd.name, cmd.fn, opts)
 end
-

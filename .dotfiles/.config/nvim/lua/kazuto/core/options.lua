@@ -60,10 +60,10 @@ opt.clipboard:append("unnamedplus") -- use system clipboard
 -- LISTCHARS
 opt.list = true -- enable listchars
 opt.listchars = {
-	tab = "┊ ",
-	trail = "·",
-	nbsp = "⎵",
-	-- eol = '↲',
-	extends = "❯",
-	precedes = "❮",
+  tab = "┊ ",
+  trail = "·",
+  nbsp = "⎵",
+  -- eol = '↲',
+  extends = "❯",
+  precedes = "❮",
 }
