@@ -46,7 +46,7 @@ in
         lua = enabled;
         nodejs20 = enabled;
         # php81 = enabled;
-        python311 = enabled;
+        # python311 = enabled;
         go = enabled;
       };
     };
