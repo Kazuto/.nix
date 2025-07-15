@@ -24,7 +24,11 @@ for mid in $(aerospace list-monitors | awk '{print $1}'); do
 done
 
 sketchybar --add item space_separator left \
-           --set space_separator label.drawing=off \
+           --set space_separator icon="􀆊" \
+                                 icon.color=$CAT_TEXT \
+                                 icon.padding_left=2 \
+                                 icon.padding_right=2 \
+                                 label.drawing=off \
                                  background.drawing=off \
                                  script="$PLUGIN_DIR/space_windows.sh" \
            --subscribe space_separator space_windows_change
