@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CONFIG_DIR="$HOME/.config/sketchybar"
+
 source "$CONFIG_DIR/colors.sh"
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
@@ -17,8 +19,8 @@ sketchybar --bar height=42 \
                  corner_radius=10 \
                  margin=10 \
                  y_offset=4 \
-                 color=0x00000000
-                 # color=$CAT_BASE \
+                 color=$CAT_BASE
+                 # color=0x00000000
 
 sketchybar --default icon.font="JetBrainsMono Nerd Font Propo:Semibold:13.0" \
                      icon.color=$CAT_TEXT \
@@ -35,10 +37,10 @@ sketchybar --default icon.font="JetBrainsMono Nerd Font Propo:Semibold:13.0" \
 
 # -- Left Side Items --
 source $ITEM_DIR/spaces.sh
+source $ITEM_DIR/front_app.sh
 
 # -- Center Items --
-source $ITEM_DIR/front_app.sh
-# source $ITEM_DIR/spotify.sh
+source $ITEM_DIR/spotify.sh
 
 # -- Right Side Items --
 source $ITEM_DIR/calendar.sh
@@ -47,6 +49,7 @@ source $ITEM_DIR/calendar.sh
 source $ITEM_DIR/github.sh
 source $ITEM_DIR/cpu.sh
 source $ITEM_DIR/timer.sh
+source $ITEM_DIR/logitech.sh
 
 sketchybar --hotload on
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sketchybar --add item front_app center \
+sketchybar --add item front_app left \
            --set front_app       background.color=$CAT_PEACH \
                                  icon.color=$CAT_BASE \
                                  icon.font="sketchybar-app-font:Regular:16.0" \
