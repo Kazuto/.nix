@@ -8,6 +8,7 @@ sketchybar --add       event           spotify_change $SPOTIFY_EVENT      \
                                        popup.align=center                 \
                                        icon=󰓇                             \
                                        icon.color="$CAT_GREEN"            \
+                                       icon.padding_right=5               \
                                        popup.background.corner_radius=10  \
                                        popup.background.color="$CAT_BASE" \
                                        popup.background.border_width=1    \
