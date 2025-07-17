@@ -23,9 +23,11 @@ jq -c '.[]' "$RESPONSE_FILE" | while read -r notification; do
             id=$(echo "$notification" | jq -r '.id')
             repo_name=$(echo "$notification" | jq -r '.repository.full_name')
             subject_title=$(echo "$notification" | jq -r '.subject.title')
+            url=$(echo "$notification" | jq -r '.subject.html_url')
 
 sketchybar --add item "github.${id}" popup.github \
            --set "github.${id}" label="${repo_name}: ${subject_title}" \
+                        click_script="open $url" \
                         padding_left=16 \
                         padding_right=16 
 done
