@@ -7,7 +7,6 @@ return {
   dependencies = {
     "JoosepAlviste/nvim-ts-context-commentstring",
     "nvim-treesitter/nvim-treesitter-textobjects",
-    "windwp/nvim-ts-autotag",
   },
   config = function(_, opts)
     vim.filetype.add({
@@ -27,10 +26,6 @@ return {
       },
 
       indent = {
-        enable = true,
-      },
-
-      autotag = {
         enable = true,
       },
 
