@@ -22,7 +22,7 @@ return {
         selection_caret = " ",
         entry_prefix = "",
         layout_config = {
-          prompt_position = "bottom",
+          prompt_position = "top",
         },
         sorting_strategy = "ascending",
         mappings = {
