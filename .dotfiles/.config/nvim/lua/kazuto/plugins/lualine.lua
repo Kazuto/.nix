@@ -78,27 +78,23 @@ return {
           end,
           { "diagnostics", sources = { "nvim_diagnostic" } },
         },
-        lualine_c = {
-          "filename",
-        },
+        lualine_c = {},
         lualine_x = {
-          {
-            require("lazy.status").updates,
-            cond = require("lazy.status").has_updates,
-            color = { fg = "#ff9e64" },
-          },
+          { "filename", path = 1 },
+          -- {
+          --   require("lazy.status").updates,
+          --   cond = require("lazy.status").has_updates,
+          --   color = { fg = "#ff9e64" },
+          -- },
         },
         lualine_y = {
           "filetype",
-          "encoding",
-          "fileformat",
-          '(vim.bo.expandtab and "␠ " or "⇥ ") .. vim.bo.shiftwidth',
+          -- "fileformat",
+          -- '(vim.bo.expandtab and "␠ " or "⇥ ") .. vim.bo.shiftwidth',
         },
         lualine_z = {
-          "searchcount",
-          "selectioncount",
-          "location",
           "progress",
+          "location",
         },
       },
     })
