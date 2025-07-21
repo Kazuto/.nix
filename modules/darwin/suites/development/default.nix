@@ -17,13 +17,9 @@ in
       };
 
       cli = {
-        commitizen = enabled;
-        gum = enabled;
         neovim = enabled;
         ngrok = enabled;
         phpstan = enabled;
-        supabase = enabled;
-        # tmux = enabled;
         trash = enabled;
         vercel = enabled;
         zoxide = enabled;
@@ -35,18 +31,12 @@ in
         # ghostty = enabled;
         gh-ost = enabled;
         git = enabled;
-        gitkraken = enabled;
         pocketbase = enabled;
-        kitty = enabled;
-        phpstorm = enabled;
         vscode = enabled;
       };
 
       development.languages = {
         lua = enabled;
-        nodejs20 = enabled;
-        # php81 = enabled;
-        # python311 = enabled;
         go = enabled;
       };
     };
