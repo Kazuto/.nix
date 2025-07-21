@@ -10,6 +10,7 @@ return {
     "nvim-telescope/telescope-ui-select.nvim",
     "nvim-tree/nvim-web-devicons",
     "jonarrien/telescope-cmdline.nvim",
+    "tami5/sqlite.lua",
   },
   config = function()
     local telescope = require("telescope")
@@ -35,6 +36,7 @@ return {
           },
         },
         file_ignore_patterns = { "node_modules", ".git", "vendor" },
+        wrap_results = true,
       },
       pickers = {
         find_files = {

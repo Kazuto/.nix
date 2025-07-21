@@ -33,6 +33,7 @@ in
         git = enabled;
         pocketbase = enabled;
         vscode = enabled;
+        sqlite = enabled;
       };
 
       development.languages = {
