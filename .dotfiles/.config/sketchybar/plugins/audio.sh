@@ -22,12 +22,10 @@ if [[ "$audio_device" == *"Speakers"* ]]; then
 fi
 
 case "$SENDER" in
-    "mouse.entered")
-        sketchybar --set "$NAME" popup.drawing=on
-        ;;
-    "mouse.exited"|"mouse.exited.global")
-        sketchybar --set "$NAME" popup.drawing=off
-        ;;
+"mouse.entered")
+  sketchybar --set "$NAME" popup.drawing=on
+  ;;
+"mouse.exited" | "mouse.exited.global")
+  sketchybar --set "$NAME" popup.drawing=off
+  ;;
 esac
-
-

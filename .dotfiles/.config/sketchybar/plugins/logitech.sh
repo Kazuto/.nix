@@ -15,12 +15,11 @@ __update() {
   CHARGING=$(jq -r '.charging' "$JSON_FILE")
 
   if [ "$CHARGING" = true ]; then
-    sketchybar --set "$NAME"  icon="$DEVICE_ICON" label="$ICON"
+    sketchybar --set "$NAME" icon="$DEVICE_ICON" label="$ICON"
   else
-    sketchybar --set "$NAME"  icon="$DEVICE_ICON " label="$PERCENTAGE%"
+    sketchybar --set "$NAME" icon="$DEVICE_ICON " label="$PERCENTAGE%"
   fi
 }
-
 
 __update
 
@@ -45,17 +44,17 @@ fi
 
 # Select icon
 case $PERCENTAGE in
-  9[0-9]|100) ICON="􀛨" ;;  # Full
-  [6-8][0-9]) ICON="􀺸" ;;  # High
-  [3-5][0-9]) ICON="􀺶" ;;  # Medium
-  [1-2][0-9]) ICON="􀛩" ;;  # Low
-  *) ICON="􀛪" ;;            # Very low
+9[0-9] | 100) ICON="􀛨" ;; # Full
+[6-8][0-9]) ICON="􀺸" ;;   # High
+[3-5][0-9]) ICON="􀺶" ;;   # Medium
+[1-2][0-9]) ICON="􀛩" ;;   # Low
+*) ICON="􀛪" ;;            # Very low
 esac
 
 # Override icon if charging
 [ "$CHARGING" = true ] && ICON="􀢋"
 # Save to JSON
-cat > "$JSON_FILE" <<EOF
+cat >"$JSON_FILE" <<EOF
 {
   "percentage": $PERCENTAGE,
   "charging": $CHARGING,
@@ -65,4 +64,3 @@ cat > "$JSON_FILE" <<EOF
 EOF
 
 __update
-

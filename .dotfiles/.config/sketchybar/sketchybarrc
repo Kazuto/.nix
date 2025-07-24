@@ -7,33 +7,32 @@ source "$CONFIG_DIR/colors.sh"
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 ITEM_DIR="$CONFIG_DIR/items"
 
-
 AEROSPACE_FOCUSED_MONITOR_NO=$(aerospace list-workspaces --focused)
 AEROSPACE_LIST_OF_WINDOWS_IN_FOCUSED_MONITOR=$(aerospace list-windows --workspace $AEROSPACE_FOCUSED_MONITOR_NO | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
 
 sketchybar --bar height=42 \
-                 display=main \
-                 blur_radius=0 \
-                 position=top \
-                 sticky=false \
-                 corner_radius=10 \
-                 margin=10 \
-                 y_offset=4 \
-                 color=$CAT_BASE
-                 # color=0x00000000
+  display=main \
+  blur_radius=0 \
+  position=top \
+  sticky=false \
+  corner_radius=10 \
+  margin=10 \
+  y_offset=4 \
+  color=$CAT_BASE
+# color=0x00000000
 
 sketchybar --default icon.font="JetBrainsMono Nerd Font Propo:Semibold:13.0" \
-                     icon.color=$CAT_TEXT \
-                     label.font="SF Pro:Medium:13.0" \
-                     label.color=$CAT_TEXT \
-                     background.corner_radius=10 \
-                     background.height=26 \
-                     padding_left=6 \
-                     padding_right=6 \
-                     label.shadow.drawing=on \
-                     label.shadow.angle=90 \
-                     label.shadow.distance=1 \
-                     label.shadow.color=0x80000000 \ 
+  icon.color=$CAT_TEXT \
+  label.font="SF Pro:Medium:13.0" \
+  label.color=$CAT_TEXT \
+  background.corner_radius=10 \
+  background.height=26 \
+  padding_left=6 \
+  padding_right=6 \
+  label.shadow.drawing=on \
+  label.shadow.angle=90 \
+  label.shadow.distance=1 \
+  label.shadow.color=0x80000000 \
 
 # -- Left Side Items --
 source $ITEM_DIR/spaces.sh

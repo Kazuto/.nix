@@ -6,10 +6,9 @@ for mid in $(aerospace list-monitors | awk '{print $1}'); do
     icon_strip=" "
 
     if [ "${apps}" != "" ]; then
-      while read -r app
-      do
+      while read -r app; do
         icon_strip+=" $($CONFIG_DIR/plugins/icon_map_fn.sh "$app")"
-      done <<< "${apps}"
+      done <<<"${apps}"
     else
       icon_strip=" —"
     fi
