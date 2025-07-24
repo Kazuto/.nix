@@ -68,6 +68,7 @@ return {
         { name = "luasnip" }, -- snippets
         { name = "buffer" }, -- text within current buffer
         { name = "path" }, -- file system paths
+        { name = "supermaven" },
       }),
       formatting = {
         format = function(entry, item)
@@ -75,6 +76,8 @@ return {
           item = require("lspkind").cmp_format({
             maxwidth = 50,
             ellipsis_char = "...",
+            mode = "symbol",
+            symbol_map = { Supermaven = "" },
           })(entry, item)
           if color_item.abbr_hl_group then
             item.kind_hl_group = color_item.abbr_hl_group
