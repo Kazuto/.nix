@@ -1,4 +1,4 @@
--- Lightweight yet powerful formatter plugin
+-- Lightweight yet powerful formatter plugin for Neovim
 -- https://github.com/stevearc/conform.nvim
 return {
   "stevearc/conform.nvim",
@@ -16,10 +16,14 @@ return {
         json = { "prettierd" },
         lua = { "stylua" },
         markdown = { "prettierd" },
-        php = { "pint" },
+        php = { "php_cs_fixer" },
+        python = { "isort", "black" },
+        scss = { "prettierd" },
+        sh = { "shfmt" }, -- This is what you need for shell files
+        bash = { "shfmt" }, -- Also for bash files
         typescript = { "prettierd" },
-        yaml = { "prettierd" },
         vue = { "prettierd" },
+        yaml = { "prettierd" },
       },
       format_on_save = {
         lsp_fallback = true,
@@ -28,12 +32,12 @@ return {
       },
     })
 
-    vim.keymap.set({ "n", "v" }, "<leader>cf", function()
+    vim.keymap.set({ "n", "v" }, "<leader>mp", function()
       conform.format({
         lsp_fallback = true,
         async = false,
         timeout_ms = 1000,
       })
-    end, { desc = "[C]ode [F]ormat" })
+    end, { desc = "Format file or range (in visual mode)" })
   end,
 }

@@ -47,6 +47,8 @@ local mason = {
         "prettierd",
         "stylua",
         "eslint_d",
+        "shellcheck",
+        "shfmt",
       },
     })
   end,
