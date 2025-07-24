@@ -44,12 +44,12 @@ source $ITEM_DIR/spotify.sh
 
 # -- Right Side Items --
 source $ITEM_DIR/calendar.sh
-# source $ITEM_DIR/volume.sh
+source $ITEM_DIR/audio.sh
+source $ITEM_DIR/logitech.sh
 # source $ITEM_DIR/battery.sh
-source $ITEM_DIR/github.sh
 source $ITEM_DIR/cpu.sh
 source $ITEM_DIR/timer.sh
-source $ITEM_DIR/logitech.sh
+source $ITEM_DIR/github.sh
 
 sketchybar --hotload on
 

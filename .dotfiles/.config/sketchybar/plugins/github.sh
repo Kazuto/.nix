@@ -60,7 +60,7 @@ rm -f "$TMP_FILE"
 if (( notification_count > 0 )); then
   sketchybar --set "$NAME" icon.color="$CAT_RED" label.drawing=on label="$notification_count"
 else
-  sketchybar --set "$NAME" icon.color="$CAT_BLUE" label.drawing=off
+  sketchybar --set "$NAME" icon.color="$CAT_LAVENDER" label.drawing=off
 fi
 
 # Handle popup drawing based on mouse events

@@ -5,6 +5,7 @@ sketchybar --add item logitech.keyboard right \
                           icon=􀢋  \
                           icon.color="$CAT_SKY" \
                           icon.padding_right=5 \
+                          y_offset=1 \
                           script="$PLUGIN_DIR/logitech.sh ED9B3216"
 
 sketchybar --add item logitech.mouse right \
@@ -12,4 +13,5 @@ sketchybar --add item logitech.mouse right \
                           icon=􀢋  \
                           icon.color="$CAT_SKY" \
                           icon.padding_right=5 \
+                          y_offset=1 \
                           script="$PLUGIN_DIR/logitech.sh B2CF7061"
