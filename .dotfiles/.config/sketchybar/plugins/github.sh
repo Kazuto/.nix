@@ -65,10 +65,7 @@ fi
 
 # Handle popup drawing based on mouse events
 case "$SENDER" in
-mouse.entered)
-  sketchybar --set "$NAME" popup.drawing=on
-  ;;
-mouse.exited | mouse.exited.global)
-  sketchybar --set "$NAME" popup.drawing=off
+mouse.clicked)
+  sketchybar --set "$NAME" popup.drawing=toggle
   ;;
 esac

@@ -20,12 +20,3 @@ fi
 if [[ "$audio_device" == *"Speakers"* ]]; then
   sketchybar -m --set "$NAME" icon="󰓃" label="$audio_device ($VOLUME%)"
 fi
-
-case "$SENDER" in
-"mouse.entered")
-  sketchybar --set "$NAME" popup.drawing=on
-  ;;
-"mouse.exited" | "mouse.exited.global")
-  sketchybar --set "$NAME" popup.drawing=off
-  ;;
-esac

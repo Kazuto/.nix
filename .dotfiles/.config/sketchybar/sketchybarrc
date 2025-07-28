@@ -32,7 +32,7 @@ sketchybar --default icon.font="JetBrainsMono Nerd Font Propo:Semibold:13.0" \
   label.shadow.drawing=on \
   label.shadow.angle=90 \
   label.shadow.distance=1 \
-  label.shadow.color=0x80000000 \
+  label.shadow.color=0x80000000
 
 # -- Left Side Items --
 source $ITEM_DIR/spaces.sh

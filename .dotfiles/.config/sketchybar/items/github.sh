@@ -10,7 +10,7 @@ sketchybar --add item github right \
   label.padding_left=5 \
   label.drawing=off \
   y_offset=1 \
-  update_freq=300 \
+  update_freq=60 \
   script="$PLUGIN_DIR/github.sh" \
   popup.background.corner_radius=10 \
   popup.background.color="$CAT_BASE" \
@@ -21,15 +21,30 @@ sketchybar --add item github right \
 
 RESPONSE_FILE="/tmp/sketchybar_github_response"
 
-jq -c '.[]' "$RESPONSE_FILE" | while read -r notification; do
-  id=$(echo "$notification" | jq -r '.id')
-  repo_name=$(echo "$notification" | jq -r '.repository.full_name')
-  subject_title=$(echo "$notification" | jq -r '.subject.title')
-  url=$(echo "$notification" | jq -r '.subject.html_url')
+check_github_notifications() {
+  while true; do
+    if [[ -f "$RESPONSE_FILE" && -s "$RESPONSE_FILE" ]]; then
+      echo "Processing GitHub notifications..."
 
-  sketchybar --add item "github.${id}" popup.github \
-    --set "github.${id}" label="${repo_name}: ${subject_title}" \
-    click_script="open $url; sketchybar -m --set github popup.drawing=off" \
-    padding_left=16 \
-    padding_right=16
-done
+      jq -c '.[]' "$RESPONSE_FILE" | while read -r notification; do
+        id=$(echo "$notification" | jq -r '.id')
+        repo_name=$(echo "$notification" | jq -r '.repository.full_name')
+        subject_title=$(echo "$notification" | jq -r '.subject.title')
+        url=$(echo "$notification" | jq -r '.subject.html_url')
+
+        sketchybar --add item "github.${id}" popup.github \
+          --set "github.${id}" label="${repo_name}: ${subject_title}" \
+          click_script="open $url; sketchybar -m --set github popup.drawing=off" \
+          padding_left=16 \
+          padding_right=16
+      done
+
+      # Clear file after processing
+      >"$RESPONSE_FILE"
+    fi
+    sleep 5
+  done
+}
+
+# Start background process
+check_github_notifications &
