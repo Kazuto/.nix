@@ -18,8 +18,8 @@ sketchybar --bar height=42 \
   corner_radius=10 \
   margin=10 \
   y_offset=4 \
-  color=$CAT_BASE
-# color=0x00000000
+  color=0x00000000
+# color=$CAT_BASE
 
 sketchybar --default icon.font="JetBrainsMono Nerd Font Propo:Semibold:13.0" \
   icon.color=$CAT_TEXT \
@@ -27,12 +27,9 @@ sketchybar --default icon.font="JetBrainsMono Nerd Font Propo:Semibold:13.0" \
   label.color=$CAT_TEXT \
   background.corner_radius=10 \
   background.height=26 \
-  padding_left=6 \
-  padding_right=6 \
-  label.shadow.drawing=on \
-  label.shadow.angle=90 \
-  label.shadow.distance=1 \
-  label.shadow.color=0x80000000
+  background.color=0x15000000 \
+  padding_left=4 \
+  padding_right=4
 
 # -- Left Side Items --
 source $ITEM_DIR/spaces.sh

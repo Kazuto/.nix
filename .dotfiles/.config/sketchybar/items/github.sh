@@ -7,9 +7,9 @@ sketchybar --add item github right \
   click_script="$POPUP_SCRIPT" \
   icon.font="sketchybar-app-font:Regular:13.0" \
   icon.color=$CAT_LAVENDER \
-  label.padding_left=5 \
-  label.drawing=off \
-  y_offset=1 \
+  icon.padding_left=8 \
+  icon.padding_right=6 \
+  label.padding_right=8 \
   update_freq=60 \
   script="$PLUGIN_DIR/github.sh" \
   popup.background.corner_radius=10 \
@@ -34,7 +34,8 @@ check_github_notifications() {
           --set "github.${id}" label="${repo_name}: ${subject_title}" \
           click_script="open $url; sketchybar -m --set github popup.drawing=off" \
           padding_left=16 \
-          padding_right=16
+          padding_right=16 \
+          background.drawing=off
       done
     fi
 

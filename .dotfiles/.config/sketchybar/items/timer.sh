@@ -4,8 +4,9 @@ sketchybar --add item timer right \
   --set timer label="No Timer" \
   icon=􀐱 \
   icon.color="$CAT_YELLOW" \
+  icon.padding_left=8 \
   icon.padding_right=5 \
-  background.drawing=off \
+  label.padding_right=8 \
   y_offset=1 \
   script="$PLUGIN_DIR/timer.sh" \
   popup.background.corner_radius=10 \
@@ -19,5 +20,6 @@ for timer in "5" "10" "25"; do
     --set "timer.${timer}" label="${timer} Minutes" \
     padding_left=16 \
     padding_right=16 \
+    background.drawing=off \
     click_script="$PLUGIN_DIR/timer.sh $((timer * 60)); sketchybar -m --set timer popup.drawing=off"
 done

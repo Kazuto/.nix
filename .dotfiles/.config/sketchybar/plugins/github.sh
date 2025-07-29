@@ -55,7 +55,7 @@ rm -f "$TMP_FILE"
 
 # Update sketchybar based on unread notification count
 if ((notification_count > 0)); then
-  sketchybar --set "$NAME" icon.color="$CAT_RED" label.drawing=on label="$notification_count"
+  sketchybar --set "$NAME" icon.color="$CAT_RED" label="$notification_count Notifications"
 else
-  sketchybar --set "$NAME" icon.color="$CAT_LAVENDER" label.drawing=off
+  sketchybar --set "$NAME" icon.color="$CAT_LAVENDER" label="0 Notifications"
 fi
