@@ -47,6 +47,7 @@ local mason = {
         "prettierd",
         "stylua",
         "eslint_d",
+        "php-cs-fixer",
         "shellcheck",
         "shfmt",
       },

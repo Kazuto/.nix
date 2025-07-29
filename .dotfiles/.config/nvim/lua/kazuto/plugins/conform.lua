@@ -16,7 +16,7 @@ return {
         json = { "prettierd" },
         lua = { "stylua" },
         markdown = { "prettierd" },
-        php = { "php_cs_fixer" },
+        php = { "pint", "php-cs-fixer" },
         python = { "isort", "black" },
         scss = { "prettierd" },
         sh = { "shfmt" }, -- This is what you need for shell files
