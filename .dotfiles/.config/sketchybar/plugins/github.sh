@@ -11,7 +11,6 @@ curl -s -H "Authorization: token $GITHUB_TOKEN" "$GITHUB_NOTIFICATIONS_URL" -o "
 
 # Count unread notifications
 notification_count=$(jq '[.[] | select(.unread == true)] | length' "$RESPONSE_FILE")
-echo "Unread notifications: $notification_count" >&2
 
 # Process each notification, append constructed html_url based on subject info
 jq -c '.[]' "$RESPONSE_FILE" | while read -r notif; do
@@ -50,8 +49,6 @@ done
 # Combine updated notifications back into a JSON array, overwrite response file
 if [[ -s "$TMP_FILE" ]]; then
   jq -s . "$TMP_FILE" >"$RESPONSE_FILE"
-else
-  echo "⚠️ No valid notifications were processed, original file unchanged." >&2
 fi
 
 rm -f "$TMP_FILE"
@@ -62,10 +59,3 @@ if ((notification_count > 0)); then
 else
   sketchybar --set "$NAME" icon.color="$CAT_LAVENDER" label.drawing=off
 fi
-
-# Handle popup drawing based on mouse events
-case "$SENDER" in
-mouse.clicked)
-  sketchybar --set "$NAME" popup.drawing=toggle
-  ;;
-esac

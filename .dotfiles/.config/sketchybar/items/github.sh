@@ -24,8 +24,6 @@ RESPONSE_FILE="/tmp/sketchybar_github_response"
 check_github_notifications() {
   while true; do
     if [[ -f "$RESPONSE_FILE" && -s "$RESPONSE_FILE" ]]; then
-      echo "Processing GitHub notifications..."
-
       jq -c '.[]' "$RESPONSE_FILE" | while read -r notification; do
         id=$(echo "$notification" | jq -r '.id')
         repo_name=$(echo "$notification" | jq -r '.repository.full_name')
@@ -38,10 +36,8 @@ check_github_notifications() {
           padding_left=16 \
           padding_right=16
       done
-
-      # Clear file after processing
-      >"$RESPONSE_FILE"
     fi
+
     sleep 5
   done
 }
