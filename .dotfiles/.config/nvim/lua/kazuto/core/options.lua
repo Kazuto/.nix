@@ -34,7 +34,6 @@ opt.cursorline = true
 opt.title = true
 opt.termguicolors = true -- enable 24-bit RGB color
 opt.background = "dark" -- dark or light
-opt.colorcolumn = "80" -- highlight column 80
 
 -- Better file handling
 opt.backup = false
@@ -44,7 +43,7 @@ opt.undofile = true
 opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
 -- Better tables
-opt.wildmode = "longest:full,full" -- list all matches and complete till longest common string
+opt.wildmode = "list:longest,list:full" -- list all matches and complete till longest common string
 
 -- SPLIT WINDOWS
 opt.splitright = true -- split new window to right
