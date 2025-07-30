@@ -8,7 +8,11 @@ return {
   },
   cmd = "Trouble",
   keys = {
-    { "<leader>xw", ":Trouble diagnostics toggle<CR>", desc = "Open trouble workspace diagnostics" },
+    {
+      "<leader>xw",
+      ":Trouble diagnostics toggle<CR>",
+      desc = "Open trouble workspace diagnostics",
+    },
     {
       "<leader>xd",
       ":Trouble diagnostics toggle filter.buf=0<CR>",
@@ -17,5 +21,20 @@ return {
     { "<leader>xq", ":Trouble quickfix toggle<CR>", desc = "Open trouble quickfix list" },
     { "<leader>xl", ":Trouble loclist toggle<CR>", desc = "Open trouble location list" },
     { "<leader>xt", ":Trouble todo toggle<CR>", desc = "Open todos in trouble" },
+    -- QWERTZ-friendly navigation within Trouble
+    {
+      "<leader>tn",
+      function()
+        require("trouble").next({ skip_groups = true, jump = true })
+      end,
+      desc = "Next Trouble Item",
+    },
+    {
+      "<leader>tp",
+      function()
+        require("trouble").previous({ skip_groups = true, jump = true })
+      end,
+      desc = "Previous Trouble Item",
+    },
   },
 }

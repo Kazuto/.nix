@@ -12,18 +12,10 @@ return {
   },
   cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
   keys = {
-    { "<leader>aa", ":Laravel artisan<CR>", desc = "Laravel Artisan" },
-    { "<leader>ar", ":Laravel routes<CR>", desc = "Laravel Application Routes" },
-    { "<leader>am", ":Laravel make<CR>", desc = "Laravel Make" },
-    { "<leader>ac", ":Laravel related<CR>", desc = "Laravel Related" },
-    {
-      "<leader>at",
-      function()
-        require("laravel.tinker").send_to_tinker()
-      end,
-      mode = "v",
-      desc = "Laravel Tinker",
-    },
+    { "<leader>la", ":Laravel artisan<CR>", desc = "Laravel Artisan" },
+    { "<leader>lr", ":Laravel routes<CR>", desc = "Laravel Application Routes" },
+    { "<leader>lm", ":Laravel make<CR>", desc = "Laravel Make" },
+    { "<leader>lc", ":Laravel related<CR>", desc = "Laravel Related" },
   },
   event = { "VeryLazy" },
   config = true,

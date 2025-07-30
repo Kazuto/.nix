@@ -21,13 +21,16 @@ M.setup = function()
   end
 
   vim.diagnostic.config({
-    virtual_text = true,
+    virtual_text = {
+      prefix = "●",
+      source = "if_many",
+    },
     signs = true,
     update_on_insert = true,
     underline = true,
     severity_sort = true,
     float = {
-      source = true,
+      source = "always",
       border = "rounded",
     },
   })
@@ -38,25 +41,31 @@ local function keymaps(client, bufnr)
     vim.keymap.set(mode, keys, func, { noremap = true, silent = true, buffer = bufnr, desc = desc })
   end
 
-  map({ "n" }, "gD", vim.lsp.buf.declaration, "[G]o [D]efinition")
-  map({ "n" }, "gd", ":Telescope lsp_definitions<CR>", "[L]ist [D]efinitions")
-  map({ "n" }, "gR", ":Telescope lsp_references<CR>", "[L]ist [R]eferences")
-  map({ "n" }, "gi", ":Telescope lsp_implementations<CR>", "[L]ist [I]mplementation")
-  map({ "n" }, "gt", ":Telescope lsp_type_definitions<CR>", "[L]ist [T]ype Definition")
-  map({ "n" }, "gs", ":Telescope git_status<CR>", "[G]it [S]tatus")
+  -- Navigation
+  map("n", "gD", vim.lsp.buf.declaration, "Go to Declaration")
+  map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "Go to Definition")
+  map("n", "gr", "<cmd>Telescope lsp_references<CR>", "Go to References")
+  map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", "Go to Implementation")
+  map("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "Go to Type Definition")
 
+  -- Documentation
   map({ "n" }, "K", vim.lsp.buf.hover, "Show documentation")
-  -- map({ "n" }, "K", ":Lspsaga hover_doc<CR>", "Show documentation")
+  map("n", "<C-k>", vim.lsp.buf.signature_help, "Show Signature Help")
 
-  map({ "n" }, "<leader>D", ":Telescope diagnostics bufnr=0<CR>", "[D]iagnostics for file")
-  map({ "n" }, "<leader>d", vim.diagnostic.open_float, "[D]iagnostics for line")
+  -- Actions
+  map("n", "<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
+  map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code Actions")
 
-  map({ "n" }, "<leader>rn", vim.lsp.buf.rename, "[R]ename")
-  map({ "n" }, "<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ctions")
+  -- Diagnostics
+  map("n", "<leader>d", vim.diagnostic.open_float, "Show Line Diagnostics")
+  map("n", "<leader>dp", function()
+    vim.diagnostic.jump({ count = -1 })
+  end, "Previous Diagnostic")
+  map("n", "<leader>dn", function()
+    vim.diagnostic.jump({ count = 1 })
+  end, "Next Diagnostic")
 
-  map({ "n" }, "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", "Previous diagnostic in buffer")
-  map({ "n" }, "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", "Next diagnostic in buffer")
-
+  -- LSP Servers
   map({ "n" }, "<leader>rs", ":LspRestart<CR>", "[R]estart LSP [S]erver")
 end
 

@@ -7,10 +7,10 @@ return {
   },
   config = function()
     require("gitsigns").setup({
-      current_line_blame = true,
+      current_line_blame = false,
       current_line_blame_opts = {
         virt_text = true,
-        virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+        virt_text_pos = "eol",
         delay = 100,
         ignore_whitespace = false,
         virt_text_priority = 100,
@@ -24,6 +24,8 @@ return {
     { "<leader>hp", ":Gitsigns preview_hunk<CR>", desc = "[H]unk [P]review" },
     { "<leader>hr", ":Gitsigns reset_hunk<CR>", desc = "[H]unk [R]eset" },
     { "<leader>hS", ":Gitsigns stage_buffer<CR>", desc = "[S]tage [B]uffer" },
+    { "<leader>hs", ":Gitsigns stage_hunk<CR>", desc = "[H]unk [S]tage" },
+    { "<leader>hu", ":Gitsigns undo_stage_hunk<CR>", desc = "[H]unk [U]ndo Stage" },
   },
   event = { "VeryLazy" },
 }

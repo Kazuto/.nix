@@ -8,7 +8,9 @@ return {
   keys = {
     { "<Tab>", ":BufferLineCycleNext<CR>", desc = "Next Buffer" },
     { "<S-Tab>", ":BufferLineCyclePrev<CR>", desc = "Previous Buffer" },
-    { "<C-w>", ":BufferKill<CR>", desc = "Close Buffer" },
+    { "<leader>bd", ":BufferKill<CR>", desc = "Close Buffer" }, -- Changed from <C-w>
+    { "<leader>ba", ":BufferKillOthers<CR>", desc = "Close All Other Buffers" },
+    { "<leader>bp", ":BufferLinePick<CR>", desc = "Pick Buffer" },
   },
   config = function()
     require("bufferline").setup({

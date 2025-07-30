@@ -34,7 +34,6 @@ local mason = {
         "intelephense",
         "jsonls",
         "lua_ls",
-        "phpactor",
         "tailwindcss",
         "ts_ls",
         "volar",
@@ -141,5 +140,4 @@ local lspsaga = {
 return {
   mason,
   lspconfig,
-  lspsaga,
 }

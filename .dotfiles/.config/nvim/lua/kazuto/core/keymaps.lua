@@ -3,7 +3,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Shorten function name
-function Map(mode, lhs, rhs, opts)
+local function keymap(mode, lhs, rhs, opts)
   local options = { noremap = true, silent = true }
 
   if opts then
@@ -14,47 +14,64 @@ function Map(mode, lhs, rhs, opts)
 end
 
 -- general
-Map("n", "<C-s>", vim.cmd.w, { desc = "[S]ave file" })
+keymap("n", "<C-s>", vim.cmd.w, { desc = "[S]ave file" })
+
+-- Better window navigation
+keymap("n", "<C-h>", "<C-w>h")
+keymap("n", "<C-j>", "<C-w>j")
+keymap("n", "<C-k>", "<C-w>k")
+keymap("n", "<C-l>", "<C-w>l")
+
+-- Resize windows
+keymap("n", "<C-Up>", ":resize -2<CR>")
+keymap("n", "<C-Down>", ":resize +2<CR>")
+keymap("n", "<C-Left>", ":vertical resize -2<CR>")
+keymap("n", "<C-Right>", ":vertical resize +2<CR>")
+
+-- Better indenting
+keymap("v", "<", "<gv")
+keymap("v", ">", ">gv")
+
+-- Move text up and down
+keymap("v", "J", ":m '>+1<CR>gv=gv")
+keymap("v", "K", ":m '<-2<CR>gv=gv")
+
+-- Navigate between quickfix items
+keymap("n", "<leader>qn", ":cnext<CR>")
+keymap("n", "<leader>qp", ":cprev<CR>")
 
 -- When text is wrapped, move by terminal rows, not lines, unless a count is provided
-Map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-Map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- split windows
-Map("n", "<leader>sv", "<C-w>v", { desc = "[S]plit window [V]ertical" })
-Map("n", "<leader>sh", "<C-w>s", { desc = "[S]plit window [H]orizontal" })
-Map("n", "<leader>se", "<C-w>=", { desc = "[S]plit window [E]qual" })
-Map("n", "<leader>sx", ":close<CR>", { desc = "[S]plit window E[x]it" })
+keymap("n", "<leader>sv", "<C-w>v", { desc = "[S]plit window [V]ertical" })
+keymap("n", "<leader>sh", "<C-w>s", { desc = "[S]plit window [H]orizontal" })
+keymap("n", "<leader>se", "<C-w>=", { desc = "[S]plit window [E]qual" })
+keymap("n", "<leader>sx", ":close<CR>", { desc = "[S]plit window E[x]it" })
 
 -- Maintain the cursor position when yanking a visual selection
-Map("v", "y", "myy`y")
+keymap("v", "y", "myy`y")
 
--- reselect visual selection after indenting
-Map("v", "<", "<gv")
-Map("v", ">", ">gv")
+-- Better paste (don't replace clipboard)
+keymap("v", "p", '"_dP')
 
--- Easy insertion of a trailing ; or , from insert mode
--- Map("i", ";;", "<Esc>A;<Esc>")
--- Map("i", ",,", "<Esc>A,<Esc>")
+-- Clear search highlighting
+keymap("n", "<leader>h", ":nohlsearch<CR>")
 
--- paste replace visual selection without copying it
-Map("v", "p", '"_dP')
+-- Quick save and quit
+keymap("n", "<leader>w", ":w<CR>")
+keymap("n", "<leader>q", ":q<CR>")
+keymap("n", "<leader>x", ":x<CR>")
 
--- resize with arrows
-Map("n", "<C-Up>", ":resize +2<CR>")
-Map("n", "<C-Down>", ":resize -2<CR>")
-Map("n", "<C-Left>", ":vertical resize -2<CR>")
-Map("n", "<C-Right>", ":vertical resize +2<CR>")
+-- Alternative to [{ and ]} for function/block navigation
+keymap("n", "<leader>fp", "?{<CR>", { desc = "Previous {" })
+keymap("n", "<leader>fn", "/{<CR>", { desc = "Next {" })
 
-Map("n", "<leader>cs", ":noh<CR>", { desc = "[C]lear [S]earch" })
+-- For navigating between git changes (if you use vim-fugitive or similar)
+keymap("n", "<leader>cp", ":cprevious<CR>", { desc = "Previous Change" })
+keymap("n", "<leader>cn", ":cnext<CR>", { desc = "Next Change" })
 
--- move text up and down
--- Map("i", "<M-j>", "<Esc>:m .+1<CR>==gi")
--- Map("i", "<M-k>", "<Esc>:m .-2<CR>==gi")
--- Map("n", "<M-j>", ":m .+1<CR>==")
--- Map("n", "<M-k>", ":m .-2<CR>==")
--- Map("v", "<M-j>", ":m '>+1<CR>gv=gv")
--- Map("v", "<M-k>", ":m '<-2<CR>gv=gv")
-
--- Map("v", "<J>", ":m '>+1<CR>gv=gv")
--- Map("v", "<K>", ":m '<-2<CR>gv=gv")
+-- For navigating folds (alternative to zj/zk if you use them)
+keymap("n", "<leader>zn", "zj", { desc = "Next Fold" })
+keymap("n", "<leader>zp", "zk", { desc = "Previous Fold" })
