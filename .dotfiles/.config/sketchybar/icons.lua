@@ -1,6 +1,7 @@
 return {
   loading = "􀖇",
   apple = "􀣺",
+  calendar = "􀉉 ",
   preferences = "􀺽",
 
   volume = {
