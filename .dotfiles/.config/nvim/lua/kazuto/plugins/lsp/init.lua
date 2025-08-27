@@ -34,9 +34,11 @@ local mason = {
         "intelephense",
         "jsonls",
         "lua_ls",
+        "phpactor",
         "tailwindcss",
         "ts_ls",
         "volar",
+        "vtsls",
       },
       automatic_installation = true,
     })

@@ -57,7 +57,11 @@ keymap("v", "y", "myy`y")
 keymap("v", "p", '"_dP')
 
 -- Clear search highlighting
-keymap("n", "<leader>h", ":nohlsearch<CR>")
+keymap("n", "<Esc>", function()
+  if vim.v.hlsearch == 1 then
+    vim.cmd("nohlsearch")
+  end
+end, { desc = "Clear search highlights", silent = true })
 
 -- Quick save and quit
 keymap("n", "<leader>w", ":w<CR>")

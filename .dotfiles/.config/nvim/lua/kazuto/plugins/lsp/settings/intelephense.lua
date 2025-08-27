@@ -1,12 +1,11 @@
+-- Enhanced intelephense.lua (focused on navigation/completion)
 return {
   settings = {
     intelephense = {
-      -- Explicitly set PHP version
       environment = {
         phpVersion = "8.4.0",
         includePaths = { "./vendor" },
       },
-      -- Comprehensive stubs list for PHP 8.4
       stubs = {
         "Core",
         "SPL",
@@ -81,10 +80,7 @@ return {
       },
       files = {
         maxSize = 5000000,
-        associations = {
-          "*.php",
-          "*.phtml",
-        },
+        associations = { "*.php", "*.phtml" },
         exclude = {
           "**/node_modules/**",
           "**/bower_components/**",
@@ -119,16 +115,16 @@ return {
       format = {
         enable = false,
       },
-      rename = {
-        exclude = {
-          "**/vendor/**",
-          "**/node_modules/**",
-        },
+      telemetry = {
+        enabled = false,
       },
     },
   },
   on_attach = function(client, bufnr)
+    -- Intelephense handles: navigation, completion, hover, diagnostics
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
+    -- Disable rename for Intelephense (let phpactor handle it)
+    client.server_capabilities.renameProvider = false
   end,
 }

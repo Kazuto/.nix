@@ -30,7 +30,7 @@ M.setup = function()
     underline = true,
     severity_sort = true,
     float = {
-      source = "always",
+      source = true,
       border = "rounded",
     },
   })
@@ -41,20 +41,34 @@ local function keymaps(client, bufnr)
     vim.keymap.set(mode, keys, func, { noremap = true, silent = true, buffer = bufnr, desc = desc })
   end
 
-  -- Navigation
+  -- Navigation (primarily Intelephense)
   map("n", "gD", vim.lsp.buf.declaration, "Go to Declaration")
   map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "Go to Definition")
   map("n", "gr", "<cmd>Telescope lsp_references<CR>", "Go to References")
   map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", "Go to Implementation")
   map("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "Go to Type Definition")
 
-  -- Documentation
-  map({ "n" }, "K", vim.lsp.buf.hover, "Show documentation")
-  map("n", "<C-k>", vim.lsp.buf.signature_help, "Show Signature Help")
+  -- Documentation (Intelephense)
+  map("n", "K", vim.lsp.buf.hover, "Show Hover Documentation")
+  if client.server_capabilities.signatureHelpProvider then
+    map("n", "<C-k>", vim.lsp.buf.signature_help, "Show Signature Help")
+  end
 
-  -- Actions
-  map("n", "<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
-  map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code Actions")
+  -- Refactoring (will use whichever server supports it)
+  if client.server_capabilities.renameProvider then
+    map("n", "<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
+  end
+
+  if client.server_capabilities.codeActionProvider then
+    map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code Actions")
+  end
+
+  -- Formatting (use conform.nvim instead)
+  if client.server_capabilities.documentFormattingProvider then
+    map("n", "<leader>f", function()
+      vim.lsp.buf.format({ async = true })
+    end, "Format Document")
+  end
 
   -- Diagnostics
   map("n", "<leader>d", vim.diagnostic.open_float, "Show Line Diagnostics")
@@ -67,6 +81,39 @@ local function keymaps(client, bufnr)
 
   -- LSP Servers
   map({ "n" }, "<leader>rs", ":LspRestart<CR>", "[R]estart LSP [S]erver")
+
+  -- Debug which server is handling what
+  map("n", "<leader>lc", function()
+    pcall(function()
+      local clients = vim.lsp.get_clients({ bufnr = bufnr })
+      if #clients == 0 then
+        vim.notify("No LSP clients attached", vim.log.levels.WARN)
+        return
+      end
+
+      for _, c in ipairs(clients) do
+        local caps = c.server_capabilities or {}
+        local msg = string.format(
+          [[
+%s:
+├─ Hover: %s
+├─ Completion: %s
+├─ Definition: %s
+├─ References: %s
+├─ Rename: %s
+└─ Code Actions: %s]],
+          c.name,
+          caps.hoverProvider and "✓" or "✗",
+          caps.completionProvider and "✓" or "✗",
+          caps.definitionProvider and "✓" or "✗",
+          caps.referencesProvider and "✓" or "✗",
+          caps.renameProvider and "✓" or "✗",
+          caps.codeActionProvider and "✓" or "✗"
+        )
+        vim.notify(msg, vim.log.levels.INFO)
+      end
+    end)
+  end, "LSP Capabilities")
 end
 
 M.on_attach = function(client, bufnr)
