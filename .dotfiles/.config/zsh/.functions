@@ -29,12 +29,14 @@ function l:ps() {
     fi
 }
 
-dirigo() {
+dg() {
   if [[ "$1" == --* ]]; then
     command dirigo "$@"
   else
     local dir
+    
     dir=$(command dirigo "$1") || return 1
+
     if [ -d "$dir" ]; then
       cd "$dir" && nvim || return
     else
