@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source "$CONFIG_DIR/colors.sh"
 JSON_FILE="/tmp/logitech_battery_$1.json"
 
 if [ "$1" = "ED9B3216" ]; then
@@ -13,11 +14,12 @@ __update() {
   PERCENTAGE=$(jq '.percentage' "$JSON_FILE")
   ICON=$(jq -r '.icon' "$JSON_FILE")
   CHARGING=$(jq -r '.charging' "$JSON_FILE")
+  COLOR=$(jq -r '.color' "$JSON_FILE")
 
   if [ "$CHARGING" = true ]; then
     sketchybar --set "$NAME" icon="$DEVICE_ICON" label="$ICON"
   else
-    sketchybar --set "$NAME" icon="$DEVICE_ICON " label="$PERCENTAGE%"
+    sketchybar --set "$NAME" icon="$DEVICE_ICON " label="$PERCENTAGE%" label.color="$COLOR"
   fi
 }
 
@@ -44,11 +46,11 @@ fi
 
 # Select icon
 case $PERCENTAGE in
-9[0-9] | 100) ICON="􀛨" ;; # Full
-[6-8][0-9]) ICON="􀺸" ;;   # High
-[3-5][0-9]) ICON="􀺶" ;;   # Medium
-[1-2][0-9]) ICON="􀛩" ;;   # Low
-*) ICON="􀛪" ;;            # Very low
+9[0-9] | 100) ICON="􀛨" COLOR="$CAT_TEXT" ;; # Full
+[6-8][0-9]) ICON="􀺸" COLOR="$CAT_TEXT" ;;   # High
+[3-5][0-9]) ICON="􀺶" COLOR="$CAT_YELLOW" ;; # Medium
+[1-2][0-9]) ICON="􀛩" COLOR="$CAT_PEACH" ;;  # Low
+*) ICON="􀛪" COLOR="$CAT_RED" ;;             # Very low
 esac
 
 # Override icon if charging
@@ -59,6 +61,8 @@ cat >"$JSON_FILE" <<EOF
   "percentage": $PERCENTAGE,
   "charging": $CHARGING,
   "icon": "$ICON",
+  "color": "$COLOR",
+
   "device": "$1"
 }
 EOF
