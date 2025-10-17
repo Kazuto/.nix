@@ -29,7 +29,14 @@ export PATH="$PATH:/nix/var/nix/profiles/default/bin"
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro--locate-shell-integration-path zsh)"
+
+if [[ "$TERM_PROGRAM" == "kiro" ]]; then
+  # Leave empty or set a light theme
+else
+  # Your theme
+  ZSH_THEME="powerlevel10k/powerlevel10k"
+fi
 
 plugins=(
   composer
@@ -87,3 +94,5 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
 fi
+
+export PATH=$PATH:/Users/kazuto/.spicetify
