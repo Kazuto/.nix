@@ -79,3 +79,6 @@ keymap("n", "<leader>cn", ":cnext<CR>", { desc = "Next Change" })
 -- For navigating folds (alternative to zj/zk if you use them)
 keymap("n", "<leader>zn", "zj", { desc = "Next Fold" })
 keymap("n", "<leader>zp", "zk", { desc = "Previous Fold" })
+
+-- PHPActor restart for memory issues
+keymap("n", "<leader>rp", ":PhpactorRestart<CR>", { desc = "[R]estart [P]HPActor" })

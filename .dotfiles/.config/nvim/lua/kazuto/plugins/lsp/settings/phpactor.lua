@@ -5,6 +5,24 @@ return {
     ["language_server_phpstan.enabled"] = false,
     ["code_transform.import_globals"] = true,
     ["language_server_psalm.enabled"] = false,
+    -- Memory and performance optimizations
+    ["indexer.enabled_watchers"] = { "php" },
+    ["indexer.exclude_patterns"] = {
+      "**/vendor/**",
+      "**/node_modules/**",
+      "**/build/**",
+      "**/storage/**",
+      "**/cache/**",
+      "**/.git/**",
+      "**/phpstan/**",
+      "**/*resultCache*",
+      "**/*.cache",
+      "**/bootstrap/cache/**",
+    },
+    ["indexer.poll_time"] = 5000,
+    ["completion.dedupe"] = true,
+    ["completion_worse.snippets"] = false,
+    ["worse_reflection.enable_cache"] = false,
   },
   on_attach = function(client, bufnr)
     -- Phpactor handles: renaming, refactoring, code actions

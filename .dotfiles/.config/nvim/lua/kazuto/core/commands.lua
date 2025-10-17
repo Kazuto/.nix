@@ -83,6 +83,24 @@ local collection = {
       buf_kill("bd")
     end,
   },
+  {
+    name = "PhpactorRestart",
+    fn = function()
+      -- Stop phpactor
+      for _, client in pairs(vim.lsp.get_clients()) do
+        if client.name == "phpactor" then
+          client.stop()
+          vim.notify("Stopping PHPActor...", vim.log.levels.INFO)
+        end
+      end
+      
+      -- Wait a moment then restart
+      vim.defer_fn(function()
+        vim.cmd("LspStart phpactor")
+        vim.notify("PHPActor restarted", vim.log.levels.INFO)
+      end, 1000)
+    end,
+  },
 }
 
 for _, cmd in pairs(collection) do

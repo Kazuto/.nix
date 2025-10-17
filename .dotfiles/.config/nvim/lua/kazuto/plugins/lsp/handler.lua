@@ -34,6 +34,12 @@ M.setup = function()
       border = "rounded",
     },
   })
+
+  -- Global LSP optimizations for large files and memory usage
+  vim.lsp.set_log_level("WARN") -- Reduce log verbosity
+  
+  -- Increase file size limit to 10MB (from default 5MB)
+  vim.g.lsp_file_size_limit = 10 * 1024 * 1024
 end
 
 local function keymaps(client, bufnr)
@@ -43,7 +49,28 @@ local function keymaps(client, bufnr)
 
   -- Navigation (primarily Intelephense)
   map("n", "gD", vim.lsp.buf.declaration, "Go to Declaration")
-  map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "Go to Definition")
+  map("n", "gd", function()
+    -- Check if we're in a special buffer type that might cause issues
+    local buftype = vim.bo.buftype
+    if buftype == "prompt" or buftype == "nofile" then
+      vim.notify("Cannot navigate from this buffer type", vim.log.levels.WARN)
+      return
+    end
+    
+    -- Try Telescope first, fallback to builtin LSP
+    local ok, _ = pcall(function()
+      require("telescope.builtin").lsp_definitions({
+        show_line = false,
+        trim_text = true,
+        include_current_line = false,
+      })
+    end)
+    
+    if not ok then
+      -- Fallback to builtin LSP
+      vim.lsp.buf.definition()
+    end
+  end, "Go to Definition")
   map("n", "gr", "<cmd>Telescope lsp_references<CR>", "Go to References")
   map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", "Go to Implementation")
   map("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "Go to Type Definition")
@@ -117,6 +144,25 @@ local function keymaps(client, bufnr)
 end
 
 M.on_attach = function(client, bufnr)
+  -- Check file size and disable LSP for very large files
+  local file_size_limit = 5 * 1024 * 1024 -- 5MB
+  local file_path = vim.api.nvim_buf_get_name(bufnr)
+  
+  if file_path and file_path ~= "" then
+    local stat = vim.loop.fs_stat(file_path)
+    if stat and stat.size > file_size_limit then
+      vim.notify(
+        string.format("File %s is too large (%dMB), disabling LSP", 
+          vim.fn.fnamemodify(file_path, ":t"), 
+          math.floor(stat.size / 1024 / 1024)
+        ), 
+        vim.log.levels.WARN
+      )
+      vim.lsp.buf_detach_client(bufnr, client.id)
+      return
+    end
+  end
+
   keymaps(client, bufnr)
 end
 
