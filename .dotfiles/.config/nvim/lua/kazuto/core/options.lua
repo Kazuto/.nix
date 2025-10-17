@@ -4,6 +4,9 @@ opt.updatetime = 250
 opt.timeoutlen = 300
 opt.redrawtime = 10000
 opt.maxmempattern = 5000
+opt.synmaxcol = 300 -- Don't syntax highlight long lines
+opt.lazyredraw = true -- Don't redraw during macros
+opt.ttyfast = true -- Faster terminal connection
 
 -- Better completion
 opt.completeopt = { "menu", "menuone", "noselect" }

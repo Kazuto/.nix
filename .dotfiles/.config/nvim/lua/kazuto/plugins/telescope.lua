@@ -51,19 +51,6 @@ return {
             ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
           },
         },
-        -- Handle buffer type issues
-        buffer_previewer_maker = function(filepath, bufnr, opts)
-          opts = opts or {}
-          
-          -- Skip preview for very large files
-          local stat = vim.loop.fs_stat(filepath)
-          if stat and stat.size > 1024 * 1024 then -- 1MB
-            vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, {"File too large for preview"})
-            return
-          end
-          
-          require("telescope.previewers.utils").regex_highlighter(bufnr, "php")
-        end,
         file_ignore_patterns = {
           "node_modules",
           ".git/",
@@ -82,6 +69,14 @@ return {
           additional_args = function()
             return { "--hidden" }
           end,
+        },
+        lsp_definitions = {
+          show_line = false,
+          trim_text = true,
+        },
+        lsp_references = {
+          show_line = false,
+          trim_text = true,
         },
       },
     })

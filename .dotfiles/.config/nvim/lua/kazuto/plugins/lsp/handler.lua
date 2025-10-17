@@ -40,6 +40,15 @@ M.setup = function()
   
   -- Increase file size limit to 10MB (from default 5MB)
   vim.g.lsp_file_size_limit = 10 * 1024 * 1024
+  
+  -- Remove custom code action handler that might cause loops
+  
+  -- Optimize hover timeout
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover, {
+      timeout_ms = 2000, -- 2 second timeout
+    }
+  )
 end
 
 local function keymaps(client, bufnr)
@@ -87,7 +96,36 @@ local function keymaps(client, bufnr)
   end
 
   if client.server_capabilities.codeActionProvider then
-    map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code Actions")
+    map({ "n", "v" }, "<leader>ca", function()
+      -- Use a simple timeout wrapper around the default code action
+      local timer = vim.loop.new_timer()
+      local completed = false
+      
+      timer:start(3000, 0, function()
+        if not completed then
+          completed = true
+          vim.schedule(function()
+            vim.notify("Code action request timed out", vim.log.levels.WARN)
+          end)
+        end
+        timer:close()
+      end)
+      
+      vim.lsp.buf.code_action({
+        apply = false,
+        context = {
+          only = { "quickfix", "refactor.extract", "source.organizeImports" }
+        }
+      })
+      
+      -- Mark as completed when the action menu appears
+      vim.defer_fn(function()
+        completed = true
+        if timer and not timer:is_closing() then
+          timer:close()
+        end
+      end, 100)
+    end, "Code Actions")
   end
 
   -- Formatting (use conform.nvim instead)

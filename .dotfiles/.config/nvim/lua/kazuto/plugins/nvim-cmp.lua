@@ -65,12 +65,32 @@ return {
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
       }),
       sources = cmp.config.sources({
-        { name = "nvim_lsp" }, -- lsp
-        { name = "nvim_lsp_signature_help" },
-        { name = "luasnip" }, -- snippets
-        { name = "buffer" }, -- text within current buffer
-        { name = "path" }, -- file system paths
+        { name = "nvim_lsp", priority = 1000 }, -- lsp
+        { name = "nvim_lsp_signature_help", priority = 900 },
+        { name = "luasnip", priority = 800 }, -- snippets
+        { 
+          name = "buffer", 
+          priority = 500,
+          option = {
+            get_bufnrs = function()
+              local bufs = {}
+              for _, win in ipairs(vim.api.nvim_list_wins()) do
+                bufs[vim.api.nvim_win_get_buf(win)] = true
+              end
+              return vim.tbl_keys(bufs)
+            end
+          }
+        }, -- text within current buffer
+        { name = "path", priority = 300 }, -- file system paths
       }),
+      performance = {
+        debounce = 60,
+        throttle = 30,
+        fetching_timeout = 500,
+        confirm_resolve_timeout = 80,
+        async_budget = 1,
+        max_view_entries = 200,
+      },
       formatting = {
         format = function(entry, item)
           local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })

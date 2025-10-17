@@ -16,6 +16,15 @@ return {
         virt_text_priority = 100,
         use_focus = true,
       },
+      max_file_length = 40000, -- Disable for files longer than 40k lines
+      update_debounce = 200, -- Debounce updates
+      preview_config = {
+        border = "rounded",
+        style = "minimal",
+        relative = "cursor",
+        row = 0,
+        col = 1,
+      },
     })
   end,
   keys = {

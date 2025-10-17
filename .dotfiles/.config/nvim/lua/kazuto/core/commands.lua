@@ -101,6 +101,25 @@ local collection = {
       end, 1000)
     end,
   },
+  {
+    name = "PerformanceInfo",
+    fn = function()
+      local stats = {
+        "=== Neovim Performance Stats ===",
+        "",
+        "Startup time: " .. vim.fn.reltimestr(vim.fn.reltime(vim.g.start_time)) .. "s",
+        "Memory usage: " .. math.floor(collectgarbage("count")) .. " KB",
+        "Loaded plugins: " .. #vim.tbl_keys(require("lazy").plugins()),
+        "LSP clients: " .. #vim.lsp.get_clients(),
+        "",
+        "=== Buffer Stats ===",
+        "Total buffers: " .. #vim.api.nvim_list_bufs(),
+        "Loaded buffers: " .. #vim.tbl_filter(function(buf) return vim.api.nvim_buf_is_loaded(buf) end, vim.api.nvim_list_bufs()),
+      }
+      
+      vim.notify(table.concat(stats, "\n"), vim.log.levels.INFO)
+    end,
+  },
 }
 
 for _, cmd in pairs(collection) do

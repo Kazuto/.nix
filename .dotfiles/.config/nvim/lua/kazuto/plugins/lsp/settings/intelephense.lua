@@ -79,7 +79,7 @@ return {
         "lumen",
       },
       files = {
-        maxSize = 5000000,
+        maxSize = 3000000, -- Reduced from 5MB to 3MB
         associations = { "*.php", "*.phtml" },
         exclude = {
           "**/node_modules/**",
@@ -87,17 +87,24 @@ return {
           "**/.git/**",
           "**/vendor/**/Tests/**",
           "**/vendor/**/tests/**",
+          "**/storage/**",
+          "**/cache/**",
+          "**/build/**",
+          "**/phpstan/**",
+          "**/*resultCache*",
+          "**/*.cache",
+          "**/bootstrap/cache/**",
         },
       },
       completion = {
         insertUseDeclaration = true,
         fullyQualifyGlobalConstantsAndFunctions = false,
         triggerParameterHints = true,
-        maxItems = 100,
+        maxItems = 50, -- Reduced from 100 to 50
       },
       diagnostics = {
         enable = true,
-        run = "onType",
+        run = "onSave", -- Changed from onType to onSave for better performance
         typeErrors = false,
         undefinedTypes = true,
         undefinedFunctions = true,
@@ -105,12 +112,12 @@ return {
         undefinedClassConstants = true,
         undefinedMethods = true,
         undefinedProperties = true,
-        unusedSymbols = true,
+        unusedSymbols = false, -- Disabled for performance
         duplicateSymbols = true,
         argumentCount = true,
-        typeCoercion = true,
+        typeCoercion = false, -- Disabled for performance
         missingReturnType = false,
-        unnecessaryFQCN = true,
+        unnecessaryFQCN = false, -- Disabled for performance
       },
       format = {
         enable = false,
