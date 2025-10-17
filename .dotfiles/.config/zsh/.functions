@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function info() {
-    gum style --padding "1 5" --border double --border-foreground 212 "$1"
+  gum style --padding "1 5" --border double --border-foreground 212 "$1"
 }
 
 # ======== PHPSTAN ======== #
@@ -9,32 +9,32 @@ alias psc="phpstan analyse --ansi --memory-limit=8G"
 alias psb="phpstan --generate-baseline --memory-limit=8G"
 
 function _phpstan() {
-    case $1 in
-        "check") phpstan analyse --ansi --memory-limit="8G";;
-        "generate") phpstan --generate-baseline --memory-limit="8G";;
-        "clear") phpstan clear-result-cache --memory-limit="8G";;
-    esac
+  case $1 in
+  "check") phpstan analyse --ansi --memory-limit="8G" ;;
+  "generate") phpstan --generate-baseline --memory-limit="8G" ;;
+  "clear") phpstan clear-result-cache --memory-limit="8G" ;;
+  esac
 }
 
 function l:ps() {
-    info "PHPStan: Do you want to check errors or generate baseline?"
-    action=$(gum choose "Check" "Generate")
+  info "PHPStan: Do you want to check errors or generate baseline?"
+  action=$(gum choose "Check" "Generate")
 
-    if [ "$action" = "Check" ]; then
-       _phpstan check
-    elif [ "$action" = "Generate" ]; then
-        gum confirm "Clear cache?" && _phpstan clear
+  if [ "$action" = "Check" ]; then
+    _phpstan check
+  elif [ "$action" = "Generate" ]; then
+    gum confirm "Clear cache?" && _phpstan clear
 
-        _phpstan generate
-    fi
+    _phpstan generate
+  fi
 }
 
-dg() {
+function dg() {
   if [[ "$1" == --* ]]; then
     command dirigo "$@"
   else
     local dir
-    
+
     dir=$(command dirigo "$1") || return 1
 
     if [ -d "$dir" ]; then
