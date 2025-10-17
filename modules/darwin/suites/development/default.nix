@@ -17,6 +17,7 @@ in
       };
 
       cli = {
+        jira-cli = enabled;
         neovim = enabled;
         ngrok = enabled;
         phpstan = enabled;
