@@ -36,7 +36,7 @@ automatically-unhide-macos-hidden-apps = false
     5 = 'main'
     6 = 'main'
     "T" = 2
-    "S" = 3
+    "S" = 2
 
 [key-mapping]
     preset = 'qwerty'
