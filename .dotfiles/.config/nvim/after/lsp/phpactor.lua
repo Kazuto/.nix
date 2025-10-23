@@ -45,8 +45,9 @@ return {
     client.server_capabilities.diagnosticProvider = false
     client.server_capabilities.publishDiagnostics = false
     
-    -- Disable diagnostic handlers
-    vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
+    -- Disable diagnostic handlers for this client only
+    client.handlers = client.handlers or {}
+    client.handlers["textDocument/publishDiagnostics"] = function() end
 
     -- Keep only what phpactor does well
     -- client.server_capabilities.renameProvider = true (keep default)

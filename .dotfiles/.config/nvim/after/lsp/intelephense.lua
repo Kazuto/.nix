@@ -77,7 +77,7 @@ return {
     "lumen",
   },
   files = {
-    maxSize = 3000000,
+    maxSize = 1000000,
     associations = { "*.php", "*.phtml" },
     exclude = {
       "**/node_modules/**",
@@ -85,6 +85,7 @@ return {
       "**/.git/**",
       "**/vendor/**/Tests/**",
       "**/vendor/**/tests/**",
+      "**/vendor/**/test/**",
       "**/storage/**",
       "**/cache/**",
       "**/build/**",
@@ -92,13 +93,21 @@ return {
       "**/*resultCache*",
       "**/*.cache",
       "**/bootstrap/cache/**",
+      "**/public/build/**",
+      "**/public/hot",
+      "**/public/storage/**",
     },
   },
   completion = {
     insertUseDeclaration = true,
     fullyQualifyGlobalConstantsAndFunctions = false,
     triggerParameterHints = true,
-    maxItems = 50,
+    maxItems = 25,
+  },
+  cache = {
+    workspace = {
+      enable = true,
+    },
   },
   diagnostics = {
     enable = true,
@@ -110,12 +119,12 @@ return {
     undefinedClassConstants = true,
     undefinedMethods = true,
     undefinedProperties = true,
-    unusedSymbols = true, -- Disabled for performance
-    duplicateSymbols = true,
+    unusedSymbols = true,
+    duplicateSymbols = false,
     argumentCount = true,
-    typeCoercion = false, -- Disabled for performance
+    typeCoercion = false,
     missingReturnType = false,
-    unnecessaryFQCN = false, -- Disabled for performance
+    unnecessaryFQCN = false,
   },
   format = {
     enable = false,
