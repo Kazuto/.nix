@@ -93,7 +93,7 @@ local collection = {
           vim.notify("Stopping PHPActor...", vim.log.levels.INFO)
         end
       end
-      
+
       -- Wait a moment then restart
       vim.defer_fn(function()
         vim.cmd("LspStart phpactor")
@@ -104,20 +104,9 @@ local collection = {
   {
     name = "PerformanceInfo",
     fn = function()
-      local stats = {
-        "=== Neovim Performance Stats ===",
-        "",
-        "Startup time: " .. vim.fn.reltimestr(vim.fn.reltime(vim.g.start_time)) .. "s",
-        "Memory usage: " .. math.floor(collectgarbage("count")) .. " KB",
-        "Loaded plugins: " .. #vim.tbl_keys(require("lazy").plugins()),
-        "LSP clients: " .. #vim.lsp.get_clients(),
-        "",
-        "=== Buffer Stats ===",
-        "Total buffers: " .. #vim.api.nvim_list_bufs(),
-        "Loaded buffers: " .. #vim.tbl_filter(function(buf) return vim.api.nvim_buf_is_loaded(buf) end, vim.api.nvim_list_bufs()),
-      }
-      
-      vim.notify(table.concat(stats, "\n"), vim.log.levels.INFO)
+      -- Use the new performance utilities
+      require("kazuto.utils.performance-commands")
+      vim.cmd("PerfReport")
     end,
   },
 }
@@ -126,3 +115,6 @@ for _, cmd in pairs(collection) do
   local opts = vim.tbl_deep_extend("force", common_opts, cmd.opts or {})
   vim.api.nvim_create_user_command(cmd.name, cmd.fn, opts)
 end
+
+-- Initialize performance monitoring utilities
+require("kazuto.utils.performance-commands")

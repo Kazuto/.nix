@@ -19,8 +19,8 @@ return {
     })
   end,
   keys = {
-    { "<leader>wr", "<cmd>SessionRestore<CR>", desc = "[W]orkspace [R]estore" },
-    { "<leader>ws", "<cmd>SessionSave<CR>", desc = "[W]orkspace [S]ave" },
-    { "<leader>wd", "<cmd>SessionDelete<CR>", desc = "[W]orkspace [D]elete" },
+    { "<leader>wr", "<cmd>AutoSession restore<CR>", desc = "[W]orkspace [R]estore" },
+    { "<leader>ws", "<cmd>AutoSession save<CR>", desc = "[W]orkspace [S]ave" },
+    { "<leader>wd", "<cmd>AutoSession delete<CR>", desc = "[W]orkspace [D]elete" },
   },
 }

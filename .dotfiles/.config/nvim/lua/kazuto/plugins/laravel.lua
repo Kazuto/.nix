@@ -9,6 +9,8 @@ return {
     "nvimtools/none-ls.nvim",
     "kevinhwang91/promise-async",
     "nvim-treesitter/nvim-treesitter",
+    "nvim-lua/plenary.nvim",
+    "nvim-neotest/nvim-nio",
   },
   cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
   keys = {

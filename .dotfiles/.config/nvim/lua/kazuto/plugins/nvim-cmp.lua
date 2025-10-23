@@ -68,8 +68,8 @@ return {
         { name = "nvim_lsp", priority = 1000 }, -- lsp
         { name = "nvim_lsp_signature_help", priority = 900 },
         { name = "luasnip", priority = 800 }, -- snippets
-        { 
-          name = "buffer", 
+        {
+          name = "buffer",
           priority = 500,
           option = {
             get_bufnrs = function()
@@ -78,8 +78,8 @@ return {
                 bufs[vim.api.nvim_win_get_buf(win)] = true
               end
               return vim.tbl_keys(bufs)
-            end
-          }
+            end,
+          },
         }, -- text within current buffer
         { name = "path", priority = 300 }, -- file system paths
       }),

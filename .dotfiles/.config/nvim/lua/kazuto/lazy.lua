@@ -15,6 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   { import = "kazuto.plugins" },
+  { import = "kazuto.plugins.lsp" },
 }, {
   checker = {
     enabled = true,
