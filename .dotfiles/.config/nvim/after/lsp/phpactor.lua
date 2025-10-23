@@ -8,7 +8,6 @@ return {
     -- Memory and performance optimizations
     ["indexer.enabled_watchers"] = { "php" },
     ["indexer.exclude_patterns"] = {
-      "**/vendor/**",
       "**/node_modules/**",
       "**/build/**",
       "**/storage/**",
@@ -22,7 +21,11 @@ return {
     ["indexer.poll_time"] = 5000,
     ["completion.dedupe"] = true,
     ["completion_worse.snippets"] = false,
-    ["worse_reflection.enable_cache"] = false,
+    ["worse_reflection.enable_cache"] = true,
+    ["language_server.diagnostics_on_update"] = false,
+    ["language_server.diagnostics_on_open"] = false,
+    ["language_server.diagnostics_on_save"] = false,
+    ["language_server_worse_reflection.diagnostics.enable"] = false,
   },
   on_attach = function(client, bufnr)
     -- Phpactor handles: renaming, refactoring, code actions
@@ -38,8 +41,12 @@ return {
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
 
-    -- DISABLE DIAGNOSTICS - Let Intelephense handle all diagnostics
+    -- COMPLETELY DISABLE DIAGNOSTICS - Let Intelephense handle all diagnostics
+    client.server_capabilities.diagnosticProvider = false
     client.server_capabilities.publishDiagnostics = false
+    
+    -- Disable diagnostic handlers
+    vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
 
     -- Keep only what phpactor does well
     -- client.server_capabilities.renameProvider = true (keep default)
