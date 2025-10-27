@@ -44,7 +44,7 @@ return {
     -- COMPLETELY DISABLE DIAGNOSTICS - Let Intelephense handle all diagnostics
     client.server_capabilities.diagnosticProvider = false
     client.server_capabilities.publishDiagnostics = false
-    
+
     -- Disable diagnostic handlers for this client only
     client.handlers = client.handlers or {}
     client.handlers["textDocument/publishDiagnostics"] = function() end
