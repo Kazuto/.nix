@@ -31,7 +31,9 @@ local battery = sbar.add("item", "battery", {
     padding_right = settings.spacing.label_padding_right,
   },
   background = {
-    drawing = false, -- Remove background to match bash config
+    color = colors.item.bg,
+    corner_radius = 10,
+    height = 26,
   },
   update_freq = settings.update_freq.battery,
   y_offset = settings.y_offset,

@@ -235,7 +235,9 @@ local spotify_item = sbar.add("item", "spotify.name", {
     },
   },
   background = {
-    drawing = false, -- Remove background to match bash config
+    color = colors.item.bg,
+    corner_radius = 10,
+    height = 26,
   },
   popup = {
     horizontal = "on", -- Horizontal layout for cover next to controls
@@ -462,32 +464,30 @@ local function update_spotify()
 end
 
 -- Click handlers for media controls
-spotify_item:subscribe("mouse.clicked", function()
-  spotify_item:set({ popup = { drawing = "toggle" } })
+spotify_item:subscribe("mouse.entered", function()
+  spotify_item:set({ popup = { drawing = true } })
+end)
+
+spotify_item:subscribe("mouse.exited.global", function()
+  spotify_item:set({ popup = { drawing = false } })
 end)
 
 spotify_back:subscribe("mouse.clicked", function()
   spotify.previous_track()
-  -- Small delay then update
-  sbar.exec("sleep 0.1 && echo 'update'", function()
-    update_spotify()
-  end)
+  -- Trigger immediate update without blocking
+  update_spotify()
 end)
 
 spotify_play:subscribe("mouse.clicked", function()
   spotify.play_pause()
-  -- Small delay then update
-  sbar.exec("sleep 0.1 && echo 'update'", function()
-    update_spotify()
-  end)
+  -- Trigger immediate update without blocking
+  update_spotify()
 end)
 
 spotify_next:subscribe("mouse.clicked", function()
   spotify.next_track()
-  -- Small delay then update
-  sbar.exec("sleep 0.1 && echo 'update'", function()
-    update_spotify()
-  end)
+  -- Trigger immediate update without blocking
+  update_spotify()
 end)
 
 spotify_shuffle:subscribe("mouse.clicked", function()

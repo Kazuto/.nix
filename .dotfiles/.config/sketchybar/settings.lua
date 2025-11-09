@@ -63,7 +63,7 @@ return {
   },
 
   -- Y-offset settings
-  y_offset = 1,
+  y_offset = 0,
 
   -- Popup settings
   popup = {

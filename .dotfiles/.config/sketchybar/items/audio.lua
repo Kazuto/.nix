@@ -26,7 +26,9 @@ local audio = sbar.add("item", "audio", {
     padding_right = settings.spacing.label_padding_right,
   },
   background = {
-    drawing = false, -- Remove background to match bash config
+    color = colors.item.bg,
+    corner_radius = 10,
+    height = 26,
   },
   y_offset = settings.y_offset,
   popup = {

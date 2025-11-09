@@ -28,7 +28,7 @@ sbar.default({
     height = 26,
     corner_radius = 10,
     border_width = 0,
-    color = "0x15000000", -- Semi-transparent background to match bash config
+    color = "0x0d000000", -- 95% transparent (5% opacity)
   },
   popup = {
     background = {

@@ -3,7 +3,7 @@ return {
     bg = "0xff1e1e2e",
   },
   item = {
-    bg = "0xff181825",
+    bg = "0x1a000000", -- 90% transparent (10% opacity) - change this to adjust all item backgrounds
     text = "0xffcdd6f4",
   },
   accent = "0xfffab387",

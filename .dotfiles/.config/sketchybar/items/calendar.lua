@@ -24,7 +24,9 @@ local calendar = sbar.add("item", {
     padding_right = settings.spacing.label_padding_right,
   },
   background = {
-    drawing = false, -- Remove background to match bash config
+    color = colors.item.bg,
+    corner_radius = 10,
+    height = 26,
   },
   position = "right",
   y_offset = settings.y_offset,
