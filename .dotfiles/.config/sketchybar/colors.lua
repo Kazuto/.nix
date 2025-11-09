@@ -46,6 +46,7 @@ return {
       base = "0xff1e1e2e",
       mantle = "0xff181825",
       crust = "0xff11111b",
+      transparent = "0x00000000"
     },
   },
 }

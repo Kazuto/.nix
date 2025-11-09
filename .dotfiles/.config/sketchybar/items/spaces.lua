@@ -13,15 +13,15 @@ local spaces = {}
 local SPACE_CONFIG = {
   icon = {
     padding_left = settings.spacing.space_icon_padding_left or 10,
-    padding_right = 0,
+    padding_right = 5, -- Add padding between number and app icons
     font = {
-      family = settings.fonts.app_icons.family,
-      style = settings.fonts.app_icons.style,
-      size = settings.fonts.app_icons.size
+      family = "SF Pro", -- Use SF Pro instead of app font for numbers
+      style = "Semibold",
+      size = 16.0
     }
   },
   label = {
-    padding_left = 0,
+    padding_left = 5, -- Add padding between number and app icons
     padding_right = settings.spacing.space_label_padding_right or 20,
     y_offset = -1,
     font = {
@@ -101,23 +101,20 @@ local function generate_workspace_items()
   end
   space_items = {}
   
-  -- Get all monitors
-  local monitors = aerospace.get_monitors()
-  if #monitors == 0 then
-    helpers.log_error("No monitors found from aerospace")
+  -- Only show workspaces from primary monitor (monitor 1)
+  local monitor_id = "1"
+  local workspaces = aerospace.get_workspaces(monitor_id)
+  
+  if #workspaces == 0 then
+    helpers.log_error("No workspaces found for monitor " .. monitor_id)
     return
   end
   
-  helpers.log_info("Found " .. #monitors .. " monitors")
+  helpers.log_info("Monitor " .. monitor_id .. " has " .. #workspaces .. " workspaces")
   
-  -- Create workspace items for each monitor
-  for _, monitor_id in ipairs(monitors) do
-    local workspaces = aerospace.get_workspaces(monitor_id)
-    helpers.log_info("Monitor " .. monitor_id .. " has " .. #workspaces .. " workspaces")
-    
-    for _, workspace_id in ipairs(workspaces) do
-      create_space_item(workspace_id, monitor_id)
-    end
+  -- Create workspace items
+  for _, workspace_id in ipairs(workspaces) do
+    create_space_item(workspace_id, monitor_id)
   end
   
   helpers.log_info("Generated " .. helpers.table_length(space_items) .. " workspace items")
@@ -131,38 +128,22 @@ local function update_workspace_state(workspace_id, is_focused)
   end
   
   local item = space_data.item
-  
-  if is_focused then
-    -- Focused workspace styling
-    item:set({
-      drawing = true,
-      background = {
-        drawing = true,
-        color = colors.catppuccin.mocha.peach
-      },
-      icon = {
-        color = colors.catppuccin.mocha.base
-      },
-      label = {
-        color = colors.catppuccin.mocha.base,
-        shadow = { drawing = false }
-      }
-    })
-  else
-    -- Unfocused workspace styling
-    item:set({
-      drawing = true,
-      background = {
-        drawing = false
-      },
-      icon = {
-        color = colors.catppuccin.mocha.text
-      },
-      label = {
-        color = colors.catppuccin.mocha.text
-      }
-    })
-  end
+  local text_color = is_focused and colors.catppuccin.mocha.base or colors.catppuccin.mocha.text
+  local background_color = is_focused and colors.catppuccin.mocha.peach or colors.catppuccin.mocha.transparent
+
+  item:set({
+    background = {
+      drawing = is_focused,
+      color = background_color
+    },
+    icon = {
+      color = text_color
+    },
+    label = {
+      color = text_color,
+      shadow = { drawing = false }
+    }
+  })
 end
 
 -- Update all workspace states based on current focus
@@ -188,53 +169,63 @@ local function update_window_indicators()
     return
   end
   
-  -- Get all monitors and their workspaces
-  local monitors = aerospace.get_monitors()
+  -- Only update workspaces from primary monitor (monitor 1)
+  local monitor_id = "1"
+  local workspaces = aerospace.get_workspaces(monitor_id)
   
-  for _, monitor_id in ipairs(monitors) do
-    local workspaces = aerospace.get_workspaces(monitor_id)
-    
-    for _, workspace_id in ipairs(workspaces) do
-      local space_data = space_items[workspace_id]
-      if space_data and space_data.item then
-        -- Get windows for this workspace
-        local windows = aerospace.get_workspace_windows(workspace_id)
-        local icon_strip = " "
-        
-        if #windows > 0 then
-          -- Create icon strip from window applications
-          for _, window_line in ipairs(windows) do
-            -- Parse application name from window line (format may vary)
-            -- Typical format: "window_id | app_name | window_title"
-            local app_name = window_line:match("|%s*([^|]+)%s*|")
-            if app_name then
-              app_name = helpers.trim(app_name)
-              local app_icon = helpers.get_app_icon(app_name)
-              icon_strip = icon_strip .. " " .. app_icon
-            end
+  for _, workspace_id in ipairs(workspaces) do
+    local space_data = space_items[workspace_id]
+    if space_data and space_data.item then
+      -- Get windows for this workspace
+      local windows = aerospace.get_workspace_windows(workspace_id)
+      local icon_strip = ""
+      
+      if #windows > 0 then
+        -- Create icon strip from window applications
+        for _, window_line in ipairs(windows) do
+          -- Parse application name from window line (format may vary)
+          -- Typical format: "window_id | app_name | window_title"
+          local app_name = window_line:match("|%s*([^|]+)%s*|")
+          if app_name then
+            app_name = helpers.trim(app_name)
+            local app_icon = helpers.get_app_icon(app_name)
+            icon_strip = icon_strip .. " " .. app_icon
           end
-        else
-          -- Empty workspace indicator
-          icon_strip = " —"
         end
-        
-        -- Update the space item label with window indicators
-        space_data.item:set({
-          label = { string = icon_strip }
-        })
+      else
+        -- Empty workspace indicator
+        icon_strip = " —"
       end
+      
+      -- Update ONLY the label, preserving the icon (workspace number)
+      space_data.item:set({
+        label = { string = icon_strip }
+      })
     end
   end
-  
-  helpers.log_info("Updated window indicators for all workspaces")
 end
 
 -- Handle aerospace workspace change events
 local function handle_workspace_change(env)
-  helpers.log_info("Workspace change event received")
+  -- Get focused workspace from event environment variable
+  local focused_workspace = env.FOCUSED_WORKSPACE
   
-  -- Update workspace states
-  update_all_workspace_states()
+  if not focused_workspace then
+    -- Fallback to querying aerospace if env var not available
+    focused_workspace = aerospace.get_focused_workspace()
+  end
+  
+  if not focused_workspace then
+    return
+  end
+  
+  -- Update all workspace items based on focused workspace
+  for workspace_id, space_data in pairs(space_items) do
+    if space_data and space_data.item then
+      local is_focused = workspace_id == focused_workspace
+      update_workspace_state(workspace_id, is_focused)
+    end
+  end
   
   -- Trigger window indicators update
   sbar.trigger("space_windows_change")

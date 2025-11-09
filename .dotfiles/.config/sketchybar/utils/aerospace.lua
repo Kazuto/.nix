@@ -7,8 +7,20 @@ local aerospace = {}
 
 -- Execute aerospace command and return output
 local function execute_aerospace_command(cmd)
-  local full_cmd = "aerospace " .. cmd
-  return helpers.execute_command(full_cmd)
+  local full_cmd = "aerospace " .. cmd .. " 2>/dev/null"
+  local handle = io.popen(full_cmd)
+  if not handle then
+    return nil
+  end
+  
+  local result = handle:read("*a")
+  handle:close()
+  
+  if not result or result == "" then
+    return nil
+  end
+  
+  return result
 end
 
 -- Get list of all monitors
@@ -31,7 +43,7 @@ end
 
 -- Get list of workspaces for a specific monitor
 function aerospace.get_workspaces(monitor_id)
-  local cmd = monitor_id and ("list-workspaces --monitor " .. monitor_id) or "list-workspaces"
+  local cmd = monitor_id and ("list-workspaces --monitor " .. monitor_id) or "list-workspaces --all"
   local output = execute_aerospace_command(cmd)
   if not output then
     return {}
@@ -108,7 +120,14 @@ end
 
 -- Check if aerospace is available
 function aerospace.is_available()
-  local output = helpers.execute_command("which aerospace")
+  local handle = io.popen("which aerospace 2>/dev/null")
+  if not handle then
+    return false
+  end
+  
+  local output = handle:read("*a")
+  handle:close()
+  
   return output ~= nil and output:match("/aerospace") ~= nil
 end
 
