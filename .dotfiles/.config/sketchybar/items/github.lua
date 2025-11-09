@@ -4,6 +4,7 @@
 local colors = require("colors")
 local icons = require("icons")
 local settings = require("settings")
+local helpers = require("utils.helpers")
 
 -- Function to load .env file
 local function load_env()
@@ -44,13 +45,6 @@ load_env()
 local GITHUB_TOKEN = (_G.ENV and _G.ENV.GITHUB_TOKEN) or os.getenv("GITHUB_TOKEN")
 local GITHUB_NOTIFICATIONS_URL = (_G.ENV and _G.ENV.GITHUB_NOTIFICATIONS_URL) or os.getenv("GITHUB_NOTIFICATIONS_URL") or "https://api.github.com/notifications"
 local RESPONSE_FILE = "/tmp/sketchybar_github_response"
-
--- Debug: Check if token is loaded
-if GITHUB_TOKEN and GITHUB_TOKEN ~= "" then
-  print("GitHub: Token loaded (length: " .. #GITHUB_TOKEN .. ")")
-else
-  print("GitHub: No token loaded")
-end
 
 -- Create GitHub item
 local github = sbar.add("item", "github", {
@@ -158,15 +152,32 @@ end
 
 -- Function to count unread notifications using jq
 local function count_unread_notifications()
+  -- Check if response file exists
+  local file = io.open(RESPONSE_FILE, "r")
+  if not file then
+    return 0
+  end
+  file:close()
+  
+  -- Count all notifications marked as unread by GitHub
   local jq_command = string.format(
     'jq "[.[] | select(.unread == true)] | length" "%s" 2>/dev/null',
     RESPONSE_FILE
   )
   
-  local count_str = safe_execute(jq_command, "0")
-  local count = tonumber(count_str) or 0
+  local handle = io.popen(jq_command)
+  local count_str = "0"
+  if handle then
+    count_str = handle:read("*a")
+    handle:close()
+  end
   
-  return count
+  -- Trim whitespace and convert to number
+  if count_str then
+    count_str = count_str:match("^%s*(.-)%s*$")
+  end
+  
+  return tonumber(count_str) or 0
 end
 
 -- Function to process notifications and add HTML URLs
@@ -286,24 +297,20 @@ local function update_github()
     return
   end
   
+  -- Count unread notifications BEFORE processing (processing might modify the file)
+  local notification_count = count_unread_notifications()
+  
   -- Process notifications to add HTML URLs
   process_notifications()
   
-  -- Count unread notifications
-  local notification_count = count_unread_notifications()
-  
   -- Update item appearance based on notification count
-  if notification_count > 0 then
-    github:set({
-      icon = { color = colors.catppuccin.mocha.red },
-      label = { string = notification_count .. " Notifications" }
-    })
-  else
-    github:set({
-      icon = { color = colors.catppuccin.mocha.lavender },
-      label = { string = "0 Notifications" }
-    })
-  end
+  local label_text = tostring(notification_count) .. " Notification" .. (notification_count == 1 and "" or "s")
+  local icon_color = notification_count > 0 and colors.catppuccin.mocha.red or colors.catppuccin.mocha.lavender
+  
+  github:set({
+    icon = { color = icon_color },
+    label = { string = label_text }
+  })
   
   -- Update popup with current notifications
   update_popup()

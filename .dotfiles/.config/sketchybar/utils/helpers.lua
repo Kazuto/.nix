@@ -12,34 +12,52 @@ local LOG_LEVEL = {
 }
 
 local current_log_level = LOG_LEVEL.INFO
+local LOG_FILE = "/tmp/sketchybar.log"
 
 -- Set logging level
 function helpers.set_log_level(level)
   current_log_level = level
 end
 
+-- Write to log file
+local function write_to_log(message)
+  local file = io.open(LOG_FILE, "a")
+  if file then
+    file:write(os.date("%Y-%m-%d %H:%M:%S") .. " " .. message .. "\n")
+    file:close()
+  end
+end
+
 -- Log functions
 function helpers.log_error(message)
+  local msg = "[ERROR] " .. tostring(message)
   if current_log_level >= LOG_LEVEL.ERROR then
-    print("[ERROR] " .. tostring(message))
+    print(msg)
+    write_to_log(msg)
   end
 end
 
 function helpers.log_warn(message)
+  local msg = "[WARN] " .. tostring(message)
   if current_log_level >= LOG_LEVEL.WARN then
-    print("[WARN] " .. tostring(message))
+    print(msg)
+    write_to_log(msg)
   end
 end
 
 function helpers.log_info(message)
+  local msg = "[INFO] " .. tostring(message)
   if current_log_level >= LOG_LEVEL.INFO then
-    print("[INFO] " .. tostring(message))
+    print(msg)
+    write_to_log(msg)
   end
 end
 
 function helpers.log_debug(message)
+  local msg = "[DEBUG] " .. tostring(message)
   if current_log_level >= LOG_LEVEL.DEBUG then
-    print("[DEBUG] " .. tostring(message))
+    print(msg)
+    write_to_log(msg)
   end
 end
 
