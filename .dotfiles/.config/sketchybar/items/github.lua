@@ -5,10 +5,52 @@ local colors = require("colors")
 local icons = require("icons")
 local settings = require("settings")
 
+-- Function to load .env file
+local function load_env()
+  local env_file = os.getenv("HOME") .. "/.config/sketchybar/.env"
+  local file = io.open(env_file, "r")
+  
+  if not file then
+    print("GitHub: .env file not found at " .. env_file)
+    return
+  end
+  
+  for line in file:lines() do
+    -- Skip empty lines and comments
+    if line ~= "" and not line:match("^%s*#") then
+      -- Match KEY="VALUE" or KEY=VALUE format
+      local key, value = line:match('^([%w_]+)%s*=%s*"?([^"]*)"?')
+      if key and value then
+        -- Remove trailing quotes if present
+        value = value:gsub('"$', '')
+        -- Set environment variable for this process
+        os.setenv = os.setenv or function(k, v)
+          -- Lua doesn't have os.setenv, so we'll store in a table
+          if not _G.ENV then _G.ENV = {} end
+          _G.ENV[k] = v
+        end
+        os.setenv(key, value)
+      end
+    end
+  end
+  
+  file:close()
+end
+
+-- Load environment variables from .env file
+load_env()
+
 -- GitHub configuration
-local GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-local GITHUB_NOTIFICATIONS_URL = os.getenv("GITHUB_NOTIFICATIONS_URL") or "https://api.github.com/notifications"
+local GITHUB_TOKEN = (_G.ENV and _G.ENV.GITHUB_TOKEN) or os.getenv("GITHUB_TOKEN")
+local GITHUB_NOTIFICATIONS_URL = (_G.ENV and _G.ENV.GITHUB_NOTIFICATIONS_URL) or os.getenv("GITHUB_NOTIFICATIONS_URL") or "https://api.github.com/notifications"
 local RESPONSE_FILE = "/tmp/sketchybar_github_response"
+
+-- Debug: Check if token is loaded
+if GITHUB_TOKEN and GITHUB_TOKEN ~= "" then
+  print("GitHub: Token loaded (length: " .. #GITHUB_TOKEN .. ")")
+else
+  print("GitHub: No token loaded")
+end
 
 -- Create GitHub item
 local github = sbar.add("item", "github", {
@@ -26,7 +68,7 @@ local github = sbar.add("item", "github", {
   },
   label = {
     string = "0 Notifications",
-    color = colors.item.text,
+    color = colors.catppuccin.mocha.text,
     font = {
       family = settings.fonts.text.family,
       style = settings.fonts.text.style,
@@ -35,7 +77,7 @@ local github = sbar.add("item", "github", {
     padding_right = settings.spacing.label_padding_right,
   },
   background = {
-    color = colors.item.bg,
+    drawing = false, -- Remove background to match bash config
   },
   y_offset = settings.y_offset,
   update_freq = settings.update_freq.github,
@@ -76,17 +118,16 @@ local function fetch_github_notifications()
     return nil
   end
 
+  -- Use Bearer token format (newer GitHub API standard)
   local curl_command = string.format(
-    'curl -s -H "Authorization: token %s" "%s" -o "%s"',
+    'curl -s -H "Authorization: Bearer %s" -H "Accept: application/vnd.github.v3+json" "%s" -o "%s" 2>&1',
     GITHUB_TOKEN,
     GITHUB_NOTIFICATIONS_URL,
     RESPONSE_FILE
   )
   
+  print("GitHub: Fetching notifications...")
   local result = safe_execute(curl_command, nil)
-  if not result then
-    return nil
-  end
   
   -- Check if response file exists and has content
   local file = io.open(RESPONSE_FILE, "r")
@@ -103,6 +144,13 @@ local function fetch_github_notifications()
     return nil
   end
   
+  -- Check if response is an error message
+  if content:match('"message"') and content:match('"Bad credentials"') then
+    print("GitHub: Bad credentials - check your token")
+    return nil
+  end
+  
+  print("GitHub: Successfully fetched notifications")
   return content
 end
 

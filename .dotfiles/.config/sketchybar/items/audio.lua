@@ -22,8 +22,11 @@ local audio = sbar.add("item", "audio", {
       style = settings.fonts.text.style,
       size = settings.fonts.text.size,
     },
-    color = colors.item.text,
+    color = colors.catppuccin.mocha.text,
     padding_right = settings.spacing.label_padding_right,
+  },
+  background = {
+    drawing = false, -- Remove background to match bash config
   },
   y_offset = settings.y_offset,
   popup = {
@@ -82,7 +85,7 @@ local function update_audio_item(volume)
   local label = current_device
   
   if current_device:match("Steinberg") then
-    icon = ""
+    icon = "􀑈"
     label = current_device
   elseif current_device:match("Speaker") then
     icon = "󰓃"
@@ -106,7 +109,7 @@ local function create_device_popup()
   for id, name in pairs(devices) do
     local device_icon = "󰓃"
     if name:match("Steinberg") then
-      device_icon = ""
+      device_icon = "􀑈"
     elseif name:match("Speaker") then
       device_icon = "󰓃"
     end
@@ -129,7 +132,7 @@ local function create_device_popup()
           style = settings.fonts.text.style,
           size = settings.fonts.text.size,
         },
-        color = colors.item.text,
+        color = colors.catppuccin.mocha.text,
         padding_left = 5,
       },
       padding_left = 16,
@@ -140,15 +143,23 @@ local function create_device_popup()
   end
 end
 
--- Set up click handler for popup toggle
-audio:set({
-  click_script = "sketchybar -m --set audio popup.drawing=toggle",
-})
-
 -- Subscribe to volume change events
 audio:subscribe("volume_change", function(env)
   local volume = env.INFO
   update_audio_item(volume)
+end)
+
+-- Set up hover handlers for popup
+audio:subscribe("mouse.entered", function()
+  audio:set({ popup = { drawing = true } })
+end)
+
+audio:subscribe("mouse.exited", function()
+  audio:set({ popup = { drawing = false } })
+end)
+
+audio:subscribe("mouse.exited.global", function()
+  audio:set({ popup = { drawing = false } })
 end)
 
 -- Initial setup

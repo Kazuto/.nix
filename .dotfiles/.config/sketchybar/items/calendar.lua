@@ -23,6 +23,9 @@ local calendar = sbar.add("item", {
     color = colors.catppuccin.mocha.text,
     padding_right = settings.spacing.label_padding_right,
   },
+  background = {
+    drawing = false, -- Remove background to match bash config
+  },
   position = "right",
   y_offset = settings.y_offset,
   update_freq = settings.update_freq.calendar,

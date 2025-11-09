@@ -22,7 +22,7 @@ local cpu = sbar.add("item", "cpu", {
   },
   label = {
     string = "0%",
-    color = colors.item.text,
+    color = colors.catppuccin.mocha.text,
     font = {
       family = settings.fonts.numbers.family,
       style = settings.fonts.numbers.style,
@@ -31,7 +31,7 @@ local cpu = sbar.add("item", "cpu", {
     padding_right = settings.spacing.label_padding_right,
   },
   background = {
-    color = colors.item.bg,
+    drawing = false, -- Remove background to match bash config
   },
   y_offset = settings.y_offset,
   update_freq = settings.update_freq.cpu,

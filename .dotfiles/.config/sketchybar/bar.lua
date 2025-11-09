@@ -10,5 +10,6 @@ sbar.bar({
   corner_radius = 10,
   margin = 10,
   y_offset = 4,
-  color = colors.bar.bg,
+  color = "0x00000000", -- Transparent background to match bash config
+  -- color = colors.bar.bg, -- Alternative: solid background
 })

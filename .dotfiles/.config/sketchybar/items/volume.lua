@@ -21,13 +21,11 @@ local volume = sbar.add("item", "volume", {
       style = settings.fonts.numbers.style,
       size = settings.fonts.numbers.size,
     },
-    color = colors.item.text,
+    color = colors.catppuccin.mocha.text,
     padding_right = settings.spacing.label_padding_right,
   },
   background = {
-    color = colors.item.bg,
-    corner_radius = 6,
-    height = 24,
+    drawing = false, -- Remove background to match bash config
   },
   y_offset = settings.y_offset,
 })

@@ -109,7 +109,7 @@ local function update_device(item, device_icon, battery_info)
   if not battery_info then
     item:set({
       icon = { string = device_icon },
-      label = { string = "N/A", color = colors.catppuccin.mocha.overlay0 },
+      label = { string = "N/A", color = colors.catppuccin.mocha.text },
     })
     return
   end
@@ -154,8 +154,11 @@ for _, device in ipairs(devices) do
         style = settings.fonts.text.style,
         size = settings.fonts.text.size,
       },
-      color = colors.item.text,
+      color = colors.catppuccin.mocha.text,
       padding_right = settings.spacing.label_padding_right,
+    },
+    background = {
+      drawing = false, -- Remove background to match bash config
     },
     y_offset = settings.y_offset,
   })

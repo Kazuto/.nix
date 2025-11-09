@@ -226,7 +226,7 @@ local spotify_item = sbar.add("item", "spotify.name", {
   },
   label = {
     string = "Nothing Playing",
-    color = colors.item.text,
+    color = colors.catppuccin.mocha.text,
     padding_right = settings.spacing.label_padding_right,
     font = {
       family = settings.fonts.text.family,
@@ -235,8 +235,7 @@ local spotify_item = sbar.add("item", "spotify.name", {
     },
   },
   background = {
-    color = colors.item.bg,
-    corner_radius = 6,
+    drawing = false, -- Remove background to match bash config
   },
   popup = {
     horizontal = "on", -- Horizontal layout for cover next to controls

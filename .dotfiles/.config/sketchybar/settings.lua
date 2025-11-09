@@ -41,7 +41,7 @@ return {
   },
 
   -- Spacing and padding constants
-  paddings = 6,
+  paddings = 4, -- Match bash config (was 6)
   spacing = {
     icon_padding_left = 8,
     icon_padding_right = 5,

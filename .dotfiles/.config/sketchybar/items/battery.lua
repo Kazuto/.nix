@@ -27,13 +27,11 @@ local battery = sbar.add("item", "battery", {
       style = settings.fonts.text.style,
       size = settings.fonts.text.size,
     },
-    color = colors.item.text,
+    color = colors.catppuccin.mocha.text,
     padding_right = settings.spacing.label_padding_right,
   },
   background = {
-    color = colors.item.bg,
-    corner_radius = 6,
-    height = 24,
+    drawing = false, -- Remove background to match bash config
   },
   update_freq = settings.update_freq.battery,
   y_offset = settings.y_offset,
