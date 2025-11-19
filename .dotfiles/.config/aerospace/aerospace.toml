@@ -120,13 +120,13 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-l = ['join-with right', 'mode main']
 
 [[on-window-detected]]
-    if.app-id = 'org.chromium.Thorium'
-    if.window-title-regex-substring = 'Smake'
+    if.app-id = 'org.mozilla.firefox'
+    if.window-title-regex-substring = 'Work'
     run = "move-node-to-workspace 1"
 
 [[on-window-detected]]
-    if.app-id = 'org.chromium.Thorium'
-    if.window-title-regex-substring = 'Privat'
+    if.app-id = 'org.mozilla.firefox'
+    if.window-title-regex-substring = 'Private'
     run = "move-node-to-workspace 5"
 
 [[on-window-detected]]
