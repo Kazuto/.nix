@@ -3,8 +3,8 @@ return {
   settings = {
     intelephense = {
       environment = {
-        phpVersion = "8.3.0",
-        includePaths = { "./vendor" },
+        phpVersion = "8.2.0",
+        includePaths = { "vendor" },
       },
       stubs = {
         "Core",
@@ -79,32 +79,41 @@ return {
         "lumen",
       },
       files = {
-        maxSize = 1000000,
+        maxSize = 5000000,
         associations = { "*.php", "*.phtml" },
         exclude = {
           "**/node_modules/**",
           "**/bower_components/**",
           "**/.git/**",
-          "**/vendor/**/Tests/**",
-          "**/vendor/**/tests/**",
-          "**/vendor/**/test/**",
           "**/storage/**",
-          "**/cache/**",
-          "**/build/**",
-          "**/phpstan/**",
-          "**/*resultCache*",
-          "**/*.cache",
           "**/bootstrap/cache/**",
           "**/public/build/**",
           "**/public/hot",
           "**/public/storage/**",
+          "**/cache/**",
+          "**/build/**",
+          -- Exclude test files to reduce memory
+          "**/vendor/**/Tests/**",
+          "**/vendor/**/tests/**",
+          "**/vendor/**/test/**",
+          -- Exclude heavy dev dependencies
+          "**/vendor/bin/**",
+          "**/vendor/composer/**",
+          "**/vendor/phpunit/**",
+          "**/vendor/phpstan/**",
+          "**/vendor/psalm/**",
+          "**/vendor/mockery/**",
+          "**/vendor/fakerphp/**",
+          "**/vendor/psy/**",
+          "**/vendor/nunomaduro/collision/**",
+          "**/vendor/filp/whoops/**",
         },
       },
       completion = {
         insertUseDeclaration = true,
         fullyQualifyGlobalConstantsAndFunctions = false,
         triggerParameterHints = true,
-        maxItems = 25,
+        maxItems = 100,
       },
       cache = {
         workspace = {
@@ -113,7 +122,7 @@ return {
       },
       diagnostics = {
         enable = true,
-        run = "onSave",
+        run = "onType",
         typeErrors = false,
         undefinedTypes = true,
         undefinedFunctions = true,
