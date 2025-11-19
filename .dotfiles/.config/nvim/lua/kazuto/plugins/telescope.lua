@@ -88,11 +88,19 @@ return {
 
     vim.keymap.set("n", "<leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
     vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind existing [B]uffers" })
+    vim.keymap.set("v", "<leader>fb", function()
+      local text = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = vim.fn.mode() })
+      builtin.current_buffer_fuzzy_find({ default_text = table.concat(text, "\n") })
+    end, { desc = "[F]ind in current [B]uffer" })
     vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
     vim.keymap.set("n", "<leader>fa", function()
       builtin.find_files({ follow = true, no_ignore = true, hidden = true })
     end, { desc = "[F]ind [A]ll" })
     vim.keymap.set("n", "<leader>fs", builtin.live_grep, { desc = "[F]ind [S]tring" })
+    vim.keymap.set("v", "<leader>fs", function()
+      local text = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = vim.fn.mode() })
+      builtin.grep_string({ search = table.concat(text, "\n") })
+    end, { desc = "[F]ind [S]election in project" })
     vim.keymap.set(
       "n",
       "<leader>fg",
