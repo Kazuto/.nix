@@ -25,7 +25,7 @@ done < <(
   SwitchAudioSource -a -f json | jq -r '
     select(
       .type == "output" and
-      (.name | test("Steinberg|Speaker"; "i"))
+      (.name | test("Steinberg|Mac|LG"; "i"))
     ) |
     "\(.id)=\(.name)"
   '
@@ -35,18 +35,23 @@ for id in "${!devices[@]}"; do
 
   name=${devices[$id]}
 
+  if [[ "$name" == *"Mac"* ]]; then
+    icon="􀣺"
+  fi
+
   if [[ "$name" == *"Steinberg"* ]]; then
     icon=""
   fi
 
-  if [[ "$name" == *"Speakers"* ]]; then
+  if [[ "$name" == *"LG"* ]]; then
     icon="󰓃"
+    name="${name%(*}"
   fi
 
   sketchybar --add item "audio.${id}" popup.audio \
     --set "audio.${id}" \
     icon="$icon" \
-    label="${devices[$id]}" \
+    label="$name" \
     label.padding_left=5 \
     padding_left=16 \
     padding_right=16 \

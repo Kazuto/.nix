@@ -17,6 +17,11 @@ if [[ "$audio_device" == *"Steinberg"* ]]; then
   sketchybar -m --set "$NAME" icon="" label="$audio_device"
 fi
 
-if [[ "$audio_device" == *"Speakers"* ]]; then
-  sketchybar -m --set "$NAME" icon="󰓃" label="$audio_device ($VOLUME%)"
+if [[ "$audio_device" == *"Mac"* ]]; then
+  sketchybar -m --set "$NAME" icon="􀣺" label="$audio_device ($VOLUME%)"
+fi
+
+if [[ "$audio_device" == *"LG"* ]]; then
+  label="${audio_device%(*}"
+  sketchybar -m --set "$NAME" icon="󰓃" label="$label ($VOLUME%)"
 fi
