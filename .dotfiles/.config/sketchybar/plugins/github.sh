@@ -3,24 +3,25 @@
 source "$CONFIG_DIR/colors.sh"
 source "$CONFIG_DIR/.env"
 
+TMP_OUTPUT_FILE=$(mktemp)
+TMP_PARSE_FILE=$(mktemp)
 RESPONSE_FILE="/tmp/sketchybar_github_response"
-TMP_FILE=$(mktemp)
 
 # Fetch notifications from GitHub API
-curl -s -H "Authorization: token $GITHUB_TOKEN" "$GITHUB_NOTIFICATIONS_URL" -o "$RESPONSE_FILE"
+curl -s -H "Authorization: token $GITHUB_TOKEN" "$GITHUB_NOTIFICATIONS_URL" -o "$TMP_OUTPUT_FILE"
 
 # Count unread notifications
-notification_count=$(jq '[.[] | select(.unread == true)] | length' "$RESPONSE_FILE")
+notification_count=$(jq '[.[] | select(.unread == true)] | length' "$TMP_OUTPUT_FILE")
 
 # Process each notification, append constructed html_url based on subject info
-jq -c '.[]' "$RESPONSE_FILE" | while read -r notif; do
+jq -c '.[]' "$TMP_OUTPUT_FILE" | while read -r notif; do
   subject_url=$(jq -r '.subject.url' <<<"$notif")
   subject_type=$(jq -r '.subject.type' <<<"$notif")
   repo_full_name=$(jq -r '.repository.full_name' <<<"$notif")
 
   # If any essential data missing, keep notification unchanged
   if [[ "$subject_url" == "null" || -z "$subject_url" || -z "$repo_full_name" ]]; then
-    echo "$notif" >>"$TMP_FILE"
+    echo "$notif" >>"$TMP_PARSE_FILE"
     continue
   fi
 
@@ -33,7 +34,7 @@ jq -c '.[]' "$RESPONSE_FILE" | while read -r notif; do
   Issue) html_path="issues" ;;
   *)
     echo "⚠️ Unknown subject type: $subject_type" >&2
-    echo "$notif" >>"$TMP_FILE"
+    echo "$notif" >>"$TMP_PARSE_FILE"
     continue
     ;;
   esac
@@ -43,15 +44,16 @@ jq -c '.[]' "$RESPONSE_FILE" | while read -r notif; do
   echo " → Constructed html_url: $html_url" >&2
 
   # Append html_url to the subject object
-  echo "$notif" | jq --arg html_url "$html_url" '.subject.html_url = $html_url' >>"$TMP_FILE"
+  echo "$notif" | jq --arg html_url "$html_url" '.subject.html_url = $html_url' >>"$TMP_PARSE_FILE"
 done
 
 # Combine updated notifications back into a JSON array, overwrite response file
-if [[ -s "$TMP_FILE" ]]; then
-  jq -s . "$TMP_FILE" >"$RESPONSE_FILE"
+if [[ -s "$TMP_PARSE_FILE" ]]; then
+  jq -s . "$TMP_PARSE_FILE" >"$RESPONSE_FILE"
 fi
 
-rm -f "$TMP_FILE"
+rm -f "$TMP_OUTPUT_FILE"
+rm -f "$TMP_PARSE_FILE"
 
 # Update sketchybar based on unread notification count
 if ((notification_count > 0)); then
