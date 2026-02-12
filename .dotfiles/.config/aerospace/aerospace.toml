@@ -82,8 +82,8 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-cmd-ctrl-shift-s = 'workspace S'
     alt-shift-cmd-ctrl-shift-t = 'workspace T'
 
-    ctrl-left = 'workspace prev'
-    ctrl-right = 'workspace next'
+    alt-shift-cmd-ctrl-shift-left = 'workspace prev'
+    alt-shift-cmd-ctrl-shift-right = 'workspace next'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'

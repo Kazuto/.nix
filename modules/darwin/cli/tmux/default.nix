@@ -11,7 +11,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ tmux ];
+    environment.systemPackages = with pkgs; [ tmux tmuxifier ];
 
     programs.tmux = {
       enable = true;

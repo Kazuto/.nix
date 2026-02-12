@@ -96,3 +96,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 export PATH=$PATH:/Users/kazuto/.spicetify
+
+# Tmuxifier
+export TMUXIFIER_LAYOUT_PATH="${XDG_CONFIG_HOME:-$HOME/.config}/tmuxifier/layouts"
+eval "$(tmuxifier init -)"

@@ -1,6 +1,7 @@
 export EDITOR="nvim"
 export TERM="ghostty"
 export TERMINAL="ghostty"
+export PROJECT_ROOT="$HOME/Development"
 
 # follow XDG base dir specification
 export XDG_CONFIG_HOME="$HOME/.config"

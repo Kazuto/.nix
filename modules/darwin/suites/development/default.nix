@@ -21,6 +21,7 @@ in
         neovim = enabled;
         ngrok = enabled;
         phpstan = enabled;
+        tmux = enabled;
         trash = enabled;
         vercel = enabled;
         zoxide = enabled;
