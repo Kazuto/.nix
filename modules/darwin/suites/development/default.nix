@@ -41,6 +41,7 @@ in
       development.languages = {
         lua = enabled;
         go = enabled;
+        rust = enabled;
       };
     };
   };
