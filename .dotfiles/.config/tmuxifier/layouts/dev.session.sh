@@ -1,5 +1,11 @@
 # Set a custom session root path. Default is `$HOME`.
 # session_root "~/Projects"
+#
+# 3-pane horizontal split reference (left | center | right):
+#   30|40|30  →  split_h 70, split_h 43
+#   25|50|25  →  split_h 75, split_h 33
+#   20|60|20  →  split_h 80, split_h 25
+#   15|70|15  →  split_h 85, split_h 18
 
 # Create session with specified name if it does not already exist. When no
 # argument is given, session name will be based on layout file name.

@@ -7,8 +7,8 @@ if initialize_session "supervisor"; then
   window_root "$PROJECT_ROOT/Smake/production-server-supervisor"
   new_window "supervisor"
 
-  split_h 70
-  split_h 43
+  split_h 85
+  split_h 18
 
   # Left pane: npm run dev
   select_pane 1
@@ -26,8 +26,8 @@ if initialize_session "supervisor"; then
   window_root "$PROJECT_ROOT/Smake/production-server-v2"
   new_window "server"
 
-  split_h 70
-  split_h 43
+  split_h 85
+  split_h 18
 
   # Left pane: npm run dev
   select_pane 1
