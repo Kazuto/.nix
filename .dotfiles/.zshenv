@@ -13,3 +13,6 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 #
 # Nvim
 export NVIM_LARAVEL_ENV=local
+
+# LM Studio
+export LMSTUDIO_BASE_URL="http://localhost:1234"

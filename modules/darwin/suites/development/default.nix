@@ -36,6 +36,7 @@ in
         pocketbase = enabled;
         vscode = enabled;
         sqlite = enabled;
+        opencode = enabled;
       };
 
       development.languages = {

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio (local)",
+      "options": {
+        "baseURL": "$LMSTUDIO_BASE_URL/v1"
+      },
+      "models": {
+        "qwen/qwen3-4b": {
+          "name": "qwen3-4b"
+        }
+      }
+    }
+  }
+}
