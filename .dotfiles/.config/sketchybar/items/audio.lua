@@ -20,8 +20,16 @@ local audio = sbar.add("item", "audio", {
   },
 })
 
-audio:subscribe("mouse.clicked", function()
-  sbar.set("audio", { popup = { drawing = "toggle" } })
+audio:subscribe("mouse.entered", function()
+  audio:set({ popup = { drawing = true } })
+end)
+
+audio:subscribe("mouse.exited", function()
+  audio:set({ popup = { drawing = false } })
+end)
+
+audio:subscribe("mouse.exited.global", function()
+  audio:set({ popup = { drawing = false } })
 end)
 
 local function update_audio(env)
