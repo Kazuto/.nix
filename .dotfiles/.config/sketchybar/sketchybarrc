@@ -1,54 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env lua
 
-CONFIG_DIR="$HOME/.config/sketchybar"
+package.cpath = package.cpath .. ";/Users/" .. os.getenv("USER") .. "/.local/share/sketchybar_lua/?.so"
 
-source "$CONFIG_DIR/colors.sh"
+sbar = require("sketchybar")
 
-PLUGIN_DIR="$CONFIG_DIR/plugins"
-ITEM_DIR="$CONFIG_DIR/items"
+sbar.begin_config()
+require("init")
+sbar.hotload(true)
+sbar.end_config()
 
-AEROSPACE_FOCUSED_MONITOR_NO=$(aerospace list-workspaces --focused)
-AEROSPACE_LIST_OF_WINDOWS_IN_FOCUSED_MONITOR=$(aerospace list-windows --workspace $AEROSPACE_FOCUSED_MONITOR_NO | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
-
-sketchybar --bar height=42 \
-  display=main \
-  blur_radius=0 \
-  position=top \
-  sticky=false \
-  corner_radius=10 \
-  margin=10 \
-  y_offset=4 \
-  color=0x00000000
-# color=$CAT_BASE
-
-sketchybar --default icon.font="JetBrainsMono Nerd Font Propo:Semibold:13.0" \
-  icon.color=$CAT_TEXT \
-  label.font="SF Pro:Medium:13.0" \
-  label.color=$CAT_TEXT \
-  background.corner_radius=10 \
-  background.height=26 \
-  background.color=0x15000000 \
-  padding_left=4 \
-  padding_right=4
-
-# -- Left Side Items --
-source $ITEM_DIR/spaces.sh
-source $ITEM_DIR/front_app.sh
-
-# -- Center Items --
-source $ITEM_DIR/spotify.sh
-
-# -- Right Side Items --
-source $ITEM_DIR/calendar.sh
-source $ITEM_DIR/audio.sh
-source $ITEM_DIR/logitech.sh
-# source $ITEM_DIR/battery.sh
-source $ITEM_DIR/cpu.sh
-source $ITEM_DIR/memory.sh
-source $ITEM_DIR/network.sh
-source $ITEM_DIR/timer.sh
-source $ITEM_DIR/github.sh
-
-sketchybar --hotload on
-
-sketchybar --update
+sbar.event_loop()
