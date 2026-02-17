@@ -1,17 +1,17 @@
 # Set a custom session root path. Default is `$HOME`.
-session_root "$PROJECT_ROOT/Private"
+session_root "$PROJECT_ROOT/Smake"
 
-if initialize_session "eunoia"; then
+if initialize_session "frontend-merchant"; then
 
   # ── Window 1: eunioa ──
-  window_root "$PROJECT_ROOT/Private/eunoia"
-  new_window "eunoia"
+  window_root "$PROJECT_ROOT/Smake/frontend-merchant-administration/"
+  new_window "frontend-merchant"
 
   split_h 50
 
   # Left pane: Dev server
   select_pane 1
-  run_cmd "bun storybook"
+  run_cmd "npm run dev"
 
   # Right pane: nvim
   select_pane 2

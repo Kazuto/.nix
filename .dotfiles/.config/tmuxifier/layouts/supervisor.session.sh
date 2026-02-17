@@ -7,43 +7,44 @@ if initialize_session "supervisor"; then
   window_root "$PROJECT_ROOT/Smake/production-server-supervisor"
   new_window "supervisor"
 
-  split_h 85
-  split_h 18
+  split_h 50
 
-  # Left pane: npm run dev
+  # Split left pane vertically: lazygit (top) + npm run dev (bottom)
+  select_pane 1
+  split_v 50
+
   select_pane 1
   run_cmd "npm run dev"
 
-  # Right pane: claude
-  select_pane 3
+  select_pane 2
   run_cmd "claude"
 
-  # Focus on nvim (center)
-  select_pane 2
+  # Right pane: nvim
+  select_pane 3
   run_cmd "nvim"
 
   # ── Window 2: server ──
   window_root "$PROJECT_ROOT/Smake/production-server-v2"
   new_window "server"
 
-  split_h 85
-  split_h 18
+  split_h 50
 
-  # Left pane: npm run dev
+  # Split left pane vertically: lazygit (top) + npm run dev (bottom)
   select_pane 1
-  run_cmd "npm run dev"
+  split_v 50
 
-  # Right pane: claude
-  select_pane 3
+  select_pane 1
+  run_cmd "npm run standalone"
+
+  select_pane 2
   run_cmd "claude"
 
-  # Focus on nvim (center)
-  select_pane 2
+  # Right pane: nvim
+  select_pane 3
   run_cmd "nvim"
 
   # Start on the first window
   select_window 1
-
 fi
 
 finalize_and_go_to_session
