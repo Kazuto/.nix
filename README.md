@@ -48,3 +48,56 @@ darwin-rebuild switch --flake ./#tsukuyomi
 ```bash
 stow --adopt -t ~ .dotfiles
 ```
+
+## 5. Sketchybar (macOS only)
+
+The status bar uses [SketchyBar](https://github.com/FelixKratz/SketchyBar) with a Lua config via [SbarLua](https://github.com/FelixKratz/SbarLua).
+
+### Install SketchyBar
+
+```bash
+brew install FelixKratz/formulae/sketchybar
+```
+
+### Install SbarLua
+
+```bash
+git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua \
+  && cd /tmp/SbarLua/ \
+  && make install \
+  && rm -rf /tmp/SbarLua/
+```
+
+This places `sketchybar.so` in `~/.local/share/sketchybar_lua/`.
+
+### Install dependencies
+
+```bash
+# App font for workspace window icons
+brew tap kvndrsslr/homebrew-formulae
+brew install sketchybar-app-font
+
+# Audio device switching (used by the audio item)
+brew install switchaudio-osx
+
+# JSON processing
+brew install jq
+```
+
+### Install fonts
+
+The config uses **JetBrainsMono Nerd Font** (icons) and **SF Pro** (labels). JetBrainsMono Nerd Font is installed via the Nix config. SF Pro can be downloaded from [developer.apple.com/fonts](https://developer.apple.com/fonts/).
+
+### Start SketchyBar
+
+```bash
+brew services start sketchybar
+```
+
+### Verify
+
+```bash
+sketchybar --reload
+```
+
+All items should render on the bar. Hover over CPU, memory, network, audio, github, or spotify for popup details.
