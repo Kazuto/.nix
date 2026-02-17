@@ -7,12 +7,12 @@ let
 in
 {
   options.shiro.development.languages.php81 = with types; {
-    enable = mkBoolOpt false "Whether or not to use PHP 8.1.";
+    enable = mkBoolOpt false "Whether or not to use PHP 8.4.";
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;  [
-      (php81.buildEnv {
+      (php84.buildEnv {
         extensions = ({ enabled, all }: enabled ++ (with all; [
            gd imagick opcache pcov redis xdebug
         ]));
@@ -25,9 +25,9 @@ in
       })
 
       imagemagick
-      php81Extensions.imagick
+      php84Extensions.imagick
 
-      php81Packages.composer
+      php84Packages.composer
       blade-formatter
     ];
   };

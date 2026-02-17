@@ -19,5 +19,7 @@ with lib.shiro;
     "/opt/homebrew/bin"
   ];
 
+  ids.gids.nixbld = 350;
+  system.primaryUser = "kazuto";
   system.stateVersion = 4;
 }

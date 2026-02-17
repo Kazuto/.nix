@@ -11,6 +11,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.nix-daemon = enabled;
+    nix.enable = true;
   };
 }

@@ -23,7 +23,6 @@ in
         phpstan = enabled;
         tmux = enabled;
         trash = enabled;
-        vercel = enabled;
         zoxide = enabled;
         zsh = enabled;
       };

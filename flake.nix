@@ -2,15 +2,15 @@
   description = "My nix configuration";
 
   inputs = {
-    # NixPkgs (nixos-23.05)
-    nixpkgs.url = "nixpkgs/nixos-25.05";
+    # NixPkgs Unstable
+    nixpkgs.url = "nixpkgs/nixpkgs-unstable";
 
     # NixPkgs Unstable (nixos-unstable)
     unstable.url = "nixpkgs/nixos-unstable";
 
-    # Home Manager (release-23.05)
+    # Home Manager (master, follows nixpkgs-unstable)
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

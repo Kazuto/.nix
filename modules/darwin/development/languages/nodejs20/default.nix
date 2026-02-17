@@ -14,7 +14,6 @@ in
     environment.systemPackages = with pkgs;  [
       nodePackages.eslint_d
       nodePackages.postcss
-      nodePackages.vercel
       vscode-extensions.vue.volar
       yalc
       bun
