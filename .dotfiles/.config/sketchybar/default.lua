@@ -12,7 +12,7 @@ sbar.default({
   background = {
     corner_radius = 10,
     height        = 26,
-    color         = 0x15000000,
+    color         = 0x26000000,
   },
   padding_left  = 4,
   padding_right = 4,

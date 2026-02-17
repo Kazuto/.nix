@@ -39,7 +39,7 @@ local function update_audio(env)
     local icon, label
 
     if device:find("Steinberg") then
-      icon  = ""
+      icon  = "􀑈"
       label = device
     elseif device:find("Mac") then
       icon  = "􀣺"
@@ -59,6 +59,9 @@ end
 audio:subscribe("volume_change", update_audio)
 audio:subscribe("forced", update_audio)
 
+-- Query current audio source on startup
+update_audio({ INFO = nil })
+
 -- Populate audio device popup
 sbar.exec(
   "SwitchAudioSource -a -f json | jq -r 'select(.type == \"output\" and (.name | test(\"Steinberg|Mac|LG\"; \"i\"))) | \"\\(.id)=\\(.name)\"'",
@@ -68,7 +71,7 @@ sbar.exec(
       if id and name then
         local icon = "􀣺"
         if name:find("Steinberg") then
-          icon = ""
+          icon = "􀑈"
         elseif name:find("LG") then
           icon = "󰓃"
           name = name:gsub("%(.+$", "")
