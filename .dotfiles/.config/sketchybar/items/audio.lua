@@ -3,19 +3,19 @@ local colors = require("colors")
 local audio = sbar.add("item", "audio", {
   position = "right",
   icon = {
-    color         = colors.green,
-    padding_left  = 8,
+    color = colors.green,
+    padding_left = 8,
     padding_right = 5,
   },
   label = { padding_right = 8 },
   y_offset = 1,
   popup = {
-    align      = "right",
+    align = "right",
     background = {
       corner_radius = 10,
-      color         = colors.base,
-      border_width  = 1,
-      border_color  = colors.surface1,
+      color = colors.base,
+      border_width = 1,
+      border_color = colors.surface1,
     },
   },
 })
@@ -39,16 +39,16 @@ local function update_audio(env)
     local icon, label
 
     if device:find("Steinberg") then
-      icon  = "􀑈"
+      icon = "􀑈"
       label = device
     elseif device:find("Mac") then
-      icon  = "􀣺"
+      icon = "􀣺"
       label = device .. " (" .. volume .. "%)"
     elseif device:find("LG") then
-      icon  = "󰓃"
+      icon = "󰓃"
       label = device:gsub("%(.+$", "") .. " (" .. volume .. "%)"
     else
-      icon  = "􀣺"
+      icon = "􀣺"
       label = device
     end
 
@@ -64,7 +64,7 @@ update_audio({ INFO = nil })
 
 -- Populate audio device popup
 sbar.exec(
-  "SwitchAudioSource -a -f json | jq -r 'select(.type == \"output\" and (.name | test(\"Steinberg|Mac|LG\"; \"i\"))) | \"\\(.id)=\\(.name)\"'",
+  'SwitchAudioSource -a -f json | jq -r \'select(.type == "output" and (.name | test("Steinberg|Mac|LG"; "i"))) | "\\(.id)=\\(.name)"\'',
   function(result)
     for line in result:gmatch("[^\r\n]+") do
       local id, name = line:match("^(.-)=(.+)$")
@@ -78,10 +78,10 @@ sbar.exec(
         end
 
         local device_item = sbar.add("item", "audio." .. id, {
-          position   = "popup." .. audio.name,
-          icon       = icon,
-          label      = { string = name, padding_left = 5 },
-          padding_left  = 16,
+          position = "popup." .. audio.name,
+          icon = icon,
+          label = { string = name, padding_left = 5 },
+          padding_left = 16,
           padding_right = 16,
           background = { drawing = false },
         })
