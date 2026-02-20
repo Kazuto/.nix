@@ -21,6 +21,7 @@ in
 
       cli = {
         gitleaks = enabled;
+        blueutil = enabled;
         pre-commit = enabled;
         skeema = enabled;
       };

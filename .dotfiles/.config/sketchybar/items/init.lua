@@ -8,6 +8,7 @@ require("items.spotify")
 -- Right side
 require("items.calendar")
 require("items.audio")
+require("items.bluetooth")
 require("items.logitech")
 require("items.cpu")
 require("items.memory")
