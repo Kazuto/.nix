@@ -234,7 +234,12 @@ Leader key: `Space`
 
 | Mode | Key | Description |
 |------|-----|-------------|
-| n | `<F1>` | Toggle floating terminal |
+| n | `<leader>t1` | Toggle terminal 1 |
+| n | `<leader>t2` | Toggle terminal 2 |
+| n | `<leader>t3` | Toggle terminal 3 |
+| n | `<leader>ts` | Select terminal |
+| n | `<leader>tx` | Kill terminal |
+| t | `<Esc>` | Exit terminal mode |
 
 ### Diagnostics / Trouble
 
