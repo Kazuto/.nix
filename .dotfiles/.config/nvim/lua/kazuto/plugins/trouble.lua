@@ -25,14 +25,20 @@ return {
     {
       "<leader>tn",
       function()
-        require("trouble").next({ skip_groups = true, jump = true })
+        local trouble = require("trouble")
+        if trouble.is_open() then
+          trouble.next({ skip_groups = true, jump = true })
+        end
       end,
       desc = "Next Trouble Item",
     },
     {
       "<leader>tp",
       function()
-        require("trouble").previous({ skip_groups = true, jump = true })
+        local trouble = require("trouble")
+        if trouble.is_open() then
+          trouble.previous({ skip_groups = true, jump = true })
+        end
       end,
       desc = "Previous Trouble Item",
     },

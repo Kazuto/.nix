@@ -42,8 +42,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "K", vim.lsp.buf.hover, "Show Hover Documentation")
 
     -- Refactoring (will use whichever server supports it)
-    map("n", "<leader>rn", vim.lsp.buf.rename, "Smart rename")
-    map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code Actions")
+    map("n", "grn", vim.lsp.buf.rename, "Smart rename")
+    map({ "n", "v" }, "gra", vim.lsp.buf.code_action, "Code Actions")
 
     -- Diagnostics
     map("n", "<leader>d", vim.diagnostic.open_float, "Show Line Diagnostics")

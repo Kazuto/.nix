@@ -87,34 +87,26 @@ return {
     telescope.load_extension("cmdline")
 
     vim.keymap.set("n", "<leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
-    vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind existing [B]uffers" })
-    vim.keymap.set("v", "<leader>fb", function()
+    vim.keymap.set("n", "fb", builtin.buffers, { desc = "[F]ind existing [B]uffers" })
+    vim.keymap.set("v", "fb", function()
       local text = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = vim.fn.mode() })
       builtin.current_buffer_fuzzy_find({ default_text = table.concat(text, "\n") })
     end, { desc = "[F]ind in current [B]uffer" })
-    vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
-    vim.keymap.set("n", "<leader>fa", function()
+    vim.keymap.set("n", "ff", builtin.find_files, { desc = "[F]ind [F]iles" })
+    vim.keymap.set("n", "fa", function()
       builtin.find_files({ follow = true, no_ignore = true, hidden = true })
     end, { desc = "[F]ind [A]ll" })
-    vim.keymap.set("n", "<leader>fs", builtin.live_grep, { desc = "[F]ind [S]tring" })
-    vim.keymap.set("v", "<leader>fs", function()
+    vim.keymap.set("n", "fs", builtin.live_grep, { desc = "[F]ind [S]tring" })
+    vim.keymap.set("v", "fs", function()
       local text = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = vim.fn.mode() })
       builtin.grep_string({ search = table.concat(text, "\n") })
     end, { desc = "[F]ind [S]election in project" })
-    vim.keymap.set(
-      "n",
-      "<leader>fg",
-      require("kazuto.plugins.telescope.multigrep"),
-      { desc = "[F]ind [G]rep" }
-    )
-    vim.keymap.set("n", "<leader>fc", builtin.grep_string, { desc = "[F]ind [C]ursor" })
-    vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind [B]uffer" })
-    vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "[F]ind [T]odos" })
-    vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
-    vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" })
-    vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "[F]ind [C]ommands" })
+    vim.keymap.set("n", "fg", require("kazuto.plugins.telescope.multigrep"), { desc = "[F]ind [G]rep" })
+    vim.keymap.set("n", "fc", builtin.grep_string, { desc = "[F]ind [C]ursor" })
+    vim.keymap.set("n", "ft", "<cmd>TodoTelescope<cr>", { desc = "[F]ind [T]odos" })
+    vim.keymap.set("n", "fr", builtin.resume, { desc = "[F]ind [R]esume" })
+    vim.keymap.set("n", "fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" })
+    vim.keymap.set("n", "fx", builtin.commands, { desc = "[F]ind E[x]ecute Command" })
     vim.keymap.set("n", "Q", builtin.command_history, { desc = "Cmdline" })
-    vim.keymap.set("n", "<leader><leader>", builtin.command_history, { desc = "Cmdline" })
   end,
-  keys = {},
 }

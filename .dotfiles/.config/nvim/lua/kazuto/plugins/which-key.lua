@@ -10,7 +10,14 @@ return {
   },
   opts = {
     preset = "modern",
+    triggers = {
+      { "<auto>", mode = "nxso" },
+      { "f", mode = "n" },
+    },
+    spec = {
+      { "f", group = "Find" },
+    },
   },
-  keys = { "<leader>", '"', "'", "`", "c", "v" },
+  keys = { "<leader>", '"', "'", "`", "c", "v", "f" },
   event = { "VeryLazy" },
 }
