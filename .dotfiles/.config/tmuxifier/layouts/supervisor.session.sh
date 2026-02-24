@@ -34,7 +34,7 @@ if initialize_session "supervisor"; then
   split_v 50
 
   select_pane 1
-  run_cmd "npm run standalone"
+  run_cmd "npm run dev"
 
   select_pane 2
   run_cmd "claude"

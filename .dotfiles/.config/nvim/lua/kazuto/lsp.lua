@@ -11,7 +11,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     -- Navigation (primarily Intelephense)
-    map("n", "gD", vim.lsp.buf.declaration, "Go to Declaration")
+    map("n", "gD", function()
+      local clients = vim.lsp.get_clients({ bufnr = ev.buf })
+      local supports_declaration = vim.iter(clients):any(function(c)
+        return c.supports_method("textDocument/declaration")
+      end)
+      if supports_declaration then
+        vim.lsp.buf.declaration()
+      else
+        vim.lsp.buf.definition()
+      end
+    end, "Go to Declaration")
     map("n", "gd", function()
       -- Check if we're in a special buffer type that might cause issues
       local buftype = vim.bo.buftype

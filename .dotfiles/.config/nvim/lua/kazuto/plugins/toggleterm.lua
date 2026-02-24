@@ -11,19 +11,43 @@ return {
   },
   config = function()
     require("toggleterm").setup({
-      size = 15,
       hide_numbers = true,
-      shade_terminals = true,
-      shading_factor = 2,
+      shade_terminals = false,
       start_in_insert = true,
       insert_mappings = true,
-      persist_size = true,
-      direction = "horizontal",
+      persist_size = false,
+      direction = "float",
       close_on_exit = true,
       shell = vim.o.shell,
+      float_opts = {
+        border = "rounded",
+        width = math.floor(vim.o.columns * 0.8),
+        height = math.floor(vim.o.lines * 0.8),
+        winblend = 0,
+      },
     })
 
     -- Exit terminal mode with Esc
     vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+    -- Hide terminal while staying in terminal mode
+    vim.keymap.set(
+      "t",
+      "<leader>t1",
+      "<C-\\><C-n><cmd>1ToggleTerm<cr>",
+      { desc = "[T]erminal [1]" }
+    )
+    vim.keymap.set(
+      "t",
+      "<leader>t2",
+      "<C-\\><C-n><cmd>2ToggleTerm<cr>",
+      { desc = "[T]erminal [2]" }
+    )
+    vim.keymap.set(
+      "t",
+      "<leader>t3",
+      "<C-\\><C-n><cmd>3ToggleTerm<cr>",
+      { desc = "[T]erminal [3]" }
+    )
   end,
 }
