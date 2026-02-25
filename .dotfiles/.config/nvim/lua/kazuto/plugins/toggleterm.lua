@@ -25,29 +25,15 @@ return {
         height = math.floor(vim.o.lines * 0.8),
         winblend = 0,
       },
+      on_open = function(term)
+        local buf = term.bufnr
+        -- Esc exits terminal mode (buffer-local, so lazygit is unaffected)
+        vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { buffer = buf, desc = "Exit terminal mode" })
+        -- Hide terminal while staying in terminal mode
+        vim.keymap.set("t", "<leader>t1", "<C-\\><C-n><cmd>1ToggleTerm<cr>", { buffer = buf, desc = "[T]erminal [1]" })
+        vim.keymap.set("t", "<leader>t2", "<C-\\><C-n><cmd>2ToggleTerm<cr>", { buffer = buf, desc = "[T]erminal [2]" })
+        vim.keymap.set("t", "<leader>t3", "<C-\\><C-n><cmd>3ToggleTerm<cr>", { buffer = buf, desc = "[T]erminal [3]" })
+      end,
     })
-
-    -- Exit terminal mode with Esc
-    vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-
-    -- Hide terminal while staying in terminal mode
-    vim.keymap.set(
-      "t",
-      "<leader>t1",
-      "<C-\\><C-n><cmd>1ToggleTerm<cr>",
-      { desc = "[T]erminal [1]" }
-    )
-    vim.keymap.set(
-      "t",
-      "<leader>t2",
-      "<C-\\><C-n><cmd>2ToggleTerm<cr>",
-      { desc = "[T]erminal [2]" }
-    )
-    vim.keymap.set(
-      "t",
-      "<leader>t3",
-      "<C-\\><C-n><cmd>3ToggleTerm<cr>",
-      { desc = "[T]erminal [3]" }
-    )
   end,
 }

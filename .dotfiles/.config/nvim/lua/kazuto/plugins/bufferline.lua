@@ -6,8 +6,24 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   keys = {
-    { "<Tab>", ":BufferLineCycleNext<CR>", desc = "Next Buffer" },
-    { "<S-Tab>", ":BufferLineCyclePrev<CR>", desc = "Previous Buffer" },
+    {
+      "<Tab>",
+      function()
+        if vim.bo.buftype ~= "terminal" then
+          vim.cmd("BufferLineCycleNext")
+        end
+      end,
+      desc = "Next Buffer",
+    },
+    {
+      "<S-Tab>",
+      function()
+        if vim.bo.buftype ~= "terminal" then
+          vim.cmd("BufferLineCyclePrev")
+        end
+      end,
+      desc = "Previous Buffer",
+    },
     { "<leader>bd", ":BufferKill<CR>", desc = "Close Buffer" }, -- Changed from <C-w>
     { "<leader>ba", ":BufferKillOthers<CR>", desc = "Close All Other Buffers" },
     { "<leader>bp", ":BufferLinePick<CR>", desc = "Pick Buffer" },
