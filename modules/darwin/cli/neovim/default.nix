@@ -53,7 +53,7 @@ in
 
       nodePackages.bash-language-server
       nodePackages.diagnostic-languageserver
-      nodePackages.dockerfile-language-server-nodejs
+      dockerfile-language-server
       nodePackages.eslint_d
       nodePackages.tailwindcss
       nodePackages.typescript-language-server

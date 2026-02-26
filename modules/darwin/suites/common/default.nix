@@ -15,6 +15,7 @@ in
       nix = enabled;
 
       cli = {
+        coreutils = enabled;
         flake = enabled;
         stow = enabled;
         neofetch = enabled;
