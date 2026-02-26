@@ -59,8 +59,12 @@
 	snowfall-flake.overlays.default
       ];
 
-      systems.modules = with inputs; [
+      systems.modules.nixos = with inputs; [
         home-manager.nixosModules.home-manager
+      ];
+
+      systems.modules.darwin = with inputs; [
+        home-manager.darwinModules.home-manager
       ];
     };
 }
