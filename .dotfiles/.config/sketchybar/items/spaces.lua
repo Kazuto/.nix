@@ -31,8 +31,8 @@ for mid in monitors:gmatch("[^\r\n]+") do
       click_script      = "aerospace workspace " .. sid,
     })
 
-    space:subscribe("aerospace_workspace_change", function(env)
-      local selected = env.FOCUSED_WORKSPACE == sid
+    local function update_focus(focused_ws)
+      local selected = focused_ws == sid
       space:set({
         background = {
           drawing = selected,
@@ -44,6 +44,16 @@ for mid in monitors:gmatch("[^\r\n]+") do
           shadow         = { drawing = selected and false or nil },
         },
       })
+    end
+
+    space:subscribe("aerospace_workspace_change", function(env)
+      update_focus(env.FOCUSED_WORKSPACE)
+    end)
+
+    space:subscribe("front_app_switched", function(_)
+      sbar.exec("aerospace list-workspaces --focused", function(out)
+        update_focus(out:gsub("%s+", ""))
+      end)
     end)
 
     -- Set initial window icons for this space
