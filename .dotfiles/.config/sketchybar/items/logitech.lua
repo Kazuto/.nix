@@ -23,33 +23,29 @@ for _, device in ipairs(devices) do
   item:subscribe({ "routine", "forced" }, function()
     local json_file = "/tmp/logitech_battery_" .. device.serial .. ".json"
 
-    -- First try to display from cached JSON
-    sbar.exec("cat " .. json_file .. " 2>/dev/null", function(cached)
-      if cached ~= "" then
-        sbar.exec("echo '" .. cached .. "' | jq -r '.percentage'", function(pct)
-          sbar.exec("echo '" .. cached .. "' | jq -r '.charging'", function(charging)
-            sbar.exec("echo '" .. cached .. "' | jq -r '.color'", function(color)
-              pct      = pct:gsub("\n", "")
-              charging = charging:gsub("\n", "")
-              color    = color:gsub("\n", "")
-
-              if charging == "true" then
-                item:set({ icon = device.icon, label = icons.battery_charging })
-              else
-                item:set({
-                  icon  = device.icon,
-                  label = { string = pct .. "%", color = tonumber(color) or colors.text },
-                })
-              end
-            end)
-          end)
-        end)
+    -- Read and apply cached JSON without spawning extra execs
+    local f = io.open(json_file, "r")
+    if f then
+      local cached = f:read("*a")
+      f:close()
+      local pct      = cached:match('"percentage":(%d+)')
+      local charging = cached:match('"charging":(%a+)')
+      local color    = cached:match('"color":"(0x%x+)"')
+      if pct then
+        if charging == "true" then
+          item:set({ icon = device.icon, label = icons.battery_charging })
+        else
+          item:set({
+            icon  = device.icon,
+            label = { string = pct .. "%", color = tonumber(color) or colors.text },
+          })
+        end
       end
-    end)
+    end
 
-    -- Then update from solaar
+    -- Then update from solaar (timeout prevents indefinite hangs)
     sbar.exec(
-      "/Users/kazuto/.pyenv/shims/solaar show " .. device.serial .. " 2>/dev/null | grep 'Battery:' | head -1",
+      "timeout 8 /Users/kazuto/.pyenv/shims/solaar show " .. device.serial .. " 2>/dev/null | grep 'Battery:' | head -1",
       function(battery_line)
         battery_line = battery_line:gsub("\n", "")
         if battery_line == "" then return end
