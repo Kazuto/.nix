@@ -17,31 +17,26 @@ in
       };
 
       cli = {
-        commitizen = enabled;
         curl = enabled;
+        git = enabled;
         gum = enabled;
         jira-cli = enabled;
         neovim = enabled;
-        ngrok = enabled;
         phpstan = enabled;
         pre-commit = enabled;
-        supabase = enabled;
         tmux = enabled;
-        vercel = enabled;
         # wget = enabled;
         zoxide = enabled;
         zsh = enabled;
       };
 
       development.tools = {
-        beekeeper = enabled;
         bruno = enabled;
         bun = enabled;
-        dbeaver = enabled;
-        gitkraken = enabled;
-        insomnia = enabled;
         kitty = enabled;
-        phpstorm = enabled;
+        lmstudio = enabled;
+        ollama = enabled;
+        tableplus = enabled;
         vscode = enabled;
       };
 
@@ -50,10 +45,6 @@ in
         php8 = enabled;
         python311 = enabled;
         go = enabled;
-      };
-
-      tools = {
-        git = enabled;
       };
     };
   };

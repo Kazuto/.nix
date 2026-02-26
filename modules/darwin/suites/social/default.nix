@@ -14,7 +14,6 @@ in
     shiro = {
       apps = {
         discord = enabled;
-        # telegram = enabled;
       };
     };
   };

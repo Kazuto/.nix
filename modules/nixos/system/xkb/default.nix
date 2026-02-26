@@ -13,9 +13,9 @@ in
   config = mkIf cfg.enable {
     console.useXkbConfig = true;
 
-    services.xserver = {
+    services.xserver.xkb = {
       layout = "de";
-      xkbVariant = "mac_nodeadkeys";
+      variant = "mac_nodeadkeys";
     };
   };
 }

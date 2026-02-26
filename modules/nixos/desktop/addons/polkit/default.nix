@@ -10,10 +10,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ polkit_gnome ];
+    environment.systemPackages = with pkgs; [ polkit-gnome ];
 
     environment.sessionVariables = {
-      POLKIT_AUTH_AGENT = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      POLKIT_AUTH_AGENT = "${pkgs.polkit-gnome}/libexec/polkit-gnome-authentication-agent-1";
     };
   };
 }

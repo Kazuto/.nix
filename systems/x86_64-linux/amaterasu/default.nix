@@ -14,7 +14,7 @@ with lib;
     };
 
     suites = {
-      core = enabled;
+      common = enabled;
       desktop = enabled;
       development = enabled;
       gaming = enabled;

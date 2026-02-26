@@ -32,24 +32,22 @@ in
 
     shiro.home.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
     shiro.home.configFile."hypr/keybind".source = ./keybind;
-    shiro.home.configFile."hypr/xdg-portal-hyprland".source = ./xdg-portal-hyprland;
 
     environment.systemPackages = with pkgs; [
       hyprland
       hyprland-share-picker
       hyprland-protocols
 
-      wlroots
       wl-clipboard
 
       viewnior
-      mplayer
+      mpv
       grim
       xdg-user-dirs
 
       jq
       xsel
-      nss_latest
+      nss
       cmake
       ninja
     ];
@@ -65,39 +63,29 @@ in
 
     programs.hyprland = {
       enable = true;
-
-      xwayland = {
-        hidpi = true;
-        enable = true;
-      };
+      xwayland.enable = true;
     };
 
     services.xserver = {
       enable = true;
-
-      displayManager = {
-        defaultSession = "hyprland";
-
-        gdm  = {
-          enable = true;
-          wayland = true;
-        };
-
-        # Enable automatic login for the user.
-        autoLogin = {
-          enable = true;
-          user = config.shiro.user.name;
-        };
-      };
-
-      # Enable touchpad support (enabled default in most desktopManager).
       libinput.enable = true;
     };
 
-    services.gnome = {
-      sushi.enable = true;
-      gnome-keyring.enable = true;
+    services.displayManager = {
+      defaultSession = "hyprland";
+
+      gdm = {
+        enable = true;
+        wayland = true;
+      };
+
+      autoLogin = {
+        enable = true;
+        user = config.shiro.user.name;
+      };
     };
+
+    services.gnome-keyring.enable = true;
 
     # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
     systemd.services."getty@tty1".enable = false;

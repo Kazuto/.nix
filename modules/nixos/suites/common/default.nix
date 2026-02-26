@@ -12,6 +12,8 @@ in
 
   config = mkIf cfg.enable {
     shiro = {
+      apps.thunderbird = enabled;
+
       nix = enabled;
 
       cli = {

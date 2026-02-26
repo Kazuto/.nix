@@ -17,9 +17,9 @@ in
       };
 
       cli = {
+        git = enabled;
         jira-cli = enabled;
         neovim = enabled;
-        ngrok = enabled;
         phpstan = enabled;
         tmux = enabled;
         trash = enabled;
@@ -31,7 +31,6 @@ in
         bun = enabled;
         # ghostty = enabled;
         gh-ost = enabled;
-        git = enabled;
         pocketbase = enabled;
         vscode = enabled;
         sqlite = enabled;

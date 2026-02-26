@@ -15,7 +15,7 @@ in
 
       # Needed for some installers like League of Legends
       openssl
-      gnome.zenity
+      zenity
     ];
   };
 }

@@ -15,7 +15,6 @@ in
       nodejs_24
       nodePackages.eslint_d
       nodePackages.postcss
-      nodePackages.vercel
       vscode-extensions.vue.volar
       nodePackages.yarn
       prettierd

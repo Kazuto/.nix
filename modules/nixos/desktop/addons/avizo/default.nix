@@ -11,7 +11,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ avizo pamixer pulseaudioFull brightnessctl ];
+    environment.systemPackages = with pkgs; [ avizo pamixer brightnessctl ];
 
     shiro.home.configFile."avizo/config.ini".source = ./config.ini;
   };

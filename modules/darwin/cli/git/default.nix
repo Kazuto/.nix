@@ -3,11 +3,11 @@
 with lib;
 with lib.shiro;
 let
-  cfg = config.shiro.development.tools.git;
+  cfg = config.shiro.cli.git;
   user = config.shiro.user;
 in
 {
-  options.shiro.development.tools.git = with types; {
+  options.shiro.cli.git = with types; {
     enable = mkBoolOpt false "Whether or not to use git.";
     userName = mkOpt types.str user.fullName "The name to configure git with.";
     userEmail = mkOpt types.str user.email "The email to configure git with.";

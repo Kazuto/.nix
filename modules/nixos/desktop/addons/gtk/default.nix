@@ -61,11 +61,11 @@ in
       gtk-engine-murrine
       glib
       gsettings-desktop-schemas
-      gnome.gnome-themes-extra
+      gnome-themes-extra
       sassc
       themechanger
       catppuccin-gtk
-      gnome.dconf-editor
+      dconf-editor
     ];
 
     environment.sessionVariables = {
