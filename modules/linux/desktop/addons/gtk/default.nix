@@ -54,7 +54,7 @@ in
       };
     };
 
-    programs.dconf = enabled;
+    programs.dconf.enable = true;
 
     environment.systemPackages = with pkgs; [
       gtk_engines

@@ -7,14 +7,27 @@ let
 in
 {
   options.shiro.development.tools.valet-linux = with types; {
-    enable = mkBoolOpt false "Whether or not to install Beekeeper Studio.";
+    enable = mkBoolOpt false "Whether or not to install valet-linux.";
   };
 
   config = mkIf cfg.enable {
-    shiro.development.languages.php81 = enabled;
+    shiro.development.languages.php8 = enabled;
 
-    environment.systemPackages = with pkgs; [ dnsmasq nginx mysql ];
+    services.nginx.enable = true;
 
-    services.nginx = enabled;
+    services.mysql = {
+      enable = true;
+      package = pkgs.mysql80;
+    };
+
+    services.redis.servers."" = {
+      enable = true;
+      package = pkgs.redis7;
+    };
+
+    services.dnsmasq = {
+      enable = true;
+      settings.address = "/.test/127.0.0.1";
+    };
   };
 }

@@ -3,16 +3,16 @@
 with lib;
 with lib.shiro;
 let
-  cfg = config.shiro.development.languages.php81;
+  cfg = config.shiro.development.languages.php8;
 in
 {
-  options.shiro.development.languages.php81 = with types; {
-    enable = mkBoolOpt false "Whether or not to use PHP 8.1.";
+  options.shiro.development.languages.php8 = with types; {
+    enable = mkBoolOpt false "Whether or not to use PHP 8.x.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs;  [
-      (php.buildEnv {
+    environment.systemPackages = with pkgs; [
+      (php83.buildEnv {
         extensions = ({ enabled, all }: enabled ++ (with all; [
           xdebug imagick
         ]));
@@ -23,8 +23,8 @@ in
         '';
       })
 
-      php81Packages.composer
-      php81Extensions.imagick
+      php83Packages.composer
+      php83Extensions.imagick
     ];
   };
 }

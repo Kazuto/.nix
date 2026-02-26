@@ -29,7 +29,7 @@ in
       # programs.bash.shellAliases.vim = "nvim";
     };
 
-    shiro.development.languages.nodejs20 = enabled;
+    shiro.development.languages.nodejs = enabled;
     shiro.cli.ripgrep = enabled;
 
     environment.systemPackages = with pkgs; [

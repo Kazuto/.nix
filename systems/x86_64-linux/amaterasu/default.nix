@@ -17,8 +17,8 @@ with lib;
       core = enabled;
       desktop = enabled;
       development = enabled;
-      entertainment = enabled;
       gaming = enabled;
+      media = enabled;
       social = enabled;
     };
 
@@ -28,5 +28,7 @@ with lib;
     };
   };
 
-  system.stateVersion = "23.05";
+  networking.hostName = "amaterasu";
+
+  system.stateVersion = "24.11";
 }

@@ -20,11 +20,13 @@ in
         commitizen = enabled;
         curl = enabled;
         gum = enabled;
+        jira-cli = enabled;
         neovim = enabled;
         ngrok = enabled;
         phpstan = enabled;
         pre-commit = enabled;
         supabase = enabled;
+        tmux = enabled;
         vercel = enabled;
         # wget = enabled;
         zoxide = enabled;
@@ -34,6 +36,7 @@ in
       development.tools = {
         beekeeper = enabled;
         bruno = enabled;
+        bun = enabled;
         dbeaver = enabled;
         gitkraken = enabled;
         insomnia = enabled;
@@ -43,8 +46,8 @@ in
       };
 
       development.languages = {
-        nodejs20 = enabled;
-        php81 = enabled;
+        nodejs = enabled;
+        php8 = enabled;
         python311 = enabled;
         go = enabled;
       };

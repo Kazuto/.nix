@@ -3,21 +3,22 @@
 with lib;
 with lib.shiro;
 let
-  cfg = config.shiro.development.languages.nodejs20;
+  cfg = config.shiro.development.languages.nodejs;
 in
 {
-  options.shiro.development.languages.nodejs20 = with types; {
-    enable = mkBoolOpt false "Whether or not to install Node.js 20.";
+  options.shiro.development.languages.nodejs = with types; {
+    enable = mkBoolOpt false "Whether or not to install Node.js.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs;  [
-      nodejs_20
+    environment.systemPackages = with pkgs; [
+      nodejs_24
       nodePackages.eslint_d
       nodePackages.postcss
       nodePackages.vercel
       vscode-extensions.vue.volar
       nodePackages.yarn
+      prettierd
     ];
   };
 }
