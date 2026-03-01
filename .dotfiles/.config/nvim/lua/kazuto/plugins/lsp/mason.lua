@@ -15,7 +15,7 @@ return {
         "phpactor",
         "tailwindcss",
         "ts_ls",
-        "vue_ls",
+        "volar",
       },
     },
     dependencies = {
