@@ -149,13 +149,13 @@ alias nrs="npm run storybook"
 
 # ======== DOCKER ======== #
 function dcu() {
-  local env_flag=""
-  [ -n "$1" ] && env_flag="--env-file $1"
-  docker-compose $env_flag up -d --force-recreate --remove-orphans
+  local -a env_args=()
+  [ -n "$1" ] && env_args=(--env-file "$1")
+  docker compose "${env_args[@]}" up -d --force-recreate --remove-orphans
 }
 
 function dcupdate() {
-  local env_flag=""
-  [ -n "$1" ] && env_flag="--env-file $1"
-  docker-compose $env_flag pull && docker-compose $env_flag up -d --force-recreate --remove-orphans
+  local -a env_args=()
+  [ -n "$1" ] && env_args=(--env-file "$1")
+  docker compose "${env_args[@]}" up -d --force-recreate --pull always
 }
