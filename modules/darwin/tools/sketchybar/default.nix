@@ -11,7 +11,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ sketchybar ];
+    environment.systemPackages = with pkgs; [ sketchybar sbarlua switchaudio-osx nowplaying-cli ];
 
     fonts.packages = with pkgs; [
         sketchybar-app-font

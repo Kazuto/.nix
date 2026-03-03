@@ -11,7 +11,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ ghostty ];
+    environment.systemPackages = with pkgs; [ ghostty-bin ];
 
     # shiro.home.configFile."ghostty/config".source = ./config;
   };

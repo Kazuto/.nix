@@ -13,6 +13,10 @@ with lib.shiro;
       tiling = enabled;
       gaming = enabled;
     };
+
+    system = {
+      homebrew = enabled;
+    };
   };
 
   environment.systemPath = [

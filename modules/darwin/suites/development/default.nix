@@ -17,6 +17,8 @@ in
       };
 
       cli = {
+        asciinema = enabled;
+        fswatch = enabled;
         git = enabled;
         jira-cli = enabled;
         neovim = enabled;
@@ -29,9 +31,11 @@ in
 
       development.tools = {
         bun = enabled;
-        # ghostty = enabled;
+        ghostty = enabled;
         gh-ost = enabled;
+        golangci-lint = enabled;
         pocketbase = enabled;
+        pyenv = enabled;
         vscode = enabled;
         sqlite = enabled;
         opencode = enabled;
