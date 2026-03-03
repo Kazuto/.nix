@@ -14,7 +14,6 @@ in
     shiro = {
       apps = {
         spotify = enabled;
-        obs = enabled;
         mkvtoolnix = enabled;
         # vlc = enabled;
       };
