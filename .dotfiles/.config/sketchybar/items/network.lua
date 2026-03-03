@@ -39,7 +39,7 @@ local net_ip = sbar.add("item", "network.ip", {
   background    = { drawing = false },
 })
 
-network:subscribe({ "routine", "forced", "system_woke" }, function()
+local function update_network()
   sbar.exec(string.format([[
     INTERFACE="%s"
     PREV_FILE="%s"
@@ -51,6 +51,8 @@ network:subscribe({ "routine", "forced", "system_woke" }, function()
       PREV_OUT=$(awk '{print $2}' "$PREV_FILE")
       DIFF_IN=$((CURRENT_IN - PREV_IN))
       DIFF_OUT=$((CURRENT_OUT - PREV_OUT))
+      [ "$DIFF_IN" -lt 0 ] && DIFF_IN=0
+      [ "$DIFF_OUT" -lt 0 ] && DIFF_OUT=0
       DOWN=$(echo "$DIFF_IN" | awk '{v=$1/2; if(v>=1048576) printf "%%.1f MB/s",v/1048576; else if(v>=1024) printf "%%.0f KB/s",v/1024; else printf "%%.0f B/s",v}')
       UP=$(echo "$DIFF_OUT" | awk '{v=$1/2; if(v>=1048576) printf "%%.1f MB/s",v/1048576; else if(v>=1024) printf "%%.0f KB/s",v/1024; else printf "%%.0f B/s",v}')
     else
@@ -69,6 +71,14 @@ network:subscribe({ "routine", "forced", "system_woke" }, function()
     net_interface:set({ label = "Interface: " .. iface })
     net_ip:set({ label = "IP: " .. ip })
   end)
+end
+
+network:subscribe({ "routine", "forced" }, update_network)
+
+-- On wake, drop the stale baseline so the first tick shows 0 B/s instead of garbage
+network:subscribe("system_woke", function()
+  os.remove(PREV_FILE)
+  update_network()
 end)
 
 network:subscribe("mouse.entered", function()

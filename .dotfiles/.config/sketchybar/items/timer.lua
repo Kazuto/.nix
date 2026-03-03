@@ -25,6 +25,31 @@ local timer = sbar.add("item", "timer", {
   },
 })
 
+local function start_timer(seconds)
+  sbar.exec(string.format([[
+    if [ -f "%s" ]; then
+      PID=$(cat "%s")
+      kill "$PID" 2>/dev/null
+      rm -f "%s"
+    fi
+    (
+      time_left=%d
+      while [ "$time_left" -gt 0 ]; do
+        minutes=$((time_left / 60))
+        secs=$((time_left %% 60))
+        sketchybar --set timer label="$(printf "%%02d:%%02d" "$minutes" "$secs")"
+        sleep 1
+        time_left=$((time_left - 1))
+      done
+      afplay "%sGuideSuccess.aiff"
+      sketchybar --set timer label="Done"
+    ) &
+    echo $! > "%s"
+    afplay "%sTrackingOn.aiff"
+  ]], COUNTDOWN_PID_FILE, COUNTDOWN_PID_FILE, COUNTDOWN_PID_FILE,
+      seconds, SOUNDS_PATH, COUNTDOWN_PID_FILE, SOUNDS_PATH))
+end
+
 local presets = { 5, 10, 25 }
 for _, minutes in ipairs(presets) do
   local preset = sbar.add("item", "timer." .. minutes, {
@@ -36,65 +61,15 @@ for _, minutes in ipairs(presets) do
   })
 
   preset:subscribe("mouse.clicked", function()
-    local seconds = minutes * 60
-    -- Stop any existing timer
-    sbar.exec(string.format([[
-      if [ -f "%s" ]; then
-        PID=$(cat "%s")
-        kill "$PID" 2>/dev/null
-        rm -f "%s"
-      fi
-    ]], COUNTDOWN_PID_FILE, COUNTDOWN_PID_FILE, COUNTDOWN_PID_FILE))
-
-    -- Start new countdown
-    sbar.exec(string.format([[
-      (
-        time_left=%d
-        while [ "$time_left" -gt 0 ]; do
-          minutes=$((time_left / 60))
-          secs=$((time_left %% 60))
-          sketchybar --set timer label="$(printf "%%02d:%%02d" "$minutes" "$secs")"
-          sleep 1
-          time_left=$((time_left - 1))
-        done
-        afplay "%sGuideSuccess.aiff"
-        sketchybar --set timer label="Done"
-      ) &
-      echo $! > "%s"
-      afplay "%sTrackingOn.aiff"
-    ]], seconds, SOUNDS_PATH, COUNTDOWN_PID_FILE, SOUNDS_PATH))
-
+    start_timer(minutes * 60)
     timer:set({ popup = { drawing = false } })
   end)
 end
 
 timer:subscribe("mouse.clicked", function(env)
   if env.BUTTON == "left" then
-    -- Start default 25 min timer
-    sbar.exec(string.format([[
-      if [ -f "%s" ]; then
-        PID=$(cat "%s")
-        kill "$PID" 2>/dev/null
-        rm -f "%s"
-      fi
-      (
-        time_left=%d
-        while [ "$time_left" -gt 0 ]; do
-          minutes=$((time_left / 60))
-          secs=$((time_left %% 60))
-          sketchybar --set timer label="$(printf "%%02d:%%02d" "$minutes" "$secs")"
-          sleep 1
-          time_left=$((time_left - 1))
-        done
-        afplay "%sGuideSuccess.aiff"
-        sketchybar --set timer label="Done"
-      ) &
-      echo $! > "%s"
-      afplay "%sTrackingOn.aiff"
-    ]], COUNTDOWN_PID_FILE, COUNTDOWN_PID_FILE, COUNTDOWN_PID_FILE,
-        DEFAULT_DURATION, SOUNDS_PATH, COUNTDOWN_PID_FILE, SOUNDS_PATH))
+    start_timer(DEFAULT_DURATION)
   elseif env.BUTTON == "right" then
-    -- Stop timer
     sbar.exec(string.format([[
       if [ -f "%s" ]; then
         PID=$(cat "%s")
@@ -105,6 +80,19 @@ timer:subscribe("mouse.clicked", function(env)
     ]], COUNTDOWN_PID_FILE, COUNTDOWN_PID_FILE, COUNTDOWN_PID_FILE, SOUNDS_PATH))
     timer:set({ label = "No Timer" })
   end
+end)
+
+-- After wake the countdown shell process will be dead; detect this and reset the label
+timer:subscribe("system_woke", function()
+  sbar.exec(string.format([[
+    if [ -f "%s" ]; then
+      PID=$(cat "%s")
+      if ! kill -0 "$PID" 2>/dev/null; then
+        rm -f "%s"
+        sketchybar --set timer label="No Timer"
+      fi
+    fi
+  ]], COUNTDOWN_PID_FILE, COUNTDOWN_PID_FILE, COUNTDOWN_PID_FILE))
 end)
 
 timer:subscribe("mouse.entered", function()

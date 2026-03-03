@@ -119,34 +119,41 @@ end
 
 spotify_play:subscribe("spotify_change", update)
 
--- Query current state on startup (spotify_change only fires on state *changes*)
-sbar.exec([[
-  osascript -e '
-    if application "Spotify" is running then
-      tell application "Spotify"
-        set playerState to player state as string
-        if playerState is "playing" then
-          set trackName to name of current track
-          set trackArtist to artist of current track
-          return trackName & "\t" & trackArtist
-        end if
-      end tell
-    end if
-    return ""
-  '
-]], function(result)
-  result = (result:gsub("%s+$", ""))
-  if result ~= "" then
-    local track, artist = result:match("^(.-)\t(.*)$")
-    if track then
-      track  = track:sub(1, 20)
-      artist = (artist or ""):sub(1, 20)
+-- Used at startup and after wake to sync state without relying on a state-change event
+local function query_current()
+  sbar.exec([[
+    osascript -e '
+      if application "Spotify" is running then
+        tell application "Spotify"
+          set playerState to player state as string
+          if playerState is "playing" then
+            set trackName to name of current track
+            set trackArtist to artist of current track
+            return "playing" & tab & trackName & tab & trackArtist
+          end if
+        end tell
+      end if
+      return "stopped"
+    '
+  ]], function(result)
+    result = (result:gsub("%s+$", ""))
+    if result:sub(1, 7) == "playing" then
+      local parts = {}
+      for part in result:gmatch("[^\t]+") do parts[#parts + 1] = part end
+      local track  = (parts[2] or ""):sub(1, 20)
+      local artist = (parts[3] or ""):sub(1, 20)
       local display = artist ~= "" and (track .. " - " .. artist) or track
       spotify:set({ label = display, drawing = true })
       spotify_play:set({ icon = { string = icons.pause } })
+    else
+      spotify:set({ label = "Nothing Playing", popup = { drawing = false } })
+      spotify_play:set({ icon = { string = icons.play } })
     end
-  end
-end)
+  end)
+end
+
+query_current()
+spotify:subscribe("system_woke", query_current)
 
 spotify_back:subscribe("mouse.clicked", function()
   sbar.exec("osascript -e 'tell application \"Spotify\" to play previous track'")
