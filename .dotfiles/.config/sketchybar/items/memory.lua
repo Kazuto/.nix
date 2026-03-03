@@ -32,7 +32,7 @@ for _, name in ipairs({ "usage", "active", "wired", "compressed" }) do
   })
 end
 
-memory:subscribe({ "routine", "forced" }, function()
+memory:subscribe({ "routine", "forced", "system_woke" }, function()
   sbar.exec([[
     TOTAL_MEM=$(sysctl -n hw.memsize)
     TOTAL_MEM_MB=$((TOTAL_MEM / 1024 / 1024))

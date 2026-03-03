@@ -54,7 +54,7 @@ for i = 1, 5 do
   })
 end
 
-cpu:subscribe({ "routine", "forced" }, function()
+cpu:subscribe({ "routine", "forced", "system_woke" }, function()
   sbar.exec([[
     CORE_COUNT=$(sysctl -n machdep.cpu.thread_count)
     CPU_INFO=$(ps -eo pcpu,user)

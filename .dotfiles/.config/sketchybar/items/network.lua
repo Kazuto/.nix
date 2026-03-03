@@ -39,7 +39,7 @@ local net_ip = sbar.add("item", "network.ip", {
   background    = { drawing = false },
 })
 
-network:subscribe({ "routine", "forced" }, function()
+network:subscribe({ "routine", "forced", "system_woke" }, function()
   sbar.exec(string.format([[
     INTERFACE="%s"
     PREV_FILE="%s"

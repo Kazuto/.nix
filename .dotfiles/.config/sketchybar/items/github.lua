@@ -84,5 +84,4 @@ local function update_github()
   end)
 end
 
-github:subscribe("routine", update_github)
-github:subscribe("forced", update_github)
+github:subscribe({ "routine", "forced", "system_woke" }, update_github)

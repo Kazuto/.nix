@@ -20,7 +20,7 @@ for _, device in ipairs(devices) do
     update_freq = 120,
   })
 
-  item:subscribe({ "routine", "forced" }, function()
+  item:subscribe({ "routine", "forced", "system_woke" }, function()
     local json_file = "/tmp/logitech_battery_" .. device.serial .. ".json"
 
     -- Read and apply cached JSON without spawning extra execs

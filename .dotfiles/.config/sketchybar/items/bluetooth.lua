@@ -65,7 +65,7 @@ local function update_bluetooth()
   end)
 end
 
-bluetooth:subscribe({ "routine", "forced" }, update_bluetooth)
+bluetooth:subscribe({ "routine", "forced", "system_woke" }, update_bluetooth)
 update_bluetooth()
 
 -- Populate popup with paired devices at startup

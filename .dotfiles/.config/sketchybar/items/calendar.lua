@@ -14,7 +14,7 @@ local calendar = sbar.add("item", "calendar", {
   update_freq = 30,
 })
 
-calendar:subscribe({ "routine", "forced" }, function()
+calendar:subscribe({ "routine", "forced", "system_woke" }, function()
   sbar.exec("date '+%a %d %b %I:%M %p'", function(date)
     calendar:set({ label = date:gsub("\n", "") })
   end)
