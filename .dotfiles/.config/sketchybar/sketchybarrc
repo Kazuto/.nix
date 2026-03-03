@@ -1,8 +1,6 @@
-#!/usr/bin/env lua
+#!/usr/bin/env lua5.4
 
-package.cpath = package.cpath
-  .. ";/run/current-system/sw/lib/?.so"
-  .. ";/Users/" .. os.getenv("USER") .. "/.local/share/sketchybar_lua/?.so"
+package.cpath = package.cpath .. ";/Users/" .. os.getenv("USER") .. "/.local/share/sketchybar_lua/?.so"
 
 sbar = require("sketchybar")
 
