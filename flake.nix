@@ -31,6 +31,12 @@
       url = "github:snowfallorg/flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # CachyOS kernel for NixOS
+    nix-cachyos-kernel = {
+      url = "github:xddxdd/nix-cachyos-kernel/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:
@@ -57,6 +63,7 @@
 
       overlays = with inputs; [
 	snowfall-flake.overlays.default
+	nix-cachyos-kernel.overlays.pinned
       ];
 
       systems.modules.nixos = with inputs; [
