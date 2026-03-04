@@ -85,7 +85,7 @@ in
       };
     };
 
-    services.gnome-keyring.enable = true;
+    services.gnome.gnome-keyring.enable = true;
 
     # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
     systemd.services."getty@tty1".enable = false;

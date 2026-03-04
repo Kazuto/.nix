@@ -1,13 +1,13 @@
-{ options, config, lib, pkgs, stdenv, ... }:
+{ options, config, lib, pkgs, ... }:
 
 with lib;
 with lib.shiro;
 let
   cfg = config.shiro.desktop.addons.hyprload;
 
-  hyprload = stdenv.mkDerivation {
+  hyprload = pkgs.stdenv.mkDerivation {
     name = "hyprload";
-    src = fetchFromGitHub {
+    src = pkgs.fetchFromGitHub {
         owner = "Duckonaut";
         repo = "hyprload";
         rev = "cdec6d114143d6ee95fd77683e494ab65fb74351";
