@@ -17,6 +17,7 @@ in
       };
 
       cli = {
+        bat = enabled;
         curl = enabled;
         git = enabled;
         gum = enabled;
