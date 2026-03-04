@@ -16,6 +16,7 @@ in
     services.xserver.xkb = {
       layout = "de";
       variant = "mac_nodeadkeys";
+      options = "apple:badmap";
     };
   };
 }
