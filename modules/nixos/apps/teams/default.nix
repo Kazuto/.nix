@@ -11,6 +11,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ teams ];
+    environment.systemPackages = with pkgs; [ teams-for-linux ];
   };
 }

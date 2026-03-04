@@ -12,7 +12,7 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;  [
-      (python311Full.withPackages(p: with p; [
+      (python311.withPackages(p: with p; [
         pygobject3 gst-python
       ]))
 

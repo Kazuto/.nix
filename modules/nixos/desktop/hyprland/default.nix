@@ -35,7 +35,6 @@ in
 
     environment.systemPackages = with pkgs; [
       hyprland
-      hyprland-share-picker
       hyprland-protocols
 
       wl-clipboard
@@ -66,10 +65,8 @@ in
       xwayland.enable = true;
     };
 
-    services.xserver = {
-      enable = true;
-      libinput.enable = true;
-    };
+    services.xserver.enable = true;
+    services.libinput.enable = true;
 
     services.displayManager = {
       defaultSession = "hyprland";

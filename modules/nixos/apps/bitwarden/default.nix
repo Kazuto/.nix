@@ -11,6 +11,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ bitwarden ];
+    environment.systemPackages = with pkgs; [ bitwarden-desktop ];
   };
 }

@@ -47,7 +47,7 @@ in
       gcc
       gnumake
       pkg-config
-      xorg.xhost
+      xhost
       snowfallorg.flake
     ];
   };

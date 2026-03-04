@@ -35,17 +35,17 @@ in
 
         programs.zsh = {
           enable = true;
-          enableAutosuggestions = true;
+          autosuggestion.enable = true;
           enableCompletion = true;
 
-          dotDir = ".config/zsh";
+          dotDir = "/home/${config.shiro.user.name}/.config/zsh";
 
           history = {
             size = 10000;
             path = "$XDG_DATA_HOME/zsh/history";
           };
 
-          initExtra = ''
+          initContent = ''
             export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 
             [[ ! -f ~/.aliases ]] || source ~/.aliases

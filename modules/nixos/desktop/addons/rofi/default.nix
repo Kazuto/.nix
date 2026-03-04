@@ -11,7 +11,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ rofi-wayland ];
+    environment.systemPackages = with pkgs; [ rofi ];
 
     shiro.home.configFile."rofi/themes".source = ./themes;
   };

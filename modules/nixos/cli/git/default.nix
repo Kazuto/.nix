@@ -20,9 +20,9 @@ in
       programs.git = {
         enable = true;
 
-        inherit (cfg) userName userEmail;
-
-        extraConfig = {
+        settings = {
+          user.name = cfg.userName;
+          user.email = cfg.userEmail;
           init = { defaultBranch = "master"; };
           push = { autoSetupRemote = true; };
         };

@@ -11,6 +11,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ php81Packages.phpstan ];
+    environment.systemPackages = with pkgs; [ phpstan ];
   };
 }
