@@ -1,14 +1,15 @@
 #!/bin/bash
 
 # ======== GENERAL ======== #
-command -v bat &>/dev/null && alias cat="bat --paging=never" || command -v batcat &>/dev/null && alias cat="batcat --paging=never"
+[ "$(which bat)" != "" ] && alias cat="bat --paging=never"
+[ "$(which batcat)" != "" ] && alias cat="batcat --paging=never"
 [ "$(which eza)" != "" ] && alias ls="eza --icons $@"
 [ "$(which trash)" != "" ] && alias rm="trash"
 [ "$(which zoxide)" != "" ] && alias cd="z"
 
 # Copy and paste from terminal
-[ "$(which xclip)" != "" ] && alias pbcopy="xclip -sel clip";
-[ "$(which xclip)" != "" ] && alias pbpaste="xclip -sel clip -o";
+[ "$(which xclip)" != "" ] && alias pbcopy="xclip -sel clip"
+[ "$(which xclip)" != "" ] && alias pbpaste="xclip -sel clip -o"
 
 alias config="cd ~/.config/ && nvim"
 
@@ -53,9 +54,10 @@ function ac {
 }
 
 function pat() {
-  if [ $# -eq 0 ]
-  then args="--testdox"
-  else args="--filter=$1"
+  if [ $# -eq 0 ]; then
+    args="--testdox"
+  else
+    args="--filter=$1"
   fi
 
   art test -d memory_limit=6144M "$args"
@@ -69,13 +71,11 @@ alias vgp="vendor-patches generate && composer update --lock"
 alias lg="lazygit"
 alias nah="git stash && git stash drop"
 
-comme () {
+comme() {
   git add --all
-  if (($# > 1))
-  then
+  if (($# > 1)); then
     params=''
-    for i in "$@"
-    do
+    for i in "$@"; do
       params=" $params $i"
     done
     git commit -m "$params"
@@ -84,7 +84,7 @@ comme () {
   fi
 }
 
-git:clean () {
+git:clean() {
   git branch --merged master | xargs git branch -d
 }
 
@@ -93,15 +93,16 @@ alias sp="supabase"
 alias sp:start="sp start"
 alias sp:stop="sp stop"
 
-function sp:migration(){
-  if [ $# -eq 0 ]
-  then echo "Provide a migration name"
-  else sp db diff --use-migra "$1" -f "$1"
+function sp:migration() {
+  if [ $# -eq 0 ]; then
+    echo "Provide a migration name"
+  else
+    sp db diff --use-migra "$1" -f "$1"
   fi
 }
 
 function sp:types() {
-  sp gen types typescript --linked --schema public > types/supabase.ts
+  sp gen types typescript --linked --schema public >types/supabase.ts
 }
 
 # ======== VIM & TMUXIFIER ======== #
