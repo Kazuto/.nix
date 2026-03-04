@@ -36,7 +36,7 @@ in
         kitty = enabled;
         lmstudio = enabled;
         ollama = enabled;
-        tableplus = enabled;
+        # tableplus = enabled;
         vscode = enabled;
       };
 
