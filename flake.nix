@@ -37,6 +37,17 @@
       url = "github:xddxdd/nix-cachyos-kernel/release";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
+    split-monitor-workspaces = {
+      url = "github:zjeffer/split-monitor-workspaces";
+      inputs.hyprland.follows = "hyprland"; # <- make sure this line is present for the plugin to work as intended
+    };
   };
 
   outputs = inputs:
@@ -45,7 +56,7 @@
         inherit inputs;
         src = ./.;
 
-	snowfall = {
+	    snowfall = {
           meta = {
             name = "shiro";
             title = "Shiro";
@@ -57,13 +68,13 @@
     in
     lib.mkFlake {
       channels-config = {
-	allowUnfree = true;
-	permittedInsecurePackages = [];
+	      allowUnfree = true;
+	      permittedInsecurePackages = [];
       };
 
       overlays = with inputs; [
-	snowfall-flake.overlays.default
-	nix-cachyos-kernel.overlays.pinned
+	      snowfall-flake.overlays.default
+	      nix-cachyos-kernel.overlays.pinned
       ];
 
       systems.modules.nixos = with inputs; [

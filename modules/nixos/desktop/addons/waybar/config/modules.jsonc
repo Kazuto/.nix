@@ -1,140 +1,128 @@
 {
-    "custom/menu": {
-        "format": "",
-        "tooltip": false,
-        "on-click": "$HOME/.config/waybar/scripts/menu"
+  "custom/menu": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "$HOME/.config/waybar/scripts/menu"
+  },
+  "custom/power": {
+    "format": "󰐥",
+    "tooltip": false,
+    "on-click": "wlogout --protocol layer-shell -b 5 -T 400 -B 400"
+  },
+  "clock": {
+    "interval": 60,
+    "format": "  {:%a, %d %b %Y | %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "custom/weather": {
+    "tooltip": true,
+    "format": "{}",
+    "interval": 30,
+    "exec": "$HOME/.config/waybar/scripts/waybar-wttr.py",
+    "return-type": "json"
+  },
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": false,
+    "on-click": "activate",
+    "format": "{icon}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "󰆼",
+      "4": "",
+      "5": "",
+      "6": "",
+      "7": "󰊻",
+      "active": "",
+      "default": ""
     },
-    "custom/power": {
-         "format": "󰐥",
-         "tooltip": false,
-         "on-click": "wlogout --protocol layer-shell -b 5 -T 400 -B 400"
+    "persistent-workspaces": {
+      "DP-1": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "DP-2": [
+        6,
+        7,
+        7,
+        8,
+        9,
+        10
+      ]
     },
-    "clock": {
-        "format": "{: %a, %d %b %Y | %H:%M}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-    },
-    "custom/weather": {
-        "tooltip": true,
-        "format": "{}",
-        "interval": 30,
-        "exec": "$HOME/.config/waybar/scripts/waybar-wttr.py",
-        "return-type": "json"
-    },
-    "wlr/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": false,
-        "on-click": "activate",
-        "format": "{icon}",
-        "format-icons": {
-            // "1": "",
-            // "2": "",
-            // "3": "",
-            // "4": "",
-            // "5": "",
-            "focused": "",
-            "default": ""
-        },
-        "persistent_workspaces": {
-            "1": [
-                "DP-1"
-            ],
-            "2": [
-                "DP-1"
-            ],
-            "3": [
-                "DP-1"
-            ],
-            "4": [
-                "DP-1"
-            ],
-            "5": [
-                "DP-1"
-            ],
-            "6": [
-                "DP-2"
-            ],
-            "7": [
-                "DP-2"
-            ],
-            "8": [
-                "DP-2"
-            ],
-            "9": [
-                "DP-2"
-            ],
-            "10": [
-                "DP-2"
-            ]
-        },
-        "sort-by-number": true
-    },
-    "hyprland/window": {
-        "format": "{}",
-        "max-length": 36
-    },
-    "tray": {
-        "icon-size": 13,
-        "spacing": 10
-    },
-    "custom/spotify": {
-        "interval": 1,
-        "return-type": "json",
-        "exec": "$HOME/.config/waybar/scripts/spotify",
-        "exec-if": "pgrep spotify",
-        "escape": true,
-        "on-click": "playerctl play-pause",
-        "on-scroll-up": "playerctl next",
-        "on-scroll-down": "playerctl previous"
-    },
-    "cpu": {
-        "interval": 10,
-        "format": " {usage}%",
-        "max-length": 10,
-        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
-    },
-    "memory": {
-        "interval": 30,
-        "format": "󰍛 {}%",
-        "max-length": 10,
-        "tooltip": true,
-        "tooltip-format": "Memory - {used:0.1f}GB used",
-        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
-    },
-    "network": {
-        "interface": "enp6s0",
-        "interval": 5,
-        "format": "󰶡 {bandwidthDownBits}",
-        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
-    },
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "tooltip": false,
-        "format-muted": " Muted",
-        "on-click": "pamixer -t",
-        "on-scroll-up": "pamixer -i 5",
-        "on-scroll-down": "pamixer -d 5",
-        "scroll-step": 5,
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": [
-                "",
-                "",
-                ""
-            ]
-        }
-    },
-    "pulseaudio#microphone": {
-        "format": "{format_source}",
-        "format-source": " {volume}%",
-        "format-source-muted": " Muted",
-        "on-click": "pamixer --default-source -t",
-        "on-scroll-up": "pamixer --default-source -i 5",
-        "on-scroll-down": "pamixer --default-source -d 5",
-        "scroll-step": 5
+    "sort-by-number": true
+  },
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 36
+  },
+  "tray": {
+    "icon-size": 13,
+    "spacing": 10
+  },
+  "custom/spotify": {
+    "interval": 1,
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/spotify",
+    "exec-if": "pgrep spotify",
+    "escape": true,
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous"
+  },
+  "cpu": {
+    "interval": 10,
+    "format": " {usage}%",
+    "max-length": 10,
+    "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
+  },
+  "memory": {
+    "interval": 30,
+    "format": "󰍛 {}%",
+    "max-length": 10,
+    "tooltip": true,
+    "tooltip-format": "Memory - {used:0.1f}GB used",
+    "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
+  },
+  "network": {
+    "interface": "enp6s0",
+    "interval": 5,
+    "format": "󰶡 {bandwidthDownBits}",
+    "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "tooltip": false,
+    "format-muted": " Muted",
+    "on-click": "pamixer -t",
+    "on-scroll-up": "pamixer -i 5",
+    "on-scroll-down": "pamixer -d 5",
+    "scroll-step": 5,
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
     }
+  },
+  "pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": " Muted",
+    "on-click": "pamixer --default-source -t",
+    "on-scroll-up": "pamixer --default-source -i 5",
+    "on-scroll-down": "pamixer --default-source -d 5",
+    "scroll-step": 5
+  }
 }

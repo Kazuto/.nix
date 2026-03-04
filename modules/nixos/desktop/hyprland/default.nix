@@ -1,4 +1,4 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, inputs, ... }:
 
 with lib;
 with lib.shiro;
@@ -32,6 +32,16 @@ in
 
     shiro.home.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
     shiro.home.configFile."hypr/keybind".source = ./keybind;
+
+    shiro.home.extraOptions = {
+      wayland.windowManager.hyprland = {
+        enable = true;
+
+        plugins = [
+          inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+        ];
+      };
+    };
 
     environment.systemPackages = with pkgs; [
       hyprland
@@ -85,5 +95,3 @@ in
     services.gnome.gnome-keyring.enable = true;
   };
 }
-
-

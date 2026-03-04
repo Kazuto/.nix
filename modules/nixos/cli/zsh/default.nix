@@ -46,10 +46,19 @@ in
           };
 
           initContent = ''
-            export PATH="$PATH:$HOME/.config/composer/vendor/bin"
-
             [[ ! -f ~/.aliases ]] || source ~/.aliases
             [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+            export EDITOR="nvim"
+            export TERM="ghostty"
+            export TERMINAL="ghostty"
+            export PROJECT_ROOT="$HOME/Development"
+
+            # Nvim
+            export NVIM_LARAVEL_ENV=local
+
+            # LM Studio
+            export LMSTUDIO_BASE_URL="http://localhost:1234"
           '';
 
           zplug = {

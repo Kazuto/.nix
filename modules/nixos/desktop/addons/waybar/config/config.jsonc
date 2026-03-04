@@ -1,52 +1,55 @@
 [
-    {
-        "layer": "top",
-        "output": "DP-1",
-        "position": "top",
-        "mod": "dock",
-        "exclusive": true,
-        "passthrough": false,
-        "gtk-layer-shell": true,
-        "height": 0,
-        "modules-left": [
-            // "custom/menu",
-            "hyprland/workspaces"
-        ],
-        "modules-center": [
-            "hyprland/window"
-        ],
-        "modules-right": [
-            "clock"
-            // "custom/power"
-        ],
-        // "modules-center": ["hyprland/workspaces"],
-        "include": [
-            "$HOME/.config/waybar/modules.jsonc"
-        ]
-    },
-    {
-        "layer": "top",
-        "output": "DP-2",
-        "position": "top",
-        "mod": "dock",
-        "exclusive": true,
-        "passthrough": false,
-        "gtk-layer-shell": true,
-        "height": 0,
-        "modules-left": [
-            "hyprland/workspaces",
-            "custom/spotify"
-        ],
-        "modules-right": [
-            "tray",
-            "cpu",
-            "memory",
-            "network",
-            "pulseaudio"
-            // "pulseaudio#microphone"
-        ],
-        "include": [
-            "$HOME/.config/waybar/modules.jsonc"
-        ]
-    }
+  {
+    "layer": "top",
+    "output": "DP-1",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 0,
+    "modules-left": [
+      "custom/menu",
+      "hyprland/workspaces",
+      "hyprland/window"
+    ],
+    "modules-center": [
+      "custom/spotify"
+    ],
+    "modules-right": [
+      "cpu",
+      "memory",
+      "network",
+      "pulseaudio",
+      "clock",
+      "custom/power"
+    ],
+    "include": [
+      "$HOME/.config/waybar/modules.jsonc"
+    ]
+  },
+  {
+    "layer": "top",
+    "output": "DP-2",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 0,
+    "modules-left": [
+      "hyprland/workspaces"
+    ],
+    "modules-right": [
+      "tray",
+      "cpu",
+      "memory",
+      "network",
+      "pulseaudio"
+      // "pulseaudio#microphone"
+    ],
+    "include": [
+      "$HOME/.config/waybar/modules.jsonc"
+    ]
+  }
 ]

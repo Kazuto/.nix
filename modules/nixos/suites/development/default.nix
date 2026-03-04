@@ -33,7 +33,7 @@ in
       development.tools = {
         bruno = enabled;
         bun = enabled;
-        kitty = enabled;
+        ghostty = enabled;
         lmstudio = enabled;
         ollama = enabled;
         # tableplus = enabled;

@@ -45,6 +45,7 @@ in
       shellcheck
       stylua
       tree-sitter
+      lazygit
 
       nodePackages.bash-language-server
       nodePackages.diagnostic-languageserver
