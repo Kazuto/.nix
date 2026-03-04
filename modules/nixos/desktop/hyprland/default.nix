@@ -68,25 +68,21 @@ in
     services.xserver.enable = true;
     services.libinput.enable = true;
 
-    services.displayManager = {
-      defaultSession = "hyprland";
+    hardware.graphics.enable = true;
 
-      gdm = {
-        enable = true;
-        wayland = true;
-      };
+    shiro.user.extraGroups = [ "video" "input" "render" ];
 
-      autoLogin = {
-        enable = true;
-        user = config.shiro.user.name;
+    services.greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
+          user = "greeter";
+        };
       };
     };
 
     services.gnome.gnome-keyring.enable = true;
-
-    # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-    systemd.services."getty@tty1".enable = false;
-    systemd.services."autovt@tty1".enable = false;
   };
 }
 
