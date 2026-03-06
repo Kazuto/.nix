@@ -23,7 +23,6 @@ in {
 
     services.redis.servers."" = {
       enable = true;
-      package = pkgs.redis;
     };
 
     services.dnsmasq = {
