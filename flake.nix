@@ -26,6 +26,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Nixvim - Neovim configuration in Nix
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Simplified Nix Flakes on the command line
     snowfall-flake = {
       url = "github:snowfallorg/flake";
@@ -73,10 +79,16 @@
 
       systems.modules.nixos = with inputs; [
         home-manager.nixosModules.home-manager
+        nixvim.nixosModules.nixvim
       ];
 
       systems.modules.darwin = with inputs; [
         home-manager.darwinModules.home-manager
+        nixvim.nixDarwinModules.nixvim
+      ];
+
+      homes.modules = with inputs; [
+        nixvim.homeManagerModules.nixvim
       ];
     };
 }

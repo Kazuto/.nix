@@ -3,11 +3,11 @@
 with lib;
 with lib.shiro;
 let
-  cfg = config.shiro.suites.smake;
+  cfg = config.shiro.suites.work;
 in
 {
-  options.shiro.suites.smake = with types; {
-    enable = mkBoolOpt false "Whether or not to enable smake configuration.";
+  options.shiro.suites.work = with types; {
+    enable = mkBoolOpt false "Whether or not to enable work configuration.";
   };
 
   config = mkIf cfg.enable {

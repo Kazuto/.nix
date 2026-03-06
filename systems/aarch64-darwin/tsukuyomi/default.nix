@@ -9,7 +9,7 @@ with lib.shiro;
     };
 
     suites = {
-      smake = enabled;
+      work = enabled;
       tiling = enabled;
       gaming = enabled;
     };
