@@ -19,7 +19,6 @@ in
 
       development.tools = {
         gh-ost = enabled;
-        golangci-lint = enabled;
         pocketbase = enabled;
         pyenv = enabled;
         sqlite = enabled;

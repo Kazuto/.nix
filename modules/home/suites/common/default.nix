@@ -14,7 +14,7 @@ in
     shiro = {
       cli = {
         flake = enabled;
-        neofetch = enabled;
+        fastfetch = enabled;
         wget = enabled;
         zsh = enabled;
       };
