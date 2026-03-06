@@ -7,9 +7,11 @@
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
-    "height": 0,
+    "height": 42,
+    "margin-top": 4,
+    "margin-left": 10,
+    "margin-right": 10,
     "modules-left": [
-      "custom/menu",
       "hyprland/workspaces",
       "hyprland/window"
     ],
@@ -17,12 +19,15 @@
       "custom/spotify"
     ],
     "modules-right": [
+      "clock",
+      "pulseaudio",
+      "bluetooth",
+      "custom/logitech",
       "cpu",
       "memory",
       "network",
-      "pulseaudio",
-      "clock",
-      "custom/power"
+      "custom/timer",
+      "custom/github"
     ],
     "include": [
       "$HOME/.config/waybar/modules.jsonc"
@@ -36,17 +41,18 @@
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
-    "height": 0,
+    "height": 42,
+    "margin-top": 4,
+    "margin-left": 10,
+    "margin-right": 10,
     "modules-left": [
       "hyprland/workspaces"
     ],
     "modules-right": [
-      "tray",
       "cpu",
       "memory",
       "network",
       "pulseaudio"
-      // "pulseaudio#microphone"
     ],
     "include": [
       "$HOME/.config/waybar/modules.jsonc"

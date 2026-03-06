@@ -14,6 +14,7 @@ in
     environment.systemPackages = with pkgs; [ rofi ];
 
     shiro.home.configFile."rofi/themes".source = ./themes;
+    shiro.home.configFile."rofi/config.rasi".source = ./config.rasi;
   };
 }
 

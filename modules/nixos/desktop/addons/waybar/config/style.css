@@ -1,23 +1,24 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: JetBrainsMono Nerd Font, monospace;
-  font-weight: bold;
-  font-size: 14px;
+  font-family: "SF Pro", "JetBrainsMono Nerd Font", monospace;
+  font-weight: 500;
+  font-size: 13px;
   min-height: 0;
 }
 
 window#waybar {
-  background: rgba(21, 18, 27, 0);
+  background: transparent;
   color: #CDD6F4;
 }
 
 tooltip {
   background: #1E1E2E;
   border-radius: 10px;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
-  border-color: #11111B;
+  border-color: #45475A;
+  color: #CDD6F4;
 }
 
 #clock,
@@ -25,13 +26,17 @@ tooltip {
 #window,
 #tray,
 #pulseaudio,
+#bluetooth,
 #cpu,
 #memory,
-#network {
+#network,
+#custom-github,
+#custom-timer,
+#custom-logitech {
   background: #1E1E2E;
   border-radius: 10px;
-  padding: 0px 8px;
-  margin: 8px 5px 3px 5px;
+  padding: 0px 10px;
+  margin: 8px 5px 0px 5px;
 }
 
 #custom-menu,
@@ -40,86 +45,130 @@ tooltip {
 #custom-updates {
   background: #1E1E2E;
   border-radius: 10px;
-  padding: 0px 8px;
-  margin: 8px 5px 3px 5px;
+  padding: 0px 10px;
+  margin: 8px 5px 0px 5px;
 }
 
 #workspaces {
   background: #1E1E2E;
+  padding: 0px 4px;
 }
 
 #workspaces button {
-  box-shadow: unset;
-  border: unset;
-
-  padding: 6px 9px 6px 6px;
-
+  box-shadow: none;
+  text-shadow: none;
+  padding: 6px 8px;
+  margin: 0px 2px;
+  border-radius: 8px;
   color: #313244;
-  background: none;
+  background: transparent;
+  transition: none;
 }
 
 #workspaces button.active {
   color: #A6ADC8;
-  background: none;
+  background: transparent;
 }
 
 #workspaces button.focused {
   color: #A6ADC8;
-  background: none;
+  background: transparent;
   outline: none;
 }
 
 #workspaces button.urgent {
   color: #F38BA8;
-  background: none;
+  background: transparent;
 }
 
 #workspaces button:hover {
   color: #FAB387;
-  background: none;
+  background: transparent;
+}
+
+#window {
+  color: #CDD6F4;
+  font-weight: 500;
 }
 
 #clock {
-  color: #FAB387;
+  color: #89B4FA;
+  font-weight: 500;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #custom-menu {
   color: #89B4FA;
-  padding-left: 9px;
-  padding-right: 15px;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 #custom-power {
   color: #FAB387;
-  padding-left: 11px;
-  padding-right: 13px;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 #custom-spotify {
   color: #A6E3A1;
+  font-weight: 500;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+#bluetooth {
+  color: #89B4FA;
+}
+
+#bluetooth.connected {
+  color: #89B4FA;
+}
+
+#bluetooth.disabled {
+  color: #7F849C;
 }
 
 #cpu {
   color: #89DCEB;
-  border-radius: 10px 0px 0px 10px;
-  margin-left: 0px;
-  margin-right: 0px;
 }
 
 #memory {
   color: #74C7EC;
-  border-radius: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
 }
 
 #network {
   color: #89B4FA;
-  border-radius: 0px 10px 10px 0px;
-  margin-left: 0px;
-  margin-right: 0px;
 }
 
 #pulseaudio {
   color: #CBA6F7;
+}
+
+#pulseaudio.muted {
+  color: #7F849C;
+}
+
+#custom-github {
+  color: #B4BEFE;
+}
+
+#custom-github.notifications {
+  color: #F38BA8;
+}
+
+#custom-timer {
+  color: #F9E2AF;
+}
+
+#custom-logitech {
+  color: #89DCEB;
+}
+
+#custom-logitech.low {
+  color: #FAB387;
+}
+
+#custom-logitech.critical {
+  color: #F38BA8;
 }

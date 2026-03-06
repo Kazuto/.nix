@@ -11,11 +11,24 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ playerctl inotify-tools];
+    environment.systemPackages = with pkgs; [
+      playerctl
+      inotify-tools
+      solaar
+      libnotify
+    ];
 
     programs.waybar.enable = true;
 
     shiro.home.configFile."waybar".source = ./config;
+
+    # Make scripts executable
+    shiro.home.extraOptions = {
+      home.file.".config/waybar/scripts/github".executable = true;
+      home.file.".config/waybar/scripts/github-menu".executable = true;
+      home.file.".config/waybar/scripts/timer".executable = true;
+      home.file.".config/waybar/scripts/logitech".executable = true;
+    };
   };
 }
 

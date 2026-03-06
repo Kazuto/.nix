@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+# Logitech device serials (update these with your device serials)
+# You can get these by running: solaar show
+DEVICES=(
+    "keyboard"
+    "mouse"
+)
+
+get_battery() {
+    device=$1
+
+    # Try to get battery info from solaar
+    battery_info=$(timeout 5 solaar show 2>/dev/null | grep -A 2 "$device" | grep "Battery:" | head -1)
+
+    if [ -z "$battery_info" ]; then
+        return
+    fi
+
+    percentage=$(echo "$battery_info" | grep -oP '\d+(?=%)')
+    charging=$(echo "$battery_info" | grep -q "RECHARGING" && echo "true" || echo "false")
+
+    if [ -n "$percentage" ]; then
+        echo "$device:$percentage:$charging"
+    fi
+}
+
+output=""
+for device in "${DEVICES[@]}"; do
+    result=$(get_battery "$device")
+    if [ -n "$result" ]; then
+        IFS=':' read -r dev pct chrg <<< "$result"
+
+        # Choose icon based on battery level
+        if [ "$pct" -ge 90 ]; then
+            icon="󰁹"
+            class="full"
+        elif [ "$pct" -ge 60 ]; then
+            icon="󰂀"
+            class="high"
+        elif [ "$pct" -ge 30 ]; then
+            icon="󰁾"
+            class="medium"
+        elif [ "$pct" -ge 10 ]; then
+            icon="󰁻"
+            class="low"
+        else
+            icon="󰁺"
+            class="critical"
+        fi
+
+        if [ "$chrg" = "true" ]; then
+            icon="󰂄"
+            class="charging"
+        fi
+
+        if [ -n "$output" ]; then
+            output="$output | "
+        fi
+
+        device_icon="󰌌"  # keyboard
+        [ "$dev" = "mouse" ] && device_icon="󰍽"
+
+        output="$output$device_icon $icon $pct%"
+    fi
+done
+
+if [ -z "$output" ]; then
+    echo "{\"text\":\"\",\"tooltip\":\"No Logitech devices found\",\"class\":\"disconnected\"}"
+else
+    echo "{\"text\":\"$output\",\"tooltip\":\"Logitech devices\",\"class\":\"connected\"}"
+fi

@@ -1,6 +1,6 @@
 {
   "custom/menu": {
-    "format": "",
+    "format": "",
     "tooltip": false,
     "on-click": "$HOME/.config/waybar/scripts/menu"
   },
@@ -11,8 +11,18 @@
   },
   "clock": {
     "interval": 60,
-    "format": "  {:%a, %d %b %Y | %H:%M}",
+    "format": "  {:%a %d %b %I:%M %p}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "bluetooth": {
+    "format": " {status}",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on-click": "blueman-manager"
   },
   "custom/weather": {
     "tooltip": true,
@@ -27,15 +37,15 @@
     "on-click": "activate",
     "format": "{icon}",
     "format-icons": {
-      "1": "",
-      "2": "",
+      "1": "",
+      "2": "",
       "3": "󰆼",
-      "4": "",
-      "5": "",
-      "6": "",
+      "4": "",
+      "5": "",
+      "6": "",
       "7": "󰊻",
-      "active": "",
-      "default": ""
+      "active": "",
+      "default": ""
     },
     "persistent-workspaces": {
       "DP-1": [
@@ -47,7 +57,6 @@
       ],
       "DP-2": [
         6,
-        7,
         7,
         8,
         9,
@@ -76,7 +85,7 @@
   },
   "cpu": {
     "interval": 10,
-    "format": " {usage}%",
+    "format": "󰻠 {usage}%",
     "max-length": 10,
     "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
   },
@@ -97,32 +106,57 @@
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "tooltip": false,
-    "format-muted": " Muted",
+    "format-muted": " Muted",
     "on-click": "pamixer -t",
     "on-scroll-up": "pamixer -i 5",
     "on-scroll-down": "pamixer -d 5",
     "scroll-step": 5,
     "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
       "default": [
-        "",
-        "",
-        ""
+        "",
+        "",
+        ""
       ]
     }
   },
   "pulseaudio#microphone": {
     "format": "{format_source}",
-    "format-source": " {volume}%",
-    "format-source-muted": " Muted",
+    "format-source": " {volume}%",
+    "format-source-muted": " Muted",
     "on-click": "pamixer --default-source -t",
     "on-scroll-up": "pamixer --default-source -i 5",
     "on-scroll-down": "pamixer --default-source -d 5",
     "scroll-step": 5
+  },
+  "custom/github": {
+    "format": " {}",
+    "return-type": "json",
+    "interval": 60,
+    "exec": "$HOME/.config/waybar/scripts/github",
+    "on-click": "$HOME/.config/waybar/scripts/github-menu",
+    "on-click-right": "xdg-open https://github.com/notifications",
+    "tooltip": true
+  },
+  "custom/timer": {
+    "format": " {}",
+    "interval": 1,
+    "exec": "$HOME/.config/waybar/scripts/timer status",
+    "on-click": "$HOME/.config/waybar/scripts/timer menu",
+    "on-click-right": "$HOME/.config/waybar/scripts/timer stop",
+    "tooltip": true,
+    "tooltip-format": "Left click: Select timer duration\nRight click: Stop timer"
+  },
+  "custom/logitech": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 120,
+    "exec": "$HOME/.config/waybar/scripts/logitech",
+    "tooltip": true
   }
 }
