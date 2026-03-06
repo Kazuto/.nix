@@ -27,9 +27,8 @@ in
       eza
       tree
       zoxide
-      xclip
     ] ++ lib.optionals stdenv.isDarwin [ darwin.trash ]
-      ++ lib.optionals stdenv.isLinux [ trashy ];
+      ++ lib.optionals stdenv.isLinux [ trashy xclip ];
 
     home.sessionPath = [
       "${config.home.homeDirectory}/.local/bin"
@@ -49,8 +48,6 @@ in
       cat = "bat --paging=never";
       ls = "eza --icons";
       l = "ls -lah";
-      pbcopy = "xclip -sel clip";
-      pbpaste = "xclip -sel clip -o";
 
       # Auth
       token = "pwgen -s 40 1 | pbcopy && echo 'Copied to clipboard.'";
@@ -80,6 +77,10 @@ in
     } // lib.optionalAttrs pkgs.stdenv.isDarwin {
       # Nix rebuild alias for cross-platform compatibility
       nixos-rebuild = "darwin-rebuild";
+    } // lib.optionalAttrs pkgs.stdenv.isLinux {
+      # Clipboard aliases for Linux (xclip)
+      pbcopy = "xclip -sel clip";
+      pbpaste = "xclip -sel clip -o";
     };
 
     programs.fzf = {
@@ -189,7 +190,9 @@ in
         # Nix rebuild shortcut
         function nix:update() {
           echo "Rebuilding flake ./#${hostname}"
-          sudo nixos-rebuild switch --flake ${config.home.homeDirectory}/.nix/#${hostname}
+          ${if pkgs.stdenv.isDarwin
+            then "sudo darwin-rebuild switch --flake ${config.home.homeDirectory}/.nix/#${hostname}"
+            else "sudo nixos-rebuild switch --flake ${config.home.homeDirectory}/.nix/#${hostname}"}
         }
 
         # Docker shortcuts
