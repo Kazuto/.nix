@@ -33,6 +33,7 @@ in
       development.tools = {
         bruno = enabled;
         bun = enabled;
+        claude-code = enabled;
         ghostty = enabled;
         kitty = enabled;
         opencode = enabled;
