@@ -19,6 +19,7 @@ in
       # hyprload = enabled;
       hyprpaper = enabled;
       hyprpicker = enabled;
+      libinput-gestures = enabled;
       nautilus = enabled;
       rofi = enabled;
       thunar = enabled;
