@@ -2,14 +2,7 @@
 
 with lib;
 with lib.shiro;
-let
-  cfg = config.shiro.home;
-in
 {
-  imports = with inputs; [
-    home-manager.nixosModules.home-manager
-  ];
-
   options.shiro.home = with types; {
     file = mkOpt attrs { }
       "A set of files to be managed by home-manager's <option>home.file</option>.";
@@ -35,5 +28,3 @@ in
     };
   };
 }
-
-

@@ -11,10 +11,5 @@ in
   };
 
   config = mkIf cfg.enable {
-    shiro = {
-      apps = {
-        discord = enabled;
-      };
-    };
   };
 }

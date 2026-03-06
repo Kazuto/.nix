@@ -12,40 +12,18 @@ in
 
   config = mkIf cfg.enable {
     shiro = {
-      apps = {
-        obsidian = enabled;
-      };
-
       cli = {
         bat = enabled;
         curl = enabled;
-        git = enabled;
-        gum = enabled;
-        jira-cli = enabled;
-        neovim = enabled;
-        phpstan = enabled;
-        pre-commit = enabled;
-        tmux = enabled;
-        # wget = enabled;
-        zoxide = enabled;
-        zsh = enabled;
       };
 
       development.tools = {
-        bruno = enabled;
-        bun = enabled;
-        ghostty = enabled;
         lmstudio = enabled;
         ollama = enabled;
-        # tableplus = enabled;
-        vscode = enabled;
       };
 
       development.languages = {
-        nodejs = enabled;
-        php8 = enabled;
         python311 = enabled;
-        go = enabled;
       };
     };
   };

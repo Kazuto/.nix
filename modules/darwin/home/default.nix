@@ -2,9 +2,6 @@
 
 with lib;
 with lib.shiro;
-let
-  cfg = config.shiro.home;
-in
 {
   options.shiro.home = with types; {
     file = mkOpt attrs { }
@@ -16,17 +13,19 @@ in
 
   config = {
     shiro.home.extraOptions = {
-      home.stateVersion = config.system.stateVersion;
+      home.stateVersion = "24.11";
       home.file = mkAliasDefinitions options.shiro.home.file;
       xdg.enable = true;
       xdg.configFile = mkAliasDefinitions options.shiro.home.configFile;
     };
 
-    snowfallorg.users.${config.shiro.user.name}.home.config = mkAliasDefinitions options.shiro.home.extraOptions;
+    snowfallorg.users.${config.shiro.user.name}.home.config =
+      mkAliasDefinitions options.shiro.home.extraOptions;
 
     home-manager = {
-      useUserPackages = true;
+      useUserPackages = false;
       useGlobalPkgs = true;
+      backupFileExtension = "backup";
     };
   };
 }

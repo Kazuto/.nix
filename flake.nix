@@ -32,12 +32,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # CachyOS kernel for NixOS
-    nix-cachyos-kernel = {
-      url = "github:xddxdd/nix-cachyos-kernel/release";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -65,6 +59,7 @@
           namespace = "shiro";
         };
       };
+
     in
     lib.mkFlake {
       channels-config = {
@@ -74,7 +69,6 @@
 
       overlays = with inputs; [
 	      snowfall-flake.overlays.default
-	      nix-cachyos-kernel.overlays.pinned
       ];
 
       systems.modules.nixos = with inputs; [

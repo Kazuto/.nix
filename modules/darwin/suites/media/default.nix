@@ -13,9 +13,7 @@ in
   config = mkIf cfg.enable {
     shiro = {
       apps = {
-        spotify = enabled;
         mkvtoolnix = enabled;
-        # vlc = enabled;
       };
 
       cli = {

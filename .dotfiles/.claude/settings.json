@@ -1,0 +1,13 @@
+{
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true,
+    "php-lsp@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true
+  },
+  "effortLevel": "medium",
+  "statusLine": {
+    "type": "command",
+    "command": "bash /Users/kazuto/.claude/statusline-command.sh"
+  }
+}

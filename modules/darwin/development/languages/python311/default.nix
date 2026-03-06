@@ -12,12 +12,11 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;  [
-      (python311Full.withPackages(p: with p; [
-        pygobject3 gst-python pillow termcolor pyinstaller gnureadline
+      (python311.withPackages(p: with p; [
+        pygobject3 pillow termcolor pyinstaller
       ]))
 
       python311Packages.pip
-      gst_all_1.gstreamer
     ];
   };
 }

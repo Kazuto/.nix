@@ -13,7 +13,6 @@ in
   config = mkIf cfg.enable {
     shiro = {
       apps = {
-        discord = enabled;
         lutris = enabled;
         prismlauncher = enabled;
         steam = enabled;

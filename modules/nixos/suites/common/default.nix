@@ -12,13 +12,10 @@ in
 
   config = mkIf cfg.enable {
     shiro = {
-      apps.thunderbird = enabled;
-
       nix = enabled;
 
       cli = {
-        flake = enabled;
-        stow = enabled;
+        zsh = enabled;
       };
 
       hardware = {

@@ -12,38 +12,22 @@ in
 
   config = mkIf cfg.enable {
     shiro = {
-      apps = {
-        obsidian = enabled;
-      };
-
       cli = {
         asciinema = enabled;
         fswatch = enabled;
-        git = enabled;
-        jira-cli = enabled;
-        neovim = enabled;
-        phpstan = enabled;
-        tmux = enabled;
-        trash = enabled;
-        zoxide = enabled;
-        zsh = enabled;
       };
 
       development.tools = {
-        bun = enabled;
-        ghostty = enabled;
         gh-ost = enabled;
         golangci-lint = enabled;
         pocketbase = enabled;
         pyenv = enabled;
-        vscode = enabled;
         sqlite = enabled;
-        opencode = enabled;
       };
 
       development.languages = {
         lua = enabled;
-        go = enabled;
+        python311 = enabled;
         rust = enabled;
       };
     };

@@ -16,10 +16,7 @@ in
 
       cli = {
         coreutils = enabled;
-        flake = enabled;
-        stow = enabled;
-        neofetch = enabled;
-        wget = enabled;
+        zsh = enabled;
       };
 
       services = {

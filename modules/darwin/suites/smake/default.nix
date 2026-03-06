@@ -7,7 +7,7 @@ let
 in
 {
   options.shiro.suites.smake = with types; {
-    enable = mkBoolOpt false "Whether or not to enable social configuration.";
+    enable = mkBoolOpt false "Whether or not to enable smake configuration.";
   };
 
   config = mkIf cfg.enable {
@@ -22,8 +22,6 @@ in
       cli = {
         gitleaks = enabled;
         blueutil = enabled;
-        pre-commit = enabled;
-        skeema = enabled;
       };
     };
   };

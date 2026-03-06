@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-**Shiro** is a modular Nix-based configuration management system for macOS and Linux using the Snowfall Lib architecture. It manages system configurations declaratively through Nix Flakes while keeping tool-specific dotfiles separate (symlinked via GNU Stow).
+**Shiro** is a modular Nix-based configuration management system for macOS and Linux using the Snowfall Lib architecture. It manages system configurations declaratively through Nix Flakes. Dotfiles in `.dotfiles/` are symlinked into `~` via home-manager (`modules/home/dotfiles/`).
 
 ## Build Commands
 
