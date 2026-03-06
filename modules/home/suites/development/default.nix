@@ -28,6 +28,7 @@ in
         pre-commit = enabled;
         skeema = enabled;
         tmux = enabled;
+        weave = enabled;
         zoxide = enabled;
       };
 
