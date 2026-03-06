@@ -1,10 +1,14 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.shiro;
-let cfg = config.shiro.layouts.workstation;
-in
 {
+  options,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib;
+with lib.shiro; let
+  cfg = config.shiro.layouts.workstation;
+in {
   options.shiro.layouts.workstation = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable the workstation layout.";
@@ -14,7 +18,6 @@ in
     shiro = {
       suites = {
         common = enabled;
-        desktop = enabled;
         development = enabled;
         media = enabled;
         social = enabled;
