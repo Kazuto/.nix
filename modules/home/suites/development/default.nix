@@ -22,7 +22,8 @@ in
         gum = enabled;
         lazygit = enabled;
         jira-cli = enabled;
-        neovim = enabled;
+        # neovim = enabled;
+        nixvim = enabled;
         phpstan = enabled;
         pre-commit = enabled;
         skeema = enabled;
@@ -36,8 +37,8 @@ in
         claude-code = enabled;
         ghostty = enabled;
         gh-ost = enabled;
-        lmstudio = enabled;
-        ollama = enabled;
+        # lmstudio = enabled;  # Disabled: build fails with codesign error
+        # ollama = enabled;    # Disabled: NixOS-only service module
         opencode = enabled;
         pyenv = enabled;
         sqlite = enabled;

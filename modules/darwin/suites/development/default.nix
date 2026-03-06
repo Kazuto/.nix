@@ -16,19 +16,6 @@ in
         asciinema = enabled;
         fswatch = enabled;
       };
-
-      development.tools = {
-        gh-ost = enabled;
-        pocketbase = enabled;
-        pyenv = enabled;
-        sqlite = enabled;
-      };
-
-      development.languages = {
-        lua = enabled;
-        python311 = enabled;
-        rust = enabled;
-      };
     };
   };
 }

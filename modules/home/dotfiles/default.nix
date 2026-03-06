@@ -3,10 +3,10 @@
 let
   dotfiles = "${config.home.homeDirectory}/.nix/.dotfiles";
   link = config.lib.file.mkOutOfStoreSymlink;
+  nixvimEnabled = config.shiro.cli.nixvim.enable or false;
 in
 {
   xdg.configFile = {
-    "nvim".source           = link "${dotfiles}/.config/nvim";
     "tmuxifier".source      = link "${dotfiles}/.config/tmuxifier";
     "opencode".source       = link "${dotfiles}/.config/opencode";
     "zsh/.aliases".source   = link "${dotfiles}/.config/zsh/.aliases";
@@ -106,6 +106,9 @@ in
           {{end}}
           Generate ONLY the PR description, nothing else. Be concise and specific.
     '';
+  # } // lib.optionalAttrs (!nixvimEnabled) {
+  #   # Only symlink nvim config if not using nixvim
+  #   "nvim".source = link "${dotfiles}/.config/nvim";
   } // lib.optionalAttrs pkgs.stdenv.isDarwin {
     "karabiner".source  = link "${dotfiles}/.config/karabiner";
     "sketchybar".source = link "${dotfiles}/.config/sketchybar";

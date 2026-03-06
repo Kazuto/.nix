@@ -50,31 +50,29 @@
     };
   };
 
-  outputs = inputs:
-    let
-      lib = inputs.snowfall-lib.mkLib {
-        inherit inputs;
-        src = ./.;
+  outputs = inputs: let
+    lib = inputs.snowfall-lib.mkLib {
+      inherit inputs;
+      src = ./.;
 
-	    snowfall = {
-          meta = {
-            name = "shiro";
-            title = "Shiro";
-          };
-
-          namespace = "shiro";
+      snowfall = {
+        meta = {
+          name = "shiro";
+          title = "Shiro";
         };
-      };
 
-    in
+        namespace = "shiro";
+      };
+    };
+  in
     lib.mkFlake {
       channels-config = {
-	      allowUnfree = true;
-	      permittedInsecurePackages = [];
+        allowUnfree = true;
+        permittedInsecurePackages = [];
       };
 
       overlays = with inputs; [
-	      snowfall-flake.overlays.default
+        snowfall-flake.overlays.default
       ];
 
       systems.modules.nixos = with inputs; [

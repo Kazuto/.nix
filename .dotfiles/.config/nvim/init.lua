@@ -1,8 +1,1 @@
--- Load vim options
-require("kazuto.core")
-
--- Load plugin manager (lazy)
-require("kazuto.lazy")
-
--- Load LSP
-require("kazuto.lsp")
+/nix/store/ggwd52w5k26xjd69jq2f2j0f1hwzpwl1-home-manager-files/.config/nvim/init.lua

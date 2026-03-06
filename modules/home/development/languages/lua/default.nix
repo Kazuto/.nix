@@ -12,8 +12,8 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      lua
-      luajit
+      luajit  # Use LuaJIT (faster, compatible with Lua 5.1)
+      # lua     # Conflicts with luajit - both provide /bin/lua
     ];
   };
 }
