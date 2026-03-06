@@ -11,6 +11,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ blueutil ];
+    home.packages = with pkgs; [ blueutil ];
   };
 }

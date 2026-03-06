@@ -9,7 +9,6 @@ with lib.shiro;
     };
 
     suites = {
-      work = enabled;
       tiling = enabled;
       gaming = enabled;
     };

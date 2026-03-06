@@ -16,15 +16,6 @@ in
         bat = enabled;
         curl = enabled;
       };
-
-      development.tools = {
-        lmstudio = enabled;
-        ollama = enabled;
-      };
-
-      development.languages = {
-        python311 = enabled;
-      };
     };
   };
 }

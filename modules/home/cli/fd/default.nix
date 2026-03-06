@@ -11,6 +11,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ fd ];
+    home.packages = with pkgs; [ fd ];
   };
 }

@@ -35,15 +35,22 @@ in
         bun = enabled;
         claude-code = enabled;
         ghostty = enabled;
-        kitty = enabled;
+        gh-ost = enabled;
+        lmstudio = enabled;
+        ollama = enabled;
         opencode = enabled;
+        pyenv = enabled;
+        sqlite = enabled;
         vscode = enabled;
       };
 
       development.languages = {
         go = enabled;
+        lua = enabled;
         nodejs = enabled;
         php8 = enabled;
+        python3 = enabled;
+        rust = enabled;
       };
     };
   };

@@ -17,6 +17,7 @@ in
         development = enabled;
         media = enabled;
         social = enabled;
+        work = enabled;
       };
     };
   };
