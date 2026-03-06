@@ -31,12 +31,14 @@ in
       polkit = enabled;
     };
 
-    shiro.home.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
     shiro.home.configFile."hypr/keybind".source = ./keybind;
 
     shiro.home.extraOptions = {
       wayland.windowManager.hyprland = {
         enable = true;
+        systemd.enable = true;
+
+        extraConfig = builtins.readFile ./hyprland.conf;
 
         plugins = [
           inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
