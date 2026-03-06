@@ -21,7 +21,7 @@ in
 
       cli = {
         gitleaks = enabled;
-        blueutil = enabled;
+        blueutil = mkIf pkgs.stdenv.isDarwin enabled;
       };
     };
   };
