@@ -11,26 +11,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    # Just install gh, let it manage its own config
     home.packages = with pkgs; [ gh ];
-
-    xdg.configFile."gh/config.yml".text = ''
-      git_protocol: https
-      editor:
-      prompt: enabled
-      pager:
-      aliases:
-        co: pr checkout
-      http_unix_socket:
-      browser:
-      version: "1"
-    '';
-
-    xdg.configFile."gh/hosts.yml".text = ''
-      github.com:
-        user: Kazuto
-        git_protocol: ssh
-        users:
-          Kazuto:
-    '';
   };
 }

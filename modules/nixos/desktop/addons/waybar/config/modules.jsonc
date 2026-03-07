@@ -1,22 +1,22 @@
 {
   "custom/menu": {
-    "format": "",
+    "format": "󱄅",
     "tooltip": false,
     "on-click": "$HOME/.config/waybar/scripts/menu"
   },
   "custom/power": {
-    "format": "󰐥",
+    "format": "⏻",
     "tooltip": false,
     "on-click": "wlogout --protocol layer-shell -b 5 -T 400 -B 400"
   },
   "clock": {
     "interval": 60,
-    "format": "  {:%a %d %b %I:%M %p}",
+    "format": " {:%a %d %b %I:%M %p}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "bluetooth": {
-    "format": " {status}",
-    "format-connected": " {device_alias}",
+    "format": " {status}",
+    "format-connected": " {device_alias}",
     "format-connected-battery": " {device_alias} {device_battery_percentage}%",
     "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
@@ -37,15 +37,14 @@
     "on-click": "activate",
     "format": "{icon}",
     "format-icons": {
-      "1": "",
-      "2": "",
+      "1": "",
+      "2": "",
       "3": "󰆼",
-      "4": "",
-      "5": "",
-      "6": "",
+      "4": "",
+      "5": "",
+      "6": "",
       "7": "󰊻",
-      "active": "",
-      "default": ""
+      "default": ""
     },
     "persistent-workspaces": {
       "DP-1": [
@@ -74,6 +73,7 @@
     "spacing": 10
   },
   "custom/spotify": {
+    "format": " {}",
     "interval": 1,
     "return-type": "json",
     "exec": "$HOME/.config/waybar/scripts/spotify",
@@ -87,7 +87,7 @@
     "interval": 10,
     "format": "󰻠 {usage}%",
     "max-length": 10,
-    "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
+    "on-click": "ghostty -e btop"
   },
   "memory": {
     "interval": 30,
@@ -95,18 +95,18 @@
     "max-length": 10,
     "tooltip": true,
     "tooltip-format": "Memory - {used:0.1f}GB used",
-    "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
+    "on-click": "ghostty -e btop"
   },
   "network": {
     "interface": "enp6s0",
     "interval": 5,
-    "format": "󰶡 {bandwidthDownBits}",
-    "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
+    "format": "󰛳 {bandwidthDownBits}",
+    "on-click": "ghostty -e btop"
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "tooltip": false,
-    "format-muted": " Muted",
+    "format-muted": "󰝟 Muted",
     "on-click": "pamixer -t",
     "on-scroll-up": "pamixer -i 5",
     "on-scroll-down": "pamixer -d 5",
@@ -119,9 +119,9 @@
       "portable": "",
       "car": "",
       "default": [
-        "",
-        "",
-        ""
+        "󰕿",
+        "󰖀",
+        "󰕾"
       ]
     }
   },
@@ -135,7 +135,7 @@
     "scroll-step": 5
   },
   "custom/github": {
-    "format": " {}",
+    "format": " {}",
     "return-type": "json",
     "interval": 60,
     "exec": "$HOME/.config/waybar/scripts/github",
@@ -144,7 +144,7 @@
     "tooltip": true
   },
   "custom/timer": {
-    "format": " {}",
+    "format": " {}",
     "interval": 1,
     "exec": "$HOME/.config/waybar/scripts/timer status",
     "on-click": "$HOME/.config/waybar/scripts/timer menu",
@@ -153,7 +153,7 @@
     "tooltip-format": "Left click: Select timer duration\nRight click: Stop timer"
   },
   "custom/logitech": {
-    "format": "{}",
+    "format": "󰍽 {}",
     "return-type": "json",
     "interval": 120,
     "exec": "$HOME/.config/waybar/scripts/logitech",

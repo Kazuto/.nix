@@ -11,6 +11,17 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ spotify spicetify-cli ];
+    home.packages = with pkgs; [
+      (pkgs.symlinkJoin {
+        name = "spotify";
+        paths = [ spotify ];
+        buildInputs = [ pkgs.makeWrapper ];
+        postBuild = ''
+          wrapProgram $out/bin/spotify \
+            --add-flags "--enable-features=UseOzonePlatform --ozone-platform=wayland"
+        '';
+      })
+      spicetify-cli
+    ];
   };
 }

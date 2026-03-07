@@ -890,6 +890,22 @@ in
           end,
         })
 
+        -- nvim-highlight-colors setup
+        require("nvim-highlight-colors").setup({
+          render = "virtual",
+          virtual_symbol = "●",
+          virtual_symbol_prefix = "",
+          virtual_symbol_suffix = " ",
+          virtual_symbol_position = "inline",
+          enable_hex = true,
+          enable_short_hex = true,
+          enable_rgb = true,
+          enable_hsl = true,
+          enable_var_usage = true,
+          enable_named_colors = true,
+          enable_tailwind = true,
+        })
+
         -- Lualine custom catppuccin theme
         local mocha = require("catppuccin.palettes").get_palette("mocha")
         vim.opt.laststatus = 0
@@ -978,6 +994,12 @@ in
 
         # Git
         lazygit
+      ];
+
+      # Extra plugins not in nixvim
+      extraPlugins = with pkgs.vimPlugins; [
+        SchemaStore-nvim
+        nvim-highlight-colors
       ];
     };
   };

@@ -17,12 +17,30 @@ in
       autostart.enable = true;
       portal = {
         enable = true;
+        xdgOpenUsePortal = true;
         extraPortals = with pkgs; [
           xdg-desktop-portal-hyprland
           xdg-desktop-portal-gtk
         ];
-        configPackages = with pkgs; [ hyprland ];
+        config = {
+          common = {
+            default = [ "gtk" ];
+            "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
+            "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
+          };
+          hyprland = {
+            default = [ "gtk" ];
+            "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
+            "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
+          };
+        };
       };
+    };
+
+    # Ensure GTK portal service starts
+    systemd.user.services.xdg-desktop-portal-gtk = {
+      wantedBy = [ "xdg-desktop-portal.service" ];
+      before = [ "xdg-desktop-portal.service" ];
     };
   };
 }

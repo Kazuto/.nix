@@ -16,16 +16,21 @@ in
       inotify-tools
       solaar
       libnotify
+      waybar
     ];
-
-    programs.waybar.enable = true;
 
     shiro.home.configFile."waybar/config.jsonc".source = ./config/config.jsonc;
     shiro.home.configFile."waybar/modules.jsonc".source = ./config/modules.jsonc;
     shiro.home.configFile."waybar/style.css".source = ./config/style.css;
 
-    # Make scripts executable
+    # Use home-manager's waybar module with systemd service
     shiro.home.extraOptions = {
+      programs.waybar = {
+        enable = true;
+        systemd.enable = true;  # Enable systemd service
+      };
+
+      # Make scripts executable
       home.file.".config/waybar/scripts/github" = {
         source = ./config/scripts/github;
         executable = true;
@@ -40,6 +45,22 @@ in
       };
       home.file.".config/waybar/scripts/logitech" = {
         source = ./config/scripts/logitech;
+        executable = true;
+      };
+      home.file.".config/waybar/scripts/spotify" = {
+        source = ./config/scripts/spotify;
+        executable = true;
+      };
+      home.file.".config/waybar/scripts/menu" = {
+        source = ./config/scripts/menu;
+        executable = true;
+      };
+      home.file.".config/waybar/scripts/waybar-wttr.py" = {
+        source = ./config/scripts/waybar-wttr.py;
+        executable = true;
+      };
+      home.file.".config/waybar/waybar.sh" = {
+        source = ./config/waybar.sh;
         executable = true;
       };
     };

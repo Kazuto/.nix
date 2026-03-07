@@ -41,4 +41,8 @@
   hardware.bluetooth.enable = true;
 
   hardware.graphics.enable = true;
+
+  # Logitech device support
+  hardware.logitech.wireless.enable = true;
+  hardware.logitech.wireless.enableGraphical = true;
 }

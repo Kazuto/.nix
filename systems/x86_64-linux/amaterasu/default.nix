@@ -29,6 +29,10 @@ with lib.shiro; {
       gparted = enabled;
       remmina = enabled;
     };
+
+    security = {
+      yubikey = enabled;
+    };
   };
 
   # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;

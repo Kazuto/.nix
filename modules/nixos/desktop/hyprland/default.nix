@@ -1,11 +1,15 @@
-{ options, config, lib, pkgs, inputs, ... }:
-
-with lib;
-with lib.shiro;
-let
-  cfg = config.shiro.desktop.hyprland;
-in
 {
+  options,
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+with lib;
+with lib.shiro; let
+  cfg = config.shiro.desktop.hyprland;
+in {
   options.shiro.desktop.hyprland = with types; {
     enable = mkBoolOpt false "Whether or not to install Hyprland and dependencies.";
   };
@@ -56,6 +60,7 @@ in
       viewnior
       mpv
       grim
+      slurp
       xdg-user-dirs
 
       jq
@@ -63,6 +68,7 @@ in
       nss
       cmake
       ninja
+      usbutils
     ];
 
     environment.sessionVariables = {
@@ -84,18 +90,49 @@ in
 
     hardware.graphics.enable = true;
 
-    shiro.user.extraGroups = [ "video" "input" "render" ];
+    shiro.user.extraGroups = ["video" "input" "render" "uinput"];
 
+    # Terminal-based login with tuigreet
     services.greetd = {
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --greeting 'Welcome to Amaterasu' --asterisks --cmd Hyprland";
           user = "greeter";
         };
       };
     };
 
+    # Suppress Hyprland start warning and enable dark mode
+    environment.sessionVariables = {
+      HYPRLAND_NO_START_WARNING = "1";
+
+      # Dark mode for applications and browsers
+      GTK_THEME = "Catppuccin-Mocha-Standard-Blue-Dark";
+      QT_STYLE_OVERRIDE = "kvantum-dark";
+
+      # Default browser for xdg-open fallback
+      BROWSER = "firefox";
+    };
+
     services.gnome.gnome-keyring.enable = true;
+
+    # Keyd for remapping Caps Lock to Hyper (Ctrl+Shift+Alt)
+    services.keyd = {
+      enable = true;
+      keyboards.default = {
+        ids = [ "*" ];
+        settings = {
+          main = {
+            # Map Caps Lock to a layer (hyper)
+            capslock = "overload(hyper, esc)";
+          };
+          # Hyper layer sends Ctrl+Shift+Alt with other keys
+          "hyper:C-S-A" = {
+            # All keys in this layer will have Ctrl+Shift+Alt pressed
+          };
+        };
+      };
+    };
   };
 }

@@ -28,7 +28,7 @@ in
       tree
       zoxide
     ] ++ lib.optionals stdenv.isDarwin [ darwin.trash ]
-      ++ lib.optionals stdenv.isLinux [ trashy xclip ];
+      ++ lib.optionals stdenv.isLinux [ trash-cli xclip ];
 
     home.sessionPath = [
       "${config.home.homeDirectory}/.local/bin"
@@ -44,7 +44,7 @@ in
 
     programs.zsh.shellAliases = {
       # File operations
-      rm = if pkgs.stdenv.isDarwin then "trash" else "trashy";
+      rm = if pkgs.stdenv.isDarwin then "trash" else "trash-put";
       cat = "bat --paging=never";
       ls = "eza --icons";
       l = "ls -lah";
@@ -131,8 +131,7 @@ in
       oh-my-zsh = {
         enable = true;
         plugins = [ "git" "composer" "npm" ];
-        theme = "powerlevel10k/powerlevel10k";
-        custom = "${config.home.homeDirectory}/.oh-my-zsh/custom";
+        # Powerlevel10k is loaded as a plugin below, not as an oh-my-zsh theme
       };
 
       plugins = [

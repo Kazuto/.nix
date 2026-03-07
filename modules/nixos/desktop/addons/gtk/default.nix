@@ -65,12 +65,24 @@ in
       sassc
       themechanger
       catppuccin-gtk
+      catppuccin-cursors.mochaDark
+      adwaita-icon-theme  # Fallback cursors
       dconf-editor
     ];
 
     environment.sessionVariables = {
       GSETTINGS_SCHEMA_DIR = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas";
       GTK_USE_PORTAL = "1";
+      XCURSOR_THEME = cfg.cursor.name;
+      XCURSOR_SIZE = "24";
+      # Add fallback cursor path - override default with mkForce
+      XCURSOR_PATH = lib.mkForce "${pkgs.catppuccin-cursors.mochaDark}/share/icons:${pkgs.gnome-themes-extra}/share/icons:$HOME/.icons:$HOME/.local/share/icons";
+    };
+
+    # Set default cursor theme system-wide
+    environment.variables = {
+      XCURSOR_THEME = cfg.cursor.name;
+      XCURSOR_SIZE = "24";
     };
   };
 }

@@ -1,7 +1,7 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: "SF Pro", "JetBrainsMono Nerd Font", monospace;
+  font-family: "JetBrainsMono Nerd Font", monospace;
   font-weight: 500;
   font-size: 13px;
   min-height: 0;
@@ -9,16 +9,16 @@
 
 window#waybar {
   background: transparent;
-  color: #CDD6F4;
+  color: #cdd6f4;
 }
 
 tooltip {
-  background: #1E1E2E;
+  background: #1e1e2e;
   border-radius: 10px;
   border-width: 1px;
   border-style: solid;
-  border-color: #45475A;
-  color: #CDD6F4;
+  border-color: #45475a;
+  color: #cdd6f4;
 }
 
 #clock,
@@ -33,7 +33,7 @@ tooltip {
 #custom-github,
 #custom-timer,
 #custom-logitech {
-  background: #1E1E2E;
+  background: #1e1e2e;
   border-radius: 10px;
   padding: 0px 10px;
   margin: 8px 5px 0px 5px;
@@ -43,14 +43,14 @@ tooltip {
 #custom-power,
 #custom-spotify,
 #custom-updates {
-  background: #1E1E2E;
+  background: #1e1e2e;
   border-radius: 10px;
   padding: 0px 10px;
   margin: 8px 5px 0px 5px;
 }
 
 #workspaces {
-  background: #1E1E2E;
+  background: #1e1e2e;
   padding: 0px 4px;
 }
 
@@ -60,115 +60,111 @@ tooltip {
   padding: 6px 8px;
   margin: 0px 2px;
   border-radius: 8px;
-  color: #313244;
+  color: #6c7086;
   background: transparent;
-  transition: none;
-}
-
-#workspaces button.active {
-  color: #A6ADC8;
-  background: transparent;
-}
-
-#workspaces button.focused {
-  color: #A6ADC8;
-  background: transparent;
+  transition: all 0.2s ease-in-out;
   outline: none;
 }
 
+#workspaces button.active {
+  color: #fab387;
+}
+
+#workspaces button.focused {
+  color: #7287fd;
+}
+
 #workspaces button.urgent {
-  color: #F38BA8;
-  background: transparent;
+  color: #f38ba8;
 }
 
 #workspaces button:hover {
-  color: #FAB387;
-  background: transparent;
+  color: #fab387;
 }
 
 #window {
-  color: #CDD6F4;
+  color: #cdd6f4;
   font-weight: 500;
 }
 
 #clock {
-  color: #89B4FA;
+  color: #89b4fa;
   font-weight: 500;
   padding-left: 10px;
   padding-right: 10px;
 }
 
 #custom-menu {
-  color: #89B4FA;
+  color: #89b4fa;
   padding-left: 12px;
   padding-right: 12px;
 }
 
 #custom-power {
-  color: #FAB387;
+  color: #fab387;
   padding-left: 12px;
   padding-right: 12px;
 }
 
 #custom-spotify {
-  color: #A6E3A1;
+  color: #a6e3a1;
   font-weight: 500;
   padding-left: 12px;
   padding-right: 12px;
 }
 
 #bluetooth {
-  color: #89B4FA;
+  color: #89b4fa;
 }
 
 #bluetooth.connected {
-  color: #89B4FA;
+  color: #89b4fa;
 }
 
 #bluetooth.disabled {
-  color: #7F849C;
+  color: #7f849c;
 }
 
 #cpu {
-  color: #89DCEB;
+  color: #89dceb;
 }
 
 #memory {
-  color: #74C7EC;
+  color: #74c7ec;
 }
 
 #network {
-  color: #89B4FA;
+  color: #89b4fa;
 }
 
 #pulseaudio {
-  color: #CBA6F7;
+  color: #cba6f7;
 }
 
 #pulseaudio.muted {
-  color: #7F849C;
+  color: #7f849c;
 }
 
 #custom-github {
-  color: #B4BEFE;
+  color: #b4befe;
 }
 
 #custom-github.notifications {
-  color: #F38BA8;
+  color: #f38ba8;
 }
 
 #custom-timer {
-  color: #F9E2AF;
+  color: #f9e2af;
 }
 
 #custom-logitech {
-  color: #89DCEB;
+  color: #89dceb;
 }
 
 #custom-logitech.low {
-  color: #FAB387;
+  color: #fab387;
 }
 
 #custom-logitech.critical {
-  color: #F38BA8;
+  color: #f38ba8;
 }
