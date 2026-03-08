@@ -11,14 +11,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [
-      (pkgs.appimageTools.wrapType2 {
-        name = "tableplus";
-        src = pkgs.fetchurl {
-          url = "https://github.com/TablePlus/TablePlus-Linux/releases/download/build-472/TablePlus.AppImage";
-          sha256 = lib.fakeHash;
-        };
-      })
+    home.packages = with pkgs; [
+      tableplus
     ];
   };
 }

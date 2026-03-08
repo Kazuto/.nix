@@ -372,6 +372,9 @@ in
           settings = {
             disable_netrw = true;
             hijack_netrw = true;
+            filters = {
+              dotfiles = false;
+            };
             view = {
               float = {
                 enable = true;

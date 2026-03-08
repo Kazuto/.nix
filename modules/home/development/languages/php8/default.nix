@@ -7,12 +7,12 @@ let
 in
 {
   options.shiro.development.languages.php8 = with types; {
-    enable = mkBoolOpt false "Whether or not to use PHP 8.4.";
+    enable = mkBoolOpt false "Whether or not to use PHP 8.2.";
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      (php84.buildEnv {
+    home.packages = with pkgs; let
+      php = php82.buildEnv {
         extensions = ({ enabled, all }: enabled ++ (with all; [
           gd imagick opcache pcov redis xdebug
         ]));
@@ -22,12 +22,12 @@ in
           xdebug.idekey=nvim
           xdebug.mode=debug
         '';
-      })
+      };
+    in [
+      php
+      php.packages.composer
 
       imagemagick
-      php84Extensions.imagick
-
-      php84Packages.composer
       blade-formatter
     ];
   };

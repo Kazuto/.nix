@@ -1,11 +1,14 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.shiro;
-let
-  cfg = config.shiro.suites.development;
-in
 {
+  options,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib;
+with lib.shiro; let
+  cfg = config.shiro.suites.development;
+in {
   options.shiro.suites.development = with types; {
     enable = mkBoolOpt false "Whether or not to enable development configuration.";
   };
@@ -32,19 +35,23 @@ in
         zoxide = enabled;
       };
 
-      development.tools = {
-        bruno = enabled;
-        bun = enabled;
-        claude-code = enabled;
-        ghostty = enabled;
-        gh-ost = enabled;
-        # lmstudio = enabled;  # Disabled: build fails with codesign error
-        # ollama = enabled;    # Disabled: NixOS-only service module
-        opencode = enabled;
-        pyenv = enabled;
-        sqlite = enabled;
-        vscode = enabled;
-      };
+      development.tools =
+        {
+          bruno = enabled;
+          bun = enabled;
+          claude-code = enabled;
+          ghostty = enabled;
+          gh-ost = enabled;
+          # lmstudio = enabled;  # Disabled: build fails with codesign error
+          # ollama = enabled;    # Disabled: NixOS-only service module
+          opencode = enabled;
+          pyenv = enabled;
+          sqlite = enabled;
+          vscode = enabled;
+        }
+        // lib.optionalAttrs pkgs.stdenv.isLinux {
+          tableplus = enabled;
+        };
 
       development.languages = {
         go = enabled;

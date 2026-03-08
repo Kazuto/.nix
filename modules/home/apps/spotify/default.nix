@@ -18,7 +18,7 @@ in
         buildInputs = [ pkgs.makeWrapper ];
         postBuild = ''
           wrapProgram $out/bin/spotify \
-            --add-flags "--enable-features=UseOzonePlatform --ozone-platform=wayland"
+            --add-flags "--enable-features=UseOzonePlatform --ozone-platform=wayland --disable-gpu"
         '';
       })
       spicetify-cli

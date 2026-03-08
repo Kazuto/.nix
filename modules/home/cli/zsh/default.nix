@@ -1,87 +1,104 @@
-{ options, config, lib, pkgs, osConfig ? null, ... }:
-
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  osConfig ? null,
+  ...
+}:
 with lib;
-with lib.shiro;
-let
+with lib.shiro; let
   cfg = config.shiro.cli.zsh;
 
   # Get hostname from system config if available, otherwise use environment variable
-  hostname = if osConfig != null && osConfig ? networking then osConfig.networking.hostName else "$HOST";
+  hostname =
+    if osConfig != null && osConfig ? networking
+    then osConfig.networking.hostName
+    else "$HOST";
 
   configFiles = [
     "${config.programs.zsh.dotDir}/.aliases"
     "${config.programs.zsh.dotDir}/.after"
     "${config.home.homeDirectory}/.p10k.zsh"
   ];
-in
-{
+in {
   options.shiro.cli.zsh = with types; {
     enable = mkBoolOpt false "Whether or not to configure zsh";
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      oh-my-zsh
-      zsh-powerlevel10k
-      bat
-      eza
-      tree
-      zoxide
-    ] ++ lib.optionals stdenv.isDarwin [ darwin.trash ]
-      ++ lib.optionals stdenv.isLinux [ trash-cli xclip ];
+    home.packages = with pkgs;
+      [
+        oh-my-zsh
+        zsh-powerlevel10k
+        bat
+        eza
+        tree
+        zoxide
+      ]
+      ++ lib.optionals stdenv.isDarwin [darwin.trash]
+      ++ lib.optionals stdenv.isLinux [trash-cli xclip];
 
-    home.sessionPath = [
-      "${config.home.homeDirectory}/.local/bin"
-      "${config.home.homeDirectory}/.cargo/bin"
-      "${config.home.homeDirectory}/.composer/vendor/bin"
-      "$PYENV_ROOT/bin"
-      "${config.home.homeDirectory}/.spicetify"
-    ] ++ lib.optionals pkgs.stdenv.isDarwin [
-      "/opt/homebrew/bin"
-      "/opt/homebrew/sbin"
-      "${config.home.homeDirectory}/Library/Application Support/Herd/bin"
-    ];
+    home.sessionPath =
+      [
+        "${config.home.homeDirectory}/.local/bin"
+        "${config.home.homeDirectory}/.cargo/bin"
+        "${config.home.homeDirectory}/.composer/vendor/bin"
+        "$PYENV_ROOT/bin"
+        "${config.home.homeDirectory}/.spicetify"
+      ]
+      ++ lib.optionals pkgs.stdenv.isDarwin [
+        "/opt/homebrew/bin"
+        "/opt/homebrew/sbin"
+        "${config.home.homeDirectory}/Library/Application Support/Herd/bin"
+      ];
 
-    programs.zsh.shellAliases = {
-      # File operations
-      rm = if pkgs.stdenv.isDarwin then "trash" else "trash-put";
-      cat = "bat --paging=never";
-      ls = "eza --icons";
-      l = "ls -lah";
+    programs.zsh.shellAliases =
+      {
+        # File operations
+        rm =
+          if pkgs.stdenv.isDarwin
+          then "trash"
+          else "trash-put";
+        cat = "bat --paging=never";
+        ls = "eza --icons";
+        l = "ls -lah";
 
-      # Auth
-      token = "pwgen -s 40 1 | pbcopy && echo 'Copied to clipboard.'";
-      password = "pwgen -s 24 1 | pbcopy && echo 'Copied to clipboard.'";
-      uuid = "uuidgen | tr '[:upper:]' '[:lower:]' | tr -d '\n' | pbcopy && echo 'Copied to clipboard.'";
+        # Auth
+        token = "pwgen -s 40 1 | pbcopy && echo 'Copied to clipboard.'";
+        password = "pwgen -s 24 1 | pbcopy && echo 'Copied to clipboard.'";
+        uuid = "uuidgen | tr '[:upper:]' '[:lower:]' | tr -d '\n' | pbcopy && echo 'Copied to clipboard.'";
 
-      # Git
-      lg = "lazygit";
-      nah = "git stash && git stash drop";
+        # Git
+        lg = "lazygit";
+        nah = "git stash && git stash drop";
 
-      # Laravel
-      art = "php artisan";
+        # Laravel
+        art = "php artisan";
 
-      # Navigation
-      cd = "z";
+        # Navigation
+        cd = "z";
 
-      # Editors
-      vim = "nvim";
+        # Editors
+        vim = "nvim";
 
-      # Terminal
-      c = "clear";
-      s = "source ${config.programs.zsh.dotDir}/.zshrc";
+        # Terminal
+        c = "clear";
+        s = "source ${config.programs.zsh.dotDir}/.zshrc";
 
-      # Config shortcuts
-      config = "cd ${config.xdg.configHome} && nvim";
-      nixconf = "cd ${config.home.homeDirectory}/.nix && nvim";
-    } // lib.optionalAttrs pkgs.stdenv.isDarwin {
-      # Nix rebuild alias for cross-platform compatibility
-      nixos-rebuild = "darwin-rebuild";
-    } // lib.optionalAttrs pkgs.stdenv.isLinux {
-      # Clipboard aliases for Linux (xclip)
-      pbcopy = "xclip -sel clip";
-      pbpaste = "xclip -sel clip -o";
-    };
+        # Config shortcuts
+        config = "cd ${config.xdg.configHome} && nvim";
+        nixconf = "cd ${config.home.homeDirectory}/.nix && nvim";
+      }
+      // lib.optionalAttrs pkgs.stdenv.isDarwin {
+        # Nix rebuild alias for cross-platform compatibility
+        nixos-rebuild = "darwin-rebuild";
+      }
+      // lib.optionalAttrs pkgs.stdenv.isLinux {
+        # Clipboard aliases for Linux (xclip)
+        pbcopy = "xclip -sel clip";
+        pbpaste = "xclip -sel clip -o";
+      };
 
     programs.fzf = {
       enable = true;
@@ -100,37 +117,39 @@ in
         path = "$XDG_DATA_HOME/zsh/history";
       };
 
-      sessionVariables = {
-        EDITOR = "nvim";
-        TERM = "ghostty";
-        TERMINAL = "ghostty";
-        PROJECT_ROOT = "${config.home.homeDirectory}/Development";
+      sessionVariables =
+        {
+          EDITOR = "nvim";
+          TERM = "ghostty";
+          TERMINAL = "ghostty";
+          PROJECT_ROOT = "${config.home.homeDirectory}/Development";
 
-        # Nvim
-        NVIM_LARAVEL_ENV = "local";
+          # Nvim
+          NVIM_LARAVEL_ENV = "local";
 
-        # LM Studio
-        LMSTUDIO_BASE_URL = "http://localhost:1234";
+          # LM Studio
+          LMSTUDIO_BASE_URL = "http://localhost:1234";
 
-        ANTHROPIC_MODEL = "claude-sonnet-4-5-20250929";
+          ANTHROPIC_MODEL = "claude-sonnet-4-5-20250929";
 
-        # Pyenv
-        PYENV_ROOT = "${config.home.homeDirectory}/.pyenv";
+          # Pyenv
+          PYENV_ROOT = "${config.home.homeDirectory}/.pyenv";
 
-        # Tmuxifier
-        TMUXIFIER_LAYOUT_PATH = "${config.xdg.configHome}/tmuxifier/layouts";
+          # Tmuxifier
+          TMUXIFIER_LAYOUT_PATH = "${config.xdg.configHome}/tmuxifier/layouts";
 
-        # NVM
-        NVM_DIR = "${config.home.homeDirectory}/.nvm";
-      } // lib.optionalAttrs pkgs.stdenv.isDarwin {
-        # Herd PHP (macOS only)
-        HERD_PHP_84_INI_SCAN_DIR = "${config.home.homeDirectory}/Library/Application Support/Herd/config/php/84/";
-        HERD_PHP_82_INI_SCAN_DIR = "${config.home.homeDirectory}/Library/Application Support/Herd/config/php/82/";
-      };
+          # NVM
+          NVM_DIR = "${config.home.homeDirectory}/.nvm";
+        }
+        // lib.optionalAttrs pkgs.stdenv.isDarwin {
+          # Herd PHP (macOS only)
+          HERD_PHP_84_INI_SCAN_DIR = "${config.home.homeDirectory}/Library/Application Support/Herd/config/php/84/";
+          HERD_PHP_82_INI_SCAN_DIR = "${config.home.homeDirectory}/Library/Application Support/Herd/config/php/82/";
+        };
 
       oh-my-zsh = {
         enable = true;
-        plugins = [ "git" "composer" "npm" ];
+        plugins = ["git" "composer" "npm"];
         # Powerlevel10k is loaded as a plugin below, not as an oh-my-zsh theme
       };
 
@@ -162,64 +181,66 @@ in
           fi
         '')
         ''
-        # Key bindings
-        bindkey "^[[3~" delete-char              # Delete key
-        bindkey "^[[H" beginning-of-line         # Home key
-        bindkey "^[[F" end-of-line               # End key
-        bindkey "^[[1;5C" forward-word           # Ctrl+Right
-        bindkey "^[[1;5D" backward-word          # Ctrl+Left
-        bindkey "^?" backward-delete-char        # Backspace
+          # Key bindings
+          bindkey "^[[3~" delete-char              # Delete key
+          bindkey "^[[H" beginning-of-line         # Home key
+          bindkey "^[[F" end-of-line               # End key
+          bindkey "^[[1;5C" forward-word           # Ctrl+Right
+          bindkey "^[[1;5D" backward-word          # Ctrl+Left
+          bindkey "^?" backward-delete-char        # Backspace
 
-        # Custom functions
-        # Create directory and move to it
-        function to() {
-          mkdir -p "$1"
-          cd "$1" || true
-        }
+          # Custom functions
+          # Create directory and move to it
+          function to() {
+            mkdir -p "$1"
+            cd "$1" || true
+          }
 
-        # Tmuxifier shortcuts
-        function tls() {
-          tmuxifier load-session "$1"
-        }
+          # Tmuxifier shortcuts
+          function tls() {
+            tmuxifier load-session "$1"
+          }
 
-        function tms() {
-          tmuxifier new-session "$1"
-        }
+          function tms() {
+            tmuxifier new-session "$1"
+          }
 
-        # Nix rebuild shortcut
-        function nix:update() {
-          echo "Rebuilding flake ./#${hostname}"
-          ${if pkgs.stdenv.isDarwin
+          # Nix rebuild shortcut
+          function nix:update() {
+            echo "Rebuilding flake ./#${hostname}"
+            ${
+            if pkgs.stdenv.isDarwin
             then "sudo darwin-rebuild switch --flake ${config.home.homeDirectory}/.nix/#${hostname}"
-            else "sudo nixos-rebuild switch --flake ${config.home.homeDirectory}/.nix/#${hostname}"}
-        }
+            else "sudo nixos-rebuild switch --flake ${config.home.homeDirectory}/.nix/#${hostname}"
+          }
+          }
 
-        # Docker shortcuts
-        function dcu() {
-          local -a env_args=()
-          [ -n "$1" ] && env_args=(--env-file "$1")
-          docker compose "''${env_args[@]}" up -d --force-recreate --remove-orphans
-        }
+          # Docker shortcuts
+          function dcu() {
+            local -a env_args=()
+            [ -n "$1" ] && env_args=(--env-file "$1")
+            docker compose "''${env_args[@]}" up -d --force-recreate --remove-orphans
+          }
 
-        function dcupdate() {
-          local -a env_args=()
-          [ -n "$1" ] && env_args=(--env-file "$1")
-          docker compose "''${env_args[@]}" up -d --force-recreate --pull always
-        }
+          function dcupdate() {
+            local -a env_args=()
+            [ -n "$1" ] && env_args=(--env-file "$1")
+            docker compose "''${env_args[@]}" up -d --force-recreate --pull always
+          }
 
-        # Source additional config files
-        for file in ${lib.concatStringsSep " " configFiles}; do
-          [[ -f "$file" ]] && source "$file"
-        done
+          # Source additional config files
+          for file in ${lib.concatStringsSep " " configFiles}; do
+            [[ -f "$file" ]] && source "$file"
+          done
 
-        # Tool initializations
-        command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
-        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-        command -v pyenv &>/dev/null && eval "$(pyenv init --path)" && eval "$(pyenv init -)"
-        command -v tmuxifier &>/dev/null && eval "$(tmuxifier init -)"
+          # Tool initializations
+          command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          command -v pyenv &>/dev/null && eval "$(pyenv init --path)" && eval "$(pyenv init -)"
+          command -v tmuxifier &>/dev/null && eval "$(tmuxifier init -)"
 
-        # Load zsh functions
-        autoload -U add-zsh-hook
+          # Load zsh functions
+          autoload -U add-zsh-hook
         ''
       ];
     };
