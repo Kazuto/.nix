@@ -113,6 +113,10 @@ tooltip {
   padding-right: 12px;
 }
 
+#custom-spotify.paused {
+  color: #6c7086;
+}
+
 #bluetooth {
   color: #89b4fa;
 }

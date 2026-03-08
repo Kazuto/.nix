@@ -19,7 +19,6 @@ with lib.shiro; {
 
     suites = {
       common = enabled;
-      development = enabled;
       gaming = enabled;
       media = enabled;
       social = enabled;
@@ -28,6 +27,10 @@ with lib.shiro; {
     apps = {
       gparted = enabled;
       remmina = enabled;
+    };
+
+    tools = {
+      docker = enabled;
     };
 
     security = {

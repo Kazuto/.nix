@@ -2,34 +2,39 @@
 
 # Logitech device serials (update these with your device serials)
 # You can get these by running: solaar show
+# Format: "serial:display_name:icon_type"
 DEVICES=(
-    "keyboard"
-    "mouse"
+    "ED9B3216:keyboard:keyboard"
+    "B2CF7061:mouse:mouse"
 )
 
 get_battery() {
-    device=$1
+    serial=$1
+    device_name=$2
+    device_type=$3
 
-    # Try to get battery info from solaar
-    battery_info=$(timeout 5 solaar show 2>/dev/null | grep -A 2 "$device" | grep "Battery:" | head -1)
+    # Try to get battery info from solaar by serial
+    battery_info=$(timeout 8 solaar show "$serial" 2>/dev/null | grep "Battery:" | head -1)
 
     if [ -z "$battery_info" ]; then
         return
     fi
 
-    percentage=$(echo "$battery_info" | grep -oP '\d+(?=%)')
+    # Extract percentage: "Battery: 50%, BatteryStatus.DISCHARGING"
+    percentage=$(echo "$battery_info" | grep -o '[0-9]\+%' | head -1 | tr -d '%')
     charging=$(echo "$battery_info" | grep -q "RECHARGING" && echo "true" || echo "false")
 
     if [ -n "$percentage" ]; then
-        echo "$device:$percentage:$charging"
+        echo "$device_name:$device_type:$percentage:$charging"
     fi
 }
 
 output=""
 for device in "${DEVICES[@]}"; do
-    result=$(get_battery "$device")
+    IFS=':' read -r serial name type <<< "$device"
+    result=$(get_battery "$serial" "$name" "$type")
     if [ -n "$result" ]; then
-        IFS=':' read -r dev pct chrg <<< "$result"
+        IFS=':' read -r dev_name dev_type pct chrg <<< "$result"
 
         # Choose icon based on battery level
         if [ "$pct" -ge 90 ]; then
@@ -59,9 +64,9 @@ for device in "${DEVICES[@]}"; do
         fi
 
         device_icon="󰌌"  # keyboard
-        [ "$dev" = "mouse" ] && device_icon="󰍽"
+        [ "$dev_type" = "mouse" ] && device_icon="󰍽"
 
-        output="$output$device_icon $icon $pct%"
+        output="$output$device_icon $pct%"
     fi
 done
 

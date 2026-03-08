@@ -18,5 +18,12 @@ in
         setSocketVariable = true;
       };
     };
+
+    users.users.${config.shiro.user.name}.extraGroups = ["docker"];
+
+    # Allow rootless Docker to bind to privileged ports (< 1024)
+    boot.kernel.sysctl = {
+      "net.ipv4.ip_unprivileged_port_start" = 80;
+    };
   };
 }

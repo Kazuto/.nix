@@ -19,15 +19,15 @@
       "custom/spotify"
     ],
     "modules-right": [
-      "clock",
-      "pulseaudio",
-      "bluetooth",
-      "custom/logitech",
+      "custom/github",
+      "custom/timer",
       "cpu",
       "memory",
       "network",
-      "custom/timer",
-      "custom/github"
+      "pulseaudio",
+      "bluetooth",
+      "custom/logitech",
+      "clock",
     ],
     "include": [
       "$HOME/.config/waybar/modules.jsonc"

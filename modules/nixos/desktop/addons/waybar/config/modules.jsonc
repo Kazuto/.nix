@@ -73,7 +73,7 @@
     "spacing": 10
   },
   "custom/spotify": {
-    "format": " {}",
+    "format": " {}",
     "interval": 1,
     "return-type": "json",
     "exec": "$HOME/.config/waybar/scripts/spotify",

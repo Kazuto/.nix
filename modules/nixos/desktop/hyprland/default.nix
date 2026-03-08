@@ -71,6 +71,11 @@ in {
       usbutils
     ];
 
+    programs.hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
+
     environment.sessionVariables = {
       # If you cursor becomes invisible
       WLR_NO_HARDWARE_CURSORS = "1";
@@ -78,11 +83,13 @@ in {
       XDG_CURRENT_DESKTOP = "Hyprland";
       XDG_SESSION_DESKTOP = "Hyprland";
       NIXOS_XDG_OPEN_USE_PORTAL = "1";
-    };
 
-    programs.hyprland = {
-      enable = true;
-      xwayland.enable = true;
+      # Dark mode for applications and browsers
+      GTK_THEME = "Catppuccin-Mocha-Standard-Blue-Dark";
+      QT_STYLE_OVERRIDE = "kvantum-dark";
+
+      # Default browser for xdg-open fallback
+      BROWSER = "firefox";
     };
 
     services.xserver.enable = true;
@@ -97,22 +104,10 @@ in {
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --greeting 'Welcome to Amaterasu' --asterisks --cmd Hyprland";
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --greeting 'Welcome to Amaterasu' --asterisks --cmd ${lib.getExe config.programs.hyprland.package}";
           user = "greeter";
         };
       };
-    };
-
-    # Suppress Hyprland start warning and enable dark mode
-    environment.sessionVariables = {
-      HYPRLAND_NO_START_WARNING = "1";
-
-      # Dark mode for applications and browsers
-      GTK_THEME = "Catppuccin-Mocha-Standard-Blue-Dark";
-      QT_STYLE_OVERRIDE = "kvantum-dark";
-
-      # Default browser for xdg-open fallback
-      BROWSER = "firefox";
     };
 
     services.gnome.gnome-keyring.enable = true;
