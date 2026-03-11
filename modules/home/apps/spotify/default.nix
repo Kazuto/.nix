@@ -4,6 +4,7 @@ with lib;
 with lib.shiro;
 let
   cfg = config.shiro.apps.spotify;
+  isLinux = pkgs.stdenv.isLinux;
 in
 {
   options.shiro.apps.spotify = with types; {
@@ -12,15 +13,19 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      (pkgs.symlinkJoin {
-        name = "spotify";
-        paths = [ spotify ];
-        buildInputs = [ pkgs.makeWrapper ];
-        postBuild = ''
-          wrapProgram $out/bin/spotify \
-            --add-flags "--enable-features=UseOzonePlatform --ozone-platform=wayland --disable-gpu"
-        '';
-      })
+      (if isLinux then
+        pkgs.symlinkJoin {
+          name = "spotify";
+          paths = [ spotify ];
+          buildInputs = [ pkgs.makeWrapper ];
+          postBuild = ''
+            wrapProgram $out/bin/spotify \
+              --add-flags "--enable-features=UseOzonePlatform --ozone-platform=wayland --disable-gpu"
+          '';
+        }
+      else
+        spotify)
+      spotify-player
       spicetify-cli
     ];
   };
