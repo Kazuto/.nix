@@ -15,7 +15,7 @@ return {
       },
     })
 
-    local treesitter = require("nvim-treesitter.configs")
+    local treesitter = require("nvim-treesitter")
 
     vim.g.skip_ts_context_commentstring_module = true
 
@@ -85,14 +85,7 @@ return {
       auto_install = true,
     })
 
-    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-    parser_config.blade = {
-      install_info = {
-        url = "https://github.com/EmranMR/tree-sitter-blade",
-        files = { "src/parser.c" },
-        branch = "main",
-      },
-      filetype = "blade",
-    }
+    -- Register blade parser
+    vim.treesitter.language.register("blade", "blade")
   end,
 }

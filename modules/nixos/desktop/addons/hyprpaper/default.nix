@@ -11,7 +11,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ hyprpaper ];
+    environment.systemPackages = with pkgs; [
+      hyprpaper
+      swww
+    ];
 
     shiro.home.configFile."hypr/hyprpaper.conf".source = ./hyprpaper.conf;
     shiro.home.configFile."hypr/wallpaper".source = ./wallpaper;

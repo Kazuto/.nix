@@ -12,11 +12,13 @@ in
 
   config = mkIf cfg.enable {
     shiro = {
-      development.tools = {
-        canvas = enabled;
-        ghostscript = enabled;
-        mailhog = enabled;
-        meilisearch = enabled;
+      development = {
+        tools = {
+          canvas = enabled;
+          ghostscript = enabled;
+          mailhog = enabled;
+          meilisearch = enabled;
+        };
       };
 
       cli = {

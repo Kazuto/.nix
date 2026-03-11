@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-class=$(playerctl metadata --player=spotify --format '{{lc(status)}}')
+class=$(playerctl metadata --player=spotify_player --format '{{lc(status)}}')
 
 if [[ $class == "paused" ]]; then
   icon=""
@@ -9,7 +9,7 @@ else
 fi
 
 if [[ $class == "playing" ]]; then
-  info=$(playerctl metadata --player=spotify --format '{{artist}} - {{title}}')
+  info=$(playerctl metadata --player=spotify_player --format '{{artist}} - {{title}}')
 
   if [[ ${#info} -gt 40 ]]; then
     info=$(echo $info | cut -c1-36)"..."
@@ -17,7 +17,7 @@ if [[ $class == "playing" ]]; then
 
   text=$icon" "$info
 elif [[ $class == "paused" ]]; then
-  info=$(playerctl metadata --player=spotify --format '{{artist}} - {{title}}')
+  info=$(playerctl metadata --player=spotify_player --format '{{artist}} - {{title}}')
 
   if [[ ${#info} -gt 40 ]]; then
     info=$(echo $info | cut -c1-36)"..."

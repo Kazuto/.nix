@@ -105,19 +105,18 @@ in {
             ## Changes
             - Bullet points describing specific changes
 
-            ## Test Plan
-            - How to verify these changes work correctly
-            {{end}}
-            Generate ONLY the PR description, nothing else. Be concise and specific.
-      '';
-      # } // lib.optionalAttrs (!nixvimEnabled) {
-      #   # Only symlink nvim config if not using nixvim
-      #   "nvim".source = link "${dotfiles}/.config/nvim";
-    }
-    // lib.optionalAttrs pkgs.stdenv.isDarwin {
-      "karabiner".source = link "${dotfiles}/.config/karabiner";
-      "sketchybar".source = link "${dotfiles}/.config/sketchybar";
-    };
+          ## Test Plan
+          - How to verify these changes work correctly
+          {{end}}
+          Generate ONLY the PR description, nothing else. Be concise and specific.
+    '';
+  } // lib.optionalAttrs (!nixvimEnabled) {
+    # Only symlink nvim config if not using nixvim
+    "nvim".source = link "${dotfiles}/.config/nvim";
+  } // lib.optionalAttrs pkgs.stdenv.isDarwin {
+    "karabiner".source  = link "${dotfiles}/.config/karabiner";
+    "sketchybar".source = link "${dotfiles}/.config/sketchybar";
+  };
 
   home.file = {
     ".p10k.zsh".source = link "${dotfiles}/.p10k.zsh";

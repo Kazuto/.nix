@@ -18,25 +18,12 @@ with lib.shiro; {
     };
 
     suites = {
-      common = enabled;
       gaming = enabled;
-      media = enabled;
-      social = enabled;
     };
 
     apps = {
       gparted = enabled;
       remmina = enabled;
-    };
-
-    development = {
-      tools = {
-        brew = enabled;
-      };
-    };
-
-    system = {
-      homebrew = enabled;
     };
 
     tools = {

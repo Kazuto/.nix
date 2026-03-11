@@ -12,8 +12,13 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs;  [
+    home.packages = with pkgs; [
       sqlite
     ];
+
+    # Set sqlite library path for neovim sqlite.lua plugin
+    home.sessionVariables = {
+      SQLITE_CLIB_PATH = "${pkgs.sqlite.out}/lib/libsqlite3.so";
+    };
   };
 }

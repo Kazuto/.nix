@@ -25,8 +25,8 @@ in
         }
       else
         spotify)
-      spotify-player
       spicetify-cli
+      spotify-player
     ];
   };
 }

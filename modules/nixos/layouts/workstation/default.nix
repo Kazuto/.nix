@@ -18,9 +18,9 @@ in {
     shiro = {
       suites = {
         common = enabled;
-        development = enabled;
         media = enabled;
         social = enabled;
+        work = enabled;
       };
     };
   };

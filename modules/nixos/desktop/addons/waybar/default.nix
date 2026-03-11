@@ -23,11 +23,11 @@ in
     shiro.home.configFile."waybar/modules.jsonc".source = ./config/modules.jsonc;
     shiro.home.configFile."waybar/style.css".source = ./config/style.css;
 
-    # Use home-manager's waybar module with systemd service
+    # Use home-manager's waybar module without systemd service
     shiro.home.extraOptions = {
       programs.waybar = {
         enable = true;
-        systemd.enable = true;  # Enable systemd service
+        systemd.enable = false;  # Disable systemd service, use exec-once instead
       };
 
       # Make scripts executable

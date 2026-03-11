@@ -13,6 +13,12 @@ return {
     "tami5/sqlite.lua",
   },
   config = function()
+    -- Configure sqlite path for NixOS
+    local sqlite_path = vim.env.SQLITE_CLIB_PATH or "/run/current-system/sw/lib/libsqlite3.so"
+    if vim.fn.filereadable(sqlite_path) == 1 then
+      vim.g.sqlite_clib_path = sqlite_path
+    end
+
     local telescope = require("telescope")
     local actions = require("telescope.actions")
     local builtin = require("telescope.builtin")

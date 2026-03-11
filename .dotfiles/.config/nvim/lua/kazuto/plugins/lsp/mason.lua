@@ -46,10 +46,10 @@ return {
     opts = {
       ensure_installed = {
         "prettierd",
-        "stylua",
+        -- "stylua", -- Installed via Nix
         "eslint_d",
         "php-cs-fixer",
-        "shellcheck",
+        -- "shellcheck", -- Installed via Nix
         "shfmt",
       },
     },

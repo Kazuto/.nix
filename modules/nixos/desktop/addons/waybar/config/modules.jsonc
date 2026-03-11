@@ -42,8 +42,8 @@
       "3": "󰆼",
       "4": "",
       "5": "",
-      "6": "",
-      "7": "󰊻",
+      "6": "󰊻",
+      "10": "",
       "default": ""
     },
     "persistent-workspaces": {
@@ -77,11 +77,12 @@
     "interval": 1,
     "return-type": "json",
     "exec": "$HOME/.config/waybar/scripts/spotify",
-    "exec-if": "pgrep spotify",
+    "exec-if": "pgrep spotify_player",
     "escape": true,
-    "on-click": "playerctl play-pause",
-    "on-scroll-up": "playerctl next",
-    "on-scroll-down": "playerctl previous"
+    "on-click": "playerctl --player=spotify_player play-pause",
+    "on-click-right": "ghostty -e spotify_player",
+    "on-scroll-up": "playerctl --player=spotify_player next",
+    "on-scroll-down": "playerctl --player=spotify_player previous"
   },
   "cpu": {
     "interval": 10,

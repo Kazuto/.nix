@@ -11,6 +11,19 @@ in
   };
 
   config = mkIf cfg.enable {
-    shiro.apps.teams = enabled;
+
+    networking.extraHosts =
+    ''
+      127.0.0.2 other-localhost
+      127.0.0.1 smake.test
+      127.0.0.1 api.smake.test
+      127.0.0.1 cdn.smake.test
+      127.0.0.1 login.smake.test
+      127.0.0.1 multi-shop.smake.test
+      127.0.0.1 oauth.smake.test
+      127.0.0.1 production.test
+      127.0.0.1 shop.smake.test
+      127.0.0.1 system.smake.test
+    '';
   };
 }
