@@ -29,6 +29,16 @@ with lib.shiro; {
       remmina = enabled;
     };
 
+    development = {
+      tools = {
+        brew = enabled;
+      };
+    };
+
+    system = {
+      homebrew = enabled;
+    };
+
     tools = {
       docker = enabled;
     };

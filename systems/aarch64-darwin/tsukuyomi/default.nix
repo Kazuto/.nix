@@ -13,6 +13,12 @@ with lib.shiro;
       gaming = enabled;
     };
 
+    development = {
+      tools = {
+        brew = enabled;
+      };
+    };
+
     system = {
       homebrew = enabled;
     };
