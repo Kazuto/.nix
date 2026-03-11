@@ -215,7 +215,7 @@ in {
         };
 
         nodejs = {
-          format = "[\${symbol}\${version}]($style)";
+          format = "[\${symbol}\${version} ]($style)";
           style = "green";
           symbol = " ";
         };
