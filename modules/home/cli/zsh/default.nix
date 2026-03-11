@@ -19,7 +19,7 @@ with lib.shiro; let
   configFiles = [
     "${config.programs.zsh.dotDir}/.aliases"
     "${config.programs.zsh.dotDir}/.after"
-    "${config.home.homeDirectory}/.p10k.zsh"
+    # "${config.home.homeDirectory}/.p10k.zsh"  # Disabled while testing Starship
   ];
 in {
   options.shiro.cli.zsh = with types; {
@@ -76,8 +76,8 @@ in {
         # Laravel
         art = "php artisan";
 
-        # Navigation
-        cd = "z";
+        # Navigation (handled by zoxide --cmd cd below)
+        # cd = "z";  # Removed - using zoxide --cmd cd instead
 
         # Editors
         vim = "nvim";
@@ -103,6 +103,187 @@ in {
     programs.fzf = {
       enable = true;
       enableZshIntegration = true;
+    };
+
+    # Starship prompt - Simple config with Catppuccin Mocha colors
+    programs.starship = {
+      enable = true;
+      enableZshIntegration = true;
+      settings = {
+        # Disable newline before prompt
+        add_newline = false;
+
+        # Simple format: os, directory, git, newline, prompt
+        format = lib.concatStrings [
+          "$os"
+          "$directory"
+          "$git_branch"
+          "$git_status"
+          "$line_break"
+          "$character"
+        ];
+
+        # Right prompt: status, duration, jobs, versions
+        right_format = lib.concatStrings [
+          "$status"
+          "$cmd_duration"
+          "$jobs"
+          "$python"
+          "$nodejs"
+          "$php"
+          "$ruby"
+          "$golang"
+          "$rust"
+        ];
+
+        # OS icon
+        os = {
+          disabled = false;
+          format = "[$symbol ]($style)";
+          style = "bold red";
+          symbols = {
+            Windows = "";
+            Ubuntu = "󰕈";
+            Macos = "󰀵";
+            Manjaro = "";
+            Linux = "󰌽";
+            Arch = "󰣇";
+            NixOS = "󱄅";
+          };
+        };
+
+        # Directory
+        directory = {
+          format = "[$path]($style) ";
+          style = "bold peach";
+          truncation_length = 3;
+          truncate_to_repo = true;
+        };
+
+        # Git branch
+        git_branch = {
+          format = "on [$symbol$branch]($style) ";
+          style = "bold mauve";
+          symbol = " ";
+        };
+
+        # Git status
+        git_status = {
+          format = "([$all_status$ahead_behind]($style) )";
+          style = "bold yellow";
+          modified = "!\${count}";
+          untracked = "?\${count}";
+          deleted = "✘\${count}";
+          renamed = "»\${count}";
+          staged = "+\${count}";
+          stashed = "\\$\${count}";
+        };
+
+        # Status
+        status = {
+          disabled = false;
+          format = "[$symbol$status ]($style)";
+          style = "bold red";
+          symbol = "✘ ";
+        };
+
+        # Command duration
+        cmd_duration = {
+          min_time = 2000;
+          format = "[$duration ]($style)";
+          style = "bold yellow";
+        };
+
+        # Background jobs
+        jobs = {
+          format = "[$symbol$number ]($style)";
+          symbol = "✦ ";
+          style = "bold blue";
+        };
+
+        # Character (prompt symbol)
+        character = {
+          success_symbol = "[❯](bold green)";
+          error_symbol = "[❯](bold red)";
+        };
+
+        # Language versions
+        python = {
+          format = "[\${symbol}\${version} ]($style)";
+          style = "yellow";
+          symbol = " ";
+        };
+
+        nodejs = {
+          format = "[\${symbol}\${version}]($style)";
+          style = "green";
+          symbol = " ";
+        };
+
+        php = {
+          format = "[\${symbol}\${version} ]($style)";
+          style = "blue";
+          symbol = " ";
+        };
+
+        ruby = {
+          format = "[\${symbol}\${version} ]($style)";
+          style = "red";
+          symbol = " ";
+        };
+
+        golang = {
+          format = "[\${symbol}\${version} ]($style)";
+          style = "sapphire";
+          symbol = " ";
+        };
+
+        rust = {
+          format = "[\${symbol}\${version} ]($style)";
+          style = "peach";
+          symbol = " ";
+        };
+
+        docker_context = {
+          format = "[\${symbol}\${version} ]($style)";
+          style = "blue";
+          symbol = "";
+        };
+
+        # Catppuccin Mocha palette
+        palette = "catppuccin_mocha";
+
+        palettes = {
+          catppuccin_mocha = {
+            rosewater = "#f5e0dc";
+            flamingo = "#f2cdcd";
+            pink = "#f5c2e7";
+            mauve = "#cba6f7";
+            red = "#f38ba8";
+            maroon = "#eba0ac";
+            peach = "#fab387";
+            yellow = "#f9e2af";
+            green = "#a6e3a1";
+            teal = "#94e2d5";
+            sky = "#89dceb";
+            sapphire = "#74c7ec";
+            blue = "#89b4fa";
+            lavender = "#b4befe";
+            text = "#cdd6f4";
+            subtext1 = "#bac2de";
+            subtext0 = "#a6adc8";
+            overlay2 = "#9399b2";
+            overlay1 = "#7f849c";
+            overlay0 = "#6c7086";
+            surface2 = "#585b70";
+            surface1 = "#45475a";
+            surface0 = "#313244";
+            base = "#1e1e2e";
+            mantle = "#181825";
+            crust = "#11111b";
+          };
+        };
+      };
     };
 
     programs.zsh = {
@@ -150,7 +331,7 @@ in {
       oh-my-zsh = {
         enable = true;
         plugins = ["git" "composer" "npm"];
-        # Powerlevel10k is loaded as a plugin below, not as an oh-my-zsh theme
+        # Powerlevel10k loaded as plugin below instead of oh-my-zsh theme
       };
 
       plugins = [
@@ -164,22 +345,24 @@ in {
           src = pkgs.zsh-syntax-highlighting;
           file = "share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
         }
-        {
-          name = "powerlevel10k";
-          src = pkgs.zsh-powerlevel10k;
-          file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-        }
+        # Temporarily disabled to test Starship
+        # {
+        #   name = "powerlevel10k";
+        #   src = pkgs.zsh-powerlevel10k;
+        #   file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+        # }
       ];
 
       initContent = lib.mkMerge [
-        (lib.mkBefore ''
-          # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-          # Initialization code that may require console input (password prompts, [y/n]
-          # confirmations, etc.) must go above this block; everything else may go below.
-          if [[ -r "${config.xdg.cacheHome}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-            source "${config.xdg.cacheHome}/p10k-instant-prompt-''${(%):-%n}.zsh"
-          fi
-        '')
+        # Powerlevel10k instant prompt disabled while testing Starship
+        # (lib.mkBefore ''
+        #   # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+        #   # Initialization code that may require console input (password prompts, [y/n]
+        #   # confirmations, etc.) must go above this block; everything else may go below.
+        #   if [[ -r "${config.xdg.cacheHome}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+        #     source "${config.xdg.cacheHome}/p10k-instant-prompt-''${(%):-%n}.zsh"
+        #   fi
+        # '')
         ''
           # Key bindings
           bindkey "^[[3~" delete-char              # Delete key
@@ -234,10 +417,41 @@ in {
           done
 
           # Tool initializations
-          command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          command -v pyenv &>/dev/null && eval "$(pyenv init --path)" && eval "$(pyenv init -)"
+          command -v zoxide &>/dev/null && eval "$(zoxide init zsh --cmd cd)"
+          # command -v pyenv &>/dev/null && eval "$(pyenv init --path)" && eval "$(pyenv init -)"  # Disabled - causes hang
           command -v tmuxifier &>/dev/null && eval "$(tmuxifier init -)"
+
+          # Lazy load pyenv to avoid startup hang
+          if command -v pyenv &>/dev/null; then
+            export PYENV_ROOT="$HOME/.pyenv"
+            export PATH="$PYENV_ROOT/bin:$PATH"
+            pyenv() {
+              unset -f pyenv
+              eval "$(command pyenv init --path)"
+              eval "$(command pyenv init -)"
+              pyenv "$@"
+            }
+          fi
+
+          # Lazy load NVM to avoid startup hang
+          if [ -s "$NVM_DIR/nvm.sh" ]; then
+            # Create wrapper functions instead of aliases to avoid conflicts
+            nvm() {
+              unset -f nvm node npm
+              \. "$NVM_DIR/nvm.sh"
+              nvm "$@"
+            }
+            node() {
+              unset -f nvm node npm
+              \. "$NVM_DIR/nvm.sh"
+              node "$@"
+            }
+            npm() {
+              unset -f nvm node npm
+              \. "$NVM_DIR/nvm.sh"
+              npm "$@"
+            }
+          fi
 
           # Load zsh functions
           autoload -U add-zsh-hook

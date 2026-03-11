@@ -25,8 +25,8 @@ in {
         gum = enabled;
         lazygit = enabled;
         jira-cli = enabled;
-        # neovim = enabled;
-        nixvim = enabled;
+        neovim = enabled;
+        # nixvim = enabled;
         phpstan = enabled;
         pre-commit = enabled;
         skeema = enabled;

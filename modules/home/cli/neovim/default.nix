@@ -1,11 +1,14 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.shiro;
-let
-  cfg = config.shiro.cli.neovim;
-in
 {
+  options,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib;
+with lib.shiro; let
+  cfg = config.shiro.cli.neovim;
+in {
   options.shiro.cli.neovim = with types; {
     enable = mkBoolOpt false "Whether or not to install neovim";
   };
@@ -29,7 +32,7 @@ in
       fzf
       gopls
       languagetool
-lua-language-server
+      lua-language-server
       phpactor
       ripgrep
       shellcheck

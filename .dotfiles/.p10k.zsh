@@ -1758,6 +1758,9 @@
   # really need it.
   typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
 
+  # Disable gitstatus to prevent initialization hang
+  typeset -g POWERLEVEL9K_DISABLE_GITSTATUS=true
+
   # If p10k is already loaded, reload configuration.
   # This works even with POWERLEVEL9K_DISABLE_HOT_RELOAD=true.
   (( ! $+functions[p10k] )) || p10k reload
