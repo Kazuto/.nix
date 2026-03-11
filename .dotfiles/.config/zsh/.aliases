@@ -1,16 +1,5 @@
 #!/bin/bash
 
-# ======== ARTISAN ======== #
-function pat() {
-  if [ $# -eq 0 ]; then
-    args="--testdox"
-  else
-    args="--filter=$1"
-  fi
-
-  art test -d memory_limit=6144M "$args"
-}
-
 # ======== NPM ======== #
 preexec() {
   if [[ "$1" =~ ^(npm|yarn|bun)(\s|$) ]] && [ -f .nvmrc ]; then
