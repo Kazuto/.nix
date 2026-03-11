@@ -6,13 +6,13 @@
 }:
 buildGoModule rec {
   pname = "weave";
-  version = "0.0.3";
+  version = "0.0.4";
 
   src = fetchFromGitHub {
     owner = "Kazuto";
     repo = "Weave";
     rev = "v${version}";
-    hash = "sha256-R5RelXTM+zM9+Dsg/Hb1Yb0j8Q9UaO6svxs7jTxOk+s=";
+    hash = "sha256-gtqafGvpb18ODnHQ2MYhGaWZI3DlYUEA9hXVTbIKkDY=";
   };
 
   vendorHash = "sha256-g+yaVIx4jxpAQ/+WrGKxhVeliYx7nLQe/zsGpxV4Fn4=";
