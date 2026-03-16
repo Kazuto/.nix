@@ -16,6 +16,17 @@ return {
     })
 
     local treesitter = require("nvim-treesitter")
+    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+    -- Configure blade parser
+    parser_config.blade = {
+      install_info = {
+        url = "https://github.com/EmranMR/tree-sitter-blade",
+        files = { "src/parser.c" },
+        branch = "main",
+      },
+      filetype = "blade",
+    }
 
     vim.g.skip_ts_context_commentstring_module = true
 
@@ -87,5 +98,13 @@ return {
 
     -- Register blade parser
     vim.treesitter.language.register("blade", "blade")
+
+    -- Ensure Treesitter highlighting is enabled for blade and php files
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "blade", "php" },
+      callback = function()
+        vim.treesitter.start()
+      end,
+    })
   end,
 }

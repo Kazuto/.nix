@@ -49,6 +49,7 @@ return {
         -- "stylua", -- Installed via Nix
         "eslint_d",
         "php-cs-fixer",
+        "php-debug-adapter",
         -- "shellcheck", -- Installed via Nix
         "shfmt",
       },

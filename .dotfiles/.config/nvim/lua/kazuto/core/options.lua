@@ -68,3 +68,8 @@ opt.listchars = {
   extends = "❯",
   precedes = "❮",
 }
+
+-- LSP LOGGING
+-- Reduce LSP log verbosity (default is "WARN")
+-- Options: "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "OFF"
+vim.lsp.set_log_level("ERROR")
